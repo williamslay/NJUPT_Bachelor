@@ -1,0 +1,34 @@
+ \cftsetpnumwidth {\widthof {1}-1pt} \thispagestyle {empty} 
+ \cftsetpnumwidth {\widthof {2}-1pt} \thispagestyle {empty} 
+ \cftsetpnumwidth {\widthof {0}-1pt} \thispagestyle {empty} 
+ \cftsetpnumwidth {\widthof {1}-1pt} \thispagestyle {empty} 
+ \cftsetpnumwidth {\widthof {2}-1pt} \thispagestyle {empty} 
+ \cftsetpnumwidth {\widthof {1}-1pt} \thispagestyle {empty} 
+\setcounter {tocdepth}{2}
+\contentsline {chapter}{\numberline {第一章}绪论}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}名字自己替换}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}名字自己替换}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}名字自己替换}{1}{subsection.1.1.2}%
+ \cftsetpnumwidth {\widthof {2}-1pt} \thispagestyle {empty} 
+\contentsline {section}{\numberline {1.2}俄罗斯和乌克兰}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}什么是快乐星球}{2}{section.1.3}%
+ \cftsetpnumwidth {\widthof {3}-1pt} \thispagestyle {empty} 
+ \cftsetpnumwidth {\widthof {4}-1pt} \thispagestyle {empty} 
+ \cftsetpnumwidth {\widthof {5}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{\numberline {第二章}第二章了！}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Apple M1}{5}{section.2.1}%
+ \cftsetpnumwidth {\widthof {6}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{\numberline {第三章}需要几章自己加一下！}{6}{chapter.3}%
+\setcounter {tocdepth}{0}
+ \cftsetpnumwidth {\widthof {7}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{结束语}{7}{chapter*.6}%
+\setcounter {tocdepth}{0}
+ \cftsetpnumwidth {\widthof {8}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{致谢}{8}{chapter*.7}%
+ \cftsetpnumwidth {\widthof {9}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{参考文献}{9}{chapter*.8}%
+ \cftsetpnumwidth {\widthof {10}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{附录}{10}{chapter*.9}%
+\contentsline {section}{\numberline {1}本科期间的学术成果发表情况}{10}{section.3.1}%
+\contentsline {section}{\numberline {2}本科期间的获奖情况}{10}{section.3.2}%
+\contentsfinish 
