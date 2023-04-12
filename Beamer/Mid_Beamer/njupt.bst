@@ -1,4 +1,77 @@
-ing$
+ENTRY
+{
+  author
+  title
+  publisher
+  journal
+  address
+  year
+  date
+  pages
+  translator
+  booktitle
+  institution
+  country
+  url
+  volume
+  number
+  type
+  id
+  note
+  language
+}
+{}
+{label}
+
+STRINGS { s t}
+
+FUNCTION {not}
+{   { #0 }
+    { #1 }
+  if$
+}
+
+FUNCTION {and}
+{   'skip$
+    { pop$ #0 }
+  if$
+}
+
+FUNCTION {or}
+{   { pop$ #1 }
+    'skip$
+  if$
+}
+
+INTEGERS{ l }
+FUNCTION{ string.length }
+{
+    #1 'l :=
+    {duplicate$ duplicate$ #1 l substring$ = not}
+        {l #1 + 'l :=}
+    while$
+    pop$ l
+}
+
+FUNCTION {get.last.chr} {
+  duplicate$ string.length
+  duplicate$ #0 = {
+    pop$
+  } {
+    #1 substring$
+  } if$
+}
+
+FUNCTION {trim.start} {
+  {duplicate$ #1 #1 substring$ " " =} {
+    #2 global.max$ substring$
+  } while$
+}
+
+FUNCTION {trim.end} {
+  {duplicate$ get.last.chr " " =} {
+    duplicate$ string.length #1 -
+    #1 swap$ substring$
   } while$
 }
 

@@ -24,7 +24,9 @@
  \cftsetpnumwidth {\widthof {6}-1pt} \thispagestyle {empty} 
 \contentsline {chapter}{致谢}{6}{chapter*.6}%
  \cftsetpnumwidth {\widthof {7}-1pt} \thispagestyle {empty} 
-\contentsline {chapter}{附录}{7}{chapter*.7}%
-\contentsline {section}{\numberline {1}本科期间的学术成果发表情况}{7}{section.3.1}%
-\contentsline {section}{\numberline {2}本科期间的获奖情况}{7}{section.3.2}%
+\contentsline {chapter}{参考文献}{7}{chapter*.7}%
+ \cftsetpnumwidth {\widthof {8}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{附录}{8}{chapter*.8}%
+\contentsline {section}{\numberline {1}本科期间的学术成果发表情况}{8}{section.3.1}%
+\contentsline {section}{\numberline {2}本科期间的获奖情况}{8}{section.3.2}%
 \contentsfinish 
