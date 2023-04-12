@@ -8,16 +8,16 @@
 \headcommand {\slideentry {1}{0}{1}{3/3}{}{0}}
 \headcommand {\beamer@framepages {3}{3}}
 \headcommand {\beamer@subsectionpages {3}{3}}
-\headcommand {\beamer@subsectionentry {0}{1}{1}{4}{Why Fuzz}}
-\headcommand {\slideentry {1}{1}{1}{4/4}{Why Fuzz}{0}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{4}{Motivation}}
+\headcommand {\slideentry {1}{1}{1}{4/4}{Motivation}{0}}
 \headcommand {\beamer@framepages {4}{4}}
-\headcommand {\slideentry {1}{1}{2}{5/7}{Why Fuzz}{0}}
+\headcommand {\slideentry {1}{1}{2}{5/7}{Motivation}{0}}
 \headcommand {\beamer@framepages {5}{7}}
 \headcommand {\beamer@subsectionpages {4}{7}}
-\headcommand {\beamer@subsectionentry {0}{1}{2}{8}{Why Directed Grey-Box Fuzz}}
-\headcommand {\slideentry {1}{2}{1}{8/8}{Why Directed Grey-Box Fuzz}{0}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{8}{Overview}}
+\headcommand {\slideentry {1}{2}{1}{8/8}{Overview}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\slideentry {1}{2}{2}{9/10}{Why Directed Grey-Box Fuzz}{0}}
+\headcommand {\slideentry {1}{2}{2}{9/10}{Overview}{0}}
 \headcommand {\beamer@framepages {9}{10}}
 \headcommand {\beamer@sectionpages {3}{10}}
 \headcommand {\beamer@subsectionpages {8}{10}}

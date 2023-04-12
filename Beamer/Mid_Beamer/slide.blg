@@ -1,46 +1,53 @@
 This is BibTeX, Version 0.99d (TeX Live 2022)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: slide.aux
-The style file: njupt.bst
+The style file: gbt.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: ref.bib
-You've used 1 entry,
-            738 wiz_defined-function locations,
-            252 strings with 1583 characters,
-and the built_in function-call counts, 118 in all, are:
-= -- 6
-> -- 3
-< -- 0
-+ -- 3
-- -- 1
-* -- 7
-:= -- 19
+Warning--Require citedate: wiki
+Warning--Require URL: wiki
+Warning--Require citedate: origin
+You've used 2 entries,
+            3107 wiz_defined-function locations,
+            719 strings with 6157 characters,
+and the built_in function-call counts, 1541 in all, are:
+= -- 136
+> -- 4
+< -- 10
++ -- 110
+- -- 11
+* -- 62
+:= -- 164
 add.period$ -- 0
-call.type$ -- 1
-change.case$ -- 1
+call.type$ -- 2
+change.case$ -- 4
 chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 7
-empty$ -- 7
-format.name$ -- 1
-if$ -- 17
+cite$ -- 5
+duplicate$ -- 183
+empty$ -- 73
+format.name$ -- 8
+if$ -- 392
 int.to.chr$ -- 0
-int.to.str$ -- 0
-missing$ -- 3
-newline$ -- 5
-num.names$ -- 1
-pop$ -- 2
-preamble$ -- 0
+int.to.str$ -- 2
+missing$ -- 0
+newline$ -- 33
+num.names$ -- 2
+pop$ -- 28
+preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1
+skip$ -- 22
 stack$ -- 0
-substring$ -- 13
-swap$ -- 2
+substring$ -- 144
+swap$ -- 65
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 0
-while$ -- 3
-width$ -- 0
-write$ -- 14
+warning$ -- 3
+while$ -- 25
+width$ -- 3
+write$ -- 49
+(There were 3 warnings)

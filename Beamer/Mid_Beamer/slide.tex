@@ -54,12 +54,17 @@
 
 
 \section{课题背景}
-\subsection{Why Fuzz}
-\begin{frame}{Why Fuzz?}
+\subsection{Motivation}
+\begin{frame}{Motivation}
     \only<1>{
-        \begin{itemize} % 当然，除了alert，手动在里面插 \pause 也行
-            \item 大家都会\LaTeX{}，好多学校都有自己的Beamer主题
-            \item 中文支持请选择 Xe\LaTeX{} 编译选项
+        \begin{itemize} 
+            \item \structure {What Fuzzing is?}
+                \\ \textbf{Defination:} In programming and software development, fuzzing or fuzz testing is an automated software testing technique that involves providing invalid, 
+                unexpected, or random data as inputs to a computer program\cite{wiki}.
+            \item  \structure {classification of fuzzing}
+                \\ - \textbf{Black-box Fuzzing}(no program analysis, no feedback)
+                \\ - \textbf{White-box Fuzzing}(mostly program analysis)
+                \\ - \textbf{Grey-box  Fuzzing}(no program analysis, but feedback)
         \end{itemize} 
     }
 
@@ -70,7 +75,7 @@
 
 
 
-\subsection{Why Directed Grey-Box Fuzz}
+\subsection{Overview}
 \begin{frame}{ Why Directed Grey-Box Fuzz?}
     \begin{itemize}[<+-| alert@+>] % 当然，除了alert，手动在里面插 \pause 也行
         \item 大家都会\LaTeX{}，好多学校都有自己的Beamer主题
@@ -341,9 +346,7 @@ $V = \frac{4}{3}\pi r^3$
 
 \begin{frame}[allowframebreaks]
     \bibliography{ref}
-    \bibliographystyle{njupt}
-    % 如果参考文献太多的话，可以像下面这样调整字体：
-    % \tiny\bibliographystyle{alpha}
+    \bibliographystyle{gbt}
 \end{frame}
 
 \begin{frame}
