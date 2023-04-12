@@ -95,63 +95,63 @@ xxxxxxx
 
 
 
-\begin{table}[t]
-\vspace{2ex}
-\centering
-\small 
-\begin{tabular}{p{8.4cm}}
-\hline
+%\begin{table}[t]
+%\vspace{2ex}
+%\centering
+%\small 
+%\begin{tabular}{p{8.4cm}}
+%\hline
  
-Algorithm 2: DGF with adaptive splitting of exploration and exploitation. \\   
-\hline
-01 $seedQ \leftarrow i$ \quad /* initial seeds*/ \\
-02 $dp \leftarrow 0$ \\
-03 $directedQ \leftarrow \varnothing$ \quad /* Queue for directed seeds */\\
-04 $noPathCycles \leftarrow 0$ \\
-05 $noCloserCycles \leftarrow 0$ \\
-06 \textbf{while} true \textbf{do} \\
-07 \quad $findPath \leftarrow false$ \\
-08 \quad $getCloser \leftarrow false$ \\
-09 \quad \textbf{for} $s$ in $seedQ$ \textbf{do}: \\
-10 \quad\quad $assign\_power\_by\_labels(s)$ \\       
-11 \quad\quad $s' \leftarrow mutate(s)$ \\
-12 \quad\quad $feedback \leftarrow execute(s')$ \\
-13 \quad\quad \textbf{if} $find\_new\_path(s', feedback)$ \textbf{then} \\
-14 \quad\quad\quad $findPath \leftarrow true$ \\
-15 \quad\quad\quad $noPathCycles \leftarrow 0$ \\
-16 \quad\quad\quad $label\_coverage(s')$ \quad /*set coverage label*/ \\
-17 \quad\quad\quad $seedQ \leftarrow seedQ + s'$ \quad /* add new seed*/ \\
-18 \quad\quad\quad $min_distance \leftarrow evaluate(s')$ \\
-19 \quad\quad\quad $directedQ \leftarrow sort\_insert(s', min\_distance)$ \\ 
-20 \quad\quad\quad \textbf{if} $getting\_closer(min_distance)$ \textbf{then}\\
-21 \quad\quad\quad\quad $getCloser \leftarrow true $ \\
-22 \quad\quad\quad\quad $noCloserCycles \leftarrow 0$ \\
-23 \quad\quad\quad\quad \underline{$dp \leftarrow dp + 0.01 $}\\          
-24 \quad  \textbf{end} \\
-25 \quad /*when a fuzzing cycle is done*/ \\
-26 \quad \textbf{if not} $findPath$ \textbf{then}\\
-27 \quad\quad $noPathCycles ++$\\
-28 \quad \textbf{if not} $getCloser$ \textbf{then}\\
-29 \quad\quad $noCloserCycles ++ $ \\
-30 \quad \textbf{if} \underline{$noPathCycles > 100$} \textbf{and} \underline{$dp < 0.5$} \textbf{then} \\
-31 \quad\quad \underline{$dp \leftarrow 0.9 $} \quad /* move to exploitation phase */\\
-32 \quad \textbf{if} \underline{$noCloserCycles >100$} \textbf{and} \underline{$dp > 0.9$} \textbf{then} \\
-33 \quad\quad \underline{$dp \leftarrow 0.1 $} \quad /* move back to exploration phase */ \\    
-34 \quad   $dNum \leftarrow len(seedQ)*dp $\\
-35 \quad  $label\_directed(directedQ, dNum)$ \quad /*set directed label*/ \\
-36 \textbf{end}   \\
+%Algorithm 2: DGF with adaptive splitting of exploration and exploitation. \\   
+%\hline
+%01 $seedQ \leftarrow i$ \quad /* initial seeds*/ \\
+%02 $dp \leftarrow 0$ \\
+%03 $directedQ \leftarrow \varnothing$ \quad /* Queue for directed seeds */\\
+%04 $noPathCycles \leftarrow 0$ \\
+%05 $noCloserCycles \leftarrow 0$ \\
+%06 \textbf{while} true \textbf{do} \\
+%07 \quad $findPath \leftarrow false$ \\
+%08 \quad $getCloser \leftarrow false$ \\
+%09 \quad \textbf{for} $s$ in $seedQ$ \textbf{do}: \\
+%10 \quad\quad $assign\_power\_by\_labels(s)$ \\       
+%11 \quad\quad $s' \leftarrow mutate(s)$ \\
+%12 \quad\quad $feedback \leftarrow execute(s')$ \\
+%13 \quad\quad \textbf{if} $find\_new\_path(s', feedback)$ \textbf{then} \\
+%14 \quad\quad\quad $findPath \leftarrow true$ \\
+%15 \quad\quad\quad $noPathCycles \leftarrow 0$ \\
+%16 \quad\quad\quad $label\_coverage(s')$ \quad /*set coverage label*/ \\
+%17 \quad\quad\quad $seedQ \leftarrow seedQ + s'$ \quad /* add new seed*/ \\
+%18 \quad\quad\quad $min_distance \leftarrow evaluate(s')$ \\
+%19 \quad\quad\quad $directedQ \leftarrow sort\_insert(s', min\_distance)$ \\ 
+%20 \quad\quad\quad \textbf{if} $getting\_closer(min_distance)$ \textbf{then}\\
+%21 \quad\quad\quad\quad $getCloser \leftarrow true $ \\
+%22 \quad\quad\quad\quad $noCloserCycles \leftarrow 0$ \\
+%23 \quad\quad\quad\quad \underline{$dp \leftarrow dp + 0.01 $}\\          
+%24 \quad  \textbf{end} \\
+%25 \quad /*when a fuzzing cycle is done*/ \\
+%26 \quad \textbf{if not} $findPath$ \textbf{then}\\
+%27 \quad\quad $noPathCycles ++$\\
+%28 \quad \textbf{if not} $getCloser$ \textbf{then}\\
+%29 \quad\quad $noCloserCycles ++ $ \\
+%30 \quad \textbf{if} \underline{$noPathCycles > 100$} \textbf{and} \underline{$dp < 0.5$} \textbf{then} \\
+%31 \quad\quad \underline{$dp \leftarrow 0.9 $} \quad /* move to exploitation phase */\\
+%32 \quad \textbf{if} \underline{$noCloserCycles >100$} \textbf{and} \underline{$dp > 0.9$} \textbf{then} \\
+%33 \quad\quad \underline{$dp \leftarrow 0.1 $} \quad /* move back to exploration phase */ \\    
+%34 \quad   $dNum \leftarrow len(seedQ)*dp $\\
+%35 \quad  $label\_directed(directedQ, dNum)$ \quad /*set directed label*/ \\
+%36 \textbf{end}   \\
  
-\hline
-\end{tabular}
-\label{algorithm2}
-\vspace{-3ex}
-\end{table}
+%\hline
+%\end{tabular}
+%\label{algorithm2}
+%\vspace{-3ex}
+%\end{table}
 
 
-To realize this scheme, we suggest \textit{casting the splitting of fuzzing phases to the dividing of seeds}, namely dividing the seeds into two groups: coverage seeds for exploration and directed seeds for exploitation. The number of seeds in each group indicates the energy spent on the corresponding phase. The coordination of the two phases is implemented by controlling the number of seeds in each group. We use a variable called \textit{dp} to represent the percentage of directed seeds among all the seeds, which also indicates the percentage of energy that spends on the exploitation phase. We give labels to the coverage seeds during seed evaluation, and we give labels to directed seeds after every fuzzing cycle, adjusted by \textit{dp}. 
-We use Algorithm 2 to illustrate this design. A DGF with adaptive splitting should start from the exploration phase (\textit{dp} = 0) that focuses on discovering new paths. Then, with the increasing of known paths, we gradually increase \textit{dp} to invoke the exploitation phase, in which high-valued directed seeds are selected and prioritized to enhance the reachability based on \textit{dp}. When the fuzzer can not find any new paths for a long duration, the exploration phase has come to a bottleneck, and we should quickly move to the exploitation phase by dramatically increasing \textit{dp}.
-Similarly, we also need to move from the exploitation phase back to the exploration phase occasionally. For example, we are already at the exploitation phase with a very large \textit{dp} (e.g., \textit{dp} $>$ 0.9), but we cannot get any closer to the target for many fuzzing cycles, we should decrease \textit{dp} dramatically to move back to the exploration phase. This is because the directed seeds in hand perform poorly, and we should enlarge path coverage to discover more potential directed seeds. With this scheme, both of the two phases can coexist to achieve the best performance and adaptiveness. 
-It worth noting that the thresholds in the algorithm are used to illustrate the principle. Reasonable values should be generated based on a heuristic algorithm.
+%To realize this scheme, we suggest \textit{casting the splitting of fuzzing phases to the dividing of seeds}, namely dividing the seeds into two groups: coverage seeds for exploration and directed seeds for exploitation. The number of seeds in each group indicates the energy spent on the corresponding phase. The coordination of the two phases is implemented by controlling the number of seeds in each group. We use a variable called \textit{dp} to represent the percentage of directed seeds among all the seeds, which also indicates the percentage of energy that spends on the exploitation phase. We give labels to the coverage seeds during seed evaluation, and we give labels to directed seeds after every fuzzing cycle, adjusted by \textit{dp}. 
+%We use Algorithm 2 to illustrate this design. A DGF with adaptive splitting should start from the exploration phase (\textit{dp} = 0) that focuses on discovering new paths. Then, with the increasing of known paths, we gradually increase \textit{dp} to invoke the exploitation phase, in which high-valued directed seeds are selected and prioritized to enhance the reachability based on \textit{dp}. When the fuzzer can not find any new paths for a long duration, the exploration phase has come to a bottleneck, and we should quickly move to the exploitation phase by dramatically increasing \textit{dp}.
+%Similarly, we also need to move from the exploitation phase back to the exploration phase occasionally. For example, we are already at the exploitation phase with a very large \textit{dp} (e.g., \textit{dp} $>$ 0.9), but we cannot get any closer to the target for many fuzzing cycles, we should decrease \textit{dp} dramatically to move back to the exploration phase. This is because the directed seeds in hand perform poorly, and we should enlarge path coverage to discover more potential directed seeds. With this scheme, both of the two phases can coexist to achieve the best performance and adaptiveness. 
+%It worth noting that the thresholds in the algorithm are used to illustrate the principle. Reasonable values should be generated based on a heuristic algorithm.
 
 \chapter{第二章了！}
 这是一个参考文献示例\cite{PRODEN}
