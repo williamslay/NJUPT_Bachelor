@@ -53,29 +53,77 @@
 \end{frame}
 
 
-\section{课题背景}
+\section{Background}
 \subsection{Motivation}
 \begin{frame}{Motivation}
     \only<1>{
         \begin{itemize} 
             \item \structure {What Fuzzing is?}
-                \\ \textbf{Defination:} In programming and software development, fuzzing or fuzz testing is an automated software testing technique that involves providing invalid, 
-                unexpected, or random data as inputs to a computer program\cite{wiki}.
+                \\ \textbf{Definition:} Fuzzing is the execution of the PUT using input(s) sampled from an input space (the “fuzz input space”) 
+                that protrudes the expected input space of the PUT\cite{manes2019art}.
+                \\ - PUT: Program Under Test
             \item  \structure {classification of fuzzing}
-                \\ - \textbf{Black-box Fuzzing}(no program analysis, no feedback)
-                \\ - \textbf{White-box Fuzzing}(mostly program analysis)
-                \\ - \textbf{Grey-box  Fuzzing}(no program analysis, but feedback)
+                \\ - \textbf{Black-box Fuzzing} (no program analysis, no feedback)
+                \\ - \textbf{White-box Fuzzing} (mostly program analysis)
+                \\ - \textbf{Grey-box  Fuzzing} (no program analysis, but feedback)
         \end{itemize} 
     }
 
-    \only<2>{Second Line of Text}
+    \only<2>{
+        \begin{itemize}  
+        \item \structure {Black-box Fuzzing}
+          \\ \textbf{Defination:} techniques that do not see the internals of the PUT,and can observe only the input/output behavior of the PUT,
+           treating it as a black-box\cite{manes2019art}.
+           \\ -no \alert{program analysis}, no \alert{feedback}
+        \end{itemize} 
+        \begin{picture}(320,250)
+            \put(-15,110){\includegraphics[width=8.0cm]{pic/blackbox.pdf}}
+        \end{picture} 
+    }
+
+    \only<3>{
+        \begin{itemize}  
+        \item \structure {Black-box Fuzzing}
+          \\ \textbf{Defination:} techniques that do not see the internals of the PUT,and can observe only the input/output behavior of the PUT,
+           treating it as a black-box\cite{manes2019art}.
+           \\ -no \alert{program analysis}, no \alert{feedback}
+        \end{itemize} 
+        \begin{picture}(320,250)
+            \put(-15,110){\includegraphics[width=8.0cm]{pic/blackbox.pdf}}
+            \put(213,230){
+                \begin{minipage}[t]{0.35\linewidth}
+                {
+                    \footnotesize{
+                        \begin{itemize}  
+                            \item - You have no view of the PUT
+                            \item - But have some view of the input/output domain
+                            \item - And the Fuzzing process is not changed according to some feedback  
+                        \end{itemize} 
+                    }
+                }
+                \end{minipage}
+                }
+        \end{picture} 
+    }
     
-    \only<3>{Third Line of Text}
+    \only<4>{
+        \begin{itemize}  
+        \item \structure {White-box Fuzzing}
+          \\ \textbf{Defination:} techniques that do not see the internals of the PUT,and can observe only the input/output behavior of the PUT,
+           treating it as a black-box\cite{manes2019art}.
+           
+        \end{itemize} 
+        \begin{figure}[htpb]
+            \begin{center}
+                \includegraphics[width=8.0cm,height=6.0cm]{pic/blackbox.pdf}
+            \end{center}
+        \end{figure} 
+    }
 \end{frame}
 
 
 
-\subsection{Overview}
+\subsection{Research Status }
 \begin{frame}{ Why Directed Grey-Box Fuzz?}
     \begin{itemize}[<+-| alert@+>] % 当然，除了alert，手动在里面插 \pause 也行
         \item 大家都会\LaTeX{}，好多学校都有自己的Beamer主题

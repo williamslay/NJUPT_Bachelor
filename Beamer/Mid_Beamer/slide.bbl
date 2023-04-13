@@ -24,9 +24,12 @@
 \providecommand{\bibdate}[1]{#1}
 \providecommand{\biburl}[1]{\newline\url{#1}}
 
-\bibitem{wiki}
-\bibauthor{{Wikipedia contributors}}\@. \bibtitle{Fuzzing --- {Wikipedia}{,}
-  The Free Encyclopedia}\bibmark{[EB]}\@. \bibyear{2023}\@.
+\bibitem{manes2019art}
+\bibauthor{MAN{\`E}S V~J\@, HAN H\@, HAN C, et~al}\@. \bibtitle{The art,
+  science, and engineering of fuzzing: A survey}\bibmark{[J]}\@.
+  \bibjournal{IEEE Transactions on Software Engineering}\@, \bibyear{2019}\@,
+  \bibvolume{47}\bibnumber{(11)}\thinspace{}\textnormal{:
+  }\bibpages{2312\thinspace{}\textnormal{--}\thinspace{}2331}\@.
 
 \bibitem{origin}
 \bibauthor{UNKNOWN}\@. \bibtitle{THU Beamer Theme}\bibmark{[C/OL]}

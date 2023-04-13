@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  12 APR 2023 23:34
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  13 APR 2023 23:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1217,43 +1217,76 @@ File: pic/NJUPT_Logo.pdf Graphic file (type pdf)
 ] (./slide.toc) [4
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 74.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 122.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 74.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 122.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 74.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 122.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
 
 LaTeX Font Warning: Font shape `TU/MicrosoftYaHei(0)/m/it' undefined
-(Font)              using `TU/MicrosoftYaHei(0)/m/n' instead on input line 74.
+(Font)              using `TU/MicrosoftYaHei(0)/m/n' instead on input line 122.
 
 [5
 
-] [6
+]
+File: pic/blackbox.pdf Graphic file (type pdf)
+<use pic/blackbox.pdf>
 
-] [7
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 122--122
+[] 
+ []
 
-] (./slide.toc) [8
 
-] [9
+Overfull \vbox (115.4641pt too high) detected at line 122
+ []
+
+[6
+
+]
+File: pic/blackbox.pdf Graphic file (type pdf)
+<use pic/blackbox.pdf>
+
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 122--122
+[] 
+ []
+
+
+Overfull \vbox (115.4641pt too high) detected at line 122
+ []
+
+[7
+
+]
+File: pic/blackbox.pdf Graphic file (type pdf)
+<use pic/blackbox.pdf>
+
+Overfull \vbox (20.1793pt too high) detected at line 122
+ []
+
+[8
+
+] (./slide.toc) [9
 
 ] [10
 
-] (./slide.toc) [11
+] [11
 
 ] (./slide.toc) [12
 
-] [13
+] (./slide.toc) [13
 
-] (./slide.toc) [14
+] [14
 
 ] (./slide.toc) [15
+
+] (./slide.toc) [16
 
 ]
 
@@ -1262,20 +1295,20 @@ Package xeCJK Warning: Unknown CJK family `\CJKttdefault' is being ignored.
 (xeCJK)                Try to use `\setCJKmonofont[<...>]{<...>}' to define
 (xeCJK)                it.
 
-[16
+[17
 
-] (./slide.toc) [17
-
-] [18
+] (./slide.toc) [18
 
 ] [19
 
 ] [20
 
+] [21
+
 ]
 \openout4 = `slide.vrb'.
 
- (./slide.vrb) [21
+ (./slide.vrb) [22
 
 ]
 \openout4 = `slide.vrb'.
@@ -1303,14 +1336,9 @@ File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 )
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <9> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 5.
-) [22
+) [23
 
-] (./slide.vrb) [23
-
-]
-\openout4 = `slide.vrb'.
-
- (./slide.vrb) [24
+] (./slide.vrb) [24
 
 ]
 \openout4 = `slide.vrb'.
@@ -1318,19 +1346,24 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <9> not available
  (./slide.vrb) [25
 
 ]
+\openout4 = `slide.vrb'.
+
+ (./slide.vrb) [26
+
+]
 File: pic/NJUPT_Logo.pdf Graphic file (type pdf)
 <use pic/NJUPT_Logo.pdf>
- [26
+ [27
 
-] (./slide.toc) [27
+] (./slide.toc) [28
 
-] [28
+] [29
 
-] (./slide.toc) [29
+] (./slide.toc) [30
 
-] (./slide.bbl) [30
+] (./slide.bbl) [31
 
-] [31
+] [32
 
 ]
 \tf@nav=\write6
@@ -1347,15 +1380,15 @@ File: pic/NJUPT_Logo.pdf Graphic file (type pdf)
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `slide.out' has not changed.
-(rerunfilecheck)             Checksum: 9C664CC4C9C10F0C16A50B103F1C8B93;926.
+(rerunfilecheck)             Checksum: 6B7EDCD4A6FC2CADA99077A6A36F2FCE;990.
  ) 
 Here is how much of TeX's memory you used:
- 30776 strings out of 476684
- 649899 string characters out of 5804055
+ 30808 strings out of 476684
+ 651540 string characters out of 5804055
  1901018 words of memory out of 5000000
- 50337 multiletter control sequences out of 15000+600000
+ 50368 multiletter control sequences out of 15000+600000
  522108 words of font info for 108 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,20n,132p,435b,2131s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on slide.pdf (31 pages).
+Output written on slide.pdf (32 pages).
