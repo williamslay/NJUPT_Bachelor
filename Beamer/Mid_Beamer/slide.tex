@@ -1,15 +1,17 @@
-\documentclass[10pt,aspectratio=43,mathserif]{beamer} 
+\documentclass[10pt,aspectratio=43]{beamer} 
 \usepackage{hyperref}
 \usepackage{xeCJK} %导入中文包
 
 \setCJKsansfont{SimHei} 
 \setsansfont{Microsoft YaHei}
 \setmainfont{Microsoft YaHei}
-
+\usefonttheme[onlymath]{serif}
 % other packages
 \usepackage{latexsym,amsmath,xcolor,multicol,booktabs,calligra}
 \usepackage{graphicx,pstricks,listings,stackengine}
-
+\usepackage[linesnumbered,vlined]{algorithm2e}
+%\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{float}    
 \author{雷尚远}
 \title{定向覆盖模糊测试工具的设计与实现}
 \subtitle{毕业设计中期检查}
@@ -54,18 +56,181 @@
 
 
 \section{Background}
-\subsection{Motivation}
-\begin{frame}{Motivation}
+\subsection{Pre-Knowledge}
+\begin{frame}[fragile] {What Fuzzing is?}
     \only<1>{
+        \structure {Defination}
         \begin{itemize} 
-            \item \structure {What Fuzzing is?}
-                \\ \textbf{Definition:} Fuzzing is the execution of the PUT using input(s) sampled from an input space (the “fuzz input space”) 
+            \item \textbf{Fuzzing} Fuzzing is the execution of the PUT using input(s) sampled from an input space (the “fuzz input space”) 
                 that protrudes the expected input space of the PUT\cite{manes2019art}.
                 \\ - PUT: Program Under Test
-            \item  \structure {classification of fuzzing}
-                \\ - \textbf{Black-box Fuzzing} (no program analysis, no feedback)
-                \\ - \textbf{White-box Fuzzing} (mostly program analysis)
-                \\ - \textbf{Grey-box  Fuzzing} (no program analysis, but feedback)
+            \item \textbf{Fuzz testing} Fuzz testing is the use of fuzzing to test if a PUT violates a correctness policy\cite{manes2019art}.
+            \item \textbf{Fuzzer} A fuzzer is a program that performs fuzz testing on a PUT\cite{manes2019art}.
+            \item \textbf{Bug Oracle} A bug oracle is a program, perhaps as part of a fuzzer, that determines whether a given execution 
+            of the PUT violates a specific correctness policy\cite{manes2019art}.
+            \item \textbf{Fuzz Configuration}  A fuzz configuration of a fuzz algorithm comprises the parameter value(s) that control(s) the fuzz algorithm\cite{manes2019art}.
+        \end{itemize}
+    } 
+    \only<2>{
+            \begin{block}{Fuzz Testing}
+            \begin{algorithm}[H]
+                \small
+                \DontPrintSemicolon
+                \SetKwSty{algokeywordsty}
+                \SetFuncSty{algofuncsty}
+                \SetDataSty{algodatasty}
+                \SetArgSty{algoargsty}
+                \SetCommentSty{algocmtsty}
+                \SetKw{break}{break}
+                \SetKw{not}{not}
+                \SetKwFunction{preprocess}{\textsc{Preprocess}}
+                \SetKwFunction{schedule}{\textsc{Schedule}}
+                \SetKwFunction{inputGen}{\textsc{InputGen}}
+                \SetKwFunction{inputEval}{\textsc{InputEval}}
+                \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+                \SetKwFunction{continue}{\textsc{Continue}}
+                \SetKwFunction{isBug}{isBug}
+                \SetKwFunction{getProgram}{getProgram}
+                \SetKwData{newbugs}{$\bugs^\prime$}
+                \KwIn{\confs, \timeout}
+                \KwOut{\bugs \tcp{a finite set of bugs}}
+                $\bugs \gets \varnothing$\;
+                $\confs \gets \preprocess{$\confs$}$\;
+                \While {$\currtime < \timeout \land \continue{\confs}$}{
+                  \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+                  \testcases $\gets \inputGen{\conf}$\;
+                  \tcp{\bugoracle is embedded in a fuzzer}
+                  \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+                  $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+                  $\bugs \gets \bugs \cup \newbugs$\;
+                }
+                \Return{\bugs}\;
+                %\caption[short]{fuzz testing}
+            \end{algorithm} 
+        \end{block}
+    } 
+    \only<3>{
+        \begin{block}{Fuzz Testing}
+        \begin{minipage}[t]{0.65\linewidth}
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{preprocess}{\textsc{Preprocess}}
+            \SetKwFunction{schedule}{\textsc{Schedule}}
+            \SetKwFunction{inputGen}{\textsc{InputGen}}
+            \SetKwFunction{inputEval}{\textsc{InputEval}}
+            \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+            \SetKwFunction{continue}{\textsc{Continue}}
+            \SetKwFunction{isBug}{isBug}
+            \SetKwFunction{getProgram}{getProgram}
+            \SetKwData{newbugs}{$\bugs^\prime$}
+            \HiLi \KwIn{\confs, \timeout}
+            \HiLi \KwOut{\bugs \tcp{a finite set of bugs}}
+            $\bugs \gets \varnothing$\;
+            $\confs \gets \preprocess{$\confs$}$\;
+            \While {$\currtime < \timeout \land \continue{\confs}$}{
+              \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+              \testcases $\gets \inputGen{\conf}$\;
+              \tcp{\bugoracle is embedded in a fuzzer}
+              \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+              $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+              $\bugs \gets \bugs \cup \newbugs$\;
+            }
+            \Return{\bugs}\;
+        \end{algorithm} 
+        \end{minipage} 
+        \begin{minipage}[t]{0.34\linewidth}
+            {
+                \footnotesize{
+                    \begin{itemize}  
+                        \item  \confs :a set of fuzz configurations
+                        \item  \timeout: timeout
+                        \item  \bugs: a set of discovered bugs
+                    \end{itemize} 
+                }
+            }
+        \end{minipage}
+        \end{block}
+    }  
+
+    \only<4>{
+        \begin{block}{Fuzz Testing}
+        \begin{minipage}[t]{0.65\linewidth}
+        \vspace{0pt}
+        \centering
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{preprocess}{\textsc{Preprocess}}
+            \SetKwFunction{schedule}{\textsc{Schedule}}
+            \SetKwFunction{inputGen}{\textsc{InputGen}}
+            \SetKwFunction{inputEval}{\textsc{InputEval}}
+            \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+            \SetKwFunction{continue}{\textsc{Continue}}
+            \SetKwFunction{isBug}{isBug}
+            \SetKwFunction{getProgram}{getProgram}
+            \SetKwData{newbugs}{$\bugs^\prime$}
+            \KwIn{\confs, \timeout}
+            \KwOut{\bugs \tcp{a finite set of bugs}}
+            \HiLi$\bugs \gets \varnothing$\;
+            \HiLi$\confs \gets \preprocess{$\confs$}$\;
+            \While {$\currtime < \timeout \land \continue{\confs}$}{
+              \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+              \testcases $\gets \inputGen{\conf}$\;
+              \tcp{\bugoracle is embedded in a fuzzer}
+              \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+              $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+              $\bugs \gets \bugs \cup \newbugs$\;
+            }
+            \Return{\bugs}\;
+        \end{algorithm} 
+        \end{minipage} 
+        \begin{minipage}[t]{0.34\linewidth}
+            {
+                \vspace{0pt}
+                \centering
+                \preprocess\normalfont(\confs) $\rightarrow \confs$ 
+                \scriptsize{
+                    \\A user supplies \preprocess with a set of fuzz configurations as input, and it returns a potentially-modified set of fuzz configurations.
+                    Depending on the fuzz algorithm, \preprocess may perform a variety of actions such as inserting instrumentation code to PUTs, 
+                    or measuring the execution speed of seed files. 
+                }
+            }
+        \end{minipage}
+        \end{block}
+    }
+    
+
+
+
+\end{frame}
+
+
+\subsection{Motivation}
+\begin{frame}{Why Grey-box Fuzzing ?}
+    \only<1>{
+        \structure {classification of fuzzing}
+        \begin{itemize} 
+            \item  \textbf{Black-box Fuzzing}
+                \\ - no program analysis, no feedback
+            \item  \textbf{White-box Fuzzing} 
+                \\ - mostly program analysis
+            \item  \textbf{Grey-box  Fuzzing} 
+                \\ - no program analysis, but feedback
         \end{itemize} 
     }
 
@@ -74,7 +239,7 @@
         \item \structure {Black-box Fuzzing}
           \\ \textbf{Defination:} techniques that do not see the internals of the PUT,and can observe only the input/output behavior of the PUT,
            treating it as a black-box\cite{manes2019art}.
-           \\ -no \alert{program analysis}, no \alert{feedback}
+           \\ -No \alert{program analysis}, no \alert{feedback}
         \end{itemize} 
         \begin{picture}(320,250)
             \put(-15,110){\includegraphics[width=8.0cm]{pic/blackbox.pdf}}
@@ -86,18 +251,18 @@
         \item \structure {Black-box Fuzzing}
           \\ \textbf{Defination:} techniques that do not see the internals of the PUT,and can observe only the input/output behavior of the PUT,
            treating it as a black-box\cite{manes2019art}.
-           \\ -no \alert{program analysis}, no \alert{feedback}
+           \\ - No \alert{program analysis}, no \alert{feedback}
         \end{itemize} 
         \begin{picture}(320,250)
-            \put(-15,110){\includegraphics[width=8.0cm]{pic/blackbox.pdf}}
-            \put(213,230){
-                \begin{minipage}[t]{0.35\linewidth}
+            \put(-25,110){\includegraphics[width=8.0cm]{pic/blackbox.pdf}}
+            \put(190,220){
+                \begin{minipage}[t]{0.45\linewidth}
                 {
                     \footnotesize{
                         \begin{itemize}  
-                            \item - You have no view of the PUT
-                            \item - But have some view of the input/output domain
-                            \item - And the Fuzzing process is not changed according to some feedback  
+                            \item  You have no view of the PUT,but have some view of the input/output domain
+                            \item  Fuzzing process is not changed according to some feedback 
+                            \item  Random mutated (not \alert {effective})
                         \end{itemize} 
                     }
                 }
@@ -105,17 +270,51 @@
                 }
         \end{picture} 
     }
-    
     \only<4>{
         \begin{itemize}  
         \item \structure {White-box Fuzzing}
-          \\ \textbf{Defination:} techniques that do not see the internals of the PUT,and can observe only the input/output behavior of the PUT,
-           treating it as a black-box\cite{manes2019art}.
-           
+          \\ \textbf{Defination:} techniques that generates test cases by analyzing the internals of the PUT and the information gathered 
+          when executing the PUT\cite{manes2019art}.
+          \\ - Requires heavy-weight \alert {program analysis} and constraint solving. 
         \end{itemize} 
-        \begin{figure}[htpb]
+        \begin{picture}(320,250)
+            \put(-20,120){\includegraphics[width=6.0cm]{pic/cfg.pdf}}
+            \put(160,120){\includegraphics[width=6.0cm]{pic/whitebox.pdf}} 
+        \end{picture} 
+    }
+    \only<5>{
+        \begin{itemize}  
+        \item \structure {White-box Fuzzing}
+          \\ \textbf{Defination:} techniques that generates test cases by analyzing the internals of the PUT and the information gathered 
+          when executing the PUT\cite{manes2019art}.
+          \\ - Requires heavy-weight \alert {program analysis} and constraint solving. 
+        \end{itemize}
+        \begin{picture}(320,250) 
+        \put(-15,110){\includegraphics[width=8.0cm]{pic/whitebox.pdf}}
+        \put(200,210){
+            \begin{minipage}[t]{0.40\linewidth}
+            {
+                \footnotesize{
+                    \begin{itemize}  
+                        \item  You have the view of the PUT state(CFG,CG)
+                        \item  Static analysis (effective but not \alert {efficient}!)
+                    \end{itemize} 
+                }
+            }
+            \end{minipage}
+            }
+    \end{picture} 
+    }
+    \only<6>{
+        \begin{itemize}  
+        \item \structure {Grey-box Fuzzing}
+          \\ \textbf{Defination:} techniques that can obtain \textit{some} information internal to the PUT and/or its executions\cite{manes2019art} to generates test cases.
+          \\ - Uses only lightweight instrumentation to glean some program structure
+          \\ - And coverage \alert{feedback} 
+        \end{itemize} 
+        \begin{figure}[htbp]
             \begin{center}
-                \includegraphics[width=8.0cm,height=6.0cm]{pic/blackbox.pdf}
+                \includegraphics[width=10.0cm]{pic/greybox.pdf}
             \end{center}
         \end{figure} 
     }

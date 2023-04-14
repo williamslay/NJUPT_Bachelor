@@ -81,5 +81,29 @@
 	\end{frame}
 }
 
+%%% Algorithms
+\colorlet{bluekeywords}{blue!90!black}
+\colorlet{greencomments}{green!40!black}
+\colorlet{redstrings}{red!90!black}
+\newcommand*{\algokeywordsty}[1]{\textcolor{bluekeywords}{\textbf{\ttfamily{#1}}}}
+\newcommand*{\algodatasty}[1]{\ttfamily{#1}}
+\newcommand*{\algofuncsty}[1]{\textbf{\ttfamily{#1}}}
+\newcommand*{\algoargsty}[1]{\ttfamily{#1}}
+\newcommand*{\algocmtsty}[1]{\textcolor{greencomments}{\ttfamily{#1}}}
+
+\newcommand*{\timeout}{\ensuremath{t_\text{limit}}\xspace}%
+\newcommand*{\currtime}{\ensuremath{t_\text{elapsed}}\xspace}%
+\newcommand*{\confs}{\ensuremath{\mathbb{C}}\xspace}%
+\newcommand*{\conf}{\texttt{conf}\xspace}%
+\newcommand*{\testcases}{\texttt{tcs}\xspace}%
+\newcommand*{\bugoracle}{\ensuremath{O_\text{bug}}\xspace}%
+\newcommand*{\execinfos}{\texttt{execinfos}\xspace}%
+\newcommand*{\bugs}{\ensuremath{\mathbb{B}}\xspace}%
+
+\newcommand*{\bbfuzz}{\CIRCLE}
+\newcommand*{\gbfuzz}{\RIGHTcircle}
+\newcommand*{\wbfuzz}{\Circle}
+\newcommand*{\cm}{\checkmark}
+\def\HiLi{\leavevmode\rlap{\hbox to \hsize{\color{yellow!50}\leaders\hrule height .8\baselineskip depth .5ex\hfill}}}
 \mode
 <all>
