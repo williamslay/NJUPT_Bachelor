@@ -112,6 +112,8 @@
     \only<3>{
         \begin{block}{Fuzz Testing}
         \begin{minipage}[t]{0.65\linewidth}
+        \vspace{0pt}
+        \centering
         \begin{algorithm}[H]
             \footnotesize
             \DontPrintSemicolon
@@ -148,7 +150,9 @@
         \end{minipage} 
         \begin{minipage}[t]{0.34\linewidth}
             {
-                \footnotesize{
+                \vspace{25pt}
+                \centering
+                \scriptsize{
                     \begin{itemize}  
                         \item  \confs :a set of fuzz configurations
                         \item  \timeout: timeout
@@ -162,7 +166,7 @@
 
     \only<4>{
         \begin{block}{Fuzz Testing}
-        \begin{minipage}[t]{0.65\linewidth}
+        \begin{minipage}[t]{0.64\linewidth}
         \vspace{0pt}
         \centering
         \begin{algorithm}[H]
@@ -204,19 +208,413 @@
                 \vspace{0pt}
                 \centering
                 \preprocess\normalfont(\confs) $\rightarrow \confs$ 
+                    \begin{itemize}  
+            \scriptsize{\item  Instrumentation}
+                            \\- \tiny{grey-box and white-box fuzzers}
+                \scriptsize{\\-} \tiny{\alert{static}/dynamic}
+            \scriptsize{\item Seed Selection}
+                            \\- \tiny{weed out potentiallyredundant configurations}
+            \scriptsize{ \item  Seed Trimming}
+                            \\- \tiny{reduce the size of seeds}
+            \scriptsize{\item  Preparing a Driver Application}
+                            \\- \tiny{library Fuzzing, kernal Fuzzing}
+                    \end{itemize} 
+            }
+        \end{minipage}
+        \end{block}
+    }
+   
+    \only<5>{
+        \begin{block}{Fuzz Testing}
+        \begin{minipage}[t]{0.64\linewidth}
+        \vspace{0pt}
+        \centering
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{preprocess}{\textsc{Preprocess}}
+            \SetKwFunction{schedule}{\textsc{Schedule}}
+            \SetKwFunction{inputGen}{\textsc{InputGen}}
+            \SetKwFunction{inputEval}{\textsc{InputEval}}
+            \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+            \SetKwFunction{continue}{\textsc{Continue}}
+            \SetKwFunction{isBug}{isBug}
+            \SetKwFunction{getProgram}{getProgram}
+            \SetKwData{newbugs}{$\bugs^\prime$}
+            \KwIn{\confs, \timeout}
+            \KwOut{\bugs \tcp{a finite set of bugs}}
+            $\bugs \gets \varnothing$\;
+            $\confs \gets \preprocess{$\confs$}$\;
+            \HiLi\While {$\currtime < \timeout \land \continue{\confs}$}{
+              \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+              \testcases $\gets \inputGen{\conf}$\;
+              \tcp{\bugoracle is embedded in a fuzzer}
+              \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+              $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+              $\bugs \gets \bugs \cup \newbugs$\;
+            }
+            \Return{\bugs}\;
+        \end{algorithm} 
+        \end{minipage} 
+        \begin{minipage}[t]{0.35\linewidth}
+            {
+                \vspace{25pt}
+                \centering
+                stop condition
                 \scriptsize{
-                    \\A user supplies \preprocess with a set of fuzz configurations as input, and it returns a potentially-modified set of fuzz configurations.
-                    Depending on the fuzz algorithm, \preprocess may perform a variety of actions such as inserting instrumentation code to PUTs, 
-                    or measuring the execution speed of seed files. 
+                    \begin{itemize}  
+                        \item  $\currtime < \timeout$
+                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
+                        \\- Determine whether a new fuzz iteration should occur
+                    \end{itemize} 
                 }
             }
         \end{minipage}
         \end{block}
     }
-    
 
+    \only<6>{
+        \begin{block}{Fuzz Testing}
+        \begin{minipage}[t]{0.64\linewidth}
+        \vspace{0pt}
+        \centering
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{preprocess}{\textsc{Preprocess}}
+            \SetKwFunction{schedule}{\textsc{Schedule}}
+            \SetKwFunction{inputGen}{\textsc{InputGen}}
+            \SetKwFunction{inputEval}{\textsc{InputEval}}
+            \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+            \SetKwFunction{continue}{\textsc{Continue}}
+            \SetKwFunction{isBug}{isBug}
+            \SetKwFunction{getProgram}{getProgram}
+            \SetKwData{newbugs}{$\bugs^\prime$}
+            \KwIn{\confs, \timeout}
+            \KwOut{\bugs \tcp{a finite set of bugs}}
+            $\bugs \gets \varnothing$\;
+            $\confs \gets \preprocess{$\confs$}$\;
+            \While {$\currtime < \timeout \land \continue{\confs}$}{
+             \HiLi  \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+              \testcases $\gets \inputGen{\conf}$\;
+              \tcp{\bugoracle is embedded in a fuzzer}
+              \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+              $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+              $\bugs \gets \bugs \cup \newbugs$\;
+            }
+            \Return{\bugs}\;
+        \end{algorithm} 
+        \end{minipage} 
+        \begin{minipage}[t]{0.35\linewidth}
+            {
+                \vspace{25pt}
+                \centering
+                stop condition
+                \scriptsize{
+                    \begin{itemize}  
+                        \item  $\currtime < \timeout$
+                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
+                        \\- Determine whether a new fuzz iteration should occur
+                    \end{itemize} 
+                }
+            }
+        \end{minipage}
+        \end{block}
+    }
 
+    \only<7>{
+        \begin{block}{Fuzz Testing}
+        \begin{minipage}[t]{0.64\linewidth}
+        \vspace{0pt}
+        \centering
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{preprocess}{\textsc{Preprocess}}
+            \SetKwFunction{schedule}{\textsc{Schedule}}
+            \SetKwFunction{inputGen}{\textsc{InputGen}}
+            \SetKwFunction{inputEval}{\textsc{InputEval}}
+            \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+            \SetKwFunction{continue}{\textsc{Continue}}
+            \SetKwFunction{isBug}{isBug}
+            \SetKwFunction{getProgram}{getProgram}
+            \SetKwData{newbugs}{$\bugs^\prime$}
+            \KwIn{\confs, \timeout}
+            \KwOut{\bugs \tcp{a finite set of bugs}}
+            $\bugs \gets \varnothing$\;
+            $\confs \gets \preprocess{$\confs$}$\;
+            \While {$\currtime < \timeout \land \continue{\confs}$}{
+            \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+            \HiLi\testcases $\gets \inputGen{\conf}$\;
+              \tcp{\bugoracle is embedded in a fuzzer}
+              \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+              $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+              $\bugs \gets \bugs \cup \newbugs$\;
+            }
+            \Return{\bugs}\;
+        \end{algorithm} 
+        \end{minipage} 
+        \begin{minipage}[t]{0.35\linewidth}
+            {
+                \vspace{25pt}
+                \centering
+                stop condition
+                \scriptsize{
+                    \begin{itemize}  
+                        \item  $\currtime < \timeout$
+                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
+                        \\- Determine whether a new fuzz iteration should occur
+                    \end{itemize} 
+                }
+            }
+        \end{minipage}
+        \end{block}
+    }
 
+    \only<8>{
+        \begin{block}{Fuzz Testing}
+        \begin{minipage}[t]{0.64\linewidth}
+        \vspace{0pt}
+        \centering
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{preprocess}{\textsc{Preprocess}}
+            \SetKwFunction{schedule}{\textsc{Schedule}}
+            \SetKwFunction{inputGen}{\textsc{InputGen}}
+            \SetKwFunction{inputEval}{\textsc{InputEval}}
+            \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+            \SetKwFunction{continue}{\textsc{Continue}}
+            \SetKwFunction{isBug}{isBug}
+            \SetKwFunction{getProgram}{getProgram}
+            \SetKwData{newbugs}{$\bugs^\prime$}
+            \KwIn{\confs, \timeout}
+            \KwOut{\bugs \tcp{a finite set of bugs}}
+            $\bugs \gets \varnothing$\;
+            $\confs \gets \preprocess{$\confs$}$\;
+            \While {$\currtime < \timeout \land \continue{\confs}$}{
+            \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+              \testcases $\gets \inputGen{\conf}$\;
+              \tcp{\bugoracle is embedded in a fuzzer}
+              \HiLi  \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+              $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+              $\bugs \gets \bugs \cup \newbugs$\;
+            }
+            \Return{\bugs}\;
+        \end{algorithm} 
+        \end{minipage} 
+        \begin{minipage}[t]{0.35\linewidth}
+            {
+                \vspace{25pt}
+                \centering
+                stop condition
+                \scriptsize{
+                    \begin{itemize}  
+                        \item  $\currtime < \timeout$
+                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
+                        \\- Determine whether a new fuzz iteration should occur
+                    \end{itemize} 
+                }
+            }
+        \end{minipage}
+        \end{block}
+    }
+
+    \only<9>{
+        \begin{block}{Fuzz Testing}
+        \begin{minipage}[t]{0.64\linewidth}
+        \vspace{0pt}
+        \centering
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{preprocess}{\textsc{Preprocess}}
+            \SetKwFunction{schedule}{\textsc{Schedule}}
+            \SetKwFunction{inputGen}{\textsc{InputGen}}
+            \SetKwFunction{inputEval}{\textsc{InputEval}}
+            \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+            \SetKwFunction{continue}{\textsc{Continue}}
+            \SetKwFunction{isBug}{isBug}
+            \SetKwFunction{getProgram}{getProgram}
+            \SetKwData{newbugs}{$\bugs^\prime$}
+            \KwIn{\confs, \timeout}
+            \KwOut{\bugs \tcp{a finite set of bugs}}
+            $\bugs \gets \varnothing$\;
+            $\confs \gets \preprocess{$\confs$}$\;
+            \While {$\currtime < \timeout \land \continue{\confs}$}{
+            \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+              \testcases $\gets \inputGen{\conf}$\;
+              \tcp{\bugoracle is embedded in a fuzzer}
+              \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+              \HiLi  $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+              $\bugs \gets \bugs \cup \newbugs$\;
+            }
+            \Return{\bugs}\;
+        \end{algorithm} 
+        \end{minipage} 
+        \begin{minipage}[t]{0.35\linewidth}
+            {
+                \vspace{25pt}
+                \centering
+                stop condition
+                \scriptsize{
+                    \begin{itemize}  
+                        \item  $\currtime < \timeout$
+                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
+                        \\- Determine whether a new fuzz iteration should occur
+                    \end{itemize} 
+                }
+            }
+        \end{minipage}
+        \end{block}
+    }
+
+    \only<10>{
+        \begin{block}{Fuzz Testing}
+        \begin{minipage}[t]{0.64\linewidth}
+        \vspace{0pt}
+        \centering
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{preprocess}{\textsc{Preprocess}}
+            \SetKwFunction{schedule}{\textsc{Schedule}}
+            \SetKwFunction{inputGen}{\textsc{InputGen}}
+            \SetKwFunction{inputEval}{\textsc{InputEval}}
+            \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+            \SetKwFunction{continue}{\textsc{Continue}}
+            \SetKwFunction{isBug}{isBug}
+            \SetKwFunction{getProgram}{getProgram}
+            \SetKwData{newbugs}{$\bugs^\prime$}
+            \KwIn{\confs, \timeout}
+            \KwOut{\bugs \tcp{a finite set of bugs}}
+            $\bugs \gets \varnothing$\;
+            $\confs \gets \preprocess{$\confs$}$\;
+            \While {$\currtime < \timeout \land \continue{\confs}$}{
+            \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+              \testcases $\gets \inputGen{\conf}$\;
+              \tcp{\bugoracle is embedded in a fuzzer}
+              \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+              $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+            \HiLi  $\bugs \gets \bugs \cup \newbugs$\;
+            }
+            \Return{\bugs}\;
+        \end{algorithm} 
+        \end{minipage} 
+        \begin{minipage}[t]{0.35\linewidth}
+            {
+                \vspace{25pt}
+                \centering
+                stop condition
+                \scriptsize{
+                    \begin{itemize}  
+                        \item  $\currtime < \timeout$
+                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
+                        \\- Determine whether a new fuzz iteration should occur
+                    \end{itemize} 
+                }
+            }
+        \end{minipage}
+        \end{block}
+    }
+
+    \only<11>{
+        \begin{block}{Fuzz Testing}
+        \begin{minipage}[t]{0.64\linewidth}
+        \vspace{0pt}
+        \centering
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{preprocess}{\textsc{Preprocess}}
+            \SetKwFunction{schedule}{\textsc{Schedule}}
+            \SetKwFunction{inputGen}{\textsc{InputGen}}
+            \SetKwFunction{inputEval}{\textsc{InputEval}}
+            \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+            \SetKwFunction{continue}{\textsc{Continue}}
+            \SetKwFunction{isBug}{isBug}
+            \SetKwFunction{getProgram}{getProgram}
+            \SetKwData{newbugs}{$\bugs^\prime$}
+            \KwIn{\confs, \timeout}
+            \KwOut{\bugs \tcp{a finite set of bugs}}
+            $\bugs \gets \varnothing$\;
+            $\confs \gets \preprocess{$\confs$}$\;
+            \HiLi\While {$\currtime < \timeout \land \continue{\confs}$}{
+              \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+              \testcases $\gets \inputGen{\conf}$\;
+              \tcp{\bugoracle is embedded in a fuzzer}
+              \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+              $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+              $\bugs \gets \bugs \cup \newbugs$\;
+            }
+            \HiLi\Return{\bugs}\;
+        \end{algorithm} 
+        \end{minipage} 
+        \begin{minipage}[t]{0.35\linewidth}
+            {
+                \vspace{25pt}
+                \centering
+                stop condition
+                \scriptsize{
+                    \begin{itemize}  
+                        \item  $\currtime < \timeout$
+                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
+                        \\- Determine whether a new fuzz iteration should occur
+                    \end{itemize} 
+                }
+            }
+        \end{minipage}
+        \end{block}
+    }
 \end{frame}
 
 
@@ -237,9 +635,9 @@
     \only<2>{
         \begin{itemize}  
         \item \structure {Black-box Fuzzing}
-          \\ \textbf{Defination:} techniques that do not see the internals of the PUT,and can observe only the input/output behavior of the PUT,
+        \\ \textbf{Defination:} techniques that do not see the internals of the PUT,and can observe only the input/output behavior of the PUT,
            treating it as a black-box\cite{manes2019art}.
-           \\ -No \alert{program analysis}, no \alert{feedback}
+        \\ -No \alert{program analysis}, no \alert{feedback}
         \end{itemize} 
         \begin{picture}(320,250)
             \put(-15,110){\includegraphics[width=8.0cm]{pic/blackbox.pdf}}
@@ -249,9 +647,9 @@
     \only<3>{
         \begin{itemize}  
         \item \structure {Black-box Fuzzing}
-          \\ \textbf{Defination:} techniques that do not see the internals of the PUT,and can observe only the input/output behavior of the PUT,
+        \\ \textbf{Defination:} techniques that do not see the internals of the PUT,and can observe only the input/output behavior of the PUT,
            treating it as a black-box\cite{manes2019art}.
-           \\ - No \alert{program analysis}, no \alert{feedback}
+        \\ - No \alert{program analysis}, no \alert{feedback}
         \end{itemize} 
         \begin{picture}(320,250)
             \put(-25,110){\includegraphics[width=8.0cm]{pic/blackbox.pdf}}

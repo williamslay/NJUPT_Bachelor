@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  14 APR 2023 17:51
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  14 APR 2023 23:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1319,59 +1319,58 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/sc' undefined
 
 ] (./slide.vrb
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 102.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 106.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 102.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 106.
 ) [7
 
-] (./slide.vrb
-Underfull \hbox (badness 3668) in paragraph at lines 156--156
-\TU/MicrosoftYaHei(0)/m/it/7 a set of fuzz configurations
- []
+] (./slide.vrb) [8
 
+] (./slide.vrb) [9
 
-Underfull \hbox (badness 7631) in paragraph at lines 156--156
-\TU/MicrosoftYaHei(0)/m/it/7 as input, and it returns a
- []
+] (./slide.vrb) [10
 
+] (./slide.vrb) [11
 
-Underfull \hbox (badness 2707) in paragraph at lines 156--156
-\TU/MicrosoftYaHei(0)/m/it/7 mentation code to PUTs, or
- []
+] (./slide.vrb) [12
 
-) [8
+] (./slide.vrb) [13
 
-] (./slide.toc) [9
+] (./slide.vrb) [14
 
-] [10
+] (./slide.vrb) [15
 
-]
-File: pic/blackbox.pdf Graphic file (type pdf)
-<use pic/blackbox.pdf>
+] (./slide.toc) [16
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 321--321
-[] 
- []
-
-
-Overfull \vbox (115.4641pt too high) detected at line 321
- []
-
-[11
+] [17
 
 ]
 File: pic/blackbox.pdf Graphic file (type pdf)
 <use pic/blackbox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 321--321
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 719--719
 [] 
  []
 
 
-Overfull \vbox (115.4641pt too high) detected at line 321
+Overfull \vbox (115.4641pt too high) detected at line 719
  []
 
-[12
+[18
+
+]
+File: pic/blackbox.pdf Graphic file (type pdf)
+<use pic/blackbox.pdf>
+
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 719--719
+[] 
+ []
+
+
+Overfull \vbox (115.4641pt too high) detected at line 719
+ []
+
+[19
 
 ]
 File: pic/cfg.pdf Graphic file (type pdf)
@@ -1379,65 +1378,65 @@ File: pic/cfg.pdf Graphic file (type pdf)
 File: pic/whitebox.pdf Graphic file (type pdf)
 <use pic/whitebox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 321--321
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 719--719
 [] 
  []
 
 
-Overfull \vbox (127.4641pt too high) detected at line 321
+Overfull \vbox (127.4641pt too high) detected at line 719
  []
 
-[13
+[20
 
 ]
 File: pic/whitebox.pdf Graphic file (type pdf)
 <use pic/whitebox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 321--321
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 719--719
 [] 
  []
 
 
-Overfull \vbox (127.4641pt too high) detected at line 321
+Overfull \vbox (127.4641pt too high) detected at line 719
  []
 
-[14
+[21
 
 ]
 File: pic/greybox.pdf Graphic file (type pdf)
 <use pic/greybox.pdf>
- [15
-
-] (./slide.toc) [16
-
-] [17
-
-] [18
-
-] (./slide.toc) [19
-
-] (./slide.toc) [20
-
-] [21
-
-] (./slide.toc) [22
+ [22
 
 ] (./slide.toc) [23
 
 ] [24
 
-] (./slide.toc) [25
+] [25
 
-] [26
+] (./slide.toc) [26
 
-] [27
+] (./slide.toc) [27
 
 ] [28
+
+] (./slide.toc) [29
+
+] (./slide.toc) [30
+
+] [31
+
+] (./slide.toc) [32
+
+] [33
+
+] [34
+
+] [35
 
 ]
 \openout4 = `slide.vrb'.
 
- (./slide.vrb) [29
+ (./slide.vrb) [36
 
 ]
 \openout4 = `slide.vrb'.
@@ -1462,34 +1461,34 @@ File: lstlang2.sty 2023/02/27 1.9 listings language file
 File: lstlang3.sty 2023/02/27 1.9 listings language file
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-)) [30
+)) [37
 
-] (./slide.vrb) [31
-
-]
-\openout4 = `slide.vrb'.
-
- (./slide.vrb) [32
+] (./slide.vrb) [38
 
 ]
 \openout4 = `slide.vrb'.
 
- (./slide.vrb) [33
+ (./slide.vrb) [39
+
+]
+\openout4 = `slide.vrb'.
+
+ (./slide.vrb) [40
 
 ]
 File: pic/NJUPT_Logo.pdf Graphic file (type pdf)
 <use pic/NJUPT_Logo.pdf>
- [34
+ [41
 
-] (./slide.toc) [35
+] (./slide.toc) [42
 
-] [36
+] [43
 
-] (./slide.toc) [37
+] (./slide.toc) [44
 
-] (./slide.bbl) [38
+] (./slide.bbl) [45
 
-] [39
+] [46
 
 ]
 \tf@nav=\write6
@@ -1506,15 +1505,15 @@ File: pic/NJUPT_Logo.pdf Graphic file (type pdf)
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `slide.out' has not changed.
-(rerunfilecheck)             Checksum: DBB5B5295B005FEDB5ECF18FCD3E15D7;1114.
+(rerunfilecheck)             Checksum: 15F5D1A8156C083369DA8A60AC41C79A;1115.
  ) 
 Here is how much of TeX's memory you used:
- 32308 strings out of 476684
- 680421 string characters out of 5804055
- 1903018 words of memory out of 5000000
+ 32322 strings out of 476684
+ 680561 string characters out of 5804055
+ 1902018 words of memory out of 5000000
  51797 multiletter control sequences out of 15000+600000
  522260 words of font info for 127 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,24n,132p,435b,2130s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on slide.pdf (39 pages).
+Output written on slide.pdf (46 pages).
