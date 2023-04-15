@@ -3,7 +3,7 @@
 \usepackage{xeCJK} %导入中文包
 
 \setCJKsansfont{SimHei} 
-\setsansfont{Microsoft YaHei}
+\setsansfont{Times New Roman}
 \setmainfont{Microsoft YaHei}
 \usefonttheme[onlymath]{serif}
 % other packages
@@ -59,16 +59,17 @@
 \subsection{Pre-Knowledge}
 \begin{frame}[fragile] {What Fuzzing is?}
     \only<1>{
-        \structure {Defination}
+        \structure {Defination\cite{manes2019art}}
         \begin{itemize} 
             \item \textbf{Fuzzing} Fuzzing is the execution of the PUT using input(s) sampled from an input space (the “fuzz input space”) 
-                that protrudes the expected input space of the PUT\cite{manes2019art}.
+                that protrudes the expected input space of the PUT.
                 \\ - PUT: Program Under Test
-            \item \textbf{Fuzz testing} Fuzz testing is the use of fuzzing to test if a PUT violates a correctness policy\cite{manes2019art}.
-            \item \textbf{Fuzzer} A fuzzer is a program that performs fuzz testing on a PUT\cite{manes2019art}.
+            \item \textbf{Fuzz testing} Fuzz testing is the use of fuzzing to test if a PUT violates a correctness policy.
+            \item \textbf{Fuzzer} A fuzzer is a program that performs fuzz testing on a PUT.
             \item \textbf{Bug Oracle} A bug oracle is a program, perhaps as part of a fuzzer, that determines whether a given execution 
-            of the PUT violates a specific correctness policy\cite{manes2019art}.
-            \item \textbf{Fuzz Configuration}  A fuzz configuration of a fuzz algorithm comprises the parameter value(s) that control(s) the fuzz algorithm\cite{manes2019art}.
+            of the PUT violates a specific correctness policy.
+            \item \textbf{Fuzz Configuration}  A fuzz configuration of a fuzz algorithm comprises the parameter value(s) that control(s) the fuzz algorithm.
+            \item \textbf{Seed} A seed is a (commonly well-structured) input to the PUT, used to generate test cases by modifying it.
         \end{itemize}
     } 
     \only<2>{
@@ -109,13 +110,15 @@
             \end{algorithm} 
         \end{block}
     } 
-    \only<3>{
-        \begin{block}{Fuzz Testing}
-        \begin{minipage}[t]{0.65\linewidth}
+\end{frame}
+
+\begin{frame}{Fuzzing Algorithm}
+    \only<1>{
+        \begin{minipage}[t]{0.57\textwidth}
         \vspace{0pt}
         \centering
         \begin{algorithm}[H]
-            \footnotesize
+            \scriptsize
             \DontPrintSemicolon
             \SetKwSty{algokeywordsty}
             \SetFuncSty{algofuncsty}
@@ -148,11 +151,11 @@
             \Return{\bugs}\;
         \end{algorithm} 
         \end{minipage} 
-        \begin{minipage}[t]{0.34\linewidth}
+        \begin{minipage}[t]{0.4\textwidth}
             {
                 \vspace{25pt}
                 \centering
-                \scriptsize{
+                \footnotesize{
                     \begin{itemize}  
                         \item  \confs :a set of fuzz configurations
                         \item  \timeout: timeout
@@ -161,16 +164,14 @@
                 }
             }
         \end{minipage}
-        \end{block}
     }  
 
-    \only<4>{
-        \begin{block}{Fuzz Testing}
-        \begin{minipage}[t]{0.64\linewidth}
+    \only<2>{
+        \begin{minipage}[t]{0.57\linewidth}
         \vspace{0pt}
         \centering
         \begin{algorithm}[H]
-            \footnotesize
+            \scriptsize
             \DontPrintSemicolon
             \SetKwSty{algokeywordsty}
             \SetFuncSty{algofuncsty}
@@ -203,34 +204,32 @@
             \Return{\bugs}\;
         \end{algorithm} 
         \end{minipage} 
-        \begin{minipage}[t]{0.34\linewidth}
-            {
-                \vspace{0pt}
-                \centering
-                \preprocess\normalfont(\confs) $\rightarrow \confs$ 
-                    \begin{itemize}  
-            \scriptsize{\item  Instrumentation}
-                            \\- \tiny{grey-box and white-box fuzzers}
-                \scriptsize{\\-} \tiny{\alert{static}/dynamic}
-            \scriptsize{\item Seed Selection}
-                            \\- \tiny{weed out potentiallyredundant configurations}
-            \scriptsize{ \item  Seed Trimming}
-                            \\- \tiny{reduce the size of seeds}
-            \scriptsize{\item  Preparing a Driver Application}
-                            \\- \tiny{library Fuzzing, kernal Fuzzing}
-                    \end{itemize} 
-            }
+        \begin{minipage}[t]{0.4\linewidth}
+            \vspace{0pt}
+            \centering
+            \preprocess\normalfont(\confs) $\rightarrow \confs$ 
+            \scriptsize{
+            \begin{itemize}
+                \item  \textbf{Instrumentation}
+                    \\- grey-box and white-box fuzzers
+                    \\- \alert{static}/dynamic
+                \item \textbf{Seed Selection}
+                    \\- weed out potentiallyredundant configurations
+                \item  \textbf{Seed Trimming}
+                    \\- reduce the size of seeds
+                \item  \textbf{Preparing a Driver Application}
+                     \\- library Fuzzing, kernal Fuzzing
+            \end{itemize}
+            } 
         \end{minipage}
-        \end{block}
     }
    
-    \only<5>{
-        \begin{block}{Fuzz Testing}
-        \begin{minipage}[t]{0.64\linewidth}
+    \only<3>{
+        \begin{minipage}[t]{0.57\linewidth}
         \vspace{0pt}
         \centering
         \begin{algorithm}[H]
-            \footnotesize
+            \scriptsize
             \DontPrintSemicolon
             \SetKwSty{algokeywordsty}
             \SetFuncSty{algofuncsty}
@@ -262,31 +261,29 @@
             }
             \Return{\bugs}\;
         \end{algorithm} 
-        \end{minipage} 
-        \begin{minipage}[t]{0.35\linewidth}
+        \end{minipage}
+        \begin{minipage}[t]{0.4\linewidth}
             {
                 \vspace{25pt}
                 \centering
-                stop condition
-                \scriptsize{
-                    \begin{itemize}  
-                        \item  $\currtime < \timeout$
-                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
-                        \\- Determine whether a new fuzz iteration should occur
-                    \end{itemize} 
-                }
+                    Stop Condition
+                    \scriptsize{
+                        \begin{itemize}  
+                            \item  $\currtime < \timeout$
+                            \item  \continue\normalfont(\confs)$\rightarrow \{\texttt{True}, \texttt{False}\}$
+                            \\- Determine whether a new fuzz iteration should occur
+                        \end{itemize} 
+                    }
             }
         \end{minipage}
-        \end{block}
     }
 
-    \only<6>{
-        \begin{block}{Fuzz Testing}
-        \begin{minipage}[t]{0.64\linewidth}
+    \only<4>{
+        \begin{minipage}[t]{0.57\linewidth}
         \vspace{0pt}
         \centering
         \begin{algorithm}[H]
-            \footnotesize
+            \scriptsize
             \DontPrintSemicolon
             \SetKwSty{algokeywordsty}
             \SetFuncSty{algofuncsty}
@@ -319,30 +316,34 @@
             \Return{\bugs}\;
         \end{algorithm} 
         \end{minipage} 
-        \begin{minipage}[t]{0.35\linewidth}
+        \begin{minipage}[t]{0.4\linewidth}
             {
-                \vspace{25pt}
+                \vspace{0pt}
                 \centering
-                stop condition
                 \scriptsize{
+                \schedule\normalfont(\confs, \currtime, \timeout) $\rightarrow \conf$
                     \begin{itemize}  
-                        \item  $\currtime < \timeout$
-                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
-                        \\- Determine whether a new fuzz iteration should occur
+                        \item   \textbf{function}
+                            \\- selecting a new fuzz configuration
+                        \item  \textbf{depend on fuzzer}
+                            \\- finding the most number of unique bugs
+                            \\- maximizing the coverage 
+                            \\- etc.
+                        \item \textbf{problem} 
+                            \\- \textit{exploration vs. exploitation}
                     \end{itemize} 
                 }
             }
         \end{minipage}
-        \end{block}
     }
 
-    \only<7>{
-        \begin{block}{Fuzz Testing}
-        \begin{minipage}[t]{0.64\linewidth}
+
+    \only<5>{
+        \begin{minipage}[t]{0.57\linewidth}
         \vspace{0pt}
         \centering
         \begin{algorithm}[H]
-            \footnotesize
+            \scriptsize
             \DontPrintSemicolon
             \SetKwSty{algokeywordsty}
             \SetFuncSty{algofuncsty}
@@ -375,30 +376,30 @@
             \Return{\bugs}\;
         \end{algorithm} 
         \end{minipage} 
-        \begin{minipage}[t]{0.35\linewidth}
+        \begin{minipage}[t]{0.4\linewidth}
             {
                 \vspace{25pt}
                 \centering
-                stop condition
                 \scriptsize{
+                    \inputGen\normalfont(\conf)$\rightarrow \testcases$ 
                     \begin{itemize}  
-                        \item  $\currtime < \timeout$
-                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
-                        \\- Determine whether a new fuzz iteration should occur
+                        \item \textbf{function}
+                            \\- Generate testcases
+                        \item  \textbf{classification}
+                            \\- Generation-based(\textit{Model-based})
+                            \\- Mutation-based(\textit{Model-less})
                     \end{itemize} 
                 }
             }
         \end{minipage}
-        \end{block}
     }
 
-    \only<8>{
-        \begin{block}{Fuzz Testing}
-        \begin{minipage}[t]{0.64\linewidth}
+    \only<6>{
+        \begin{minipage}[t]{0.57\linewidth}
         \vspace{0pt}
         \centering
         \begin{algorithm}[H]
-            \footnotesize
+            \scriptsize
             \DontPrintSemicolon
             \SetKwSty{algokeywordsty}
             \SetFuncSty{algofuncsty}
@@ -431,30 +432,31 @@
             \Return{\bugs}\;
         \end{algorithm} 
         \end{minipage} 
-        \begin{minipage}[t]{0.35\linewidth}
+        \begin{minipage}[t]{0.4\linewidth}
             {
-                \vspace{25pt}
+                \vspace{0pt}
                 \centering
-                stop condition
                 \scriptsize{
+                    \inputEval\normalfont(\conf, \testcases, \bugoracle) $\rightarrow \bugs^\prime, \execinfos$  
                     \begin{itemize}  
-                        \item  $\currtime < \timeout$
+                        \item \textbf{function}
+                            \\- Executes the PUT with the \testcases and get \execinfos.
+                            \\- Triage:analyzing and reporting test cases
+                            \\- deduplication, prioritization, and minimization.
                         \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
                         \\- Determine whether a new fuzz iteration should occur
                     \end{itemize} 
                 }
             }
         \end{minipage}
-        \end{block}
     }
 
-    \only<9>{
-        \begin{block}{Fuzz Testing}
-        \begin{minipage}[t]{0.64\linewidth}
+    \only<7>{
+        \begin{minipage}[t]{0.57\linewidth}
         \vspace{0pt}
         \centering
         \begin{algorithm}[H]
-            \footnotesize
+            \scriptsize
             \DontPrintSemicolon
             \SetKwSty{algokeywordsty}
             \SetFuncSty{algofuncsty}
@@ -487,12 +489,12 @@
             \Return{\bugs}\;
         \end{algorithm} 
         \end{minipage} 
-        \begin{minipage}[t]{0.35\linewidth}
+        \begin{minipage}[t]{0.4\linewidth}
             {
                 \vspace{25pt}
                 \centering
-                stop condition
                 \scriptsize{
+                    \inputEval\normalfont(\conf, \testcases, \bugoracle) $\rightarrow \bugs^\prime, \execinfos$ 
                     \begin{itemize}  
                         \item  $\currtime < \timeout$
                         \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
@@ -501,16 +503,14 @@
                 }
             }
         \end{minipage}
-        \end{block}
     }
 
-    \only<10>{
-        \begin{block}{Fuzz Testing}
-        \begin{minipage}[t]{0.64\linewidth}
+    \only<8>{
+        \begin{minipage}[t]{0.57\linewidth}
         \vspace{0pt}
         \centering
         \begin{algorithm}[H]
-            \footnotesize
+            \scriptsize
             \DontPrintSemicolon
             \SetKwSty{algokeywordsty}
             \SetFuncSty{algofuncsty}
@@ -543,7 +543,7 @@
             \Return{\bugs}\;
         \end{algorithm} 
         \end{minipage} 
-        \begin{minipage}[t]{0.35\linewidth}
+        \begin{minipage}[t]{0.4\linewidth}
             {
                 \vspace{25pt}
                 \centering
@@ -557,16 +557,14 @@
                 }
             }
         \end{minipage}
-        \end{block}
     }
 
-    \only<11>{
-        \begin{block}{Fuzz Testing}
-        \begin{minipage}[t]{0.64\linewidth}
+    \only<9>{
+        \begin{minipage}[t]{0.57\linewidth}
         \vspace{0pt}
         \centering
         \begin{algorithm}[H]
-            \footnotesize
+            \scriptsize
             \DontPrintSemicolon
             \SetKwSty{algokeywordsty}
             \SetFuncSty{algofuncsty}
@@ -599,7 +597,7 @@
             \HiLi\Return{\bugs}\;
         \end{algorithm} 
         \end{minipage} 
-        \begin{minipage}[t]{0.35\linewidth}
+        \begin{minipage}[t]{0.4\linewidth}
             {
                 \vspace{25pt}
                 \centering
@@ -613,10 +611,8 @@
                 }
             }
         \end{minipage}
-        \end{block}
     }
 \end{frame}
-
 
 \subsection{Motivation}
 \begin{frame}{Why Grey-box Fuzzing ?}
@@ -706,7 +702,7 @@
     \only<6>{
         \begin{itemize}  
         \item \structure {Grey-box Fuzzing}
-          \\ \textbf{Defination:} techniques that can obtain \textit{some} information internal to the PUT and/or its executions\cite{manes2019art} to generates test cases.
+          \\ \textbf{Defination:} techniques that can obtain \textsl{some} information internal to the PUT and/or its executions to generates test cases\cite{manes2019art}.
           \\ - Uses only lightweight instrumentation to glean some program structure
           \\ - And coverage \alert{feedback} 
         \end{itemize} 

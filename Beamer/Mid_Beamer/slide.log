@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  14 APR 2023 23:52
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  15 APR 2023 15:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -647,6 +647,40 @@ Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 File: xeCJK.cfg 2022/08/05 v3.9.1 Configuration file for xeCJK package
 ))
 
+Package fontspec Info: Font family 'TimesNewRoman(0)' created for font 'Times
+(fontspec)             New Roman' with options [Ligatures=TeX].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <->"Times New
+(fontspec)             Roman/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: <->"Times New
+(fontspec)             Roman/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <->"Times New
+(fontspec)             Roman/B/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: <->"Times
+(fontspec)             New
+(fontspec)             Roman/B/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <->"Times New
+(fontspec)             Roman/I/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->"Times New
+(fontspec)             Roman/I/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->"Times New
+(fontspec)             Roman/BI/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->"Times New
+(fontspec)             Roman/BI/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+
+
+
+Package xeCJK Warning: Unknown CJK family `\CJKrmdefault' is being ignored.
+(xeCJK)                
+(xeCJK)                Try to use `\setCJKmainfont[<...>]{<...>}' to define
+(xeCJK)                it.
+
+
 Package fontspec Info: Could not resolve font "Microsoft YaHei/I" (it probably
 (fontspec)             doesn't exist).
 
@@ -666,13 +700,6 @@ Package fontspec Info: Font family 'MicrosoftYaHei(0)' created for font
 (fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->"Microsoft
 (fontspec)             YaHei/BI/OT:script=latn;language=dflt;mapping=tex-text;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
-
-
-
-Package xeCJK Warning: Unknown CJK family `\CJKrmdefault' is being ignored.
-(xeCJK)                
-(xeCJK)                Try to use `\setCJKmainfont[<...>]{<...>}' to define
-(xeCJK)                it.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/beamer/beamerfontthemeserif.sty) (/usr/local/texlive/2022/texmf-dist/tex/latex/base/latexsym.sty
 Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
@@ -1171,9 +1198,9 @@ LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
 (Font)                  OT1/cmr/bx/n --> TU/MicrosoftYaHei(0)/b/n on input line 42.
 LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/MicrosoftYaHei(0)/m/n on input line 42.
+(Font)                  OT1/cmss/m/n --> TU/TimesNewRoman(0)/m/n on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/MicrosoftYaHei(0)/m/n on input line 42.
+(Font)                  OT1/cmss/bx/n --> TU/TimesNewRoman(0)/m/n on input line 42.
 LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> TU/MicrosoftYaHei(0)/m/it on input line 42.
@@ -1193,7 +1220,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
 (Font)                  TU/MicrosoftYaHei(0)/b/n --> TU/MicrosoftYaHei(0)/b/n on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  TU/MicrosoftYaHei(0)/m/n --> TU/MicrosoftYaHei(0)/b/n on input line 42.
+(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/b/n on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  TU/MicrosoftYaHei(0)/m/it --> TU/MicrosoftYaHei(0)/b/it on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
@@ -1257,7 +1284,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  TU/MicrosoftYaHei(0)/b/n --> TU/MicrosoftYaHei(0)/b/n on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  TU/MicrosoftYaHei(0)/m/n --> TU/MicrosoftYaHei(0)/m/n on input line 42.
+(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/m/n on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
 (Font)                  TU/lmtt/m/n --> TU/lmtt/m/n on input line 42.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
@@ -1265,7 +1292,7 @@ LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  TU/MicrosoftYaHei(0)/b/it --> TU/MicrosoftYaHei(0)/b/it on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  TU/MicrosoftYaHei(0)/b/n --> TU/MicrosoftYaHei(0)/b/n on input line 42.
+(Font)                  TU/TimesNewRoman(0)/b/n --> TU/TimesNewRoman(0)/b/n on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  TU/lmtt/b/n --> TU/lmtt/b/n on input line 42.
 \c@lstlisting=\count422
@@ -1284,21 +1311,21 @@ File: pic/NJUPT_Logo.pdf Graphic file (type pdf)
 \openout4 = `slide.vrb'.
 
  (./slide.vrb
-LaTeX Font Info:    Trying to load font information for U+msa on input line 14.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 15.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 14.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 15.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 14.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 15.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
 
 LaTeX Font Warning: Font shape `TU/MicrosoftYaHei(0)/m/it' undefined
-(Font)              using `TU/MicrosoftYaHei(0)/m/n' instead on input line 14.
+(Font)              using `TU/MicrosoftYaHei(0)/m/n' instead on input line 15.
 
 ) [5
 
@@ -1310,35 +1337,35 @@ Package xeCJK Warning: Unknown CJK family `\CJKttdefault' is being ignored.
 (xeCJK)                it.
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <9> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 52.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 53.
 
 LaTeX Font Warning: Font shape `TU/lmtt/bx/sc' undefined
-(Font)              using `TU/lmtt/bx/n' instead on input line 52.
+(Font)              using `TU/lmtt/bx/n' instead on input line 53.
 
 ) [6
 
-] (./slide.vrb
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 106.
-LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 106.
-) [7
+]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <7> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 615.
+LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <7> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 615.
+ [7
 
-] (./slide.vrb) [8
+] [8
 
-] (./slide.vrb) [9
+] [9
 
-] (./slide.vrb) [10
+] [10
 
-] (./slide.vrb) [11
+] [11
 
-] (./slide.vrb) [12
+] [12
 
-] (./slide.vrb) [13
+] [13
 
-] (./slide.vrb) [14
+] [14
 
-] (./slide.vrb) [15
+] [15
 
 ] (./slide.toc) [16
 
@@ -1348,12 +1375,12 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <8> not available
 File: pic/blackbox.pdf Graphic file (type pdf)
 <use pic/blackbox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 719--719
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 715--715
 [] 
  []
 
 
-Overfull \vbox (115.4641pt too high) detected at line 719
+Overfull \vbox (107.93759pt too high) detected at line 715
  []
 
 [18
@@ -1362,12 +1389,12 @@ Overfull \vbox (115.4641pt too high) detected at line 719
 File: pic/blackbox.pdf Graphic file (type pdf)
 <use pic/blackbox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 719--719
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 715--715
 [] 
  []
 
 
-Overfull \vbox (115.4641pt too high) detected at line 719
+Overfull \vbox (107.93759pt too high) detected at line 715
  []
 
 [19
@@ -1378,12 +1405,12 @@ File: pic/cfg.pdf Graphic file (type pdf)
 File: pic/whitebox.pdf Graphic file (type pdf)
 <use pic/whitebox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 719--719
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 715--715
 [] 
  []
 
 
-Overfull \vbox (127.4641pt too high) detected at line 719
+Overfull \vbox (107.93759pt too high) detected at line 715
  []
 
 [20
@@ -1392,17 +1419,19 @@ Overfull \vbox (127.4641pt too high) detected at line 719
 File: pic/whitebox.pdf Graphic file (type pdf)
 <use pic/whitebox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 719--719
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 715--715
 [] 
  []
 
 
-Overfull \vbox (127.4641pt too high) detected at line 719
+Overfull \vbox (107.93759pt too high) detected at line 715
  []
 
 [21
 
 ]
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/sl' in size <10> not available
+(Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 715.
 File: pic/greybox.pdf Graphic file (type pdf)
 <use pic/greybox.pdf>
  [22
@@ -1508,12 +1537,12 @@ Package rerunfilecheck Info: File `slide.out' has not changed.
 (rerunfilecheck)             Checksum: 15F5D1A8156C083369DA8A60AC41C79A;1115.
  ) 
 Here is how much of TeX's memory you used:
- 32322 strings out of 476684
- 680561 string characters out of 5804055
- 1902018 words of memory out of 5000000
- 51797 multiletter control sequences out of 15000+600000
- 522260 words of font info for 127 fonts, out of 8000000 for 9000
+ 32378 strings out of 476684
+ 683120 string characters out of 5804055
+ 1903018 words of memory out of 5000000
+ 51845 multiletter control sequences out of 15000+600000
+ 522420 words of font info for 147 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 128i,24n,132p,435b,2130s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,22n,132p,435b,2130s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on slide.pdf (46 pages).
