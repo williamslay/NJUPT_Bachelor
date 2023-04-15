@@ -322,15 +322,12 @@
                 \centering
                 \scriptsize{
                 \schedule\normalfont(\confs, \currtime, \timeout) $\rightarrow \conf$
-                    \begin{itemize}  
-                        \item   \textbf{function}
-                            \\- selecting a new fuzz configuration
-                        \item  \textbf{depend on fuzzer}
-                            \\- finding the most number of unique bugs
-                            \\- maximizing the coverage 
-                            \\- etc.
-                        \item \textbf{problem} 
-                            \\- \textit{exploration vs. exploitation}
+                    \begin{itemize} 
+                        \item \textbf{Function}
+                            \\- Pick important information(\conf )
+                        \item \textbf{FCS Problem} 
+                            \\- \textit{exploration}:Spent time on gathering more accurate information on each configuration to inform future decisions
+                            \\- \textit{exploitation}:Spent time on fuzzing the configurations that are currently believed to lead to more favorable outcomes
                     \end{itemize} 
                 }
             }
@@ -439,12 +436,12 @@
                 \scriptsize{
                     \inputEval\normalfont(\conf, \testcases, \bugoracle) $\rightarrow \bugs^\prime, \execinfos$  
                     \begin{itemize}  
-                        \item \textbf{function}
-                            \\- Executes the PUT with the \testcases and get \execinfos.
-                            \\- Triage:analyzing and reporting test cases
-                            \\- deduplication, prioritization, and minimization.
-                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
-                        \\- Determine whether a new fuzz iteration should occur
+                        \item \textbf{Fuzzing PUT}
+                            \\- \testcases
+                            \\- $\bugs^\prime$
+                        \item \textbf{Feedback Information} 
+                            \\- \conf, \testcases
+                            \\- \execinfos (\testcases,crashes,stack backtrace hash,edge coverage,etc.)
                     \end{itemize} 
                 }
             }
@@ -484,7 +481,7 @@
               \tcp{\bugoracle is embedded in a fuzzer}
               \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
               \HiLi  $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
-              $\bugs \gets \bugs \cup \newbugs$\;
+              \HiLi $\bugs \gets \bugs \cup \newbugs$\;
             }
             \Return{\bugs}\;
         \end{algorithm} 
@@ -494,11 +491,12 @@
                 \vspace{25pt}
                 \centering
                 \scriptsize{
-                    \inputEval\normalfont(\conf, \testcases, \bugoracle) $\rightarrow \bugs^\prime, \execinfos$ 
                     \begin{itemize}  
-                        \item  $\currtime < \timeout$
-                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
-                        \\- Determine whether a new fuzz iteration should occur
+                        \item  \confUpdate\normalfont(\confs, \conf, \execinfos) $\rightarrow \confs$
+                            \\- Update Fuzz Configuration(distinguishablity)
+                            \\- Seed Pool Update
+                        \item   $\bugs \cup \bugs^\prime \rightarrow \bugs$
+                            \\- Update Bugs Set
                     \end{itemize} 
                 }
             }
@@ -506,60 +504,6 @@
     }
 
     \only<8>{
-        \begin{minipage}[t]{0.57\linewidth}
-        \vspace{0pt}
-        \centering
-        \begin{algorithm}[H]
-            \scriptsize
-            \DontPrintSemicolon
-            \SetKwSty{algokeywordsty}
-            \SetFuncSty{algofuncsty}
-            \SetDataSty{algodatasty}
-            \SetArgSty{algoargsty}
-            \SetCommentSty{algocmtsty}
-            \SetKw{break}{break}
-            \SetKw{not}{not}
-            \SetKwFunction{preprocess}{\textsc{Preprocess}}
-            \SetKwFunction{schedule}{\textsc{Schedule}}
-            \SetKwFunction{inputGen}{\textsc{InputGen}}
-            \SetKwFunction{inputEval}{\textsc{InputEval}}
-            \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
-            \SetKwFunction{continue}{\textsc{Continue}}
-            \SetKwFunction{isBug}{isBug}
-            \SetKwFunction{getProgram}{getProgram}
-            \SetKwData{newbugs}{$\bugs^\prime$}
-            \KwIn{\confs, \timeout}
-            \KwOut{\bugs \tcp{a finite set of bugs}}
-            $\bugs \gets \varnothing$\;
-            $\confs \gets \preprocess{$\confs$}$\;
-            \While {$\currtime < \timeout \land \continue{\confs}$}{
-            \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
-              \testcases $\gets \inputGen{\conf}$\;
-              \tcp{\bugoracle is embedded in a fuzzer}
-              \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
-              $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
-            \HiLi  $\bugs \gets \bugs \cup \newbugs$\;
-            }
-            \Return{\bugs}\;
-        \end{algorithm} 
-        \end{minipage} 
-        \begin{minipage}[t]{0.4\linewidth}
-            {
-                \vspace{25pt}
-                \centering
-                stop condition
-                \scriptsize{
-                    \begin{itemize}  
-                        \item  $\currtime < \timeout$
-                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
-                        \\- Determine whether a new fuzz iteration should occur
-                    \end{itemize} 
-                }
-            }
-        \end{minipage}
-    }
-
-    \only<9>{
         \begin{minipage}[t]{0.57\linewidth}
         \vspace{0pt}
         \centering
@@ -605,7 +549,7 @@
                 \scriptsize{
                     \begin{itemize}  
                         \item  $\currtime < \timeout$
-                        \item  \continue\normalfont(\confs)\\$\rightarrow \{\texttt{True}, \texttt{False}\}$
+                        \item  \continue\normalfont(\confs)$\rightarrow \{\texttt{True}, \texttt{False}\}$
                         \\- Determine whether a new fuzz iteration should occur
                     \end{itemize} 
                 }
