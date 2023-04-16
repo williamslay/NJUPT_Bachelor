@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  15 APR 2023 23:55
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  16 APR 2023 15:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1369,33 +1369,39 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <7> not available
 
 ] [16
 
-]
-File: pic/blackbox.pdf Graphic file (type pdf)
-<use pic/blackbox.pdf>
+] [17
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 659--659
-[] 
- []
+] [18
 
-
-Overfull \vbox (107.93759pt too high) detected at line 659
- []
-
-[17
+] [19
 
 ]
 File: pic/blackbox.pdf Graphic file (type pdf)
 <use pic/blackbox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 659--659
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 825--825
 [] 
  []
 
 
-Overfull \vbox (107.93759pt too high) detected at line 659
+Overfull \vbox (107.93759pt too high) detected at line 825
  []
 
-[18
+[20
+
+]
+File: pic/blackbox.pdf Graphic file (type pdf)
+<use pic/blackbox.pdf>
+
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 825--825
+[] 
+ []
+
+
+Overfull \vbox (107.93759pt too high) detected at line 825
+ []
+
+[21
 
 ]
 File: pic/cfg.pdf Graphic file (type pdf)
@@ -1403,119 +1409,50 @@ File: pic/cfg.pdf Graphic file (type pdf)
 File: pic/whitebox.pdf Graphic file (type pdf)
 <use pic/whitebox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 659--659
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 825--825
 [] 
  []
 
 
-Overfull \vbox (107.93759pt too high) detected at line 659
+Overfull \vbox (107.93759pt too high) detected at line 825
  []
 
-[19
+[22
 
 ]
 File: pic/whitebox.pdf Graphic file (type pdf)
 <use pic/whitebox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 659--659
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 825--825
 [] 
  []
 
 
-Overfull \vbox (107.93759pt too high) detected at line 659
+Overfull \vbox (107.93759pt too high) detected at line 825
  []
 
-[20
+[23
 
 ]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/sl' in size <10> not available
-(Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 659.
+(Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 825.
 File: pic/greybox.pdf Graphic file (type pdf)
 <use pic/greybox.pdf>
- [21
+ [24
 
-] (./slide.toc) [22
-
-] [23
-
-] [24
-
-] (./slide.toc) [25
+] [25
 
 ] (./slide.toc) [26
 
 ] [27
 
-] (./slide.toc) [28
+] [28
 
 ] (./slide.toc) [29
 
-] [30
+] (./slide.bbl) [30
 
-] (./slide.toc) [31
-
-] [32
-
-] [33
-
-] [34
-
-]
-\openout4 = `slide.vrb'.
-
- (./slide.vrb) [35
-
-]
-\openout4 = `slide.vrb'.
-
- (./slide.vrb (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2023/02/27 1.9 listings language file
-) (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2023/02/27 1.9 listings language file
-) (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2023/02/27 1.9 listings language file
-) (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2023/02/27 1.9 listings language file
-) (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2023/02/27 1.9 listings language file
-) (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2023/02/27 1.9 listings language file
-) (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2023/02/27 1.9 listings language file
-) (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2023/02/27 1.9 listings language file
-) (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2023/02/27 1.9 listings language file
-) (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-)) [36
-
-] (./slide.vrb) [37
-
-]
-\openout4 = `slide.vrb'.
-
- (./slide.vrb) [38
-
-]
-\openout4 = `slide.vrb'.
-
- (./slide.vrb) [39
-
-]
-File: pic/NJUPT_Logo.pdf Graphic file (type pdf)
-<use pic/NJUPT_Logo.pdf>
- [40
-
-] (./slide.toc) [41
-
-] [42
-
-] (./slide.toc) [43
-
-] (./slide.bbl) [44
-
-] [45
+] [31
 
 ]
 \tf@nav=\write6
@@ -1532,15 +1469,15 @@ File: pic/NJUPT_Logo.pdf Graphic file (type pdf)
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `slide.out' has not changed.
-(rerunfilecheck)             Checksum: 992DCEC2D124838CB16BEF2664D45CDB;1115.
+(rerunfilecheck)             Checksum: 713D614BB5FAB32CFAD8224AEC5DCDBC;542.
  ) 
 Here is how much of TeX's memory you used:
- 32378 strings out of 476684
- 683120 string characters out of 5804055
- 1903018 words of memory out of 5000000
- 51845 multiletter control sequences out of 15000+600000
- 522420 words of font info for 147 fonts, out of 8000000 for 9000
+ 31154 strings out of 476684
+ 661242 string characters out of 5804055
+ 1872018 words of memory out of 5000000
+ 50674 multiletter control sequences out of 15000+600000
+ 520729 words of font info for 135 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 128i,22n,132p,435b,2130s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,22n,122p,435b,921s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on slide.pdf (45 pages).
+Output written on slide.pdf (31 pages).

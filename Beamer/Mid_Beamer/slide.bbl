@@ -31,10 +31,4 @@
   \bibvolume{47}\bibnumber{(11)}\thinspace{}\textnormal{:
   }\bibpages{2312\thinspace{}\textnormal{--}\thinspace{}2331}\@.
 
-\bibitem{origin}
-\bibauthor{UNKNOWN}\@. \bibtitle{THU Beamer Theme}\bibmark{[C/OL]}
-  //\thinspace{}\bibbooktitle{None}\@. \bibyear{2015}\thinspace{}\textnormal{:
-  }\bibpages{1\thinspace{}\textnormal{--}\thinspace{}10}\@.
-  \newline\url{http://far.tooold.cn/post/latex/beamertsinghua}\@.
-
 \end{thebibliography}

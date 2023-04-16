@@ -1,33 +1,53 @@
-\begin{columns}
-        \column{.6\textwidth}
-\begin{lstlisting}[language=TeX]
-    \begin{table}[htbp]
-      \caption{编号与含义}
-      \label{tab:number}
-      \centering
-      \begin{tabular}{cl}
-        \toprule
-        编号 & 含义 \\
-        \midrule
-        1 & 4.0 \\
-        2 & 3.7 \\
-        \bottomrule
-      \end{tabular}
-    \end{table}
-    公式~(\ref{eq:vsphere}) 的
-    编号与含义请参见
-    表~\ref{tab:number}。
-\end{lstlisting}
-        \column{.4\textwidth}
-        \begin{table}[htpb]
-            \centering
-            \caption{编号与含义}
-            \label{tab:number}
-            \begin{tabular}{cl}\toprule
-                编号 & 含义 \\\midrule
-                1 & 4.0\\
-                2 & 3.7\\\bottomrule
-            \end{tabular}
-        \end{table}
-        \normalsize 公式~(\ref{eq:vsphere})的编号与含义请参见表~\ref{tab:number}。
-    \end{columns}
+\frametitle{What Fuzzing is?}
+\only<1>{
+        \structure {Defination\cite{manes2019art}}
+        \begin{itemize}
+            \item \textbf{Fuzzing} Fuzzing is the execution of the PUT using input(s) sampled from an input space (the “fuzz input space”)
+                that protrudes the expected input space of the PUT.
+                \\ - PUT: Program Under Test
+            \item \textbf{Fuzz testing} Fuzz testing is the use of fuzzing to test if a PUT violates a correctness policy.
+            \item \textbf{Fuzzer} A fuzzer is a program that performs fuzz testing on a PUT.
+            \item \textbf{Bug Oracle} A bug oracle is a program, perhaps as part of a fuzzer, that determines whether a given execution
+            of the PUT violates a specific correctness policy.
+            \item \textbf{Fuzz Configuration}  A fuzz configuration of a fuzz algorithm comprises the parameter value(s) that control(s) the fuzz algorithm.
+            \item \textbf{Seed} A seed is a (commonly well-structured) input to the PUT, used to generate test cases by modifying it.
+        \end{itemize}
+    }
+    \only<2>{
+            \begin{block}{Fuzz Testing}
+            \begin{algorithm}[H]
+                \small
+                \DontPrintSemicolon
+                \SetKwSty{algokeywordsty}
+                \SetFuncSty{algofuncsty}
+                \SetDataSty{algodatasty}
+                \SetArgSty{algoargsty}
+                \SetCommentSty{algocmtsty}
+                \SetKw{break}{break}
+                \SetKw{not}{not}
+                \SetKwFunction{preprocess}{\textsc{Preprocess}}
+                \SetKwFunction{schedule}{\textsc{Schedule}}
+                \SetKwFunction{inputGen}{\textsc{InputGen}}
+                \SetKwFunction{inputEval}{\textsc{InputEval}}
+                \SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+                \SetKwFunction{continue}{\textsc{Continue}}
+                \SetKwFunction{isBug}{isBug}
+                \SetKwFunction{getProgram}{getProgram}
+                \SetKwData{newbugs}{$\bugs^\prime$}
+                \KwIn{\confs, \timeout}
+                \KwOut{\bugs \tcp{a finite set of bugs}}
+                $\bugs \gets \varnothing$\;
+                $\confs \gets \preprocess{$\confs$}$\;
+                \While {$\currtime < \timeout \land \continue{\confs}$}{
+                  \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+                  \testcases $\gets \inputGen{\conf}$\;
+                  \tcp{\bugoracle is embedded in a fuzzer}
+                  \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+                  $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+                  $\bugs \gets \bugs \cup \newbugs$\;
+                }
+                \Return{\bugs}\;
+                %\caption[short]{fuzz testing}
+            \end{algorithm}
+        \end{block}
+    }
