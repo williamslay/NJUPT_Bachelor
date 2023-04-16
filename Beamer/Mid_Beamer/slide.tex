@@ -385,6 +385,7 @@
                         \item  \textbf{classification}
                             \\- Generation-based(\textit{Model-based})
                             \\- Mutation-based(\textit{Model-less})
+                            \\- White-box Fuzzers: symbolic execution
                     \end{itemize} 
                 }
             }
@@ -719,8 +720,9 @@
                 \begin{itemize}
                     \item Static
                     \item \alert{Dynamic} 
-                        \\- 
-                        \\-
+                        \\- dynamically-linked libraries
+                        \\- execution feedback: branch coverage, new path, etc.
+                        \\- race condition bugs: thread scheduling
                 \end{itemize}
                 }
         \end{minipage}
@@ -765,8 +767,9 @@
                     \footnotesize{
                         \begin{itemize}  
                             \item  You have no view of the PUT,but have some view of the input/output domain
-                            \item  Fuzzing process is not changed according to some feedback 
-                            \item  Random mutated (not \alert {effective})
+                            \item  Fuzzing congfigurations are not changed according to some feedback 
+                                \\- some fuzzer may add the testcases to seed pool 
+                            \item \alert {Not effective}
                         \end{itemize} 
                     }
                 }
@@ -801,12 +804,12 @@
                 \footnotesize{
                     \begin{itemize}  
                         \item  You have the view of the PUT state(CFG,CG)
-                        \item  Static analysis (effective but not \alert {efficient}!)
+                        \item  Program analysis (effective but not \alert {efficient}!)
                     \end{itemize} 
                 }
             }
             \end{minipage}
-            }
+        }
     \end{picture} 
     }
     \only<5>{
@@ -822,7 +825,20 @@
             \end{center}
         \end{figure} 
     }
+    \only<6>{
+        \textbf{ \structure {Grey-box Fuzzing} is frequently used}
+        \begin{itemize}  
+            \item \textcolor{deepgreen}{State-of-the-art} in automated vulnerability detection
+            \item \textcolor{deepgreen}{Extremely efficient} coverage-based input generation 
+                \begin{itemize}
+                    \item[-]   All program analysis before/at \textcolor{deepred}{instrumentation time}.
+                    \item[-]   Start with a seed corpus, choose a seed file, fuzz it.
+                    \item[-]   Add to corpus only if new input increases coverage.
+                \end{itemize} 
+        \end{itemize}
+    } 
 \end{frame}
+
 \begin{frame}{Why Directed Grey-box Fuzzing ?}
     
 \end{frame}

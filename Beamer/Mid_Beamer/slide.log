@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  16 APR 2023 15:56
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  16 APR 2023 20:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1346,9 +1346,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/sc' undefined
 
 ]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <7> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 559.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 560.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <7> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 559.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 560.
  [7
 
 ] [8
@@ -1379,12 +1379,12 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <7> not available
 File: pic/blackbox.pdf Graphic file (type pdf)
 <use pic/blackbox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 825--825
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 840--840
 [] 
  []
 
 
-Overfull \vbox (107.93759pt too high) detected at line 825
+Overfull \vbox (107.93759pt too high) detected at line 840
  []
 
 [20
@@ -1393,12 +1393,12 @@ Overfull \vbox (107.93759pt too high) detected at line 825
 File: pic/blackbox.pdf Graphic file (type pdf)
 <use pic/blackbox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 825--825
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 840--840
 [] 
  []
 
 
-Overfull \vbox (107.93759pt too high) detected at line 825
+Overfull \vbox (107.93759pt too high) detected at line 840
  []
 
 [21
@@ -1409,12 +1409,12 @@ File: pic/cfg.pdf Graphic file (type pdf)
 File: pic/whitebox.pdf Graphic file (type pdf)
 <use pic/whitebox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 825--825
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 840--840
 [] 
  []
 
 
-Overfull \vbox (107.93759pt too high) detected at line 825
+Overfull \vbox (107.93759pt too high) detected at line 840
  []
 
 [22
@@ -1423,36 +1423,38 @@ Overfull \vbox (107.93759pt too high) detected at line 825
 File: pic/whitebox.pdf Graphic file (type pdf)
 <use pic/whitebox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 825--825
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 840--840
 [] 
  []
 
 
-Overfull \vbox (107.93759pt too high) detected at line 825
+Overfull \vbox (107.93759pt too high) detected at line 840
  []
 
 [23
 
 ]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/sl' in size <10> not available
-(Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 825.
+(Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 840.
 File: pic/greybox.pdf Graphic file (type pdf)
 <use pic/greybox.pdf>
  [24
 
 ] [25
 
-] (./slide.toc) [26
+] [26
 
-] [27
+] (./slide.toc) [27
 
 ] [28
 
-] (./slide.toc) [29
+] [29
 
-] (./slide.bbl) [30
+] (./slide.toc) [30
 
-] [31
+] (./slide.bbl) [31
+
+] [32
 
 ]
 \tf@nav=\write6
@@ -1469,7 +1471,7 @@ File: pic/greybox.pdf Graphic file (type pdf)
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `slide.out' has not changed.
-(rerunfilecheck)             Checksum: 713D614BB5FAB32CFAD8224AEC5DCDBC;542.
+(rerunfilecheck)             Checksum: D876632DDC7F586A2165EADB15D82FF4;542.
  ) 
 Here is how much of TeX's memory you used:
  31154 strings out of 476684
@@ -1480,4 +1482,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  128i,22n,122p,435b,921s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on slide.pdf (31 pages).
+Output written on slide.pdf (32 pages).
