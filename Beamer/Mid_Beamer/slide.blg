@@ -6,47 +6,51 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: ref.bib
+Warning--string name "oct" is undefined
+--line 53 of file ref.bib
 Warning--Require citedate: wang2022
 Warning--Require URL: wang2022
-You've used 3 entries,
+Warning--Require citedate: bohmeDGF2017
+Warning--Require citedate: chenHawkeye2018
+You've used 5 entries,
             3107 wiz_defined-function locations,
-            729 strings with 6597 characters,
-and the built_in function-call counts, 6421 in all, are:
-= -- 722
-> -- 12
-< -- 27
-+ -- 580
-- -- 42
-* -- 158
-:= -- 729
+            748 strings with 7195 characters,
+and the built_in function-call counts, 11098 in all, are:
+= -- 1243
+> -- 20
+< -- 45
++ -- 977
+- -- 72
+* -- 284
+:= -- 1232
 add.period$ -- 0
-call.type$ -- 3
-change.case$ -- 18
+call.type$ -- 5
+change.case$ -- 30
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 915
-empty$ -- 226
-format.name$ -- 36
-if$ -- 1707
+cite$ -- 9
+duplicate$ -- 1604
+empty$ -- 418
+format.name$ -- 60
+if$ -- 2949
 int.to.chr$ -- 0
-int.to.str$ -- 3
+int.to.str$ -- 5
 missing$ -- 0
-newline$ -- 36
-num.names$ -- 3
-pop$ -- 85
+newline$ -- 42
+num.names$ -- 5
+pop$ -- 155
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 47
+skip$ -- 75
 stack$ -- 0
-substring$ -- 774
-swap$ -- 143
+substring$ -- 1355
+swap$ -- 263
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 2
-while$ -- 79
-width$ -- 4
-write$ -- 64
-(There were 2 warnings)
+warning$ -- 4
+while$ -- 139
+width$ -- 6
+write$ -- 100
+(There were 5 warnings)

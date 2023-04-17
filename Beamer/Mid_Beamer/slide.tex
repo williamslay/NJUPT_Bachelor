@@ -11,7 +11,11 @@
 \usepackage{graphicx,pstricks,listings,stackengine}
 \usepackage[linesnumbered,vlined]{algorithm2e}
 %\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
-\usepackage{float}    
+\usepackage{float}
+
+
+
+
 \author{雷尚远}
 \title{定向覆盖模糊测试工具的设计与实现}
 \subtitle{毕业设计中期检查}
@@ -804,7 +808,7 @@
                 \footnotesize{
                     \begin{itemize}  
                         \item  You have the view of the PUT state(CFG,CG)
-                        \item  Program analysis (effective but not \alert {efficient}!)
+                        \item  Heavy-weight Program analysis (effective but not \alert {efficient}!)
                     \end{itemize} 
                 }
             }
@@ -828,8 +832,8 @@
     \only<6>{
         \textbf{ \structure {Grey-box Fuzzing} is frequently used}
         \begin{itemize}  
-            \item \textcolor{deepgreen}{State-of-the-art} in automated vulnerability detection
-            \item \textcolor{deepgreen}{Extremely efficient} coverage-based input generation 
+            \item \textbf{\textcolor{deepgreen}{State-of-the-art}} in automated vulnerability detection
+            \item \textbf{\textcolor{deepgreen}{Extremely efficient}} coverage-based input generation 
                 \begin{itemize}
                     \item[-]   All program analysis before/at \textcolor{deepred}{instrumentation time}.
                     \item[-]   Start with a seed corpus, choose a seed file, fuzz it.
@@ -843,10 +847,10 @@
     \only<1>{
     \textbf{ \structure {Directed Fuzzing} has many applications} 
     \begin{itemize}  
-        \item \textcolor{deepgreen}{Patch Testing}: reach changed statements
-        \item \textcolor{deepgreen}{Crash Reproduction}: exercise stack trace
-        \item \textcolor{deepgreen}{SA Report Verification}: reach “dangerous” location
-        \item \textcolor{deepgreen}{Information Flow Detection}: exercise source-sink pairs
+        \item \textbf{\textcolor{deepgreen}{Patch Testing}}: reach changed statements
+        \item \textbf{\textcolor{deepgreen}{Crash Reproduction}}: exercise stack trace
+        \item \textbf{\textcolor{deepgreen}{SA Report Verification}}: reach “dangerous” location
+        \item \textbf{\textcolor{deepgreen}{Information Flow Detection}}: exercise source-sink pairs
     \end{itemize} 
     }
     \only<2>{
@@ -854,18 +858,18 @@
         \begin{itemize}  
             \item \textbf{\textcolor{deepgreen}{Goal}:reach a specific \textcolor{deepred}{target}}
             \begin{itemize}
-                \item[-]  \textbf{\alert{Target Locations}}: the line number in the source code or the virtual memory address at the binary level\cite{wang2022}.
-                \item[-]  \textbf{Target Bugs}: use-after-free vulnerabilities, etc.
+                \item[--]  \textbf{\alert{Target Locations}}: the line number in the source code or the virtual memory address at the binary level\cite{wang2022}.
+                \item[--]  \textbf{Target Bugs}: use-after-free vulnerabilities, etc.
             \end{itemize} 
             \begin{minipage}[t]{0.7\linewidth}
             \vspace{0pt} 
             \item \textbf{\textcolor{deepgreen}{DSE}:classical \textcolor{deepred}{constraint satisfaction problem}}
             \begin{itemize}
-                \item[-]  uses program analysis and constraint solving to generate inputs that systematically 
+                \item[--]  uses program analysis and constraint solving to generate inputs that systematically 
                          and effectively explore the state space of feasible paths\cite{ma2011directed}.
-                \item[-]  \alert{\textbf{Program analysis}} to identify \textcolor{deepblue}{\textbf{program paths}} that reach given program locations.
-                \item[-]  \alert{\textbf{Symbolic Execution}} to derive \textcolor{deepblue}{\textbf{path conditions}} for any of the identified paths.
-                \item[-] \alert{\textbf{Constraint Solving}} to find an input 
+                \item[--]  \alert{\textbf{Program analysis}} to identify \textcolor{deepblue}{\textbf{program paths}} that reach given program locations.
+                \item[--]  \alert{\textbf{Symbolic Execution}} to derive \textcolor{deepblue}{\textbf{path conditions}} for any of the identified paths.
+                \item[--] \alert{\textbf{Constraint Solving}} to find an input 
             \end{itemize}  
             \end{minipage}
             \begin{minipage}[t]{0.28\linewidth}
@@ -875,31 +879,39 @@
             \end{minipage} 
         \end{itemize} 
     }
+    \only<3>{
+        \textbf{\Large{
+            \begin{itemize}  
+                \item Effectiveness comes at the cost of \alert {efficiency}
+                \item \alert {Heavy-weight} program analysis
+            \end{itemize}
+        }}
+    }
 \end{frame}
 
 
-\subsection{Research Status }
-\begin{frame}{ Why Directed Grey-Box Fuzz?}
-    \begin{itemize}[<+-| alert@+>] % 当然，除了alert，手动在里面插 \pause 也行
-        \item 大家都会\LaTeX{}，好多学校都有自己的Beamer主题
-        \item 中文支持请选择 Xe\LaTeX{} 编译选项
-    \end{itemize}
+\subsection{Research Status}
+\begin{frame}
+    \structure {Genealogy tracing significant fuzzers’ lineage}\footnote{paper\cite{manes2019art}-Figure1}
+    \begin{figure}[htbp]
+        \includegraphics[width=7.0cm]{pic/gen.pdf}
+    \end{figure}
+\end{frame}
+\begin{frame}
+    \textbf{ \structure {Representative Work}}
+        \begin{itemize}  
+            \item \textbf{\textcolor{deepgreen}{AFLGo(2017)}}\cite{bohmeDGF2017}
+            \item \textbf{\textcolor{deepgreen}{Hawkeye(2018)}}\cite{chenHawkeye2018}
+            \item \textbf{Github Repository}:awesome-directed-fuzzing
+                \\ \footnotesize{\url{https://github.com/strongcourage/awesome-directed-fuzzing}}
+        \end{itemize} 
 \end{frame}
 
-% \section{研究内容}
 
-% \subsection{美化主题}
 
-% \begin{frame}{这一份主题与原始的THU Beamer Theme区别在于}
-%     \begin{itemize}
-%         \item 顶栏的小点变成一行而不是多行
-%         \item 中文采用楷书
-%         \item 修改了主题色为南邮校徽颜色
-%         \item 参考文献格式按照毕设标准进行了修改
-%         \item 更多该模板的功能可以参考 \url{https://www.latexstudio.net/archives/4051.html}
-%         \item 下面列举出了一些Beamer的用法，部分节选自 \url{https://tuna.moe/event/2018/latex/}
-%     \end{itemize}
-% \end{frame}
+\section{Theory}
+
+\section{Work}
 
 % \subsection{如何更好地做Beamer}
 

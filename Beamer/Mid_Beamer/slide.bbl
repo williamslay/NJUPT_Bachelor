@@ -43,4 +43,23 @@
   Proceedings 18}\@. \bibyear{2011}\thinspace{}\textnormal{:
   }\bibpages{95\thinspace{}\textnormal{--}\thinspace{}111}\@.
 
+\bibitem{bohmeDGF2017}
+\bibauthor{B{\"O}HME M\@, PHAM V-T\@, NGUYEN M-D, et~al}\@. \bibtitle{Directed
+  Greybox Fuzzing}\bibmark{[C/OL]} //\thinspace{}\bibbooktitle{Proceedings of
+  the 2017 ACM SIGSAC Conference on Computer and Communications Security}\@.
+  \bibaddress{Dallas Texas USA}\thinspace{}\textnormal{: }\bibpublisher{ACM}\@,
+  \bibyear{2017}\thinspace{}\textnormal{:
+  }\bibpages{2329\thinspace{}\textnormal{--}\thinspace{}2344}\@.
+  \newline\url{http://dx.doi.org/10.1145/3133956.3134020}\@.
+
+\bibitem{chenHawkeye2018}
+\bibauthor{CHEN H\@, XUE Y\@, LI Y, et~al}\@. \bibtitle{Hawkeye: Towards a
+  Desired Directed Grey-Box Fuzzer}\bibmark{[C/OL]}
+  //\thinspace{}\bibbooktitle{Proceedings of the 2018 ACM SIGSAC Conference on
+  Computer and Communications Security}\@. \bibaddress{Toronto
+  Canada}\thinspace{}\textnormal{: }\bibpublisher{ACM}\@,
+  \bibyear{2018}\thinspace{}\textnormal{:
+  }\bibpages{2095\thinspace{}\textnormal{--}\thinspace{}2108}\@.
+  \newline\url{http://dx.doi.org/10.1145/3243734.3243849}\@.
+
 \end{thebibliography}
