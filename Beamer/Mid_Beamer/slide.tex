@@ -1,7 +1,8 @@
 \documentclass[10pt,aspectratio=43]{beamer} 
 \usepackage{hyperref}
-\usepackage{xeCJK} %导入中文包
-
+%\usepackage{ctex} %导入中文包
+\usepackage{xeCJK}
+\usepackage{NJUPT}
 \setCJKsansfont{SimHei} 
 \setsansfont{Times New Roman}
 \setmainfont{Microsoft YaHei}
@@ -12,8 +13,7 @@
 \usepackage[linesnumbered,vlined]{algorithm2e}
 %\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 \usepackage{float}
-
-
+% \usepackage{emoji}
 
 
 \author{雷尚远}
@@ -21,7 +21,7 @@
 \subtitle{毕业设计中期检查}
 \institute{南京邮电大学计算机学院}
 \date{2023年4月17日}
-\usepackage{NJUPT}
+
 
 % defs
 \def\cmd#1{\texttt{\color{red}\footnotesize $\backslash$#1}}
@@ -907,10 +907,67 @@
         \end{itemize} 
 \end{frame}
 
-
-
 \section{Theory}
-
+\subsection{AFLGo}
+\begin{frame}{OverView}
+    
+\end{frame}
+\begin{frame}{Algorithm}
+    \begin{block}{Directed Grey-box Fuzzing}
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{graphextractor}{\textsc{GraphExt}}
+            \SetKwFunction{bbdistance}{\textsc{DisCalcu}}  
+            \SetKwFunction{select}{\textsc{Dequeue}}
+            \SetKwFunction{assinenergy}{\textsc{AssinEnergy}}
+            \SetKwFunction{mutation}{\textsc{Mutation}}
+            \SetKwFunction{execution}{\textsc{Execution}}
+            \SetKwFunction{IsIntersting}{\textsc{IsIntersting}}
+            \SetKwFunction{evaluateseed}{\textsc{SeedEva}}
+            \SetKwFunction{sortinsert}{SortInser}
+            % \SetKwData{crashseeds}{$\seeds_{\text{\emoji{boom}}}$}
+            \SetKwData{crashseeds}{$\seeds^\prime$} 
+            \SetKwData{seedqueue}{$\textit{SeedQueue}$}  
+            \SetKwData{Graph}{$\textit{Graphs}$}  
+            \SetKwData{BBdis}{$\textit{BBdistance}$} 
+            \SetKwData{newseed}{$\seed^\prime$}   
+            \SetKwData{energy}{$\textit{e}$}
+            \SetKwData{trace}{$\textit{trace}$} 
+            \SetKwData{distance}{$\textit{distance}$}   
+            \KwIn{\seeds\tcp{a finite set of seeds}}
+            \KwIn{\targets\tcp{a finite set of targer sits}} 
+            \KwOut{\crashseeds \tcp{a finite set of buggy seeds}}
+            $\crashseeds\gets \varnothing$\; 
+            $\seedqueue \gets \seeds$\;
+            \Graph $\gets \graphextractor{\sourcecode}$\;
+            \BBdis $\gets \bbdistance{\targets,\Graph}$\;
+            \While {$true$}{
+              \seed$\gets \select{\seedqueue}$\; 
+              \energy $\gets \assinenergy{\seed, \currtime, \BBdis}$\;
+               \For{$\textit{i}\gets 1$ \KwTo $\energy$}
+               {
+                $\newseed \gets \mutation{\seed}$\;
+                $\trace \gets \execution{\newseed}$\;
+                \lIf{\newseed crashes}{$\crashseeds \gets \crashseeds \cup \newseed $}
+                \If{\IsIntersting{\newseed}}{
+                    $\distance \gets \evaluateseed{\trace, \BBdis} $\;
+                    $ \seedqueue \gets \sortinsert{\distance,\newseed,\seedqueue} $\; 
+                }
+               }
+               \lIf{Siganl}{\break}
+            }
+            \Return{\crashseeds}\;
+        \end{algorithm} 
+    \end{block}
+\end{frame}
 \section{Work}
 
 % \subsection{如何更好地做Beamer}

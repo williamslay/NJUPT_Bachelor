@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  17 APR 2023 16:26
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  17 APR 2023 23:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -645,7 +645,7 @@ Package: fontspec-xetex 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/usr/local/texlive/2022/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
 File: xeCJK.cfg 2022/08/05 v3.9.1 Configuration file for xeCJK package
-))
+)) (./NJUPT.sty (/usr/local/texlive/2022/texmf-dist/tex/latex/beamer/beamerouterthemesmoothbars.sty) (/usr/local/texlive/2022/texmf-dist/tex/latex/beamer/beamerinnerthemecircles.sty))
 
 Package fontspec Info: Font family 'TimesNewRoman(0)' created for font 'Times
 (fontspec)             New Roman' with options [Ligatures=TeX].
@@ -1096,7 +1096,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box144
 \@float@everytoks=\toks52
 \@floatcapt=\box145
-) (./NJUPT.sty (/usr/local/texlive/2022/texmf-dist/tex/latex/beamer/beamerouterthemesmoothbars.sty) (/usr/local/texlive/2022/texmf-dist/tex/latex/beamer/beamerinnerthemecircles.sty))
+)
 
 Package fontspec Info: Could not resolve font "SimHei/BI" (it probably doesn't
 (fontspec)             exist).
@@ -1473,14 +1473,29 @@ Overfull \vbox (1.1252pt too high) detected at line 899
 
 ] (./slide.toc) [33
 
-] (./slide.toc) [34
+] [34
 
-] (./slide.bbl) [35
+]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 970.
+LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <8> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 970.
 
-] [36
+Overfull \vbox (6.39725pt too high) detected at line 970
+ []
+
+[35
+
+] (./slide.toc) [36
+
+] (./slide.toc) [37
+
+] (./slide.bbl) [38
+
+] [39
 
 
-] [37
+] [40
 
 ]
 \tf@nav=\write6
@@ -1497,15 +1512,15 @@ Overfull \vbox (1.1252pt too high) detected at line 899
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `slide.out' has not changed.
-(rerunfilecheck)             Checksum: 8BD486A1DEDFDCB2B5CD2060EC70580A;688.
+(rerunfilecheck)             Checksum: 12B91A196AB0B23809A0FE6E8CFC7FF9;771.
  ) 
 Here is how much of TeX's memory you used:
- 31234 strings out of 476684
- 662759 string characters out of 5804055
- 1874018 words of memory out of 5000000
- 50743 multiletter control sequences out of 15000+600000
- 522404 words of font info for 145 fonts, out of 8000000 for 9000
+ 31289 strings out of 476684
+ 663564 string characters out of 5804055
+ 1879018 words of memory out of 5000000
+ 50791 multiletter control sequences out of 15000+600000
+ 522444 words of font info for 150 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 128i,22n,122p,435b,921s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,28n,122p,435b,1106s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on slide.pdf (37 pages).
+Output written on slide.pdf (40 pages).

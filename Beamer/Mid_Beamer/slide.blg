@@ -6,8 +6,6 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: ref.bib
-Warning--string name "oct" is undefined
---line 53 of file ref.bib
 Warning--Require citedate: wang2022
 Warning--Require URL: wang2022
 Warning--Require citedate: bohmeDGF2017
@@ -53,4 +51,4 @@ warning$ -- 4
 while$ -- 139
 width$ -- 6
 write$ -- 100
-(There were 5 warnings)
+(There were 4 warnings)
