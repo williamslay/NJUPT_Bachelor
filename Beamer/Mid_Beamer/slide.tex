@@ -840,7 +840,41 @@
 \end{frame}
 
 \begin{frame}{Why Directed Grey-box Fuzzing ?}
-    
+    \only<1>{
+    \textbf{ \structure {Directed Fuzzing} has many applications} 
+    \begin{itemize}  
+        \item \textcolor{deepgreen}{Patch Testing}: reach changed statements
+        \item \textcolor{deepgreen}{Crash Reproduction}: exercise stack trace
+        \item \textcolor{deepgreen}{SA Report Verification}: reach “dangerous” location
+        \item \textcolor{deepgreen}{Information Flow Detection}: exercise source-sink pairs
+    \end{itemize} 
+    }
+    \only<2>{
+        \textbf{\structure {Directed Fuzzing}}
+        \begin{itemize}  
+            \item \textbf{\textcolor{deepgreen}{Goal}:reach a specific \textcolor{deepred}{target}}
+            \begin{itemize}
+                \item[-]  \textbf{\alert{Target Locations}}: the line number in the source code or the virtual memory address at the binary level\cite{wang2022}.
+                \item[-]  \textbf{Target Bugs}: use-after-free vulnerabilities, etc.
+            \end{itemize} 
+            \begin{minipage}[t]{0.7\linewidth}
+            \vspace{0pt} 
+            \item \textbf{\textcolor{deepgreen}{DSE}:classical \textcolor{deepred}{constraint satisfaction problem}}
+            \begin{itemize}
+                \item[-]  uses program analysis and constraint solving to generate inputs that systematically 
+                         and effectively explore the state space of feasible paths\cite{ma2011directed}.
+                \item[-]  \alert{\textbf{Program analysis}} to identify \textcolor{deepblue}{\textbf{program paths}} that reach given program locations.
+                \item[-]  \alert{\textbf{Symbolic Execution}} to derive \textcolor{deepblue}{\textbf{path conditions}} for any of the identified paths.
+                \item[-] \alert{\textbf{Constraint Solving}} to find an input 
+            \end{itemize}  
+            \end{minipage}
+            \begin{minipage}[t]{0.28\linewidth}
+                \vspace{0pt}
+                \centering 
+                \includegraphics[width=3.0cm]{pic/dse.pdf} 
+            \end{minipage} 
+        \end{itemize} 
+    }
 \end{frame}
 
 
@@ -1095,7 +1129,7 @@
 %     \end{itemize}
 % \end{frame}
 
- \section{参考文献}
+ \section{References}
 
  \begin{frame}[allowframebreaks]
      \bibliography{ref}

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  16 APR 2023 20:26
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  17 APR 2023 10:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1444,17 +1444,27 @@ File: pic/greybox.pdf Graphic file (type pdf)
 
 ] [26
 
-] (./slide.toc) [27
+]
+File: pic/dse.pdf Graphic file (type pdf)
+<use pic/dse.pdf>
 
-] [28
+Overfull \hbox (4.91745pt too wide) in paragraph at lines 878--878
+ [][] 
+ []
+
+[27
+
+] (./slide.toc) [28
 
 ] [29
 
-] (./slide.toc) [30
+] [30
 
-] (./slide.bbl) [31
+] (./slide.toc) [31
 
-] [32
+] (./slide.bbl) [32
+
+] [33
 
 ]
 \tf@nav=\write6
@@ -1471,15 +1481,15 @@ File: pic/greybox.pdf Graphic file (type pdf)
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `slide.out' has not changed.
-(rerunfilecheck)             Checksum: D876632DDC7F586A2165EADB15D82FF4;542.
+(rerunfilecheck)             Checksum: 6BAF07EE653DFE93118BA097E372ABBA;560.
  ) 
 Here is how much of TeX's memory you used:
- 31154 strings out of 476684
- 661242 string characters out of 5804055
+ 31166 strings out of 476684
+ 661451 string characters out of 5804055
  1872018 words of memory out of 5000000
- 50674 multiletter control sequences out of 15000+600000
+ 50685 multiletter control sequences out of 15000+600000
  520729 words of font info for 135 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,22n,122p,435b,921s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on slide.pdf (32 pages).
+Output written on slide.pdf (33 pages).
