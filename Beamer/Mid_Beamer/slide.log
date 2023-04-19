@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  17 APR 2023 23:12
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  19 APR 2023 10:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1476,26 +1476,36 @@ Overfull \vbox (1.1252pt too high) detected at line 899
 ] [34
 
 ]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 970.
-LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 970.
+File: pic/AFLGo.pdf Graphic file (type pdf)
+<use pic/AFLGo.pdf>
 
-Overfull \vbox (6.39725pt too high) detected at line 970
+Overfull \hbox (19.91681pt too wide) in paragraph at lines 938--938
+ [] 
  []
 
 [35
 
-] (./slide.toc) [36
+]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 994.
+LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <8> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 994.
+ [36
 
-] (./slide.toc) [37
+] [37
 
-] (./slide.bbl) [38
+] [38
 
-] [39
+] (./slide.toc) [39
+
+] (./slide.toc) [40
+
+] (./slide.bbl) [41
+
+] [42
 
 
-] [40
+] [43
 
 ]
 \tf@nav=\write6
@@ -1515,12 +1525,12 @@ Package rerunfilecheck Info: File `slide.out' has not changed.
 (rerunfilecheck)             Checksum: 12B91A196AB0B23809A0FE6E8CFC7FF9;771.
  ) 
 Here is how much of TeX's memory you used:
- 31289 strings out of 476684
- 663564 string characters out of 5804055
+ 31340 strings out of 476684
+ 665075 string characters out of 5804055
  1879018 words of memory out of 5000000
- 50791 multiletter control sequences out of 15000+600000
+ 50841 multiletter control sequences out of 15000+600000
  522444 words of font info for 150 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,28n,122p,435b,1106s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on slide.pdf (40 pages).
+Output written on slide.pdf (43 pages).

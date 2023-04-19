@@ -897,23 +897,104 @@
         \includegraphics[width=7.0cm]{pic/gen.pdf}
     \end{figure}
 \end{frame}
+
 \begin{frame}
     \textbf{ \structure {Representative Work}}
         \begin{itemize}  
             \item \textbf{\textcolor{deepgreen}{AFLGo(2017)}}\cite{bohmeDGF2017}
-            \item \textbf{\textcolor{deepgreen}{Hawkeye(2018)}}\cite{chenHawkeye2018}
-            \item \textbf{Github Repository}:awesome-directed-fuzzing
-                \\ \footnotesize{\url{https://github.com/strongcourage/awesome-directed-fuzzing}}
+            \item \textbf{\textcolor{deepgreen}{Hawkeye(2018)}}\cite{chenHawkeye2018} 
         \end{itemize} 
 \end{frame}
 
 \section{Theory}
 \subsection{AFLGo}
 \begin{frame}{OverView}
-    
+    \only<1>{
+        \textbf{ \structure {Directed Fuzzing} as \textcolor{deepgreen}{optimisation problem!}}
+        \begin{itemize} 
+            \item \textbf{Instrumentation Time}
+                \begin{enumerate}
+                    \item Extract \textbf{\textcolor{deepred}{call graph}} (CG) and \textbf{\textcolor{deepred}{control-flow graphs}} (CFGs).
+                    \item For each \textbf{\textcolor{deepred}{BB}}, compute \textbf{\textcolor{deepred}{distance}} to target locations.
+                    \item Instrument program to \textbf{\textcolor{deepred}{aggregate distance values}}.
+                \end{enumerate} 
+            \item \textbf{Runtime}
+                \begin{enumerate}
+                    \item collect coverage and distance \textbf{\textcolor{deepred}{information}}, and
+                    \item decide \textbf{\textcolor{deepred}{how long to be fuzzed}} based on distance.
+                    \begin{itemize}
+                        \item[--] If input is \textbf{\textcolor{deepgreen}{closer}} to the targets, it is fuzzed for \textbf{\textcolor{deepgreen}{longer}}.
+                        \item[--] If input is \textbf{\textcolor{deepred}{further away}} from the targets, it is fuzzed for \textbf{\textcolor{deepred}{shorter}}.
+                    \end{itemize}  
+                \end{enumerate}  
+        \end{itemize}  
+    }
+    \only<2>{
+        \textbf{ \structure {AFLGo Architecture}}
+        \begin{figure}[htbp]
+            \includegraphics[width=11.5cm]{pic/AFLGo.pdf}
+        \end{figure}
+    } 
 \end{frame}
+
 \begin{frame}{Algorithm}
-    \begin{block}{Directed Grey-box Fuzzing}
+        \begin{block}{Directed Grey-box Fuzzing}
+            \begin{algorithm}[H]
+                \footnotesize
+                \DontPrintSemicolon
+                \SetKwSty{algokeywordsty}
+                \SetFuncSty{algofuncsty}
+                \SetDataSty{algodatasty}
+                \SetArgSty{algoargsty}
+                \SetCommentSty{algocmtsty}
+                \SetKw{break}{break}
+                \SetKw{not}{not}
+                \SetKwFunction{graphextractor}{\textsc{GraphExt}}
+                \SetKwFunction{bbdistance}{\textsc{DisCalcu}}  
+                \SetKwFunction{select}{\textsc{Dequeue}}
+                \SetKwFunction{assinenergy}{\textsc{AssinEnergy}}
+                \SetKwFunction{mutation}{\textsc{Mutation}}
+                \SetKwFunction{execution}{\textsc{Execution}}
+                \SetKwFunction{IsIntersting}{\textsc{IsIntersting}}
+                \SetKwFunction{evaluateseed}{\textsc{SeedEva}}
+                \SetKwFunction{sortinsert}{SortInser}
+                % \SetKwData{crashseeds}{$\seeds_{\text{\emoji{boom}}}$}
+                \SetKwData{crashseeds}{$\seeds^\prime$} 
+                \SetKwData{seedqueue}{$\textit{SeedQueue}$}  
+                \SetKwData{Graph}{$\textit{Graphs}$}  
+                \SetKwData{BBdis}{$\textit{BBdistance}$} 
+                \SetKwData{newseed}{$\seed^\prime$}   
+                \SetKwData{energy}{$\textit{e}$}
+                \SetKwData{trace}{$\textit{trace}$} 
+                \SetKwData{distance}{$\textit{distance}$}   
+                \KwIn{\seeds\tcp{a finite set of seeds}}
+                \KwIn{\targets\tcp{a finite set of targer sits}} 
+                \KwOut{\crashseeds \tcp{a finite set of buggy seeds}}
+                $\crashseeds\gets \varnothing$\; 
+                $\seedqueue \gets \seeds$\;
+                \Graph $\gets \graphextractor{\sourcecode}$\;
+                \BBdis $\gets \bbdistance{\targets,\Graph}$\;
+                \While {$!siganl$}{
+                  \seed$\gets \select{\seedqueue}$\; 
+                  \energy $\gets \assinenergy{\seed, \currtime, \BBdis}$\;
+                   \For{$\textit{i}\gets 1$ \KwTo $\energy$}
+                   {
+                    $\newseed \gets \mutation{\seed}$\;
+                    $\trace \gets \execution{\newseed}$\;
+                    \lIf{\newseed crashes}{$\crashseeds \gets \crashseeds \cup \newseed $}
+                    \If{\IsIntersting{\newseed}}{
+                        $\distance \gets \evaluateseed{\trace, \BBdis} $\;
+                        $ \seedqueue \gets \sortinsert{\distance,\newseed,\seedqueue} $\; 
+                    }
+                   }
+                }
+                \Return{\crashseeds}\;
+            \end{algorithm} 
+        \end{block}
+\end{frame}
+
+\begin{frame}{Instrumentation}
+    \only<1>{
         \begin{algorithm}[H]
             \footnotesize
             \DontPrintSemicolon
@@ -947,9 +1028,9 @@
             \KwOut{\crashseeds \tcp{a finite set of buggy seeds}}
             $\crashseeds\gets \varnothing$\; 
             $\seedqueue \gets \seeds$\;
-            \Graph $\gets \graphextractor{\sourcecode}$\;
-            \BBdis $\gets \bbdistance{\targets,\Graph}$\;
-            \While {$true$}{
+            \HiLi\Graph $\gets \graphextractor{\sourcecode}$\;
+            \HiLi\BBdis $\gets \bbdistance{\targets,\Graph}$\;
+            \While {$!siganl$}{
               \seed$\gets \select{\seedqueue}$\; 
               \energy $\gets \assinenergy{\seed, \currtime, \BBdis}$\;
                \For{$\textit{i}\gets 1$ \KwTo $\energy$}
@@ -962,12 +1043,18 @@
                     $ \seedqueue \gets \sortinsert{\distance,\newseed,\seedqueue} $\; 
                 }
                }
-               \lIf{Siganl}{\break}
             }
             \Return{\crashseeds}\;
         \end{algorithm} 
-    \end{block}
+    }
+    \only<2>{
+        
+    } 
 \end{frame}
+
+
+
+
 \section{Work}
 
 % \subsection{如何更好地做Beamer}
@@ -1186,16 +1273,6 @@
 %         }
 %         \caption{这个校徽就是矢量图，虽然看起来不像，但确实是矢量图格式}
 %     \end{figure}
-% \end{frame}
-
-% \section{计划进度}
-% \begin{frame}
-%     \begin{itemize}
-%         \item 一月：完成文献调研
-%         \item 二月：研究THU Beamer Theme的实现
-%         \item 三、四月：修改NJUPT Beamer主题
-%         \item 五月：论文撰写
-%     \end{itemize}
 % \end{frame}
 
  \section{References}
