@@ -1050,7 +1050,13 @@
     \only<2->{
         \begin{itemize}  
             \onslide<2-> \item \textbf{\structure {Function-level target distance\only<2>{\footnote{R(n,Tf ) is the set of all target functions that are reachable from n in CG}}}}:using call graph \textcolor{deepred}{(CG)}
-            \onslide<5-> \item \textbf{\textcolor{deepgreen}{BB-level target distance}}:using control-flow graphs \textcolor{deepred}{(CFG)} 
+            \onslide<5-> \item \textbf{\textcolor{deepgreen}{BB-level target distance
+            \only<5>{\footnote{
+                \begin{itemize}
+                    \item [-] N (m) is the set of functions called by basic block m
+                    \item [-] T is the set of basic blocks in control-flow graph
+                \end{itemize}
+            }}}}:using control-flow graphs \textcolor{deepred}{(CFG)} 
         \end{itemize} 
         \onslide<2-> 
         \begin{minipage}[t]{0.7\linewidth}
@@ -1079,12 +1085,13 @@
         }
         \only<6-9>{
             \begin{enumerate}
-                \item  Identify\textbf{ target BBs} and assign distance 0 \only<6>{(none in function b)}
+                \item  Identify\textbf{ target BBs} and assign distance 0 \\\only<6>{(none in function b)}
                 \only<7-9>{\item  Identify BBs that \textbf{\textcolor{deepblue}{call function}} and assign \textbf{\textcolor{deepred}{10*FLTD}}}
                 \only<8-9>{\item  For each BB, compute harmonic mean of (length of shortest path to any function-calling BB + 10*FLTD).} 
             \end{enumerate}
         }
-        \only<4>{\includegraphics[width=6.0cm]{pic/diff.pdf} }  
+        \only<4>{\includegraphics[width=6.0cm]{pic/diff.pdf} } 
+        \only<7>{\includegraphics[width=3.5cm]{pic/CG_3.pdf} } 
         \end{minipage}
       \onslide<2->
       \begin{minipage}[t]{0.28\linewidth}
@@ -1101,6 +1108,61 @@
     }
 \end{frame}
 
+\begin{frame}{Runtime}
+    \only<1>{
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{graphextractor}{\textsc{GraphExt}}
+            \SetKwFunction{bbdistance}{\textsc{DisCalcu}}  
+            \SetKwFunction{select}{\textsc{Dequeue}}
+            \SetKwFunction{assinenergy}{\textsc{AssinEnergy}}
+            \SetKwFunction{mutation}{\textsc{Mutation}}
+            \SetKwFunction{execution}{\textsc{Execution}}
+            \SetKwFunction{IsIntersting}{\textsc{IsIntersting}}
+            \SetKwFunction{evaluateseed}{\textsc{SeedEva}}
+            \SetKwFunction{sortinsert}{SortInser}
+            % \SetKwData{crashseeds}{$\seeds_{\text{\emoji{boom}}}$}
+            \SetKwData{crashseeds}{$\seeds^\prime$} 
+            \SetKwData{seedqueue}{$\textit{SeedQueue}$}  
+            \SetKwData{Graph}{$\textit{Graphs}$}  
+            \SetKwData{BBdis}{$\textit{BBdistance}$} 
+            \SetKwData{newseed}{$\seed^\prime$}   
+            \SetKwData{energy}{$\textit{e}$}
+            \SetKwData{trace}{$\textit{trace}$} 
+            \SetKwData{distance}{$\textit{distance}$}   
+            \KwIn{\seeds\tcp{a finite set of seeds}}
+            \KwIn{\targets\tcp{a finite set of targer sits}} 
+            \KwOut{\crashseeds \tcp{a finite set of buggy seeds}}
+            $\crashseeds\gets \varnothing$\; 
+            $\seedqueue \gets \seeds$\;
+            \Graph $\gets \graphextractor{\sourcecode}$\;
+            \BBdis $\gets \bbdistance{\targets,\Graph}$\;
+            \While {$!siganl$}{
+              \seed$\gets \select{\seedqueue}$\; 
+              \energy $\gets \assinenergy{\seed, \currtime, \BBdis}$\;
+               \For{$\textit{i}\gets 1$ \KwTo $\energy$}
+               {
+                $\newseed \gets \mutation{\seed}$\;
+                $\trace \gets \execution{\newseed}$\;
+                \lIf{\newseed crashes}{$\crashseeds \gets \crashseeds \cup \newseed $}
+                \If{\IsIntersting{\newseed}}{
+                    $\distance \gets \evaluateseed{\trace, \BBdis} $\;
+                    $ \seedqueue \gets \sortinsert{\distance,\newseed,\seedqueue} $\; 
+                }
+               }
+            }
+            \Return{\crashseeds}\;
+        \end{algorithm} 
+    }
+\end{frame}
 
 
 

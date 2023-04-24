@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  24 APR 2023 18:40
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  24 APR 2023 22:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1495,7 +1495,7 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <8> not available
 ] [37
 
 ]
-Overfull \hbox (19.4616pt too wide) detected at line 1102
+Overfull \hbox (19.4616pt too wide) detected at line 1109
 [][]\OT1/cmr/m/n/10 ([]\OML/cmm/m/it/10 ; [][]\OT1/cmr/m/n/10 ) = []
  []
 
@@ -1514,22 +1514,26 @@ File: pic/diff.pdf Graphic file (type pdf)
 File: pic/CG_3.pdf Graphic file (type pdf)
 <use pic/CG_3.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1102--1102
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1109--1109
  [][] 
  []
 
 [40
 
 ]
-Overfull \hbox (21.36806pt too wide) detected at line 1102
+Overfull \hbox (21.36806pt too wide) detected at line 1109
 [][]\OT1/cmr/m/n/9 ([]\OML/cmm/m/it/9 ; [][]\OT1/cmr/m/n/9 ) = []
  []
 
 File: pic/CFG_1.pdf Graphic file (type pdf)
 <use pic/CFG_1.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1102--1102
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1109--1109
  [][] 
+ []
+
+
+Overfull \vbox (3.84726pt too high) detected at line 1109
  []
 
 [41
@@ -1538,17 +1542,19 @@ Overfull \hbox (13.54385pt too wide) in paragraph at lines 1102--1102
 File: pic/CFG_1.pdf Graphic file (type pdf)
 <use pic/CFG_1.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1102--1102
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1109--1109
  [][] 
  []
 
 [42
 
 ]
+File: pic/CG_3.pdf Graphic file (type pdf)
+<use pic/CG_3.pdf>
 File: pic/CFG_2.pdf Graphic file (type pdf)
 <use pic/CFG_2.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1102--1102
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1109--1109
  [][] 
  []
 
@@ -1558,7 +1564,7 @@ Overfull \hbox (13.54385pt too wide) in paragraph at lines 1102--1102
 File: pic/CFG_3.pdf Graphic file (type pdf)
 <use pic/CFG_3.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1102--1102
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1109--1109
  [][] 
  []
 
@@ -1568,22 +1574,24 @@ Overfull \hbox (13.54385pt too wide) in paragraph at lines 1102--1102
 File: pic/CFG_4.pdf Graphic file (type pdf)
 <use pic/CFG_4.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1102--1102
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1109--1109
  [][] 
  []
 
 [45
 
-] (./slide.toc) [46
+] [46
 
 ] (./slide.toc) [47
 
-] (./slide.bbl) [48
+] (./slide.toc) [48
 
-] [49
-
+] (./slide.bbl) [49
 
 ] [50
+
+
+] [51
 
 ]
 \tf@nav=\write6
@@ -1603,12 +1611,12 @@ Package rerunfilecheck Info: File `slide.out' has not changed.
 (rerunfilecheck)             Checksum: 12B91A196AB0B23809A0FE6E8CFC7FF9;771.
  ) 
 Here is how much of TeX's memory you used:
- 31419 strings out of 476684
- 666676 string characters out of 5804055
+ 31421 strings out of 476684
+ 666692 string characters out of 5804055
  1879018 words of memory out of 5000000
- 50912 multiletter control sequences out of 15000+600000
+ 50914 multiletter control sequences out of 15000+600000
  522444 words of font info for 150 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,28n,122p,435b,1106s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on slide.pdf (50 pages).
+Output written on slide.pdf (51 pages).
