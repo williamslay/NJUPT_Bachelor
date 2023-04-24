@@ -1045,11 +1045,60 @@
                }
             }
             \Return{\crashseeds}\;
-        \end{algorithm} 
+        \end{algorithm}
     }
-    \only<2>{
-        
-    } 
+    \only<2->{
+        \begin{itemize}  
+            \onslide<2-> \item \textbf{\structure {Function-level target distance\only<2>{\footnote{R(n,Tf ) is the set of all target functions that are reachable from n in CG}}}}:using call graph \textcolor{deepred}{(CG)}
+            \onslide<5-> \item \textbf{\textcolor{deepgreen}{BB-level target distance}}:using control-flow graphs \textcolor{deepred}{(CFG)} 
+        \end{itemize} 
+        \onslide<2-> 
+        \begin{minipage}[t]{0.7\linewidth}
+        \vspace{0pt} 
+        \only<2>{
+                $$ d_f(n,T_f)=\left\{ \begin{aligned}
+                         &\text{undefined} , &\text{if } R(n,T_f)=\varnothing \\
+                        [&\sum\limits_{t_f\in R(n,T_f)} d_f(n,t_f)^{-1}]^{-1} , &\text{otherwise} 
+                    \end{aligned}
+                    \right.$$
+        }
+        \only<5>{
+            \small
+            $$ d_b(m,T_b)=\left\{ \begin{aligned}
+                &0 ,&\text{if } m \in T_b \\
+                &c \cdot \min \limits_{n\in N(m)}(d_f(n,T_f)) , &\text{if } m \in T \\
+               [&\sum\limits_{t\in T} (d_b(m,t)+d_b(t,T_b))^{-1}]^{-1} , &\text{otherwise} 
+           \end{aligned}
+           \right.$$ 
+        }
+        \only<3-4>{
+            \begin{enumerate}
+               \item  Identify\textbf{ target functions} in CG
+                \only<4>{ \item  For each \textbf{\textcolor{deepblue}{function}}, compute the \textbf{\alert{harmonic mean}} of the \textbf{\textcolor{deepred}{length of the shortest path}} to targets}
+            \end{enumerate}
+        }
+        \only<6-9>{
+            \begin{enumerate}
+                \item  Identify\textbf{ target BBs} and assign distance 0 \only<6>{(none in function b)}
+                \only<7-9>{\item  Identify BBs that \textbf{\textcolor{deepblue}{call function}} and assign \textbf{\textcolor{deepred}{10*FLTD}}}
+                \only<8-9>{\item  For each BB, compute harmonic mean of (length of shortest path to any function-calling BB + 10*FLTD).} 
+            \end{enumerate}
+        }
+        \only<4>{\includegraphics[width=6.0cm]{pic/diff.pdf} }  
+        \end{minipage}
+      \onslide<2->
+      \begin{minipage}[t]{0.28\linewidth}
+            \vspace{0pt}
+            \centering 
+            \only<2>{\includegraphics[width=3.0cm]{pic/CG_1.pdf} }
+            \only<3>{\includegraphics[width=3.0cm]{pic/CG_2.pdf} }
+            \only<4>{\includegraphics[width=3.5cm]{pic/CG_3.pdf} }
+            \only<5-6>{\includegraphics[width=3.5cm]{pic/CFG_1.pdf}}
+            \only<7>{\includegraphics[width=3.5cm]{pic/CFG_2.pdf}}
+            \only<8>{\includegraphics[width=3.5cm]{pic/CFG_3.pdf}}  
+            \only<9>{\includegraphics[width=3.5cm]{pic/CFG_4.pdf}}   
+       \end{minipage} 
+    }
 \end{frame}
 
 
