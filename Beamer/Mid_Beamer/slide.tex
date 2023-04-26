@@ -18,9 +18,9 @@
 
 \author{雷尚远}
 \title{定向覆盖模糊测试工具的设计与实现}
-\subtitle{毕业设计中期检查}
+\subtitle{毕业设计检查}
 \institute{南京邮电大学计算机学院}
-\date{2023年4月17日}
+\date{2023年6月}
 
 
 % defs
@@ -30,6 +30,8 @@
 \definecolor{deepred}{rgb}{0.6,0,0}
 \definecolor{deepgreen}{rgb}{0,0.5,0}
 \definecolor{halfgray}{gray}{0.55}
+\definecolor{red_1}{rgb}{238, 34, 12}
+
 
 \lstset{
     basicstyle=\ttfamily\small,
@@ -956,8 +958,8 @@
                 \SetKwFunction{mutation}{\textsc{Mutation}}
                 \SetKwFunction{execution}{\textsc{Execution}}
                 \SetKwFunction{IsIntersting}{\textsc{IsIntersting}}
-                \SetKwFunction{evaluateseed}{\textsc{SeedEva}}
-                \SetKwFunction{sortinsert}{SortInser}
+                \SetKwFunction{evaluateseed}{\textsc{SeedDis}}
+                \SetKwFunction{sortinsert}{Enqueue}
                 % \SetKwData{crashseeds}{$\seeds_{\text{\emoji{boom}}}$}
                 \SetKwData{crashseeds}{$\seeds^\prime$} 
                 \SetKwData{seedqueue}{$\textit{SeedQueue}$}  
@@ -974,17 +976,17 @@
                 $\seedqueue \gets \seeds$\;
                 \Graph $\gets \graphextractor{\sourcecode}$\;
                 \BBdis $\gets \bbdistance{\targets,\Graph}$\;
-                \While {$!siganl$}{
-                  \seed$\gets \select{\seedqueue}$\; 
-                  \energy $\gets \assinenergy{\seed, \currtime, \BBdis}$\;
+                \While {$!siganl \land \currtime < \timeout$}{
+                  \seed$\gets \select{\seedqueue}$\;
+                  $\trace \gets \execution{\seed}$\; 
+                  $\distance \gets \evaluateseed{\trace, \BBdis} $\;
+                  \energy $\gets \assinenergy{\seed, \currtime, \distance}$\;
                    \For{$\textit{i}\gets 1$ \KwTo $\energy$}
                    {
-                    $\newseed \gets \mutation{\seed}$\;
-                    $\trace \gets \execution{\newseed}$\;
+                    $\newseed \gets \mutation{\seed}$\;      
                     \lIf{\newseed crashes}{$\crashseeds \gets \crashseeds \cup \newseed $}
-                    \If{\IsIntersting{\newseed}}{
-                        $\distance \gets \evaluateseed{\trace, \BBdis} $\;
-                        $ \seedqueue \gets \sortinsert{\distance,\newseed,\seedqueue} $\; 
+                    \lIf{\IsIntersting{\newseed}}{    
+                        $\sortinsert{\newseed,\seedqueue} $ 
                     }
                    }
                 }
@@ -1012,8 +1014,8 @@
             \SetKwFunction{mutation}{\textsc{Mutation}}
             \SetKwFunction{execution}{\textsc{Execution}}
             \SetKwFunction{IsIntersting}{\textsc{IsIntersting}}
-            \SetKwFunction{evaluateseed}{\textsc{SeedEva}}
-            \SetKwFunction{sortinsert}{SortInser}
+            \SetKwFunction{evaluateseed}{\textsc{SeedDis}}
+            \SetKwFunction{sortinsert}{Enqueue}
             % \SetKwData{crashseeds}{$\seeds_{\text{\emoji{boom}}}$}
             \SetKwData{crashseeds}{$\seeds^\prime$} 
             \SetKwData{seedqueue}{$\textit{SeedQueue}$}  
@@ -1030,22 +1032,22 @@
             $\seedqueue \gets \seeds$\;
             \HiLi\Graph $\gets \graphextractor{\sourcecode}$\;
             \HiLi\BBdis $\gets \bbdistance{\targets,\Graph}$\;
-            \While {$!siganl$}{
-              \seed$\gets \select{\seedqueue}$\; 
-              \energy $\gets \assinenergy{\seed, \currtime, \BBdis}$\;
+            \While {$!siganl \land \currtime < \timeout$}{
+              \seed$\gets \select{\seedqueue}$\;
+              $\trace \gets \execution{\seed}$\; 
+              $\distance \gets \evaluateseed{\trace, \BBdis} $\;
+              \energy $\gets \assinenergy{\seed, \currtime, \distance}$\;
                \For{$\textit{i}\gets 1$ \KwTo $\energy$}
                {
-                $\newseed \gets \mutation{\seed}$\;
-                $\trace \gets \execution{\newseed}$\;
+                $\newseed \gets \mutation{\seed}$\;      
                 \lIf{\newseed crashes}{$\crashseeds \gets \crashseeds \cup \newseed $}
-                \If{\IsIntersting{\newseed}}{
-                    $\distance \gets \evaluateseed{\trace, \BBdis} $\;
-                    $ \seedqueue \gets \sortinsert{\distance,\newseed,\seedqueue} $\; 
+                \lIf{\IsIntersting{\newseed}}{    
+                    $\sortinsert{\newseed,\seedqueue} $ 
                 }
                }
             }
             \Return{\crashseeds}\;
-        \end{algorithm}
+        \end{algorithm} 
     }
     \only<2->{
         \begin{itemize}  
@@ -1127,8 +1129,8 @@
             \SetKwFunction{mutation}{\textsc{Mutation}}
             \SetKwFunction{execution}{\textsc{Execution}}
             \SetKwFunction{IsIntersting}{\textsc{IsIntersting}}
-            \SetKwFunction{evaluateseed}{\textsc{SeedEva}}
-            \SetKwFunction{sortinsert}{SortInser}
+            \SetKwFunction{evaluateseed}{\textsc{SeedDis}}
+            \SetKwFunction{sortinsert}{Enqueue}
             % \SetKwData{crashseeds}{$\seeds_{\text{\emoji{boom}}}$}
             \SetKwData{crashseeds}{$\seeds^\prime$} 
             \SetKwData{seedqueue}{$\textit{SeedQueue}$}  
@@ -1145,17 +1147,153 @@
             $\seedqueue \gets \seeds$\;
             \Graph $\gets \graphextractor{\sourcecode}$\;
             \BBdis $\gets \bbdistance{\targets,\Graph}$\;
-            \While {$!siganl$}{
-              \seed$\gets \select{\seedqueue}$\; 
-              \energy $\gets \assinenergy{\seed, \currtime, \BBdis}$\;
+            \While {$!siganl \land \currtime < \timeout$}{
+              \seed$\gets \select{\seedqueue}$\;
+              $\trace \gets \execution{\seed}$\; 
+              \HiLi$\distance \gets \evaluateseed{\trace, \BBdis} $\;
+              \HiLi\energy $\gets \assinenergy{\seed, \currtime, \distance}$\;
                \For{$\textit{i}\gets 1$ \KwTo $\energy$}
                {
-                $\newseed \gets \mutation{\seed}$\;
-                $\trace \gets \execution{\newseed}$\;
+                $\newseed \gets \mutation{\seed}$\;      
                 \lIf{\newseed crashes}{$\crashseeds \gets \crashseeds \cup \newseed $}
-                \If{\IsIntersting{\newseed}}{
-                    $\distance \gets \evaluateseed{\trace, \BBdis} $\;
-                    $ \seedqueue \gets \sortinsert{\distance,\newseed,\seedqueue} $\; 
+                \lIf{\IsIntersting{\newseed}}{    
+                    $\sortinsert{\newseed,\seedqueue} $ 
+                }
+               }
+            }
+            \Return{\crashseeds}\;
+        \end{algorithm} 
+    }
+    \only<2-4>{
+        \begin{minipage}[t]{0.7\linewidth}
+        \vspace{0pt} 
+        \textbf{\structure {Seed distance\only<2>{\footnote{$\xi(s)$ is the execution trace of a seed s}}}} from instrumented binary
+        \only<2>{
+            $$ d(s,T_b)=\frac{\sum\limits_{m \in \xi (s)}d_b(m,T_b)}{| \xi(s)| }$$
+        }
+        \only<3-4>{
+            \begin{itemize}
+               \item  Two 64-bit shared memory entries
+                    \\• Aggregated BB-level distance values
+                    \\• Number of executed BBs
+            \end{itemize}
+        }
+        \end{minipage}
+      \onslide<2-4>
+      \begin{minipage}[t]{0.28\linewidth}
+            \vspace{0pt}
+            \centering 
+            \only<2>{\includegraphics[width=3.0cm]{pic/CFG_4.pdf} }
+            \only<3>{\includegraphics[width=3.5cm]{pic/CFG_5.pdf} }
+            \only<4>{\includegraphics[width=3.5cm]{pic/CFG_6.pdf} }
+       \end{minipage} 
+    }
+    \only<5>{
+        \textbf{\structure{Directed Fuzzing }as \textcolor{deepgreen}{Optimisation Problem}}
+        \begin{itemize}
+            \item \textbf{Directed} Greybox Fuzzing
+              \begin{itemize}
+                \item [--] Assign \textbf{\textcolor{deepred}{more energy}} to seeds that are \textbf{\textcolor{deepred}{closer}} to the given targets
+                \item [--] energy:The number of fuzz generated for a seed s is also called the energy of s.
+              \end{itemize}
+            \item \textbf{Simulated Annealing}
+            \begin{itemize}
+                \item [--]To avoid \textbf{\textcolor{deepred}{local minimum}} rather than \textbf{\textcolor{deepgreen}{global minimum}} distance
+                \item [--]\textbf{Sometimes} assign \textbf{\textcolor{deepred}{more energy}} to \textbf{\textcolor{deepblue}{further-away}} seeds
+            \end{itemize}  
+            \item \textbf{\textit{Exploration} vs \textit{Exploitation}} 
+            \begin{itemize}
+                \item [--]\textbf{Exploration} phase:\\
+                    Energy of \textbf{\textcolor{deepred}{closer}} seeds similar to energy of \textbf{\textcolor{deepblue}{further-away}} seeds
+                \item [--]\textbf{Exploitation} phase:\\
+                    - Energy of \textbf{\textcolor{deepred}{closer}} seeds is assigned  to be \textbf{\textcolor{deepred}{higher}} and higher\\
+                    - Energy of \textbf{\textcolor{deepblue}{further-away}} seeds is assigned to be \textbf{\textcolor{deepblue}{lower}} and lower
+            \end{itemize}  
+         \end{itemize}
+    }
+    \only<6>
+    {
+        \textbf{\structure{Directed Fuzzing }as \textcolor{deepgreen}{Optimisation Problem}}
+        \begin{itemize}
+            \item \textbf{Temperature} 
+            \\ $T \in [0,1]$ specifies “importance” of distance.
+            \begin{itemize}
+                \item [--]normalized seed distance
+                \\$$\widetilde{d}(s,T_b)=\frac{d(s,T_b)-\text{minD}}{\text{maxD}-\text{minD}} \in [0,1]$$
+                \item [--]At T=1, \textbf{exploration} (normal AFL)
+                \item [--]At T=0, \textbf{exploitation} (gradient descent)
+            \end{itemize}  
+            \item \textbf{Cooling schedule} :controls (global) temperature
+            \begin{itemize}
+                \item [--]Classically, exponential cooling.
+            \end{itemize} 
+         \end{itemize} 
+    }
+    \only<7-9>{
+        \textbf{ Integrating Simulated Annealing as power schedule}
+        \begin{minipage}[t]{0.45\linewidth}
+            \vspace{0pt} 
+            \begin{itemize}
+                \item  In the beginning (t = 0min), assign the \textbf{\textcolor{violet}{same energy}} to \textbf{\textcolor{violet}{all seeds}}
+                \onslide<8-9>{ \item  Later (t=10min), assign\textbf{\textcolor{brown}{ a bit more energy}} to seeds that are \textbf{\textcolor{brown}{closer}}}
+                \onslide<9>{ \item At exploitation (t=80min), assign \textbf{\textcolor{red}{maximal energy}} to seeds that are \textbf{\textcolor{red}{closest}}}
+             \end{itemize} 
+        \end{minipage}
+        \begin{minipage}[t]{0.5\linewidth}
+            \vspace{0pt}
+            \centering
+            \only<7>{\includegraphics[width=5.6cm]{pic/SA_1.pdf}}
+            \only<8>{\includegraphics[width=5.6cm]{pic/SA_2.pdf}}  
+            \only<9>{\includegraphics[width=5.6cm]{pic/SA_3.pdf}}  
+        \end{minipage} 
+    }
+    \only<10>{
+        \begin{algorithm}[H]
+            \footnotesize
+            \DontPrintSemicolon
+            \SetKwSty{algokeywordsty}
+            \SetFuncSty{algofuncsty}
+            \SetDataSty{algodatasty}
+            \SetArgSty{algoargsty}
+            \SetCommentSty{algocmtsty}
+            \SetKw{break}{break}
+            \SetKw{not}{not}
+            \SetKwFunction{graphextractor}{\textsc{GraphExt}}
+            \SetKwFunction{bbdistance}{\textsc{DisCalcu}}  
+            \SetKwFunction{select}{\textsc{Dequeue}}
+            \SetKwFunction{assinenergy}{\textsc{AssinEnergy}}
+            \SetKwFunction{mutation}{\textsc{Mutation}}
+            \SetKwFunction{execution}{\textsc{Execution}}
+            \SetKwFunction{IsIntersting}{\textsc{IsIntersting}}
+            \SetKwFunction{evaluateseed}{\textsc{SeedDis}}
+            \SetKwFunction{sortinsert}{Enqueue}
+            % \SetKwData{crashseeds}{$\seeds_{\text{\emoji{boom}}}$}
+            \SetKwData{crashseeds}{$\seeds^\prime$} 
+            \SetKwData{seedqueue}{$\textit{SeedQueue}$}  
+            \SetKwData{Graph}{$\textit{Graphs}$}  
+            \SetKwData{BBdis}{$\textit{BBdistance}$} 
+            \SetKwData{newseed}{$\seed^\prime$}   
+            \SetKwData{energy}{$\textit{e}$}
+            \SetKwData{trace}{$\textit{trace}$} 
+            \SetKwData{distance}{$\textit{distance}$}   
+            \KwIn{\seeds\tcp{a finite set of seeds}}
+            \KwIn{\targets\tcp{a finite set of targer sits}} 
+            \KwOut{\crashseeds \tcp{a finite set of buggy seeds}}
+            $\crashseeds\gets \varnothing$\; 
+            $\seedqueue \gets \seeds$\;
+            \Graph $\gets \graphextractor{\sourcecode}$\;
+            \BBdis $\gets \bbdistance{\targets,\Graph}$\;
+            \While {$!siganl \land \currtime < \timeout$}{
+              \seed$\gets \select{\seedqueue}$\;
+              $\trace \gets \execution{\seed}$\; 
+              $\distance \gets \evaluateseed{\trace, \BBdis} $\;
+              \energy $\gets \assinenergy{\seed, \currtime, \distance}$\;
+               \For{$\textit{i}\gets 1$ \KwTo $\energy$}
+               {
+                $\newseed \gets \mutation{\seed}$\;      
+                \HiLi\lIf{\newseed crashes}{$\crashseeds \gets \crashseeds \cup \newseed $}
+                \HiLi\lIf{\IsIntersting{\newseed}}{    
+                    $\sortinsert{\newseed,\seedqueue} $ 
                 }
                }
             }
@@ -1167,30 +1305,6 @@
 
 
 \section{Work}
-
-% \subsection{如何更好地做Beamer}
-
-% \begin{frame}{Why Beamer}
-%     \begin{itemize}
-%         \item \LaTeX 广泛用于学术界，期刊会议论文模板
-%     \end{itemize}
-%     \begin{table}[h]
-%         \centering
-%         \begin{tabular}{c|c}
-%             Microsoft\textsuperscript{\textregistered}  Word & \LaTeX \\
-%             \hline
-%             文字处理工具 & 专业排版软件 \\
-%             容易上手，简单直观 & 容易上手 \\
-%             所见即所得 & 所见即所想，所想即所得 \\
-%             高级功能不易掌握 & 进阶难，但一般用不到 \\
-%             处理长文档需要丰富经验 & 和短文档处理基本无异 \\
-%             花费大量时间调格式 & 无需担心格式，专心作者内容 \\
-%             公式排版差强人意 & 尤其擅长公式排版 \\
-%             二进制格式，兼容性差 & 文本文件，易读、稳定 \\
-%             付费商业许可 & 自由免费使用 \\
-%         \end{tabular}
-%     \end{table}
-% \end{frame}
 
 % \begin{frame}{排版举例}
 %     \begin{exampleblock}{无编号公式} % 加 * 
@@ -1362,28 +1476,6 @@
 %         \end{table}
 %         \normalsize 公式~(\ref{eq:vsphere})的编号与含义请参见表~\ref{tab:number}。
 %     \end{columns}
-% \end{frame}
-
-% \begin{frame}{作图}
-%     \begin{itemize}
-%         \item 矢量图 eps, ps, pdf
-%         \begin{itemize}
-%             \item METAPOST, pstricks, pgf $\ldots$
-%             \item Xfig, Dia, Visio, Inkscape $\ldots$
-%             \item Matlab / Excel 等保存为 pdf
-%         \end{itemize}
-%         \item 标量图 png, jpg, tiff $\ldots$
-%         \begin{itemize}
-%             \item 提高清晰度，避免发虚
-%             \item 应尽量避免使用
-%         \end{itemize}
-%     \end{itemize}
-%     \begin{figure}[htpb]
-%         \centering
-%         \includegraphics[width=0.2\linewidth]{pic/NJUPT_Logo.pdf
-%         }
-%         \caption{这个校徽就是矢量图，虽然看起来不像，但确实是矢量图格式}
-%     \end{figure}
 % \end{frame}
 
  \section{References}
