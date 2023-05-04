@@ -7,6 +7,7 @@ if (NOT CMAKE_BUILD_TYPE)
         STRING "Choose the type of build." FORCE)
 endif()
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -march=native")
 

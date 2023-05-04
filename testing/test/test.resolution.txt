@@ -1,0 +1,14 @@
+test.o
+-r=test.o,main,plx
+-r=test.o,menu,pl
+-r=test.o,test1,pl
+-r=test.o,test2,pl
+-r=test.o,test3,pl
+-r=test.o,test4,pl
+-r=test.o,exit,
+-r=test.o,system,
+-r=test.o,exchange,pl
+-r=test.o,printf,
+-r=test.o,fgets,
+-r=test.o,atoi,
+-r=test.o,stdin,
