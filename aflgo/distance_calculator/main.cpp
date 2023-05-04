@@ -73,7 +73,7 @@ void  cg_disinit(const graph_t &G, std::ifstream &cg_callsites_stream)
         bo::algorithm::split(splits, line, bo::is_any_of(","));
         assert(splits.size() == 3);
         if (not find_nodes(G, splits[0]).empty()) {
-            
+             
         }
     } 
 } 

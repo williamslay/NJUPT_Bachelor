@@ -11,6 +11,7 @@ void test1(void);  // 测试函数1：交换a，b的值
 void test2(void);  // 测试函数2：C语言预定义宏
 void test3(void);  // 测试函数3：C89与C99标准的区别
 void test4(void);  // 测试函数4：输出当前编译器数据类型范围
+void test5(void);
 
 // 菜单
 int menu(void);
@@ -31,6 +32,7 @@ int main(void)
      case 2 : test2();     break;  // 测试函数2：C语言预定义宏
      case 3 : test3();     break;  // 测试函数3：C89与C99标准的区别
      case 4 : test4();     break;  // 测试函数4：输出当前编译器数据类型范围
+     case 5 : test5();     break;
      case -1: exit(0);      break;  // 退出程序
      case -2: system("cls"); break;  // 清空屏幕
      default:break;
@@ -87,6 +89,7 @@ void test3(void)
  {
    printf("hello world!\n");
  }
+ test4();
 }
 
 /* 输出当前编译器数据类型范围 */
@@ -107,6 +110,22 @@ void test4(void)
 
  printf("long long的范围为: %lld —— %lld\n", LLONG_MIN, LLONG_MAX);
  printf("unsigned long long的范围为: %llu —— %llu\n\n", 0, ULLONG_MAX);
+}
+
+/* 编译区别函数 */
+void test5(void)
+{
+ int buf = 0;
+ system("cls");
+ fgets(buf,10,stdin);
+ if (buf>0)
+ {
+ printf("%d",buf);
+ test3(); 
+ }else{
+  printf("%d",buf*2);
+  test4(); 
+ } 
 }
 
 /*=============================================================================

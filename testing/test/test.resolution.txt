@@ -5,6 +5,7 @@ test.o
 -r=test.o,test2,pl
 -r=test.o,test3,pl
 -r=test.o,test4,pl
+-r=test.o,test5,pl
 -r=test.o,exit,
 -r=test.o,system,
 -r=test.o,exchange,pl
