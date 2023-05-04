@@ -29,6 +29,7 @@ struct Vertex {
 
 struct Edge {
     std::string label;
+    double dis;
 };
 typedef bo::property<bo::graph_name_t, std::string> graph_p;
 typedef bo::adjacency_list<bo::vecS, bo::vecS, bo::directedS, Vertex, Edge, graph_p> graph_t;
@@ -257,7 +258,7 @@ int main(int argc, char *argv[]) {
     dp.property("node_id", get(&Vertex::name,  graph));
     dp.property("label",   get(&Vertex::label, graph));
     dp.property("shape",   get(&Vertex::shape, graph));
-    dp.property("label",   get(&Edge::label,   graph));
+    dp.property("label",   get(&Edge::label,   graph)); 
     boost::ref_property_map<graph_t *, std::string> gname(get_property(graph, bo::graph_name));
     dp.property("label",    gname);
 

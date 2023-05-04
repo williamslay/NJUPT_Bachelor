@@ -1,5 +1,5 @@
 digraph "CFG for 'exchange' function" {
 	label="CFG for 'exchange' function";
 
-	Node0x55d7b3007e30 [shape=record,label="{test.c:47:}"];
+	Node0x5636435e9e30 [shape=record,label="{test.c:47:}"];
 }
