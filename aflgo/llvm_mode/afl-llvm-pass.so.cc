@@ -290,6 +290,7 @@ bool AFLCoverage::runOnModule(Module &M) {
     std::ofstream bbcalls(OutDirectory + "/BBcalls.txt", std::ofstream::out | std::ofstream::app);
     std::ofstream fnames(OutDirectory + "/Fnames.txt", std::ofstream::out | std::ofstream::app);
     std::ofstream ftargets(OutDirectory + "/Ftargets.txt", std::ofstream::out | std::ofstream::app);
+    std::ofstream fcalls(OutDirectory + "/BBcallcounts.txt", std::ofstream::out | std::ofstream::app);
 
     /* Create dot-files directory */
     std::string dotfiles(OutDirectory + "/dot-files");
@@ -356,6 +357,7 @@ bool AFLCoverage::runOnModule(Module &M) {
               if (auto *CalledF = c->getCalledFunction()) {
                 if (!isBlacklisted(CalledF))
                   bbcalls << bb_name << "," << CalledF->getName().str() << "\n";
+                  fcalls << F.getName().str()<< "," << CalledF->getName().str() << "\n";
               }
             }
         }

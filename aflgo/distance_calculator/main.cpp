@@ -63,16 +63,20 @@ std::vector<vertex_desc> find_nodes(const graph_t &G, const std::string &name){
     return ret;
 }
 
-// for testing
-vertex_desc _get_ver(const graph_t &G, const std::string &name){
-    bo::graph_traits<graph_t>::vertex_iterator vi, vi_end;
-    for (boost::tie(vi, vi_end) = vertices(G); vi != vi_end; ++vi) {
-        if(G[*vi].name.find(name) != std::string::npos) {
-            return *vi;
+// for callsit_test
+void  cg_disinit(const graph_t &G, std::ifstream &cg_callsites_stream)
+{
+   cout << "Loading callsits..\n";
+    for (std::string line; getline(cg_callsites_stream, line); ) {
+        bo::trim(line);
+        std::vector<std::string> splits;
+        bo::algorithm::split(splits, line, bo::is_any_of(","));
+        assert(splits.size() == 3);
+        if (not find_nodes(G, splits[0]).empty()) {
+            
         }
-    }
-    return -1;
-}
+    } 
+} 
 
 inline void init_distances_from(const graph_t &G, vertex_desc from, std::vector<int> &dists) {
     auto dist_pmap = bo::make_iterator_property_map(dists.begin(), get(bo::vertex_index, G));
@@ -271,23 +275,25 @@ int main(int argc, char *argv[]) {
 
     std::ifstream targets_stream = open_file(vm["targets"].as<std::string>());
     std::ifstream names = open_file(vm["names"].as<std::string>());
+    std::ifstream cg_callsites_stream = open_file(vm["cg_callsites"].as<std::string>());
     std::vector<vertex_desc> targets;
     unordered_map<std::string, double> cg_distance;
     unordered_map<std::string, double> bb_distance;
 
     if (is_cg) {
         targets = cg_calculation(graph, targets_stream);
+        // cg_disinit(graph,cg_callsites_stream);
     } else {
         if (not vm.count("cg_distance")) {
             cerr << "error: the required argument for option '--cg_distance' is missing\n";
             exit(1);
         }
-        if (not vm.count("cg_callsites")) {
-            cerr << "error: the required argument for option '--cg_callsites' is missing\n";
-            exit(1);
-        }
+        // if (not vm.count("cg_callsites")) {
+        //     cerr << "error: the required argument for option '--cg_callsites' is missing\n";
+        //     exit(1);
+        // }
         std::ifstream cg_distance_stream = open_file(vm["cg_distance"].as<std::string>());
-        std::ifstream cg_callsites_stream = open_file(vm["cg_callsites"].as<std::string>());
+        // std::ifstream cg_callsites_stream = open_file(vm["cg_callsites"].as<std::string>());
 
         std::vector<std::string> splits;
         bo::algorithm::split(splits, vm["dot"].as<std::string>(), bo::is_any_of("."));;

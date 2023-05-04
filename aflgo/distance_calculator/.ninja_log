@@ -1,3 +1,7 @@
 # ninja log v5
 0	11537	1683180223324479639	CMakeFiles/distance_calculator.dir/main.cpp.o	8253e154fb64582b
 11544	11848	1683180223644479647	distance_calculator	c9b6c2547542ebdf
+49	7685	1683201824799826980	CMakeFiles/distance_calculator.dir/main.cpp.o	8253e154fb64582b
+7685	8041	1683201825159826979	distance_calculator	c9b6c2547542ebdf
+12	12621	1683203806579837075	CMakeFiles/distance_calculator.dir/main.cpp.o	8253e154fb64582b
+12621	12924	1683203806899837164	distance_calculator	c9b6c2547542ebdf
