@@ -77,11 +77,11 @@ void cg_disinit(graph_t &G, std::ifstream &cg_callsites_stream)
         assert(splits.size() == 4); 
         std::string factor1 = splits[2]; 
         std::string factor2 = splits[3];
-        auto v1 = find_nodes(G, splits[0]);
-        auto v2 = find_nodes(G, splits[1]); 
+        vertex_desc v1 = find_nodes(G, splits[0]).front();
+        vertex_desc v2 = find_nodes(G, splits[1]).front(); 
         double cn = static_cast<double>(factor1[0] - '0');
         double cb = static_cast<double>(factor2[0] - '0');
-        auto e = edge(v1[0],v2[0],G).first;
+        auto e = edge(v1,v2,G).first;
         G[e].weight = ((2*cn+1)/(2*cn))*((2*cb+1)/(2*cb));
     } 
 } 
@@ -313,10 +313,6 @@ int main(int argc, char *argv[]) {
             cerr << "error: the required argument for option '--cg_distance' is missing\n";
             exit(1);
         }
-        // if (not vm.count("cg_callsites")) {
-        //     cerr << "error: the required argument for option '--cg_callsites' is missing\n";
-        //     exit(1);
-        // }
         std::ifstream cg_distance_stream = open_file(vm["cg_distance"].as<std::string>());
         // std::ifstream cg_callsites_stream = open_file(vm["cg_callsites"].as<std::string>());
 

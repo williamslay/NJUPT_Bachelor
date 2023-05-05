@@ -1,6 +1,6 @@
 test.c:102
 test.c:103
-test.c:105
-test.c:106
+test.c:74
+test.c:75
 
 

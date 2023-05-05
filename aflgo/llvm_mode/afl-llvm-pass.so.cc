@@ -356,8 +356,10 @@ bool AFLCoverage::runOnModule(Module &M) {
 
               if (auto *CalledF = c->getCalledFunction()) {
                 if (!isBlacklisted(CalledF))
+                {
                   bbcalls << bb_name << "," << CalledF->getName().str() << "\n";
                   fcalls << F.getName().str()<< ","<< bb_name<<"," << CalledF->getName().str() << "\n";
+                }
               }
             }
         }
