@@ -11,6 +11,8 @@
 #include <boost/graph/graphviz.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/graph/dijkstra_shortest_paths.hpp>
+
 
 #include <iostream>
 #include <string>
@@ -29,11 +31,12 @@ struct Vertex {
 
 struct Edge {
     std::string label;
-    double dis;
+    double weight;
 };
 typedef bo::property<bo::graph_name_t, std::string> graph_p;
-typedef bo::adjacency_list<bo::vecS, bo::vecS, bo::directedS, Vertex, Edge, graph_p> graph_t;
+typedef bo::adjacency_list<bo::vecS, bo::vecS,bo::directedS, Vertex, Edge,graph_p> graph_t;
 typedef bo::graph_traits<graph_t>::vertex_descriptor vertex_desc;
+typedef bo::graph_traits<graph_t>::edge_descriptor edge_desc;
 
 static bool is_cg;
 
@@ -64,17 +67,22 @@ std::vector<vertex_desc> find_nodes(const graph_t &G, const std::string &name){
 }
 
 // for callsit_test
-void  cg_disinit(const graph_t &G, std::ifstream &cg_callsites_stream)
+void cg_disinit(graph_t &G, std::ifstream &cg_callsites_stream)
 {
-   cout << "Loading callsits..\n";
+    cout << "Loading callsits..\n";
     for (std::string line; getline(cg_callsites_stream, line); ) {
         bo::trim(line);
         std::vector<std::string> splits;
         bo::algorithm::split(splits, line, bo::is_any_of(","));
-        assert(splits.size() == 3);
-        if (not find_nodes(G, splits[0]).empty()) {
-             
-        }
+        assert(splits.size() == 4); 
+        std::string factor1 = splits[2]; 
+        std::string factor2 = splits[3];
+        auto v1 = find_nodes(G, splits[0]);
+        auto v2 = find_nodes(G, splits[1]); 
+        double cn = static_cast<double>(factor1[0] - '0');
+        double cb = static_cast<double>(factor2[0] - '0');
+        auto e = edge(v1[0],v2[0],G).first;
+        G[e].weight = ((2*cn+1)/(2*cn))*((2*cb+1)/(2*cb));
     } 
 } 
 
@@ -83,6 +91,22 @@ inline void init_distances_from(const graph_t &G, vertex_desc from, std::vector<
     auto vis = bo::make_bfs_visitor(bo::record_distances(dist_pmap, bo::on_tree_edge()));
     bo::breadth_first_search(G, from, bo::visitor(vis));
 }
+
+// inline void cg_init_distances_from(const graph_t &G, vertex_desc from, std::vector<double> &dists) {
+//     unordered_map<edge_desc, double> weight_map;
+//     bo::associative_property_map<unordered_map<edge_desc, double> > weight_prop_map(weight_map);
+//     bo::graph_traits<graph_t>::edge_iterator ei, ei_end;
+//     for (tie(ei, ei_end) = edges(G); ei != ei_end; ++ei) 
+//     { 
+//         // Get the dis property value for the current edge
+//         double weight = G[*ei].dis;
+//         // Save the weight to the weight map
+//         bo::put(weight_prop_map, *ei, weight);
+//     }
+//     // auto vis = bo::make_bfs_visitor(bo::record_distances(dist_pmap, bo::on_tree_edge()));
+//     // auto weight_pmap = bo::get(bo::edge_weight, G);
+//     bo::dijkstra_shortest_paths(G, from, bo::distance_map(&dists[0]).weight_map(weight_prop_map));
+// }
 
 void distance(
     const graph_t &G,
@@ -99,13 +123,14 @@ void distance(
     double distance = -1;
     for (vertex_desc n : find_nodes(G, name)) {
         std::vector<int> distances(bo::num_vertices(G), 0);
-        init_distances_from(G, n, distances);
-
+        std::vector<double> cgdistances(bo::num_vertices(G), 0.0); 
+        //init_distances_from(G, n, distances);
+        //cg_init_distances_from(G, n, cgdistances);
         double d = 0.0;
         unsigned i = 0;
         if (is_cg) {
             for (vertex_desc t : targets) {
-                auto shortest = distances[t];           // shortest distance from n to t
+                auto shortest = cgdistances[t];           // shortest distance from n to t
                 if (shortest == 0 and n != t) continue; // not reachable
                 d += 1.0 / (1.0 + static_cast<double>(shortest));
                 ++i;
@@ -264,7 +289,7 @@ int main(int argc, char *argv[]) {
     dp.property("shape",   get(&Vertex::shape, graph));
     dp.property("label",   get(&Edge::label,   graph)); 
     boost::ref_property_map<graph_t *, std::string> gname(get_property(graph, bo::graph_name));
-    dp.property("label",    gname);
+    dp.property("label",    gname);   
 
     if (!read_graphviz(dot, graph, dp)) {
         cerr << "Error while parsing " << vm["dot"].as<std::string>() << std::endl;
@@ -282,7 +307,7 @@ int main(int argc, char *argv[]) {
 
     if (is_cg) {
         targets = cg_calculation(graph, targets_stream);
-        // cg_disinit(graph,cg_callsites_stream);
+        cg_disinit(graph,cg_callsites_stream);
     } else {
         if (not vm.count("cg_distance")) {
             cerr << "error: the required argument for option '--cg_distance' is missing\n";

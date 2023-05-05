@@ -1,0 +1,44 @@
+digraph "Call graph: /home/will/software_test/NJUPT_Work/NJUPT-Bachelor/testing/test/test.0.0.preopt.bc" {
+	label="Call graph: /home/will/software_test/NJUPT_Work/NJUPT-Bachelor/testing/test/test.0.0.preopt.bc";
+
+	Node0x563924f22680 [shape=record,label="{main}"];
+	Node0x563924f22680 -> Node0x563924f22730;
+	Node0x563924f22680 -> Node0x563924f227e0;
+	Node0x563924f22680 -> Node0x563924f228c0;
+	Node0x563924f22680 -> Node0x563924f229f0;
+	Node0x563924f22680 -> Node0x563924f9cd70;
+	Node0x563924f22680 -> Node0x563924f9cf40;
+	Node0x563924f22680 -> Node0x563924f9cfc0;
+	Node0x563924f22680 -> Node0x563924f9d040;
+	Node0x563924f22730 [shape=record,label="{menu}"];
+	Node0x563924f22730 -> Node0x563924f9d0c0;
+	Node0x563924f22730 -> Node0x563924f9d600;
+	Node0x563924f22730 -> Node0x563924f9d580;
+	Node0x563924f227e0 [shape=record,label="{test1}"];
+	Node0x563924f227e0 -> Node0x563924f9d040;
+	Node0x563924f227e0 -> Node0x563924f9d0c0;
+	Node0x563924f227e0 -> Node0x563924f9d680;
+	Node0x563924f228c0 [shape=record,label="{test2}"];
+	Node0x563924f228c0 -> Node0x563924f9d040;
+	Node0x563924f228c0 -> Node0x563924f9d0c0;
+	Node0x563924f229f0 [shape=record,label="{test3}"];
+	Node0x563924f229f0 -> Node0x563924f9d040;
+	Node0x563924f229f0 -> Node0x563924f9d0c0;
+	Node0x563924f229f0 -> Node0x563924f9cd70;
+	Node0x563924f9cd70 [shape=record,label="{test4}"];
+	Node0x563924f9cd70 -> Node0x563924f9d040;
+	Node0x563924f9cd70 -> Node0x563924f9d0c0;
+	Node0x563924f9cf40 [shape=record,label="{test5}"];
+	Node0x563924f9cf40 -> Node0x563924f9d040;
+	Node0x563924f9cf40 -> Node0x563924f9d580;
+	Node0x563924f9cf40 -> Node0x563924f9d0c0;
+	Node0x563924f9cf40 -> Node0x563924f229f0;
+	Node0x563924f9cf40 -> Node0x563924f9cd70;
+	Node0x563924f9cfc0 [shape=record,label="{exit}"];
+	Node0x563924f9d040 [shape=record,label="{system}"];
+	Node0x563924f9d580 [shape=record,label="{fgets}"];
+	Node0x563924f9d0c0 [shape=record,label="{printf}"];
+	Node0x563924f9d680 [shape=record,label="{exchange}"];
+	Node0x563924f9e050 [shape=record,label="{llvm.memset.p0i8.i64}"];
+	Node0x563924f9d600 [shape=record,label="{atoi}"];
+}
