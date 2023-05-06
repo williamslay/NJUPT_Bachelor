@@ -12,6 +12,8 @@ cut -d',' -f1,3 $TMP_DIR/BBcallcounts.txt | sort | uniq -c  |awk '{print $2","$1
 sort -u $TMP_DIR/BBcallcounts.txt | cut -d',' -f1,3 | >  $TMP_DIR/BBcallcounts3.txt
 sort $TMP_DIR/BBcallcounts3.txt | uniq -c | awk '{print $2","$1}' > $TMP_DIR/BBcallcounts4.txt && mv $TMP_DIR/BBcallcounts4.txt $TMP_DIR/BBcallcounts3.txt
 awk -F ',' 'FNR==NR{a[$1,$2]=$3;next}{print $0","a[$1,$2]}' $TMP_DIR/BBcallcounts3.txt $TMP_DIR/BBcallcounts2.txt  > $TMP_DIR/BBcallcounts.txt
+
+
 popd $TMP_DIR 
 ls | grep -P '^BBcallcounts(?!\.txt$)[\w-]+\.txt$' | xargs rm
 popd
