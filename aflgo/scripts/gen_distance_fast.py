@@ -49,7 +49,6 @@ def abort(args):
     sys.exit(1)
 
 # and remove unwangted func
-
 def remove_repeated_lines(in_path, out_path):
     pattern = re.compile(r'^(?!.*(?:asan\.|llvm\.|sancov\.|__ubsan_handle_|free|malloc|calloc|realloc)).*$')
     lines_seen = set()
@@ -58,9 +57,7 @@ def remove_repeated_lines(in_path, out_path):
             match = pattern.search(line)
             if  match and line not in lines_seen:
                 out.write(line)
-                lines_seen.add(line)
-            else:
-                continue        
+                lines_seen.add(line)        
 
 
 def merge_callgraphs(dots, outfilepath):
@@ -115,7 +112,7 @@ def construct_callgraph(args, binaries):
     next_step(args)
 
 
-def exec_distance_prog(dot, targets, out, names, cg_distance=None,
+def exec_distance_prog(dot, targets, out, names, fcalls, cg_distance=None,
                        cg_callsites=None, py_version=False):
     """
     Args:
@@ -133,7 +130,8 @@ def exec_distance_prog(dot, targets, out, names, cg_distance=None,
            "-d", dot,
            "-t", targets,
            "-o", out,
-           "-n", names]
+           "-n", names,
+           "-f", fcalls]
     if cg_distance is not None and cg_callsites is not None:
         cmd.extend(["-c", cg_distance,
                     "-s", cg_callsites])
@@ -167,6 +165,7 @@ def calculating_distances(args):
     fnames = args.temporary_directory / "Fnames.txt"
     bbtargets = args.temporary_directory / "BBtargets.txt"
     ftargets = args.temporary_directory / "Ftargets.txt"
+    fcalls = args.temporary_directory / "BBcallcounts.txt"
     callgraph = dot_files / CALLGRAPH_NAME
     callgraph_distance = args.temporary_directory / "callgraph.distance.txt"
 
@@ -179,6 +178,7 @@ def calculating_distances(args):
                     ftargets,
                     callgraph_distance,
                     fnames,
+                    fcalls,
                     py_version=args.python_only)
         except subprocess.CalledProcessError as err:
             with log_p.open("w") as f:
@@ -207,6 +207,7 @@ def calculating_distances(args):
                 bbtargets,
                 outpath,
                 bbnames,
+                fcalls,
                 callgraph_distance,
                 bbcalls,
                 py_version=args.python_only)

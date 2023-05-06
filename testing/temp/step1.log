@@ -1,2 +1,0 @@
-terminate called after throwing an instance of 'boost::wrapexcept<boost::bad_any_cast>'
-  what():  boost::bad_any_cast: failed conversion using boost::any_cast

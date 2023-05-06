@@ -19,4 +19,6 @@ popd
 for file in $TMP_DIR/dot-files/*.dot; do
     filename=$(basename "$file")
     dot -Tpng "$file" -o "$TMP_DIR/dot-files/${filename%.*}.png"
-done       
+done      
+
+$WORK/scripts/gen_distance_fast.py $SUBJECT $TMP_DIR test 
