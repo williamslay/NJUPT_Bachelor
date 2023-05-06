@@ -92,21 +92,21 @@ inline void init_distances_from(const graph_t &G, vertex_desc from, std::vector<
     bo::breadth_first_search(G, from, bo::visitor(vis));
 }
 
-// inline void cg_init_distances_from(const graph_t &G, vertex_desc from, std::vector<double> &dists) {
-//     unordered_map<edge_desc, double> weight_map;
-//     bo::associative_property_map<unordered_map<edge_desc, double> > weight_prop_map(weight_map);
-//     bo::graph_traits<graph_t>::edge_iterator ei, ei_end;
-//     for (tie(ei, ei_end) = edges(G); ei != ei_end; ++ei) 
-//     { 
-//         // Get the dis property value for the current edge
-//         double weight = G[*ei].dis;
-//         // Save the weight to the weight map
-//         bo::put(weight_prop_map, *ei, weight);
-//     }
-//     // auto vis = bo::make_bfs_visitor(bo::record_distances(dist_pmap, bo::on_tree_edge()));
-//     // auto weight_pmap = bo::get(bo::edge_weight, G);
-//     bo::dijkstra_shortest_paths(G, from, bo::distance_map(&dists[0]).weight_map(weight_prop_map));
-// }
+inline void cg_init_distances_from(const graph_t &G, vertex_desc from, std::vector<double> &dists) {
+    unordered_map<edge_desc, double> weight_map;
+    bo::associative_property_map<unordered_map<edge_desc, double> > weight_prop_map(weight_map);
+    bo::graph_traits<graph_t>::edge_iterator ei, ei_end;
+    for (tie(ei, ei_end) = edges(G); ei != ei_end; ++ei) 
+    { 
+        // Get the dis property value for the current edge
+        double weight = G[*ei].dis;
+        // Save the weight to the weight map
+        bo::put(weight_prop_map, *ei, weight);
+    }
+    // auto vis = bo::make_bfs_visitor(bo::record_distances(dist_pmap, bo::on_tree_edge()));
+    // auto weight_pmap = bo::get(bo::edge_weight, G);
+    bo::dijkstra_shortest_paths(G, from, bo::distance_map(&dists[0]).weight_map(weight_prop_map));
+}
 
 void distance(
     const graph_t &G,

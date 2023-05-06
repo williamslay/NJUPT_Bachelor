@@ -8,6 +8,7 @@ import argparse
 import multiprocessing as mp
 import sys
 import subprocess
+import re
 from argparse import ArgumentTypeError as ArgTypeErr
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -47,14 +48,19 @@ def abort(args):
     print(f"Check {log_p} for more information", file=sys.stderr)
     sys.exit(1)
 
+# and remove unwangted func
 
 def remove_repeated_lines(in_path, out_path):
+    pattern = re.compile(r'^(?!.*(?:asan\.|llvm\.|sancov\.|__ubsan_handle_|free|malloc|calloc|realloc)).*$')
     lines_seen = set()
     with out_path.open("w") as out, in_path.open("r") as in_f:
         for line in in_f.readlines():
-            if line not in lines_seen:
+            match = pattern.search(line)
+            if  match and line not in lines_seen:
                 out.write(line)
                 lines_seen.add(line)
+            else:
+                continue        
 
 
 def merge_callgraphs(dots, outfilepath):
