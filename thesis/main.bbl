@@ -1,4 +1,4 @@
-\begin{thebibliography}{2}
+\begin{thebibliography}{1}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -10,11 +10,6 @@
   \def\doi#1{\href{https://doi.org/#1}{\nolinkurl{#1}}}
   \let\eprint\href
 \fi
-
-\bibitem[荣洁(2005)]{荣洁2005俄罗斯民族性格和文化}
-荣洁.
-\newblock 俄罗斯民族性格和文化\allowbreak[J].
-\newblock 俄罗斯中亚东欧研究, 2005\allowbreak (1): 66-70.
 
 \bibitem[Lv et~al.(2020)Lv, Xu, Feng, Niu, Geng, and Sugiyama]{PRODEN}
 Lv~J, Xu~M, Feng~L, et~al.
