@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  6 MAY 2023 23:16
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  6 MAY 2023 23:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1025,7 +1025,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 ]
 Chapter 第一章.
-Package newfloat Info: Setting Plan B file extension to `lof'... on input line 50.
+Package newfloat Info: Setting Plan B file extension to `lof'... on input line 58.
 File: ./pic//1.jpg Graphic file (type bmp)
 <./pic//1.jpg>
 File: ./pic//2.jpg Graphic file (type bmp)
@@ -1072,6 +1072,6 @@ Here is how much of TeX's memory you used:
  42647 multiletter control sequences out of 15000+600000
  560283 words of font info for 137 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 101i,11n,105p,835b,501s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 101i,11n,105p,826b,501s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on main.pdf (13 pages).
