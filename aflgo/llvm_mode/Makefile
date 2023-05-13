@@ -63,6 +63,7 @@ endif
 
 all: test_deps $(PROGS) test_build all_done
 
+
 test_deps:
 ifndef AFL_TRACE_PC
 	@echo "[*] Checking for working 'llvm-config'..."

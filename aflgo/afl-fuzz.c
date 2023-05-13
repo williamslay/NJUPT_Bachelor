@@ -258,6 +258,7 @@ struct queue_entry {
   u32 tc_ref;                         /* Trace bytes ref count            */
 
   double distance;                    /* Distance to targets              */
+  int func_sim;                      /* Targets BB Similarity             */ 
 
   struct queue_entry *next,           /* Next element, if any             */
                      *next_100;       /* 100 elements ahead               */
@@ -289,6 +290,9 @@ static double max_distance = -1.0;     /* Maximal distance for any input   */
 static double min_distance = -1.0;     /* Minimal distance for any input   */
 static u32 t_x = 10;                  /* Time to exploitation (Default: 10 min) */
 
+static int func_sim = -1;           /* BB_level target similarity   */ 
+static int Maxfunc_sim = -1;           /* BB_level target similarity   */  
+static int Minfunc_sim = -1;           /* BB_level target similarity   */ 
 static u8* (*post_handler)(u8* buf, u32* len);
 
 /* Interesting values, as per config.h */
@@ -800,6 +804,7 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
   q->passed_det   = passed_det;
 
   q->distance = cur_distance;
+  q->func_sim = func_sim;
   if (cur_distance > 0) {
 
     if (max_distance <= 0) {
@@ -809,7 +814,19 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
     if (cur_distance > max_distance) max_distance = cur_distance;
     if (cur_distance < min_distance) min_distance = cur_distance;
 
-  }
+  } 
+
+ if (func_sim > 0) {
+
+    if (Maxfunc_sim <= 0) {
+      Maxfunc_sim = func_sim;
+      Minfunc_sim = func_sim;
+    }
+    if (func_sim > Maxfunc_sim) Maxfunc_sim = func_sim;
+    if (func_sim < Minfunc_sim) Minfunc_sim = func_sim;
+
+  }  
+
 
   if (q->depth > max_depth) max_depth = q->depth;
 
@@ -915,10 +932,17 @@ static inline u8 has_new_bits(u8* virgin_map) {
 
   /* Calculate distance of current input to targets */
   u64* total_distance = (u64*) (trace_bits + MAP_SIZE);
-  u64* total_count = (u64*) (trace_bits + MAP_SIZE + 8);
+  u64* total_count = (u64*) (trace_bits + MAP_SIZE + 8); 
+  u8* trace_ptr = (u8*) (trace_bits + MAP_SIZE + 16);  
 
   if (*total_count > 0)
-    cur_distance = (double) (*total_distance) / (double) (*total_count);
+  {
+     cur_distance = (double) (*total_distance) / (double) (*total_count);
+     for(int j=0;j<TRACE_SIZE;j++){
+      if((*(trace_ptr+j))>0)
+      func_sim+=1;
+    }
+  }
   else
     cur_distance = -1.0;
 
@@ -937,8 +961,8 @@ static inline u8 has_new_bits(u8* virgin_map) {
     cur_distance = (double) (*total_distance) / (double) (*total_count);
   else
     cur_distance = -1.0;
-
-#endif /* ^__x86_64__ */
+  
+ #endif /* ^__x86_64__ */
 
   u8   ret = 0;
 
@@ -1396,7 +1420,7 @@ EXP_ST void setup_shm(void) {
   memset(virgin_crash, 255, MAP_SIZE);
 
   /* Allocate 24 byte more for distance info */
-  shm_id = shmget(IPC_PRIVATE, MAP_SIZE + 16, IPC_CREAT | IPC_EXCL | 0600);
+  shm_id = shmget(IPC_PRIVATE, MAP_SIZE + 16 +TRACE_SIZE, IPC_CREAT | IPC_EXCL | 0600);
 
   if (shm_id < 0) PFATAL("shmget() failed");
 
@@ -2320,7 +2344,7 @@ static u8 run_target(char** argv, u32 timeout) {
      must prevent any earlier operations from venturing into that
      territory. */
 
-  memset(trace_bits, 0, MAP_SIZE + 16);
+  memset(trace_bits, 0, MAP_SIZE + 16 + TRACE_SIZE);
   MEM_BARRIER();
 
   /* If we're running in "dumb" mode, we can't rely on the fork server
@@ -2643,6 +2667,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
       has_new_bits(virgin_bits);
 
       q->distance = cur_distance;
+      q->func_sim=func_sim;
       if (cur_distance > 0) {
 
         if (max_distance <= 0) {
@@ -2653,6 +2678,16 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
         if (cur_distance < min_distance) min_distance = cur_distance;
 
       }
+
+      if (func_sim > 0) {
+
+    if (Maxfunc_sim <= 0) {
+      Maxfunc_sim = func_sim;
+      Minfunc_sim = func_sim;
+    }
+    if (func_sim > Maxfunc_sim) Maxfunc_sim = func_sim;
+    if (func_sim < Minfunc_sim) Minfunc_sim = func_sim;
+    }  
 
     }
 
@@ -4851,12 +4886,14 @@ static u32 calculate_score(struct queue_entry* q) {
   if (q->distance > 0) {
 
     double normalized_d = 0; // when "max_distance == min_distance", we set the normalized_d to 0 so that we can sufficiently explore those testcases whose distance >= 0.
+    double normalized_f = 0; 
     if (max_distance != min_distance)
       normalized_d = (q->distance - min_distance) / (max_distance - min_distance);
+   if (Maxfunc_sim != Minfunc_sim)
+      normalized_f = (q->func_sim -  Minfunc_sim) / (Maxfunc_sim - Minfunc_sim); 
 
     if (normalized_d >= 0) {
-
-        double p = (1.0 - normalized_d) * (1.0 - T) + 0.5 * T;
+        double p = normalized_f*(1.0 - normalized_d) * (1.0 - T) + 0.5 * T;
         power_factor = pow(2.0, 2.0 * (double) log2(MAX_FACTOR) * (p - 0.5));
 
     }// else WARNF ("Normalized distance negative: %f", normalized_d);

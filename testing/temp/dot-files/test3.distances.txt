@@ -1,4 +1,0 @@
-test.c:83,21
-test.c:88,21
-test.c:90,21
-test.c:92,20

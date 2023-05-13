@@ -112,8 +112,8 @@ def construct_callgraph(args, binaries):
     next_step(args)
 
 
-def exec_distance_prog(dot, targets, out, names, fcalls, cg_distance=None,
-                       cg_callsites=None, py_version=False):
+def exec_distance_prog(dot, targets, out, names, fcalls, trace_closure=None,
+                       cg_distance=None, cg_callsites=None, py_version=False):
     """
     Args:
         dot: Path to dot-file representing the graph.
@@ -132,6 +132,8 @@ def exec_distance_prog(dot, targets, out, names, fcalls, cg_distance=None,
            "-o", out,
            "-n", names,
            "-f", fcalls]
+    if trace_closure is not None:
+        cmd.extend(["-O", trace_closure])
     if cg_distance is not None and cg_callsites is not None:
         cmd.extend(["-c", cg_distance,
                     "-s", cg_callsites])
@@ -168,7 +170,7 @@ def calculating_distances(args):
     fcalls = args.temporary_directory / "BBcallcounts.txt"
     callgraph = dot_files / CALLGRAPH_NAME
     callgraph_distance = args.temporary_directory / "callgraph.distance.txt"
-
+    trace_closure = args.temporary_directory / "target.trace.txt"
     if STEP == 1:
         print(f"({STEP}) Computing distance for callgraph")
         log_p = args.temporary_directory / f"step{STEP}.log"
@@ -179,6 +181,7 @@ def calculating_distances(args):
                     callgraph_distance,
                     fnames,
                     fcalls,
+                    trace_closure,
                     py_version=args.python_only)
         except subprocess.CalledProcessError as err:
             with log_p.open("w") as f:
@@ -208,6 +211,7 @@ def calculating_distances(args):
                 outpath,
                 bbnames,
                 fcalls,
+                None,
                 callgraph_distance,
                 bbcalls,
                 py_version=args.python_only)

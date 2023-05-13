@@ -95,6 +95,8 @@
         "stack": "cpp",
         "__functional_03": "cpp",
         "*.ipp": "cpp",
-        "*.inc": "cpp"
-    }
+        "*.inc": "cpp",
+        "filesystem": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

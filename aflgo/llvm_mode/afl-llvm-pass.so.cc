@@ -114,11 +114,6 @@ namespace {
       AFLCoverage() : ModulePass(ID) { }
 
       bool runOnModule(Module &M) override;
-
-      // StringRef getPassName() const override {
-      //  return "American Fuzzy Lop Instrumentation";
-      // }
-
   };
 
 }
@@ -178,7 +173,8 @@ static bool isBlacklisted(const Function *F) {
   return false;
 }
 
-bool AFLCoverage::runOnModule(Module &M) {
+bool AFLCoverage::runOnModule(Module &M) 
+{
 
   bool is_aflgo = false;
   bool is_aflgo_preprocessing = false;
@@ -191,7 +187,7 @@ bool AFLCoverage::runOnModule(Module &M) {
   std::list<std::string> targets;
   std::map<std::string, int> bb_to_dis;
   std::vector<std::string> basic_blocks;
-
+  static std::map<Function *,bool> visited;
   if (!TargetsFile.empty()) {
 
     if (OutDirectory.empty()) {
@@ -233,6 +229,7 @@ bool AFLCoverage::runOnModule(Module &M) {
     }
 
   }
+ 
 
   /* Show a banner */
 
@@ -291,12 +288,12 @@ bool AFLCoverage::runOnModule(Module &M) {
     std::ofstream fnames(OutDirectory + "/Fnames.txt", std::ofstream::out | std::ofstream::app);
     std::ofstream ftargets(OutDirectory + "/Ftargets.txt", std::ofstream::out | std::ofstream::app);
     std::ofstream fcalls(OutDirectory + "/BBcallcounts.txt", std::ofstream::out | std::ofstream::app);
-
-    /* Create dot-files directory */
+    std::ofstream tracefile(OutDirectory + "/target.trace.txt", std::ofstream::out | std::ofstream::app);  
     std::string dotfiles(OutDirectory + "/dot-files");
+     
     if (sys::fs::create_directory(dotfiles)) {
       FATAL("Could not create directory %s.", dotfiles.c_str());
-    }
+    } 
 
     for (auto &F : M) {
 
@@ -421,9 +418,12 @@ bool AFLCoverage::runOnModule(Module &M) {
 #ifdef __x86_64__
     IntegerType *LargestType = Int64Ty;
     ConstantInt *MapCntLoc = ConstantInt::get(LargestType, MAP_SIZE + 8);
+    ConstantInt *TraceMapLoc = ConstantInt::get(LargestType, MAP_SIZE + 16); 
 #else
     IntegerType *LargestType = Int32Ty;
     ConstantInt *MapCntLoc = ConstantInt::get(LargestType, MAP_SIZE + 4);
+    ConstantInt *TargetLoc = ConstantInt::get(LargestType, MAP_SIZE + 8);
+    ConstantInt *TarCntLoc = ConstantInt::get(LargestType, MAP_SIZE + 12);
 #endif
     ConstantInt *MapDistLoc = ConstantInt::get(LargestType, MAP_SIZE);
     ConstantInt *One = ConstantInt::get(LargestType, 1);
@@ -439,17 +439,17 @@ bool AFLCoverage::runOnModule(Module &M) {
         M, Int32Ty, false, GlobalValue::ExternalLinkage, 0, "__afl_prev_loc",
         0, GlobalVariable::GeneralDynamicTLSModel, 0, false);
 
-    for (auto &F : M) {
+  
+    for (auto &F : M) {  
+      std::string funcName = F.getName().str();
+      bool is_func = false;
 
       int distance = -1;
-
       for (auto &BB : F) {
-
         distance = -1;
-
         if (is_aflgo) {
-
           std::string bb_name;
+          
           for (auto &I : BB) {
             std::string filename;
             unsigned line;
@@ -462,9 +462,8 @@ bool AFLCoverage::runOnModule(Module &M) {
               filename = filename.substr(found + 1);
 
             bb_name = filename + ":" + std::to_string(line);
-            break;
           }
-
+          
           if (!bb_name.empty()) {
 
             if (find(basic_blocks.begin(), basic_blocks.end(), bb_name) == basic_blocks.end()) {
@@ -525,10 +524,11 @@ bool AFLCoverage::runOnModule(Module &M) {
             IRB.CreateStore(ConstantInt::get(Int32Ty, cur_loc >> 1), AFLPrevLoc);
         Store->setMetadata(M.getMDKindID("nosanitize"), MDNode::get(C, None));
 
-        if (distance >= 0) {
+        if (distance >= 0) 
+        {
 
           ConstantInt *Distance =
-              ConstantInt::get(LargestType, (unsigned) distance);
+              ConstantInt::get(LargestType, (unsigned) distance);   
 
           /* Add distance to shm[MAPSIZE] */
 
@@ -551,12 +551,31 @@ bool AFLCoverage::runOnModule(Module &M) {
           Value *IncrCnt = IRB.CreateAdd(MapCnt, One);
           IRB.CreateStore(IncrCnt, MapCntPtr)
               ->setMetadata(M.getMDKindID("nosanitize"), MDNode::get(C, None));
+          
+            if(!is_func)
+        {
+           unsigned int func_id = AFL_R(TRACE_SIZE);
 
+           ConstantInt *FuncId = ConstantInt::get(LargestType, func_id); 
+
+           /* Increase count on Trace */ 
+          Value *TInserPtr = IRB.CreateAdd(TraceMapLoc,  FuncId);
+        
+          Value *TraceInsPtr = IRB.CreateBitCast(
+              IRB.CreateGEP(MapPtr, TInserPtr), LargestType->getPointerTo());
+           
+          LoadInst *TraceCnt = IRB.CreateLoad(TraceInsPtr);
+          TraceCnt->setMetadata(M.getMDKindID("nosanitize"), MDNode::get(C, None));
+          Value *TCnt = IRB.CreateAdd(TraceCnt,  ConstantInt::get(Int8Ty, 1));
+
+          IRB.CreateStore(TCnt, TraceInsPtr)
+              ->setMetadata(M.getMDKindID("nosanitize"), MDNode::get(C, None));  
+          is_func = true;
         }
 
+        }
         inst_blocks++;
-
-      }
+      } 
     }
   }
 

@@ -17,6 +17,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <queue>
 
 namespace po = boost::program_options;
 namespace bo = boost;
@@ -24,6 +25,7 @@ using std::cout;
 using std::cerr;
 using std::exception;
 using std::unordered_map;
+
 
 struct Vertex {
     std::string name, label, shape;
@@ -77,6 +79,9 @@ void cg_disinit(graph_t &G, std::ifstream &stream)
         assert(splits.size() == 4); 
         std::string factor1 = splits[2]; 
         std::string factor2 = splits[3];
+        if (find_nodes(G, splits[0]).empty()||find_nodes(G, splits[1]).empty()) {
+            break;
+        }
         vertex_desc v1 = find_nodes(G, splits[0]).front();
         vertex_desc v2 = find_nodes(G, splits[1]).front(); 
         double cn = static_cast<double>(factor1[0] - '0');
@@ -85,7 +90,49 @@ void cg_disinit(graph_t &G, std::ifstream &stream)
         G[e].weight = ((2*cn+1)/(2*cn))*((2*cb+1)/(2*cb));
     } 
 } 
+//for trace closure
+std::vector<vertex_desc> tg_closure(
+    graph_t &G,
+    std::vector<vertex_desc> &targets
+) {
+    std::vector<vertex_desc> reachable; 
+    std::queue<vertex_desc> worklist;
+    for (vertex_desc target:targets)
+    {
 
+        worklist.push(target);
+        reachable.push_back(target);  
+        while(!worklist.empty())
+        { 
+            vertex_desc temp = worklist.front();
+            worklist.pop(); 
+            bo::graph_traits<graph_t>::edge_iterator ei, ei_end;
+            for (boost::tie(ei, ei_end) = boost::edges(G); ei != ei_end; ++ei) {
+               vertex_desc s = boost::source(*ei, G);
+               vertex_desc t = boost::target(*ei, G);
+               if(t == temp)
+               {
+                 auto result = std::find(reachable.begin(), reachable.end(), s);
+                 if (result != reachable.end())
+                 {
+                    continue;
+                 }
+                 else
+                 {
+                    worklist.push(s);
+                    reachable.push_back(s); 
+                }
+               }
+            }
+        }
+    }
+    std::sort(reachable.begin(), reachable.end());
+    // Remove duplicates using std::unique()
+    auto it = std::unique(reachable.begin(), reachable.end());
+    // Erase the removed elements using std::erase()
+    reachable.erase(it, reachable.end());
+    return  reachable; 
+}
 // inline void init_distances_from(const graph_t &G, vertex_desc from, std::vector<int> &dists) {
 //     auto dist_pmap = bo::make_iterator_property_map(dists.begin(), get(bo::vertex_index, G));
 //     auto vis = bo::make_bfs_visitor(bo::record_distances(dist_pmap, bo::on_tree_edge()));
@@ -121,7 +168,6 @@ void distance(
     double distance = -1;
     for (vertex_desc n : find_nodes(G, name)) {
         std::vector<double> distances(bo::num_vertices(G), 0.0);
-        // std::vector<double> cgdistances(bo::num_vertices(G), 0.0); 
         init_distances_from(G, n, distances);
         double d = 0.0;
         unsigned i = 0;
@@ -252,11 +298,13 @@ int main(int argc, char *argv[]) {
                 ("targets,t", po::value<std::string>()->required(), "Path to file specifying Target"
                                                                     " nodes.")
                 ("out,o", po::value<std::string>()->required(), "Path to output file containing "
-                                                                "distance for each node.")
+                                                                "distance for each node.")                        
                 ("names,n", po::value<std::string>()->required(), "Path to file containing name for"
                                                                   " each node.")
                 ("fcallconuts,f", po::value<std::string>()->required(), "Path to file containing function callsits"
                                                                   " counts.")
+                ("closure,O", po::value<std::string>(), "Path to output file containing "
+                                                                "trace closure.")        
                 ("cg_distance,c", po::value<std::string>(), "Path to file containing call graph "
                                                             "distance.")
                 ("cg_callsites,s", po::value<std::string>(), "Path to file containing mapping "
@@ -305,7 +353,18 @@ int main(int argc, char *argv[]) {
     unordered_map<std::string, double> bb_distance;
 
     if (is_cg) {
+        if (not vm.count("closure")) {
+            cerr << "error: the required argument for option '--closure' is missing\n";
+            exit(1);
+        }
+        std::ofstream closure_stream(vm["closure"].as<std::string>());
+        std::vector<vertex_desc> traces; 
         targets = cg_calculation(graph, targets_stream);
+        traces = tg_closure(graph,targets);
+        for(vertex_desc trace : traces)
+        {
+            closure_stream << graph[trace].label<<"\n";  
+        }
         cg_disinit(graph,callcouts_stream);
     } else {
         if (not vm.count("cg_callsites")) {
