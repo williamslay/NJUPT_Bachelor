@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  7 MAY 2023 22:52
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  13 MAY 2023 21:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1012,41 +1012,47 @@ Package fontspec Info: Font family 'KaiTi(0)' created for font 'KaiTi' with
 
 ] (./main.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 8.
+(Font)              <12> on input line 9.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 8.
+(Font)              <8> on input line 9.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 8.
-)
+(Font)              <6> on input line 9.
+ [2
+
+])
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
- [2
-
-]
+ [3]
 Chapter 第一章.
 Package newfloat Info: Setting Plan B file extension to `lof'... on input line 67.
 [1
 
-]
+] [2]
 Chapter 第二章.
-[2
-
-]
-Chapter 第三章.
 [3
 
 ]
-Chapter 第四章.
+Chapter 第三章.
 [4
 
-] [5
-
-] (./main.bbl [6
-
-]) [7
+]
+Chapter 第四章.
+[5
 
 ]
+Chapter 第五章.
+[6
+
+]
+Chapter 第六章.
+[7
+
+] [8
+
+] (./main.bbl [9
+
+])
 
 Package caption Warning: Unused \captionsetup[algorithm] on input line 130.
 See the caption package documentation for explanation.
@@ -1059,19 +1065,14 @@ See the caption package documentation for explanation.
 Package caption Warning: Unused \captionsetup[table] on input line 197.
 See the caption package documentation for explanation.
 
-[8
+[10
 
 ] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 388F079FAE70DAC18CBF3314FA4C2A6E;4468.
+(rerunfilecheck)             Checksum: 0F71235299CBA65913D575DFDED22332;5807.
  ) 
 Here is how much of TeX's memory you used:
- 22624 strings out of 476684
- 458161 string characters out of 5804055
- 1861018 words of memory out of 5000000
- 42431 multiletter control sequences out of 15000+600000
- 560275 words of font info for 136 fonts, out of 8000000 for 9000
- 1348 hyphenation exceptions out of 8191
- 101i,11n,105p,728b,437s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-Output written on main.pdf (13 pages).
+ 22641 strings out of 476684
+ 458871 string characters out of 5804055
+ 1881018 words of memory out of 5000000
+ 42448 multiletter control sequences out of 1500

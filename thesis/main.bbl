@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{2}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -11,11 +11,17 @@
   \let\eprint\href
 \fi
 
-\bibitem[Lv et~al.(2020)Lv, Xu, Feng, Niu, Geng, and Sugiyama]{PRODEN}
-Lv~J, Xu~M, Feng~L, et~al.
-\newblock Progressive identification of true labels for partial-label
-  learning\allowbreak[C]//\allowbreak
-International Conference on Machine Learning.
-\newblock PMLR, 2020: 6500-6510.
+\bibitem[Miller et~al.(1990)Miller, Fredriksen, and So]{miller1990empirical}
+Miller~B~P, Fredriksen~L, So~B.
+\newblock An empirical study of the reliability of unix
+  utilities\allowbreak[J].
+\newblock Communications of the ACM, 1990, 33\allowbreak (12): 32-44.
+
+\bibitem[Man{\`e}s et~al.(2019)Man{\`e}s, Han, Han, Cha, Egele, Schwartz, and
+  Woo]{manes2019art}
+Man{\`e}s~V~J, Han~H, Han~C, et~al.
+\newblock The art, science, and engineering of fuzzing: A survey\allowbreak[J].
+\newblock IEEE Transactions on Software Engineering, 2019, 47\allowbreak (11):
+  2312-2331.
 
 \end{thebibliography}
