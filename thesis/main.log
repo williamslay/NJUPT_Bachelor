@@ -1075,4 +1075,9 @@ Here is how much of TeX's memory you used:
  22641 strings out of 476684
  458871 string characters out of 5804055
  1881018 words of memory out of 5000000
- 42448 multiletter control sequences out of 1500
+ 42448 multiletter control sequences out of 15000+600000
+ 560275 words of font info for 136 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 101i,11n,105p,728b,437s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on main.pdf (16 pages).
