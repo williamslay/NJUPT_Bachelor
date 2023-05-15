@@ -1,4 +1,4 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -142,5 +142,36 @@ Libxml2 is the xml c parser and toolkit developed for the gnome
   project\allowbreak[EB/OL].
 \newblock \allowbreak[2023-05-13].
 \newblock \url{https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home}.
+
+\bibitem[Householder et~al.(2012)Householder and
+  Foote]{householder2012probability}
+Householder~A~D, Foote~J~M.
+\newblock Probability-based parameter selection for black-box fuzz
+  testing\allowbreak[R].
+\newblock CARNEGIE-MELLON UNIV PITTSBURGH PA SOFTWARE ENGINEERING INST, 2012.
+
+\bibitem[Rebert et~al.(2014)Rebert, Cha, Avgerinos, Foote, Warren, Grieco, and
+  Brumley]{rebert2014optimizing}
+Rebert~A, Cha~S~K, Avgerinos~T, et~al.
+\newblock Optimizing seed selection for fuzzing\allowbreak[C]//\allowbreak
+23rd $\{$USENIX$\}$ Security Symposium ($\{$USENIX$\}$ Security 14).
+\newblock 2014: 861-875.
+
+\bibitem[B{\"o}hme et~al.(2020)B{\"o}hme, Cadar, and
+  Roychoudhury]{bohme2020fuzzing}
+B{\"o}hme~M, Cadar~C, Roychoudhury~A.
+\newblock Fuzzing: Challenges and reflections\allowbreak[J].
+\newblock IEEE Software, 2020, 38\allowbreak (3): 79-86.
+
+\bibitem[Tsankov et~al.(2012)Tsankov, Dashti, and Basin]{tsankov2012secfuzz}
+Tsankov~P, Dashti~M~T, Basin~D.
+\newblock Secfuzz: Fuzz-testing security protocols\allowbreak[C]//\allowbreak
+2012 7th International Workshop on Automation of Software Test (AST).
+\newblock IEEE, 2012: 1-7.
+
+\bibitem[Myers et~al.(2011)Myers, Sandler, and Badgett]{myers2011art}
+Myers~G~J, Sandler~C, Badgett~T.
+\newblock The art of software testing\allowbreak[M].
+\newblock John Wiley \& Sons, 2011.
 
 \end{thebibliography}

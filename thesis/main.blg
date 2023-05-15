@@ -20,45 +20,45 @@ Warning--empty year in Libxml2
 Warning--empty author in Heartbleed
 Warning--empty author in Pass
 Warning--empty author in Libxml2
-You've used 19 entries,
+You've used 24 entries,
             5225 wiz_defined-function locations,
-            1131 strings with 11259 characters,
-and the built_in function-call counts, 144660 in all, are:
-= -- 3088
-> -- 16621
-< -- 20736
-+ -- 5835
-- -- 1113
-* -- 979
-:= -- 20079
-add.period$ -- 58
-call.type$ -- 19
-change.case$ -- 38
-chr.to.int$ -- 5102
-cite$ -- 31
-duplicate$ -- 517
-empty$ -- 1434
-format.name$ -- 587
-if$ -- 37699
+            1157 strings with 12160 characters,
+and the built_in function-call counts, 189788 in all, are:
+= -- 3939
+> -- 21943
+< -- 27387
++ -- 7676
+- -- 1462
+* -- 1202
+:= -- 26290
+add.period$ -- 73
+call.type$ -- 24
+change.case$ -- 48
+chr.to.int$ -- 6733
+cite$ -- 36
+duplicate$ -- 644
+empty$ -- 1777
+format.name$ -- 750
+if$ -- 49464
 int.to.chr$ -- 1
-int.to.str$ -- 20
+int.to.str$ -- 25
 missing$ -- 0
-newline$ -- 121
-num.names$ -- 48
-pop$ -- 7336
+newline$ -- 148
+num.names$ -- 63
+pop$ -- 9805
 preamble$ -- 1
-purify$ -- 19
+purify$ -- 24
 quote$ -- 0
-skip$ -- 15144
+skip$ -- 19831
 stack$ -- 0
-substring$ -- 6647
-swap$ -- 22
-text.length$ -- 428
+substring$ -- 8693
+swap$ -- 27
+text.length$ -- 545
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 209
+type$ -- 260
 warning$ -- 9
-while$ -- 450
+while$ -- 573
 width$ -- 0
-write$ -- 269
+write$ -- 335
 (There were 9 warnings)
