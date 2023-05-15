@@ -1,4 +1,4 @@
-\begin{thebibliography}{12}
+\begin{thebibliography}{19}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -93,5 +93,54 @@ Marinescu~P~D, Cadar~C.
 Proceedings of the 2013 9th Joint Meeting on Foundations of Software
   Engineering.
 \newblock 2013: 235-245.
+
+\bibitem[Chen et~al.(2018)Chen, Xue, Li, Chen, Xie, Wu, and
+  Liu]{chen2018hawkeye}
+Chen~H, Xue~Y, Li~Y, et~al.
+\newblock Hawkeye: Towards a desired directed grey-box
+  fuzzer\allowbreak[C]//\allowbreak
+Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications
+  Security.
+\newblock 2018: 2095-2108.
+
+\bibitem[Wang et~al.(2020)Wang, Xie, Li, Wen, Li, Liu, Qin, Chen, and
+  Sui]{wang2020typestate}
+Wang~H, Xie~X, Li~Y, et~al.
+\newblock Typestate-guided fuzzer for discovering use-after-free
+  vulnerabilities\allowbreak[C]//\allowbreak
+Proceedings of the ACM/IEEE 42nd International Conference on Software
+  Engineering.
+\newblock 2020: 999-1010.
+
+\bibitem[Lee et~al.(2021)Lee, Shim, and Lee]{lee2021constraint}
+Lee~G, Shim~W, Lee~B.
+\newblock Constraint-guided directed greybox
+  fuzzing.\allowbreak[C]//\allowbreak
+USENIX Security Symposium.
+\newblock 2021: 3559-3576.
+
+\bibitem[Huang et~al.(2022)Huang, Guo, Shi, Yao, Wu, and
+  Zhang]{huang2022beacon}
+Huang~H, Guo~Y, Shi~Q, et~al.
+\newblock Beacon: Directed grey-box fuzzing with provable path
+  pruning\allowbreak[C]//\allowbreak
+2022 IEEE Symposium on Security and Privacy (SP).
+\newblock IEEE, 2022: 36-50.
+
+\bibitem[Zhu et~al.(2022)Zhu, Wen, Camtepe, and Xiang]{zhu2022fuzzing}
+Zhu~X, Wen~S, Camtepe~S, et~al.
+\newblock Fuzzing: a survey for roadmap\allowbreak[J].
+\newblock ACM Computing Surveys (CSUR), 2022, 54\allowbreak (11s): 1-36.
+
+\bibitem[Pas({[2023]})]{Pass}
+Writing an llvm pass\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://llvm.org/docs/WritingAnLLVMPass.html/}.
+
+\bibitem[Lib({[2023]})]{Libxml2}
+Libxml2 is the xml c parser and toolkit developed for the gnome
+  project\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home}.
 
 \end{thebibliography}

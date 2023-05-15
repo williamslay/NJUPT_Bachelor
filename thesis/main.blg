@@ -13,46 +13,52 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: reference.bib
 Warning--empty year in Heartbleed
 Warning--empty year in Heartbleed
+Warning--empty year in Pass
+Warning--empty year in Pass
+Warning--empty year in Libxml2
+Warning--empty year in Libxml2
 Warning--empty author in Heartbleed
-You've used 12 entries,
+Warning--empty author in Pass
+Warning--empty author in Libxml2
+You've used 19 entries,
             5225 wiz_defined-function locations,
-            1092 strings with 9923 characters,
-and the built_in function-call counts, 93922 in all, are:
-= -- 2053
-> -- 10779
-< -- 13423
-+ -- 3775
-- -- 741
-* -- 630
-:= -- 13053
-add.period$ -- 37
-call.type$ -- 12
-change.case$ -- 24
-chr.to.int$ -- 3313
-cite$ -- 16
-duplicate$ -- 334
-empty$ -- 925
-format.name$ -- 387
-if$ -- 24454
+            1131 strings with 11259 characters,
+and the built_in function-call counts, 144660 in all, are:
+= -- 3088
+> -- 16621
+< -- 20736
++ -- 5835
+- -- 1113
+* -- 979
+:= -- 20079
+add.period$ -- 58
+call.type$ -- 19
+change.case$ -- 38
+chr.to.int$ -- 5102
+cite$ -- 31
+duplicate$ -- 517
+empty$ -- 1434
+format.name$ -- 587
+if$ -- 37699
 int.to.chr$ -- 1
-int.to.str$ -- 13
+int.to.str$ -- 20
 missing$ -- 0
-newline$ -- 82
-num.names$ -- 33
-pop$ -- 4746
+newline$ -- 121
+num.names$ -- 48
+pop$ -- 7336
 preamble$ -- 1
-purify$ -- 12
+purify$ -- 19
 quote$ -- 0
-skip$ -- 9830
+skip$ -- 15144
 stack$ -- 0
-substring$ -- 4349
-swap$ -- 13
-text.length$ -- 277
+substring$ -- 6647
+swap$ -- 22
+text.length$ -- 428
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 132
-warning$ -- 3
-while$ -- 295
+type$ -- 209
+warning$ -- 9
+while$ -- 450
 width$ -- 0
-write$ -- 179
-(There were 3 warnings)
+write$ -- 269
+(There were 9 warnings)

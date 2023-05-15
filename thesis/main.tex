@@ -123,19 +123,131 @@ analyzing the limitations and deficiencies in the design and implementation proc
 \cite{ganesh2009taint,ma2011directed,person2011directed,do2013dynamic,ge2011dyta,li2013software}。
 然而, 由于定向符号执行技术(DSE) 依赖于大量的程序分析和约束求解, 其受限于兼容性和可扩展性的限制。
 
-在2017 年, Böhme等人引入了定向灰盒模糊测试(DGF)的概念\cite{bohmeDGF2017}。这是定向模糊测试的又一重要工作。
+在2017 年, Böhme等人提出的AFLGo\cite{bohmeDGF2017}引入了定向灰盒模糊测试(DGF)的概念。这是定向模糊测试的又一重要工作。
 其开创式地将将位置的可达性问题转化为生成种子和其目标集之间距离的最小值问题。通过给更靠近目标集的种子更多的变异机会, 它可
 以逐渐引导灰盒测试接近程序目标位置。与定向符号执行技术相比, DGF有更好的可拓展性，并且在测试效率上有几个数量级的提升。
 例如, Böhme 等人可以在20 分钟内重现 Heartbleed\cite{Heartbleed}(CVE-2014-0160)漏洞, 而定向符合执行工具
-KATCH\cite{marinescu2013katch} 需要24 小时以上\cite{bohmeDGF2017}。
+KATCH\cite{marinescu2013katch} 需要24小时以上\cite{bohmeDGF2017}。
 
-此后，许多针对于
+此后，许多基于AFLGo的定向性改进工作被相继提出。在2018年，Hongxu Chen等人提出的Hawkeye\cite{chen2018hawkeye}
+指出了AFLGo的距离计算方式导致的能量分配偏向导致的在测试的路径选择上偏向于距离目标更近的路径（或最短路径），而这有
+可能漏掉一些存在于较长路径上潜在的漏洞，于是其使用了新的距离度量来辅助达到更精确的距离导引；在2020年Wang等人
+提出的UAFL\cite{wang2020typestate}开创了针对于特定漏洞行为的定向性导引，其利用目标行
+为次序而不是目标位置来查找释放后使用的漏洞，这种漏洞的内存操作一定要按照一定次序执行(例如, 分配,
+使用, 然后释放内存) 才能触发；在2021年Gwangmu Lee等人提出的CDGF\cite{lee2021constraint}则
+指出AFLGo在路径选择中的不考虑执行路径导致的目标位置的顺序影响从而忽略满足特定行为引起崩溃条件的种子的缺陷，
+他们的解决思路不再是利用AFLGo的种子分配能量的方式来指引种子变异从而检测指定目标位置，而改为将其视作约束求解问题，
+通过设置一系列的约束来优先考虑选择符合要求的种子从而达到检测指定目标位置的目标；而在2022年由Heqing Huang等人
+提出的BEACON\cite{huang2022beacon}则从另一种方式进一步尝试提高定向模糊测试的速率：通过“剪枝”，
+即修建无效路径的方式。其结合轻量级的静态程序分析，来计算到达目标位置的抽象前提条件，
+并在运行时剪除那些不满足条件的路径，从而可以有效地提高效率，避免在无效或不可达的路径上浪费时间和资源。
 
 \section{研究内容}
+首先，针对于模糊测试技术，本文做了一个简单的梳理，对于目前模糊测试的基本主流技术框架做了分析和总结。自1988年这一技术
+的提出以来，相关技术研究百花齐放，技术快速迭代发展，直到近些年才有相关的总结研究和谱系分析\cite{manes2019art,zhu2022fuzzing}，
+建立系统性的分析。本文在参考相关文献的基础上对模糊测试的技术框架做了一个梳理。
+
+其次，针对于定向灰盒模糊测试的开篇之作AFLGo，本文对其的技术架构做了一个详细的总结梳理。对于AFLGo的一些实现细节做了详细的
+分析和总结。除此之外，本文还探讨了AFLGo在实际应用中的优缺点以及相比于其他模糊测试工具所具备的特点。
+针对AFLGo的优点，我们详细阐述了其灵活性、高效性和可扩展性，同时也分析了其在某些情况下可能会出现的一些问题。
+此外，本文还介绍了AFLGo在不同场景下的应用，帮助读者更好地理解如何使用AFLGo进行测试。
+
+最后，参考以AFLGo,Hawkeye为主的定向性模糊测试工具，针对于AFLGo的架构进行了改进和集成。本文主要从距离定义和目标函数集合覆盖
+率两个指标针对于定向策略做了设计和修改，并结合定向模糊测试工具AFLGo和LLVM的Pass\cite{Pass}技术做的静态分析的实现，
+实现了指标在AFLGo的集成。最终，本文在实现后通过实验成功复现libxm2\cite{Libxml2}的CVE-2017-\{9047,9048\}，证实了
+集成的可行性和可靠性。
+
 \section{论文结构}
+本文共分六章，各个章节的内容如下：
+
+第一章：主要介绍本文的研究背景、国内外研究现状、研究内容以及本文的论文结构。
+
+第二章：主要介绍本文涉及技术的概况，包括模糊测试技术和定向模糊测试技术，介绍利用这些技术的典型架构，最后阐述本文的研究动机。
+
+第三章：介绍AFLGo的主要架构和适应度指标，以及针对于其不足设计出的定向模糊测试适应度指标。详细阐述相应指标的核心设计,
+包括插桩，目标函数集覆盖率的计算。
+
+第四章：结合目标场景对实现的定向模糊测试工具做了需求分析，详细介绍了基于LLVM的Pass技术实现的插桩以及静态分析过程
+。对于结构集成以及实现方式的缘由做了详细分析。
+
+第五章：对于实现集成的工具进行了实验测试，并做了相应的测试评估，包括工具测试的可行性和性能评估。
+
+第六章：总结了本文的工作并对于未来定向模糊测试技术的发展及研究方向做了展望。
 
 \chapter{相关技术研究}
 \section{模糊测试技术}
+模糊测试（Fuzz Testing）是一种软件测试技术，其主要思想是通过向输入参数、文件、网络请求等随机或半随机注入无效、
+异常、边界数据，来检测目标系统在处理异常情况时的鲁棒性。模糊测试可以帮助发现那些未经预料的漏洞和错误，
+这些问题可能会导致应用程序崩溃、停止响应或者执行意外的操作。
+
+在进行模糊测试时，测试人员通常需要编写一个模糊测试工具，该工具可以生成大量的随机测试用例，并将这些测试用例输入
+到应用程序中进行测试。模糊测试通常被认为是一种高效的测试技术，因为它可以在较短的时间内检测应用程序中的许多潜在问题。
+此外，由于测试用例是随机生成的，模糊测试可以找出一些没有被其他测试方法发现的漏洞和错误。
+
+模糊测试的过程通常分为以下几个步骤：
+
+\begin{enumerate}[label=(\arabic*)]
+	\item 选择目标：选择需要测试的软件目标，如应用程序、库、操作系统等。
+	\item 寻找输入：确定需要对目标注入的输入类型和数据源，如输入参数、文件、网络请求等。
+	\item 创建模糊数据：使用随机或半随机的方式生成模糊数据，并将其注入到目标中。
+	\item 监控程序行为：监控被测试程序的运行行为，如崩溃、错误输出等。
+	\item 分析结果：对测试结果进行分析和报告，识别潜在的漏洞和安全问题，并反馈给开发人员进行修复。
+\end{enumerate}
+
+模糊测试是一种简单有效的测试方法，可以在较短时间内发现大量的异常情况，并帮助开发人员提高软件质量和安全性。
+
+\subsection{基本概念定义}
+为了准确地讨论学界关注的模糊测试方向的问题以及梳理架构，我选择了采用Man{\`e}s等人于论文\cite{manes2019art}中
+提出的基本概念的定义。
+
+\begin{itemize}
+	\item \textbf{Fuzzing}:模糊测试技术是指使用从超出被测试程序（PUT）的预期输入空间的输入空间（“模糊输入空间”）采样的输入来执行被测试程序。
+	 \\ 事实上
+	\item \textbf{Fuzz Testing}：模糊测试是指使用模糊测试技术（Fuzzing）来测试被测试程序是否违反正确性策略。
+	\item \textbf{Fuzzer}：模糊测试工具是对被测试程序执行模糊测试的程序。
+	\item \textbf{Bug Oracle}：错误检测器是一个程序，可能是模糊测试工具的一部分，它确定被测试程序的给定执行是否违反了特定的正确性策略。
+	\item \textbf{Fuzz Configuration}：模糊算法的配置是指所有能控制模糊算法执行的参数配置。
+	\item \textbf{Seed}：种子是被测试程序的（通常结构良好的）输入，一般用于通过修改它来生成测试用例。
+\end{itemize}
+
+\subsection{基本架构}
+
+\begin{algorithm}[H]
+	\SetKwSty{algokeywordsty}
+	\SetFuncSty{algofuncsty}
+	\SetDataSty{algodatasty}
+	\SetArgSty{algoargsty}
+	\SetCommentSty{algocmtsty}
+	\SetKw{break}{break}
+	\SetKw{not}{not}
+	\SetKwFunction{preprocess}{\textsc{Preprocess}}
+	\SetKwFunction{schedule}{\textsc{Schedule}}
+	\SetKwFunction{inputGen}{\textsc{InputGen}}
+	\SetKwFunction{inputEval}{\textsc{InputEval}}
+	\SetKwFunction{confUpdate}{\textsc{ConfUpdate}}
+	\SetKwFunction{continue}{\textsc{Continue}}
+	\SetKwFunction{isBug}{isBug}
+	\SetKwFunction{getProgram}{getProgram}
+	\SetKwData{newbugs}{$\bugs^\prime$}
+	\KwIn{\confs, \timeout}
+	\KwOut{\bugs \tcp{a finite set of bugs}}
+	$\bugs \gets \varnothing$\;
+	$\confs \gets \preprocess{$\confs$}$\;
+	\While {$\currtime < \timeout \land \continue{\confs}$}{
+	  \conf $\gets \schedule{\confs, \currtime, \timeout}$\;
+	  \testcases $\gets \inputGen{\conf}$\;
+	  \tcp{\bugoracle is embedded in a fuzzer}
+	  \newbugs, \execinfos $\gets$ \inputEval{\conf, \testcases, \bugoracle}\;
+	  $\confs \gets \confUpdate{\confs, \conf, \execinfos}$\;
+	  $\bugs \gets \bugs \cup \newbugs$\;
+	}
+	\Return{\bugs}\;
+	\caption[short]{模糊测试算法}\label{alg:fuzzing} 
+\end{algorithm} 
+
+算法\ref{alg:fuzzing}是
+
+
 \subsection{黑盒模糊测试技术}
 \subsection{白盒模糊测试技术}
 \subsection{灰盒模糊测试技术}
@@ -146,6 +258,57 @@ KATCH\cite{marinescu2013katch} 需要24 小时以上\cite{bohmeDGF2017}。
 \section{本章小结}
 
 \chapter{定向模糊测试策略设计}
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\SetKwSty{algokeywordsty}
+	\SetFuncSty{algofuncsty}
+	\SetDataSty{algodatasty}
+	\SetArgSty{algoargsty}
+	\SetCommentSty{algocmtsty}
+	\SetKw{break}{break}
+	\SetKw{not}{not}
+	\SetKwFunction{graphextractor}{\textsc{GraphExt}}
+	\SetKwFunction{bbdistance}{\textsc{DisCalcu}}  
+	\SetKwFunction{select}{\textsc{Dequeue}}
+	\SetKwFunction{assinenergy}{\textsc{AssinEnergy}}
+	\SetKwFunction{mutation}{\textsc{Mutation}}
+	\SetKwFunction{execution}{\textsc{Execution}}
+	\SetKwFunction{IsIntersting}{\textsc{IsIntersting}}
+	\SetKwFunction{evaluateseed}{\textsc{SeedDis}}
+	\SetKwFunction{sortinsert}{Enqueue}
+	% \SetKwData{crashseeds}{$\seeds_{\text{\emoji{boom}}}$}
+	\SetKwData{crashseeds}{$\seeds^\prime$} 
+	\SetKwData{seedqueue}{$\textit{SeedQueue}$}  
+	\SetKwData{Graph}{$\textit{Graphs}$}  
+	\SetKwData{BBdis}{$\textit{BBdistance}$} 
+	\SetKwData{newseed}{$\seed^\prime$}   
+	\SetKwData{energy}{$\textit{e}$}
+	\SetKwData{trace}{$\textit{trace}$} 
+	\SetKwData{distance}{$\textit{distance}$}   
+	\KwIn{\seeds\tcp{a finite set of seeds}}
+	\KwIn{\targets\tcp{a finite set of targer sits}} 
+	\KwOut{\crashseeds \tcp{a finite set of buggy seeds}}
+	$\crashseeds\gets \varnothing$\; 
+	$\seedqueue \gets \seeds$\;
+	\Graph $\gets \graphextractor{\sourcecode}$\;
+	\BBdis $\gets \bbdistance{\targets,\Graph}$\;
+	\While {$!siganl \land \currtime < \timeout$}{
+	  \seed$\gets \select{\seedqueue}$\;
+	  $\trace \gets \execution{\seed}$\; 
+	  $\distance \gets \evaluateseed{\trace, \BBdis} $\;
+	  \energy $\gets \assinenergy{\seed, \currtime, \distance}$\;
+	   \For{$\textit{i}\gets 1$ \KwTo $\energy$}
+	   {
+		$\newseed \gets \mutation{\seed}$\;      
+		\lIf{\newseed crashes}{$\crashseeds \gets \crashseeds \cup \newseed $}
+		\lIf{\IsIntersting{\newseed}}{    
+			$\sortinsert{\newseed,\seedqueue} $ 
+		}
+	   }
+	}
+	\Return{\crashseeds}\;
+	\caption[short]{定向灰盒模糊测试算法}\label{alg:DGF} 
+\end{algorithm} 
 \section{AFLGo架构研究}
 \subsection{距离计算机制}
 \subsection{能量调度机制}

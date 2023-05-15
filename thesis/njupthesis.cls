@@ -70,7 +70,6 @@
   urlcolor=black
 }
 
-
 \RequirePackage{indentfirst}
 \RequirePackage{calc}
 \RequirePackage{float}
@@ -80,7 +79,7 @@
 % \RequirePackage{cite}
 \RequirePackage[normalem]{ulem}
 \RequirePackage{enumitem}
-\RequirePackage{algorithm2e}
+\RequirePackage[linesnumbered,ruled,vlined]{algorithm2e}
 \RequirePackage{etoolbox}
 \RequirePackage{newfloat}
 \RequirePackage[nottoc]{tocbibind}
@@ -93,47 +92,82 @@
 \usepackage{natbib}
 \usepackage[sort&compress]{gbt7714}
 
-% 这是啥？？？
-\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
-
-\let\algorithm\relax
-\let\endalgorithm\relax
-\expandafter\let\csname algorithm*\endcsname\relax
-\expandafter\let\csname endalgorithm*\endcsname\relax
-\let\listofalgorithms\relax
-
-% Define the new algorithm environment
-\DeclareFloatingEnvironment{algorithm}
-
+\AtBeginEnvironment{algorithm}{\vspace{6pt}}
+\AtEndEnvironment{algorithm}{\vspace{6pt}}
 \makeatletter
-\renewcommand{\@endalgoln}{\@endalgocfline\hfill\strut\par}
-\renewcommand{\;}{\ifmmode
-  \@mathsemicolon
-\else
-  \@endalgoln
-\fi
-}
-
-% Definition for the style ruled
-% First add the rules enclosing the caption
-\DeclareCaptionFormat{algrule}{%
-  {\@hangfrom{#1#2}%
-     \doublespacing
-     \small
-     \advance\caption@parindent\hangindent
-     \advance\caption@hangindent\hangindent
-     \caption@@par#3\par}%
-}
+\renewcommand{\algorithmcfname}{算法}
+\renewcommand{\thealgocf}{\arabic{chapter}-\arabic{algocf}}
+\@addtoreset{algocf}{chapter} % 算法计数器与章节计数器关联
 \makeatother
 
-% Apply the new format to the algorithm environment
-\captionsetup[algorithm]{format=algrule}
 
-\renewcommand{\algorithmname}{算法}
-\renewcommand{\thealgorithm}{\arabic{chapter}.\arabic{algorithm}}
-% 算法题注设置
-\captionsetup[algorithm]{aboveskip=6pt}
-\AtBeginEnvironment{algorithm}{\vspace{6pt}}
+%%% Algorithms
+\colorlet{bluekeywords}{blue!90!black}
+\colorlet{greencomments}{green!40!black}
+\colorlet{redstrings}{red!90!black}
+\newcommand*{\algokeywordsty}[1]{\textcolor{bluekeywords}{\textbf{\ttfamily{#1}}}}
+\newcommand*{\algodatasty}[1]{\ttfamily{#1}}
+\newcommand*{\algofuncsty}[1]{\textbf{\ttfamily{#1}}}
+\newcommand*{\algoargsty}[1]{\ttfamily{#1}}
+\newcommand*{\algocmtsty}[1]{\textcolor{greencomments}{\ttfamily{#1}}}
+
+\newcommand*{\timeout}{\ensuremath{t_\text{limit}}\xspace}%
+\newcommand*{\currtime}{\ensuremath{t_\text{elapsed}}\xspace}%
+\newcommand*{\confs}{\ensuremath{\mathbb{C}}\xspace}%
+\newcommand*{\conf}{\texttt{conf}\xspace}%
+\newcommand*{\testcases}{\texttt{tcs}\xspace}%
+\newcommand*{\bugoracle}{\ensuremath{O_\text{bug}}\xspace}%
+\newcommand*{\execinfos}{\texttt{execinfos}\xspace}%
+\newcommand*{\bugs}{\ensuremath{\mathbb{B}}\xspace}%
+
+\newcommand*{\seeds}{\ensuremath{\mathbb{S}}\xspace}%
+\newcommand*{\seed}{\texttt{s}\xspace}%
+\newcommand*{\targets}{\ensuremath{\mathbb{T}}\xspace}%
+\newcommand*{\sourcecode}{\ensuremath{\ensuremath{Code}}\xspace}%
+
+\def\HiLi{\leavevmode\rlap{\hbox to \hsize{\color{yellow!50}\leaders\hrule height .6\baselineskip depth .5ex\hfill}}}
+
+
+% \newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+% \let\algorithm\relax
+% \let\endalgorithm\relax
+% \expandafter\let\csname algorithm*\endcsname\relax
+% \expandafter\let\csname endalgorithm*\endcsname\relax
+% \let\listofalgorithms\relax
+
+% % Define the new algorithm environment
+% \DeclareFloatingEnvironment{algorithm}
+
+% \makeatletter
+% \renewcommand{\@endalgoln}{\@endalgocfline\hfill\strut\par}
+% \renewcommand{\;}{\ifmmode
+%   \@mathsemicolon
+% \else
+%   \@endalgoln
+% \fi
+% }
+
+% % Definition for the style ruled
+% %First add the rules enclosing the caption
+% \DeclareCaptionFormat{algrule}{%
+%   {\@hangfrom{#1#2}%
+%      \doublespacing
+%      \small
+%      \advance\caption@parindent\hangindent
+%      \advance\caption@hangindent\hangindent
+%      \caption@@par#3\par}%
+% }
+% \makeatother
+
+% % Apply the new format to the algorithm environment
+% \captionsetup[algorithm]{format=algrule}
+
+% \renewcommand{\algorithmname}{算法}
+% \renewcommand{\thealgorithm}{\arabic{chapter}.\arabic{algorithm}}
+% % 算法题注设置
+% \captionsetup[algorithm]{aboveskip=6pt}
+% \AtBeginEnvironment{algorithm}{\vspace{6pt}}
 
 % 设置插入图片路径
 \graphicspath{{./pic/}}
@@ -675,8 +709,6 @@
   \setlength{\abovedisplayskip}{8pt}
   \setlength{\belowdisplayskip}{8pt}
 }
-
-
 
 
 \endinput
