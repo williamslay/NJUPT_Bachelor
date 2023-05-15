@@ -1,4 +1,4 @@
-\begin{thebibliography}{24}
+\begin{thebibliography}{27}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -57,13 +57,6 @@ Evaluation of Novel Approaches to Software Engineering: 7th International
   Conference, ENASE 2012, Warsaw, Poland, June 29-30, 2012, Revised Selected
   Papers 7.
 \newblock Springer, 2013: 3-15.
-
-\bibitem[Ge et~al.(2011)Ge, Taneja, Xie, and Tillmann]{ge2011dyta}
-Ge~X, Taneja~K, Xie~T, et~al.
-\newblock Dyta: dynamic symbolic execution guided with static verification
-  results\allowbreak[C]//\allowbreak
-Proceedings of the 33rd International Conference on Software Engineering.
-\newblock 2011: 992-994.
 
 \bibitem[Li et~al.(2013)Li, Kim, Bat-Erdene, and Lee]{li2013software}
 Li~H, Kim~T, Bat-Erdene~M, et~al.
@@ -173,5 +166,28 @@ Tsankov~P, Dashti~M~T, Basin~D.
 Myers~G~J, Sandler~C, Badgett~T.
 \newblock The art of software testing\allowbreak[M].
 \newblock John Wiley \& Sons, 2011.
+
+\bibitem[Beizer(1995)]{beizer1995black}
+Beizer~B.
+\newblock Black-box testing: techniques for functional testing of software and
+  systems\allowbreak[M].
+\newblock John Wiley \& Sons, Inc., 1995.
+
+\bibitem[Pea({[2023]})]{Peach}
+Peach\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://github.com/MozillaSecurity/peach}.
+
+\bibitem[Spi({[2023]})]{Spike}
+Spike\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://github.com/guilhermeferreira/spikepp}.
+
+\bibitem[Godefroid et~al.(2008)Godefroid, Levin, Molnar,
+  et~al.]{godefroid2008automated}
+Godefroid~P, Levin~M~Y, Molnar~D~A, et~al.
+\newblock Automated whitebox fuzz testing.\allowbreak[C]//\allowbreak
+NDSS: volume~8.
+\newblock 2008: 151-166.
 
 \end{thebibliography}
