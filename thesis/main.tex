@@ -363,7 +363,7 @@ Int型输入的可能性为$2^{32}=4,294,967,296$种，这意味着仅靠随机�
 二进制文件中的虚拟地址；也可以是指定的特定行为或错误，比如UAF（use-after-free）错误。当然，本文的设计是目标是定向覆盖
 特定区域，针对特定行为的定向模糊测试技术就不再讨论。
 
-定向模糊测试技术除了上述的补丁测试（Patch Testing）的应用外，还可以用于崩溃重现（Crash Reproduction）、安全合规性报告验证（SA Report Verification）
+定向模糊测试技术除了上述的补丁测试（Patch Testing）的应用外，还可以用于崩溃重现（Crash Reproduction）、静态分析报告验证（Static Analysis Report Verification）
 以及数据流检测（Information Flow Detection）等。
 \subsection{白盒定向模糊测试技术}
 早期的定向模糊测试是由白盒模糊测试实现的。在2011年由Ma等人提出的定向符号执行\cite{ma2011directed}
@@ -381,16 +381,36 @@ Ma等人提出了两种符号执行方式：最短距离符号执行（Shortest-
 路径条件后，再通过设置路径约束条件以求解满足条件的生成测试用例。而后测试用例即可依据设定的路径达到指定代码区域，从而实现对
 特定区域的测试，也即定向覆盖模糊测试。
 
-除此以外，无论是结合污点分析技术的BuzzFuzz\cite{ganesh2009taint}，还是
+除此以外，无论是结合污点分析技术的BuzzFuzz\cite{ganesh2009taint}，还是结合动态符号执行的KLEE\cite{cadar2008klee},都
+无外乎是在符号执行引擎中实现，采用探索可行路径的状态空间的方式来实现定向覆盖。
 
-但是这一方式依然具有白盒模糊测试的弊病，那就是对路径条件的探索和对种子生成条件的指引是以模糊测试的效率为代价的。当实际被测试程序
-具有很高的复杂度和规模时，DSE采取的重量级程序分析将面临严重的路径爆炸问题，这也使得实际执行效果并不理想。
+但是这一方式依然具有白盒模糊测试的弊病，那就是对路径条件的探索和对种子生成条件的指引的有效性是以模糊测试的效率为代价的。
+当实际被测试程序具有很高的复杂度和规模时，DSE采取的重量级程序分析将面临严重的路径爆炸问题，这也使得实际执行效果并不理想。
 \subsection{灰盒定向模糊测试技术}
+由B{\"o}hme等人于2017年提出的AFLGo\cite{bohmeDGF2017}引入了定向灰盒模糊测试（Directed Grey-box Fuzzing, 简称DGF）的概念。
+这一工具也正是本文重点研究的架构。相较于繁重的约束求解来解决定向的位置可达性问题，AFLGo采取从另一角度来实现本目标。B{\"o}hme
+等人先前于2016年做出的工作\cite{2016Coverage}将模糊测试的路径执行过程建模为马尔科夫链，这为AFLGo的设计提供了思路。
 
+事实上我们知道，一个程序中大多数执行路径是不会被经常执行的，而经常执行的路径往往只占所有路径中的小部分。在AFL的输入构造环节中
+种子的能量分配却是平均分配的，这使得那些较少被执行的路径获取得到的种子能量因为相对不足而需要更多的时间才能探索暴露出漏洞。
+对此，Böhme等人在他们的工作AFLFast\cite{2016Coverage}中给出的解决办法是将模型糊测试程序建模为对马尔可夫链接状态空间的遍历过程，
+将种子变异导致的程序执行路径转移概率,视为马尔可夫链上的状态转移概率。然后通过制定相应的能量分配策略,使得马尔可夫链状态空间的
+遍历过程,更倾向于低访问频率的区域,使得能量分配更加合理。通过针对AFLFast和AFL的对比实验表明，这样的能量分配策略使得在同样的
+时间中，AFLFast有更多的机会去接近低访问频率的区域从而能够发现比AFL多指数级的崩溃\cite{2016Coverage}。
+
+于是，针对于定向覆盖的问题，AFLGo就将其从位置可达性问题转换为能量分配的优化问题。AFLGo舍弃了繁重的路径条件的求解，而是转而通过
+在预处理阶段计算每个基本块与目标位置的距离并将其插桩进入二进制文件，再通过运行时评估每个种子执行路径相对于目标区域的平均距离从而
+利用种子的能量调度机制来影响测试用例的生成从而达到定向覆盖的目标。这一机制还会在章节\ref{sec:AFLGo}详细介绍。
+
+现在DGF仍然可以称作是模糊测试领域中非常先进的技术。其结合了定向模糊测试和灰盒模糊测试的思想，可以在不需要完全了解被测
+系统内部工作原理的情况下，检测出潜在的漏洞和错误。其将大部分的能量分配给重点的代码区域，而不浪费资源于其他无意义的部分，可以更快
+更高效地测试代码。同时，相比于白盒定向模糊测试方法，定向灰盒模糊测试可以避免过多地关注程序内部的实现细节，从而
+节省测试用例设计和编写的时间成本。
 \section{研究动机}
 \section{本章小结}
 
 \chapter{定向模糊测试策略设计}
+\section{AFLGo架构研究}\label{sec:AFLGo}
 \begin{algorithm}[H]
 	\DontPrintSemicolon
 	\SetKwSty{algokeywordsty}
@@ -409,7 +429,6 @@ Ma等人提出了两种符号执行方式：最短距离符号执行（Shortest-
 	\SetKwFunction{IsIntersting}{\textsc{IsIntersting}}
 	\SetKwFunction{evaluateseed}{\textsc{SeedDis}}
 	\SetKwFunction{sortinsert}{Enqueue}
-	% \SetKwData{crashseeds}{$\seeds_{\text{\emoji{boom}}}$}
 	\SetKwData{crashseeds}{$\seeds^\prime$} 
 	\SetKwData{seedqueue}{$\textit{SeedQueue}$}  
 	\SetKwData{Graph}{$\textit{Graphs}$}  
@@ -442,7 +461,7 @@ Ma等人提出了两种符号执行方式：最短距离符号执行（Shortest-
 	\Return{\crashseeds}\;
 	\caption[short]{定向灰盒模糊测试算法}\label{alg:DGF} 
 \end{algorithm} 
-\section{AFLGo架构研究}
+
 \subsection{距离计算机制}
 \subsection{能量调度机制}
 \section{定向适应度指标}

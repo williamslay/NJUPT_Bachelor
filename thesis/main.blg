@@ -11,7 +11,6 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: reference.bib
-Warning--I didn't find a database entry for "marinescu2013katch"
 Warning--empty year in Heartbleed
 Warning--empty year in Heartbleed
 Warning--empty year in Pass
@@ -30,45 +29,45 @@ Warning--empty author in Libxml2
 Warning--empty author in Peach
 Warning--empty author in Spike
 Warning--empty author in AFL
-You've used 28 entries,
+You've used 30 entries,
             5225 wiz_defined-function locations,
-            1174 strings with 12247 characters,
-and the built_in function-call counts, 190740 in all, are:
-= -- 4077
-> -- 21784
-< -- 27230
-+ -- 7684
-- -- 1459
-* -- 1292
-:= -- 26393
-add.period$ -- 85
-call.type$ -- 28
-change.case$ -- 56
-chr.to.int$ -- 6692
-cite$ -- 52
-duplicate$ -- 749
-empty$ -- 2036
-format.name$ -- 739
-if$ -- 49857
+            1183 strings with 12545 characters,
+and the built_in function-call counts, 205509 in all, are:
+= -- 4388
+> -- 23493
+< -- 29365
++ -- 8283
+- -- 1576
+* -- 1372
+:= -- 28432
+add.period$ -- 91
+call.type$ -- 30
+change.case$ -- 60
+chr.to.int$ -- 7214
+cite$ -- 54
+duplicate$ -- 801
+empty$ -- 2166
+format.name$ -- 795
+if$ -- 53708
 int.to.chr$ -- 1
-int.to.str$ -- 29
+int.to.str$ -- 31
 missing$ -- 0
-newline$ -- 168
-num.names$ -- 66
-pop$ -- 9798
+newline$ -- 179
+num.names$ -- 72
+pop$ -- 10542
 preamble$ -- 1
-purify$ -- 28
+purify$ -- 30
 quote$ -- 0
-skip$ -- 19872
+skip$ -- 21452
 stack$ -- 0
-substring$ -- 8664
-swap$ -- 36
-text.length$ -- 578
+substring$ -- 9336
+swap$ -- 38
+text.length$ -- 621
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 300
+type$ -- 322
 warning$ -- 18
-while$ -- 593
+while$ -- 638
 width$ -- 0
-write$ -- 375
-(There were 19 warnings)
+write$ -- 400
+(There were 18 warnings)

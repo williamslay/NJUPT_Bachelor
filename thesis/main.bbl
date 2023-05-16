@@ -1,4 +1,4 @@
-\begin{thebibliography}{28}
+\begin{thebibliography}{30}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -50,6 +50,14 @@ Ma~K~K, Yit~Phang~K, Foster~J~S, et~al.
 Static Analysis: 18th International Symposium, SAS 2011, Venice, Italy,
   September 14-16, 2011. Proceedings 18.
 \newblock Springer, 2011: 95-111.
+
+\bibitem[Marinescu et~al.(2013)Marinescu and Cadar]{marinescu2013katch}
+Marinescu~P~D, Cadar~C.
+\newblock Katch: High-coverage testing of software
+  patches\allowbreak[C]//\allowbreak
+Proceedings of the 2013 9th Joint Meeting on Foundations of Software
+  Engineering.
+\newblock 2013: 235-245.
 
 \bibitem[Jin et~al.(2012)Jin and Orso]{2012BugRedux}
 Jin~W, Orso~A.
@@ -192,5 +200,10 @@ King~J~C.
   symbolic execution\allowbreak[C]//\allowbreak
 Proceedings of the 5th international conference on Software engineering.
 \newblock IEEE Press, 1976: 238-249.
+
+\bibitem[Bhme et~al.(2016)Bhme, Pham, and Roychoudhury]{2016Coverage}
+Bhme~M, Pham~V~T, Roychoudhury~A.
+\newblock Coverage-based greybox fuzzing as markov chain\allowbreak[J].
+\newblock IEEE Transactions on Software Engineering, 2016.
 
 \end{thebibliography}
