@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  15 MAY 2023 21:35
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  16 MAY 2023 20:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1024,7 +1024,14 @@ Chapter 第一章.
 Package newfloat Info: Setting Plan B file extension to `lof'... on input line 67.
 [1
 
-] [2] [3] [4]
+]
+
+Package natbib Warning: Citation `marinescu2013katch' on page 2 undefined on input line 123.
+
+
+Package natbib Warning: Citation `marinescu2013katch' on page 2 undefined on input line 130.
+
+[2] [3] [4]
 Chapter 第二章.
 
 Underfull \hbox (badness 10000) in paragraph at lines 204--209
@@ -1065,51 +1072,53 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
 LaTeX Font Warning: Font shape `TU/lmtt/bx/sc' undefined
 (Font)              using `TU/lmtt/bx/n' instead on input line 257.
 
-[6] [7] [8] [9]
+[6] [7] [8]
+File: pic/GF.pdf Graphic file (type pdf)
+<use pic/GF.pdf>
+ [9] [10] [11]
 Chapter 第三章.
-[10
-
-]
-Chapter 第四章.
-[11
-
-]
-Chapter 第五章.
 [12
 
 ]
-Chapter 第六章.
+Chapter 第四章.
 [13
 
-] [14
+]
+Chapter 第五章.
+[14
 
-] (./main.bbl [15
+]
+Chapter 第六章.
+[15
 
 ] [16
 
+] (./main.bbl [17
+
+] [18
+
 ])
-
-Package caption Warning: Unused \captionsetup[figure] on input line 230.
-See the caption package documentation for explanation.
-
 
 Package caption Warning: Unused \captionsetup[table] on input line 231.
 See the caption package documentation for explanation.
 
-[17] (./main.aux)
+
+Package natbib Warning: There were undefined citations.
+
+[19] (./main.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 2AE78BD3F4CDD93EADA9AEA15868B2E2;5767.
+(rerunfilecheck)             Checksum: 06AF7D3D0649D62B544D542E95150D99;5767.
  ) 
 Here is how much of TeX's memory you used:
- 22893 strings out of 476684
- 466113 string characters out of 5804055
+ 22942 strings out of 476684
+ 468203 string characters out of 5804055
  1889018 words of memory out of 5000000
- 42679 multiletter control sequences out of 15000+600000
+ 42724 multiletter control sequences out of 15000+600000
  567988 words of font info for 160 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  101i,20n,105p,321b,710s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (23 pages).
+Output written on main.pdf (25 pages).

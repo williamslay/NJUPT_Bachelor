@@ -1,4 +1,4 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{28}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -30,6 +30,14 @@ Wang~P, Zhou~X, Lu~K, et~al.
   fuzzing: arXiv:2005.11907\allowbreak[EB/OL].
 \newblock arXiv, 2022.
 
+\bibitem[Cadar et~al.(2008)Cadar, Dunbar, and Engler]{cadar2008klee}
+Cadar~C, Dunbar~D, Engler~D~R.
+\newblock Klee: unassisted and automatic generation of high-coverage tests for
+  complex systems programs\allowbreak[C]//\allowbreak
+Proceedings of the 8th USENIX conference on Operating systems design and
+  implementation.
+\newblock 2008: 209-224.
+
 \bibitem[Ganesh et~al.(2009)Ganesh, Leek, and Rinard]{ganesh2009taint}
 Ganesh~V, Leek~T, Rinard~M.
 \newblock Taint-based directed whitebox fuzzing\allowbreak[C]//\allowbreak
@@ -43,27 +51,12 @@ Static Analysis: 18th International Symposium, SAS 2011, Venice, Italy,
   September 14-16, 2011. Proceedings 18.
 \newblock Springer, 2011: 95-111.
 
-\bibitem[Person et~al.(2011)Person, Yang, Rungta, and
-  Khurshid]{person2011directed}
-Person~S, Yang~G, Rungta~N, et~al.
-\newblock Directed incremental symbolic execution\allowbreak[J].
-\newblock Acm Sigplan Notices, 2011, 46\allowbreak (6): 504-515.
-
-\bibitem[Do et~al.(2013)Do, Fong, and Pears]{do2013dynamic}
-Do~T, Fong~A~C~M, Pears~R.
-\newblock Dynamic symbolic execution guided by data dependency analysis for
-  high structural coverage\allowbreak[C]//\allowbreak
-Evaluation of Novel Approaches to Software Engineering: 7th International
-  Conference, ENASE 2012, Warsaw, Poland, June 29-30, 2012, Revised Selected
-  Papers 7.
-\newblock Springer, 2013: 3-15.
-
-\bibitem[Li et~al.(2013)Li, Kim, Bat-Erdene, and Lee]{li2013software}
-Li~H, Kim~T, Bat-Erdene~M, et~al.
-\newblock Software vulnerability detection using backward trace analysis and
-  symbolic execution\allowbreak[C]//\allowbreak
-2013 International Conference on Availability, Reliability and Security.
-\newblock IEEE, 2013: 446-454.
+\bibitem[Jin et~al.(2012)Jin and Orso]{2012BugRedux}
+Jin~W, Orso~A.
+\newblock Bugredux: Reproducing field failures for in-house
+  debugging\allowbreak[C]//\allowbreak
+International Conference on Software Engineering.
+\newblock 2012.
 
 \bibitem[B{\"o}hme et~al.(2017)B{\"o}hme, Pham, Nguyen, and
   Roychoudhury]{bohmeDGF2017}
@@ -78,14 +71,6 @@ Proceedings of the 2017 ACM SIGSAC Conference on Computer and Communications
 Heartbleed - a vulnerability in openssl\allowbreak[EB/OL].
 \newblock \allowbreak[2023-05-13].
 \newblock \url{https://heartbleed.com/}.
-
-\bibitem[Marinescu et~al.(2013)Marinescu and Cadar]{marinescu2013katch}
-Marinescu~P~D, Cadar~C.
-\newblock Katch: High-coverage testing of software
-  patches\allowbreak[C]//\allowbreak
-Proceedings of the 2013 9th Joint Meeting on Foundations of Software
-  Engineering.
-\newblock 2013: 235-245.
 
 \bibitem[Chen et~al.(2018)Chen, Xue, Li, Chen, Xie, Wu, and
   Liu]{chen2018hawkeye}
@@ -189,5 +174,23 @@ Godefroid~P, Levin~M~Y, Molnar~D~A, et~al.
 \newblock Automated whitebox fuzz testing.\allowbreak[C]//\allowbreak
 NDSS: volume~8.
 \newblock 2008: 151-166.
+
+\bibitem[Jha et~al.(2016)Jha, Jin, Lerner, and Salem]{sage}
+Jha~S, Jin~Z, Lerner~S, et~al.
+\newblock Sage: A framework for succinct analysis of syntactic greedy
+  equivalence\allowbreak[J].
+\newblock arXiv preprint arXiv:1611.06279, 2016.
+
+\bibitem[AFL({[2023]})]{AFL}
+american fuzzy lop\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://lcamtuf.coredump.cx/afl/}.
+
+\bibitem[King(1976)]{king1976select}
+King~J~C.
+\newblock Select—a formal system for testing and debugging programs by
+  symbolic execution\allowbreak[C]//\allowbreak
+Proceedings of the 5th international conference on Software engineering.
+\newblock IEEE Press, 1976: 238-249.
 
 \end{thebibliography}

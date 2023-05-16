@@ -48,7 +48,7 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}国内外研究现状}{1}{section.1.2}\protected@file@percent }
 \citation{manes2019art}
 \citation{wang2022}
-\citation{ganesh2009taint,ma2011directed,person2011directed,do2013dynamic,li2013software}
+\citation{cadar2008klee,ganesh2009taint,ma2011directed,marinescu2013katch,2012BugRedux}
 \citation{bohmeDGF2017}
 \citation{Heartbleed}
 \citation{marinescu2013katch}
@@ -102,111 +102,129 @@
 \@writefile{lot}{ \cftsetpnumwidth {\widthof {8}-1pt} }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}模糊测试技术的分类}{8}{subsection.2.1.3}\protected@file@percent }
 \citation{godefroid2008automated}
+\citation{godefroid2008automated}
+\citation{cadar2008klee}
+\citation{cadar2008klee}
+\citation{sage}
 \@writefile{toc}{ \cftsetpnumwidth {\widthof {9}-1pt} \thispagestyle {empty} }
 \@writefile{lof}{ \cftsetpnumwidth {\widthof {9}-1pt} }
 \@writefile{lot}{ \cftsetpnumwidth {\widthof {9}-1pt} }
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}定向模糊测试技术}{9}{section.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}白盒定向模糊测试技术}{9}{subsection.2.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}灰盒定向模糊测试技术}{9}{subsection.2.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}研究动机}{9}{section.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}本章小结}{9}{section.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces 灰盒模糊测试架构\relax }}{9}{figure.caption.4}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{GF}{{2.1}{9}{灰盒模糊测试架构\relax }{figure.caption.4}{}}
+\citation{AFL}
+\citation{ma2011directed}
+\citation{king1976select}
 \@writefile{toc}{ \cftsetpnumwidth {\widthof {10}-1pt} \thispagestyle {empty} }
 \@writefile{lof}{ \cftsetpnumwidth {\widthof {10}-1pt} }
 \@writefile{lot}{ \cftsetpnumwidth {\widthof {10}-1pt} }
-\pp@pagectr{footnote}{3}{16}{10}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第三章}定向模糊测试策略设计}{10}{chapter.3}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{loa}{\contentsline {algocf}{\numberline {3-1}{\ignorespaces short}}{10}{algocf.3-1}\protected@file@percent }
-\newlabel{alg:DGF}{{3-1}{10}{定向模糊测试策略设计}{algocf.3-1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}AFLGo架构研究}{10}{section.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}距离计算机制}{10}{subsection.3.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}能量调度机制}{10}{subsection.3.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}定向适应度指标}{10}{section.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}距离定义}{10}{subsection.3.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}目标函数集覆盖率}{10}{subsection.3.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}能量调度机制}{10}{subsection.3.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}本章小结}{10}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}定向模糊测试技术}{10}{section.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}白盒定向模糊测试技术}{10}{subsection.2.2.1}\protected@file@percent }
+\citation{ganesh2009taint}
 \@writefile{toc}{ \cftsetpnumwidth {\widthof {11}-1pt} \thispagestyle {empty} }
 \@writefile{lof}{ \cftsetpnumwidth {\widthof {11}-1pt} }
 \@writefile{lot}{ \cftsetpnumwidth {\widthof {11}-1pt} }
-\pp@pagectr{footnote}{4}{17}{11}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第四章}基于AFLGo的定向模糊测试系统的实现}{11}{chapter.4}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}需求分析}{11}{section.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}架构设计}{11}{section.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}静态分析器的改进}{11}{section.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}定向模糊测试工具}{11}{section.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}本章小结}{11}{section.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}灰盒定向模糊测试技术}{11}{subsection.2.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}研究动机}{11}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}本章小结}{11}{section.2.4}\protected@file@percent }
 \@writefile{toc}{ \cftsetpnumwidth {\widthof {12}-1pt} \thispagestyle {empty} }
 \@writefile{lof}{ \cftsetpnumwidth {\widthof {12}-1pt} }
 \@writefile{lot}{ \cftsetpnumwidth {\widthof {12}-1pt} }
-\pp@pagectr{footnote}{5}{18}{12}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第五章}系统测试}{12}{chapter.5}\protected@file@percent }
+\pp@pagectr{footnote}{3}{18}{12}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第三章}定向模糊测试策略设计}{12}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}系统测试概述}{12}{section.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}系统测试目标}{12}{subsection.5.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}系统测试环境}{12}{subsection.5.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}功能测试}{12}{section.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}实验评估}{12}{section.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}定向模糊测试工具}{12}{subsection.5.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}本章小结}{12}{section.5.4}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {3-1}{\ignorespaces short}}{12}{algocf.3-1}\protected@file@percent }
+\newlabel{alg:DGF}{{3-1}{12}{定向模糊测试策略设计}{algocf.3-1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}AFLGo架构研究}{12}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}距离计算机制}{12}{subsection.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}能量调度机制}{12}{subsection.3.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}定向适应度指标}{12}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}距离定义}{12}{subsection.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}目标函数集覆盖率}{12}{subsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}能量调度机制}{12}{subsection.3.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}本章小结}{12}{section.3.3}\protected@file@percent }
 \@writefile{toc}{ \cftsetpnumwidth {\widthof {13}-1pt} \thispagestyle {empty} }
 \@writefile{lof}{ \cftsetpnumwidth {\widthof {13}-1pt} }
 \@writefile{lot}{ \cftsetpnumwidth {\widthof {13}-1pt} }
-\pp@pagectr{footnote}{6}{19}{13}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第六章}总结与展望}{13}{chapter.6}\protected@file@percent }
+\pp@pagectr{footnote}{4}{19}{13}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第四章}基于AFLGo的定向模糊测试系统的实现}{13}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}总结}{13}{section.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}展望}{13}{section.6.2}\protected@file@percent }
-\@writefile{toc}{\setcounter {tocdepth}{0}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}需求分析}{13}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}架构设计}{13}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}静态分析器的改进}{13}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}定向模糊测试工具}{13}{section.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}本章小结}{13}{section.4.5}\protected@file@percent }
 \@writefile{toc}{ \cftsetpnumwidth {\widthof {14}-1pt} \thispagestyle {empty} }
 \@writefile{lof}{ \cftsetpnumwidth {\widthof {14}-1pt} }
 \@writefile{lot}{ \cftsetpnumwidth {\widthof {14}-1pt} }
-\@writefile{toc}{\contentsline {chapter}{结束语}{14}{chapter*.4}\protected@file@percent }
-\@writefile{toc}{\setcounter {tocdepth}{0}}
-\bibstyle{gbt7714-numerical}
-\bibdata{reference}
+\pp@pagectr{footnote}{5}{20}{14}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第五章}系统测试}{14}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}系统测试概述}{14}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}系统测试目标}{14}{subsection.5.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}系统测试环境}{14}{subsection.5.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}功能测试}{14}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}实验评估}{14}{section.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}定向模糊测试工具}{14}{subsection.5.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}本章小结}{14}{section.5.4}\protected@file@percent }
 \@writefile{toc}{ \cftsetpnumwidth {\widthof {15}-1pt} \thispagestyle {empty} }
 \@writefile{lof}{ \cftsetpnumwidth {\widthof {15}-1pt} }
 \@writefile{lot}{ \cftsetpnumwidth {\widthof {15}-1pt} }
-\@writefile{toc}{\contentsline {chapter}{致谢}{15}{chapter*.5}\protected@file@percent }
-\bibcite{miller1990empirical}{{1}{1990}{{Miller et~al.}}{{Miller, Fredriksen, and So}}}
-\bibcite{manes2019art}{{2}{2019}{{Man{\`e}s et~al.}}{{Man{\`e}s, Han, Han, Cha, Egele, Schwartz, and Woo}}}
-\bibcite{wang2022}{{3}{2022}{{Wang et~al.}}{{Wang, Zhou, Lu, Yue, and Liu}}}
-\bibcite{ganesh2009taint}{{4}{2009}{{Ganesh et~al.}}{{Ganesh, Leek, and Rinard}}}
-\bibcite{ma2011directed}{{5}{2011}{{Ma et~al.}}{{Ma, Yit~Phang, Foster, and Hicks}}}
-\bibcite{person2011directed}{{6}{2011}{{Person et~al.}}{{Person, Yang, Rungta, and Khurshid}}}
-\bibcite{do2013dynamic}{{7}{2013}{{Do et~al.}}{{Do, Fong, and Pears}}}
-\bibcite{li2013software}{{8}{2013}{{Li et~al.}}{{Li, Kim, Bat-Erdene, and Lee}}}
-\bibcite{bohmeDGF2017}{{9}{2017}{{B{\"o}hme et~al.}}{{B{\"o}hme, Pham, Nguyen, and Roychoudhury}}}
-\bibcite{Heartbleed}{{10}{[2023]}{{Hea}}{{}}}
-\bibcite{marinescu2013katch}{{11}{2013}{{Marinescu et~al.}}{{Marinescu and Cadar}}}
-\bibcite{chen2018hawkeye}{{12}{2018}{{Chen et~al.}}{{Chen, Xue, Li, Chen, Xie, Wu, and Liu}}}
-\bibcite{wang2020typestate}{{13}{2020}{{Wang et~al.}}{{Wang, Xie, Li, Wen, Li, Liu, Qin, Chen, and Sui}}}
-\bibcite{lee2021constraint}{{14}{2021}{{Lee et~al.}}{{Lee, Shim, and Lee}}}
-\bibcite{huang2022beacon}{{15}{2022}{{Huang et~al.}}{{Huang, Guo, Shi, Yao, Wu, and Zhang}}}
-\bibcite{zhu2022fuzzing}{{16}{2022}{{Zhu et~al.}}{{Zhu, Wen, Camtepe, and Xiang}}}
-\bibcite{Pass}{{17}{[2023]}{{Pas}}{{}}}
-\bibcite{Libxml2}{{18}{[2023]}{{Lib}}{{}}}
-\bibcite{householder2012probability}{{19}{2012}{{Householder et~al.}}{{Householder and Foote}}}
-\bibcite{rebert2014optimizing}{{20}{2014}{{Rebert et~al.}}{{Rebert, Cha, Avgerinos, Foote, Warren, Grieco, and Brumley}}}
-\bibcite{bohme2020fuzzing}{{21}{2020}{{B{\"o}hme et~al.}}{{B{\"o}hme, Cadar, and Roychoudhury}}}
-\bibcite{tsankov2012secfuzz}{{22}{2012}{{Tsankov et~al.}}{{Tsankov, Dashti, and Basin}}}
-\bibcite{myers2011art}{{23}{2011}{{Myers et~al.}}{{Myers, Sandler, and Badgett}}}
-\bibcite{beizer1995black}{{24}{1995}{{Beizer}}{{}}}
+\pp@pagectr{footnote}{6}{21}{15}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第六章}总结与展望}{15}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}总结}{15}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}展望}{15}{section.6.2}\protected@file@percent }
+\@writefile{toc}{\setcounter {tocdepth}{0}}
 \@writefile{toc}{ \cftsetpnumwidth {\widthof {16}-1pt} \thispagestyle {empty} }
 \@writefile{lof}{ \cftsetpnumwidth {\widthof {16}-1pt} }
 \@writefile{lot}{ \cftsetpnumwidth {\widthof {16}-1pt} }
-\@writefile{toc}{\contentsline {chapter}{参考文献}{16}{chapter*.6}\protected@file@percent }
-\bibcite{Peach}{{25}{[2023]}{{Pea}}{{}}}
-\bibcite{Spike}{{26}{[2023]}{{Spi}}{{}}}
-\bibcite{godefroid2008automated}{{27}{2008}{{Godefroid et~al.}}{{Godefroid, Levin, Molnar, et~al.}}}
+\@writefile{toc}{\contentsline {chapter}{结束语}{16}{chapter*.5}\protected@file@percent }
+\@writefile{toc}{\setcounter {tocdepth}{0}}
+\bibstyle{gbt7714-numerical}
+\bibdata{reference}
 \@writefile{toc}{ \cftsetpnumwidth {\widthof {17}-1pt} \thispagestyle {empty} }
 \@writefile{lof}{ \cftsetpnumwidth {\widthof {17}-1pt} }
 \@writefile{lot}{ \cftsetpnumwidth {\widthof {17}-1pt} }
+\@writefile{toc}{\contentsline {chapter}{致谢}{17}{chapter*.6}\protected@file@percent }
+\bibcite{miller1990empirical}{{1}{1990}{{Miller et~al.}}{{Miller, Fredriksen, and So}}}
+\bibcite{manes2019art}{{2}{2019}{{Man{\`e}s et~al.}}{{Man{\`e}s, Han, Han, Cha, Egele, Schwartz, and Woo}}}
+\bibcite{wang2022}{{3}{2022}{{Wang et~al.}}{{Wang, Zhou, Lu, Yue, and Liu}}}
+\bibcite{cadar2008klee}{{4}{2008}{{Cadar et~al.}}{{Cadar, Dunbar, and Engler}}}
+\bibcite{ganesh2009taint}{{5}{2009}{{Ganesh et~al.}}{{Ganesh, Leek, and Rinard}}}
+\bibcite{ma2011directed}{{6}{2011}{{Ma et~al.}}{{Ma, Yit~Phang, Foster, and Hicks}}}
+\bibcite{2012BugRedux}{{7}{2012}{{Jin et~al.}}{{Jin and Orso}}}
+\bibcite{bohmeDGF2017}{{8}{2017}{{B{\"o}hme et~al.}}{{B{\"o}hme, Pham, Nguyen, and Roychoudhury}}}
+\bibcite{Heartbleed}{{9}{[2023]}{{Hea}}{{}}}
+\bibcite{chen2018hawkeye}{{10}{2018}{{Chen et~al.}}{{Chen, Xue, Li, Chen, Xie, Wu, and Liu}}}
+\bibcite{wang2020typestate}{{11}{2020}{{Wang et~al.}}{{Wang, Xie, Li, Wen, Li, Liu, Qin, Chen, and Sui}}}
+\bibcite{lee2021constraint}{{12}{2021}{{Lee et~al.}}{{Lee, Shim, and Lee}}}
+\bibcite{huang2022beacon}{{13}{2022}{{Huang et~al.}}{{Huang, Guo, Shi, Yao, Wu, and Zhang}}}
+\bibcite{zhu2022fuzzing}{{14}{2022}{{Zhu et~al.}}{{Zhu, Wen, Camtepe, and Xiang}}}
+\bibcite{Pass}{{15}{[2023]}{{Pas}}{{}}}
+\bibcite{Libxml2}{{16}{[2023]}{{Lib}}{{}}}
+\bibcite{householder2012probability}{{17}{2012}{{Householder et~al.}}{{Householder and Foote}}}
+\bibcite{rebert2014optimizing}{{18}{2014}{{Rebert et~al.}}{{Rebert, Cha, Avgerinos, Foote, Warren, Grieco, and Brumley}}}
+\bibcite{bohme2020fuzzing}{{19}{2020}{{B{\"o}hme et~al.}}{{B{\"o}hme, Cadar, and Roychoudhury}}}
+\bibcite{tsankov2012secfuzz}{{20}{2012}{{Tsankov et~al.}}{{Tsankov, Dashti, and Basin}}}
+\bibcite{myers2011art}{{21}{2011}{{Myers et~al.}}{{Myers, Sandler, and Badgett}}}
+\bibcite{beizer1995black}{{22}{1995}{{Beizer}}{{}}}
+\bibcite{Peach}{{23}{[2023]}{{Pea}}{{}}}
+\bibcite{Spike}{{24}{[2023]}{{Spi}}{{}}}
+\bibcite{godefroid2008automated}{{25}{2008}{{Godefroid et~al.}}{{Godefroid, Levin, Molnar, et~al.}}}
+\bibcite{sage}{{26}{2016}{{Jha et~al.}}{{Jha, Jin, Lerner, and Salem}}}
+\@writefile{toc}{ \cftsetpnumwidth {\widthof {18}-1pt} \thispagestyle {empty} }
+\@writefile{lof}{ \cftsetpnumwidth {\widthof {18}-1pt} }
+\@writefile{lot}{ \cftsetpnumwidth {\widthof {18}-1pt} }
+\@writefile{toc}{\contentsline {chapter}{参考文献}{18}{chapter*.7}\protected@file@percent }
+\bibcite{AFL}{{27}{[2023]}{{AFL}}{{}}}
+\bibcite{king1976select}{{28}{1976}{{King}}{{}}}
+\@writefile{toc}{ \cftsetpnumwidth {\widthof {19}-1pt} \thispagestyle {empty} }
+\@writefile{lof}{ \cftsetpnumwidth {\widthof {19}-1pt} }
+\@writefile{lot}{ \cftsetpnumwidth {\widthof {19}-1pt} }
 \ttl@finishall
-\gdef \@abspage@last{23}
+\gdef \@abspage@last{25}
