@@ -1,4 +1,4 @@
-\begin{thebibliography}{30}
+\begin{thebibliography}{31}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -80,14 +80,14 @@ Heartbleed - a vulnerability in openssl\allowbreak[EB/OL].
 \newblock \allowbreak[2023-05-13].
 \newblock \url{https://heartbleed.com/}.
 
-\bibitem[Chen et~al.(2018)Chen, Xue, Li, Chen, Xie, Wu, and
+\bibitem[Chen et~al.(2018{\natexlab{a}})Chen, Xue, Li, Chen, Xie, Wu, and
   Liu]{chen2018hawkeye}
 Chen~H, Xue~Y, Li~Y, et~al.
 \newblock Hawkeye: Towards a desired directed grey-box
   fuzzer\allowbreak[C]//\allowbreak
 Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications
   Security.
-\newblock 2018: 2095-2108.
+\newblock 2018{\natexlab{a}}: 2095-2108.
 
 \bibitem[Wang et~al.(2020)Wang, Xie, Li, Wen, Li, Liu, Qin, Chen, and
   Sui]{wang2020typestate}
@@ -205,5 +205,14 @@ Proceedings of the 5th international conference on Software engineering.
 Bhme~M, Pham~V~T, Roychoudhury~A.
 \newblock Coverage-based greybox fuzzing as markov chain\allowbreak[J].
 \newblock IEEE Transactions on Software Engineering, 2016.
+
+\bibitem[Chen et~al.(2018{\natexlab{b}})Chen, Li, Chen, Xue, and
+  Liu]{chen2018fot}
+Chen~H, Li~Y, Chen~B, et~al.
+\newblock Fot: A versatile, configurable, extensible fuzzing
+  framework\allowbreak[C]//\allowbreak
+Proceedings of the 2018 26th ACM Joint Meeting on European Software Engineering
+  Conference and Symposium on the Foundations of Software Engineering.
+\newblock 2018{\natexlab{b}}: 867-870.
 
 \end{thebibliography}

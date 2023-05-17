@@ -29,45 +29,45 @@ Warning--empty author in Libxml2
 Warning--empty author in Peach
 Warning--empty author in Spike
 Warning--empty author in AFL
-You've used 30 entries,
+You've used 31 entries,
             5225 wiz_defined-function locations,
-            1183 strings with 12545 characters,
-and the built_in function-call counts, 205509 in all, are:
-= -- 4388
-> -- 23493
-< -- 29365
-+ -- 8283
-- -- 1576
-* -- 1372
-:= -- 28432
-add.period$ -- 91
-call.type$ -- 30
-change.case$ -- 60
-chr.to.int$ -- 7214
-cite$ -- 54
-duplicate$ -- 801
-empty$ -- 2166
-format.name$ -- 795
-if$ -- 53708
-int.to.chr$ -- 1
-int.to.str$ -- 31
+            1188 strings with 12847 characters,
+and the built_in function-call counts, 214541 in all, are:
+= -- 4572
+> -- 24545
+< -- 30681
++ -- 8653
+- -- 1642
+* -- 1430
+:= -- 29687
+add.period$ -- 94
+call.type$ -- 31
+change.case$ -- 62
+chr.to.int$ -- 7535
+cite$ -- 55
+duplicate$ -- 828
+empty$ -- 2242
+format.name$ -- 834
+if$ -- 56057
+int.to.chr$ -- 2
+int.to.str$ -- 32
 missing$ -- 0
-newline$ -- 179
-num.names$ -- 72
-pop$ -- 10542
+newline$ -- 185
+num.names$ -- 75
+pop$ -- 11004
 preamble$ -- 1
-purify$ -- 30
+purify$ -- 31
 quote$ -- 0
-skip$ -- 21452
+skip$ -- 22398
 stack$ -- 0
-substring$ -- 9336
-swap$ -- 38
-text.length$ -- 621
+substring$ -- 9747
+swap$ -- 41
+text.length$ -- 647
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 322
+type$ -- 333
 warning$ -- 18
-while$ -- 638
+while$ -- 666
 width$ -- 0
-write$ -- 400
+write$ -- 413
 (There were 18 warnings)

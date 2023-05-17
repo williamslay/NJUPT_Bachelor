@@ -386,7 +386,7 @@ Ma等人提出了两种符号执行方式：最短距离符号执行（Shortest-
 
 但是这一方式依然具有白盒模糊测试的弊病，那就是对路径条件的探索和对种子生成条件的指引的有效性是以模糊测试的效率为代价的。
 当实际被测试程序具有很高的复杂度和规模时，DSE采取的重量级程序分析将面临严重的路径爆炸问题，这也使得实际执行效果并不理想。
-\subsection{灰盒定向模糊测试技术}
+\subsection{灰盒定向模糊测试技术}\label{sec:DGF}
 由B{\"o}hme等人于2017年提出的AFLGo\cite{bohmeDGF2017}引入了定向灰盒模糊测试（Directed Grey-box Fuzzing, 简称DGF）的概念。
 这一工具也正是本文重点研究的架构。相较于繁重的约束求解来解决定向的位置可达性问题，AFLGo采取从另一角度来实现本目标。B{\"o}hme
 等人先前于2016年做出的工作\cite{2016Coverage}将模糊测试的路径执行过程建模为马尔科夫链，这为AFLGo的设计提供了思路。
@@ -402,12 +402,26 @@ Ma等人提出了两种符号执行方式：最短距离符号执行（Shortest-
 在预处理阶段计算每个基本块与目标位置的距离并将其插桩进入二进制文件，再通过运行时评估每个种子执行路径相对于目标区域的平均距离从而
 利用种子的能量调度机制来影响测试用例的生成从而达到定向覆盖的目标。这一机制还会在章节\ref{sec:AFLGo}详细介绍。
 
-现在DGF仍然可以称作是模糊测试领域中非常先进的技术。其结合了定向模糊测试和灰盒模糊测试的思想，可以在不需要完全了解被测
+现在DGF仍然是模糊测试领域中非常先进的技术。其结合了定向模糊测试和灰盒模糊测试的思想，可以在不需要完全了解被测
 系统内部工作原理的情况下，检测出潜在的漏洞和错误。其将大部分的能量分配给重点的代码区域，而不浪费资源于其他无意义的部分，可以更快
 更高效地测试代码。同时，相比于白盒定向模糊测试方法，定向灰盒模糊测试可以避免过多地关注程序内部的实现细节，从而
 节省测试用例设计和编写的时间成本。
 \section{研究动机}
+自从定向灰盒模糊测试技术被提出来以来，就有许多相关的研究工作被提出。虽然AFLGo作为定向灰盒模糊测试方向开山之作在该方向的使用
+表现卓有成效，但是其策略在一些方面依然存在着一定的缺陷。后续又涌现出了一批相关的工作，例如Hawkeye\cite{chen2018hawkeye}， 
+CDGF\cite{lee2021constraint}, BEACON\cite{huang2022beacon}等。
+
+这些工作指出了AFLGo的诸多不足，例如Chen Hongxu等人认为AFLGo在能量分配上偏向较短的路径，这会导致漏洞的遗漏\cite{chen2018hawkeye}；
+Gwangmu Lee等人则认为AFLGo在路径上的优化问题处理方式会遗漏目标位置的顺序影响以及不考虑导致崩溃产生的数据条件，从而忽略满足崩溃条件的种子\cite{lee2021constraint}；
+Heqing Huang则指出AFLGo保留的过多无效路径仍然会影响模糊测试执行的路径以及耗费资源\cite{huang2022beacon}。
+
+这些工作中Chen Hongxu等人的Hawkeye\cite{chen2018hawkeye}对AFLGo的思路沿用最为整体，改进措施较为详细。
+但是他们的工作是在其自研的模糊测试框架FOT\cite{chen2018fot}上实现，且该项工具并未开源。这使得对于其成果即灰盒模糊测试的性能
+提升较难验证。于是我的定向算法指标设计主要参考了他们指出的问题，并尝试在开源的AFLGo框架上实现集成指标，以期达到AFLGo的改进。
 \section{本章小结}
+本章首先详细介绍了模糊测试的一般算法框架，并介绍了模糊测试技术的分类，分别详细区别了黑盒模糊测试，白盒模糊测试以及灰盒模糊测试的不同，一并介绍了
+不同技术的特点和相关工具。而后介绍了本文重点关注的定向模糊测试技术,介绍了技术发展初期的定向白盒模糊测试技术原理和相关工具，现在主要流行的
+定向灰盒模糊测试技术与典型工作AFLGo。最后，介绍了本文的研究动机和主要参考工作。
 
 \chapter{定向模糊测试策略设计}
 \section{AFLGo架构研究}\label{sec:AFLGo}
@@ -461,10 +475,151 @@ Ma等人提出了两种符号执行方式：最短距离符号执行（Shortest-
 	\Return{\crashseeds}\;
 	\caption[short]{定向灰盒模糊测试算法}\label{alg:DGF} 
 \end{algorithm} 
+\vspace{6pt}
+本文以AFLGo为主要研究对象，且主要改进及算法实现均在AFLGo上实现，故本节将详细介绍AFLGo的基本架构。
 
+算法\ref{alg:DGF}展现了AFLGo的基本执行流程。可以看到与算法\ref{alg:fuzzing}的基本结构相同。AFLGo采取的算法配置包括：种子队列，
+种子分配能量以及种子执行路径的距离。而AFLGo主要的修改可以分为在预处理阶段阶段和运行阶段两个阶段。
+
+在算法\ref{alg:DGF}的第3行和第4行是算法的预处理阶段。在这一阶段，AFLGo通过先进行一次插桩编译计算出被测试程序的调用图（Call Graph，简称CG）
+和每个函数对应的控制流图（Control-flow Graph，简称CFG），这一步是算法\ref{alg:DGF}的第3行实现。再通过利用提供的目标（即源码中对应的代码行号）
+识别出目标代码所在的函数（Target Function），在CG中利用迪杰斯特拉最短路径算法得到每个函数到达目标函数的最短距离。而后结合对应每个函数的CFG计算
+函数中的基本块到目标代码所在基本块（Target Basic Block）的距离。这一步是在算法\ref{alg:DGF}的第4行实现。此后，AFLGo会再执行一次插桩将代码
+距离植入每一个基本块。
+
+在算法\ref{alg:DGF}的第7、8和9行是算法的算法配置更新阶段。针对种子池中的所有输入种子，AFLGo都会将其执行一遍，并收集执行过程中种子轨迹的平均距离。
+这一步由算法的第7、8行完成。而后，算法会依据种子的距离以及算法已执行的时间，向种子分配能量。注意，在ALFGo中将种子的能量定义为由种子生成的测试用例数量。
+通过利用模拟退火的优化方式对种子分配能量，来引导测试用例更多的倾向于覆盖指定区域。
 \subsection{距离计算机制}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{pic/AFLGo.pdf}
+	\caption{AFLGo基本框架}
+ 	\label{pic:AFLGo}
+\end{figure}
+
+图\ref{pic:AFLGo}展示了AFLGo的基本框架。与图\ref{GF}所展示的灰盒模糊测试的基本框架相比，AFLGo做出较大改变的就是预处理的插桩部分。
+AFLGo利用LLVM的pass\cite{Pass}对程序的源码实现了编译器级别的分析和插桩。利用AFLGo的图生成器，AFLGo将得到程序的CG和CFG，这将用于
+参与计算AFLGo的函数级距离和基本块级目标距离。此外，可以根据提供的源码行号指定的目标得到目标代码所在的目标函数集$T_f$和目标基本块集$T_b$。
+而后，根据CG就可以计算函数级目标距离。
+
+函数级距离 $d_f(n, n')$ 定义为调用图CG中函数 $n$ 和 $n'$ 之间最短路径上的边数。而函数$n$与目标函数 $T_f$ 
+之间的函数级目标距离 $d_f (n,T_f) $则被定义为 $n$ 与任何可达目标函数 $t_f \in T_f$ 之间函数距离的调和平均值：
+ \begin{equation}\label{eq:fdis}
+	d_f(n,T_f)=\left\{ \begin{aligned}
+		&\text{undefined} , &\text{if } R(n,T_f)=\varnothing \\
+	   [&\sum\limits_{t_f\in R(n,T_f)} d_f(n,t_f)^{-1}]^{-1} , &\text{otherwise} 
+   \end{aligned}
+   \right.
+ \end{equation}
+式\ref{eq:fdis}中$R(n,T_f)$为从函数$n$出发可达的目标函数集$T_f$中的所有目标函数$t_f$的集合。注意，AFLGo是支持
+多个目标的，这也意味着目标函数可能不止一个。关于这里采用调和平均的计算方式，图\ref{pic:diff}展示了一个例子。在图中
+(a)采用了算数平均，而(b)采取了调和平均。当有多个目标函数时，在调用图中利用算数平均计算函数间目标距离无法很好地区分
+当到达不同目标函数的最短路径总和恰好相等时，究竟哪个函数离其中某个目标函数更近一点。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{pic/diff.pdf}
+	\caption{算数平均与调和平均的差异}
+ 	\label{pic:diff}
+\end{figure}
+
+基本块级目标函数距离则要依托函数级目标距离来参与计算。基本块级目标距离确定了从基本块到调用函数的所有其他基本块的距离，
+并且要考虑被调用函数的函数级目标距离。基本块级距离决定了一个函数的CFG中任意两个基本块之间的距离。因此，将基本块级距离
+$d_b(m_1, m_2)$ 作为函数$i$的控制流图$G_i$中基本块$m_1$和$m_2$ 之间最短路径上的边数。设$N(m)$为基本块 $m$的一个调用
+函数集，使得$\forall n \in N (m)$都有$R(n,T_f) \neq \varnothing$。设 $T$是 $G_i$中一个基本块集，使得$\forall m \in T$ 
+都有$N(m)\neq \varnothing$。请注意，目标基本块$T_b$不一定需要存在于当前CFG $G_i$中，但 $G_i$中可能存在可以调用可到达
+包含目标基本块$T_b$的函数的基本块集$T$。那么我们可以定义基本块$m$到目标基本块的$T_b$的基本块级目标距离$d_b(m,T_b)$为：
+\begin{equation}\label{eq:bbdis}
+	d_b(m,T_b)=\left\{ \begin{aligned}
+		&0 ,&\text{if } m \in T_b \\
+		&c \cdot \min \limits_{n\in N(m)}(d_f(n,T_f)) , &\text{if } m \in T \\
+	   [&\sum\limits_{t\in T} (d_b(m,t)+d_b(t,T_b))^{-1}]^{-1} , &\text{otherwise} 
+   \end{aligned}
+   \right.
+ \end{equation}
+式\ref{eq:bbdis}中的$c$为常数，在实际中取$c=10$。
+
+在通过利用CG和每个函数的CFG计算得到程序中所有基本块的基本块级目标距离$d_b(m,T_b)$后，AFLGo就将该数值通过第二次对程序的编译插桩
+进所有基本块中。至此，AFLGo的预处理阶段就结束了。
+
 \subsection{能量调度机制}
-\section{定向适应度指标}
+在经过了预处理之后的二进制文件在被AFLGo测试时会收集执行测试的每个种子$s$的目标距离$d(s,T_b)$。设种子$s$的执行轨迹为$\xi (s)$，那么我们可以定义
+衡量种子执行与目标基本块$T_b$远近的种子目标距离$d(s,T_b)$为：
+\begin{equation}\label{eq:sdis}
+	d(s,T_b)=\frac{\sum\limits_{m \in \xi (s)}d_b(m,T_b)}{| \xi(s)| }
+\end{equation}
+有了种子的目标距离，也就很好相应的定义种子的归一化目标距离用以作为种子能量分配调度的评判指标。针对种子池$S$中所有种子，
+可以在种子$s'\in S$执行时计算种子$s'$对应的归一化目标距离：
+\begin{equation}\label{eq:sndis}
+	\widetilde{d}(s,T_b)=\frac{d(s,T_b)-\text{minD}}{\text{maxD}-\text{minD}} \in [0,1]
+\end{equation}
+其中
+\begin{equation}
+	\text{minD}=\min\limits_{s'\in S}[d(s',T_b)] ,\\
+	\text{maxD}=\max\limits_{s'\in S}[d(s',T_b)] 	
+\end{equation}
+
+AFLGo的整体能量调度思路就是通过给种子目标距离更近的种子分配更多的能量，从而实现对目标的导向覆盖。这一思路来源于对模糊测试的马尔科夫链建模，这部分
+已经在章节\ref{sec:DGF}做了详细的介绍。在AFLGo中引入了模拟退火机制来进一步增加对能量调度的导向性，以期处理探索-开发问题。
+
+模拟退火算法是一种基于概率思想的全局优化算法，常用于解决组合优化问题。该算法基于统计力学中的退火过程，通过随机搜索
+来避免陷入局部最优解，从而寻找全局最优解。与经典的随机搜索方式相比，模拟退火的调度方式会以一定的概率接受较差的解，而这
+有使得模拟退火调度方式有跳出局部最优解达到全局最优解的可能性。接受较差解的概率由参数“温度”控制，随着时间的推延，温度逐渐下降
+能量调度也就越发降低接受较差解的可能性。随着温度最终的降低，模拟退火将找到一个全局的近似最优解。
+
+在AFLGo中，初始温度$T=T_0=1$。温度$T=1$时，AFLGo对能量的调度更倾向于平均分配，不受种子目标距离的影响。此时是处于AFLGo的
+开发阶段；而当$T=0$时，AFLGo对于能量的调度则更倾向于梯度下降，将最多的能量分配给种子目标距离更小的种子，而将较少的能量
+分配给种子目标距离较远的种子。此时是处于AFLGo的开发阶段。
+
+AFLGo采取指数型的冷却调度：
+\begin{equation}
+	T=T_0 \times \alpha^k	
+\end{equation}
+其中$\alpha$是一个小于1的常量，通常介于0.8到0.99之间；$k$是当前温度循环次数。由于温度决定了能量分配的策略，于是将$T_k=0.05$
+设置为温度阈值。当$T_k \leq 0.05$时，算法不再接受更差的解，进入开发阶段。
+
+将模糊测试已经执行的时间$t$作为调整温度循环$T_k$的参数，公式如下：
+\begin{equation}\label{eq:tk}
+	\frac{k}{k_x}=\frac{t}{t_x}	
+\end{equation}
+其中$k_x$是温度到达阈值$T_k$时的温度循环次数；$t_x$是此时模糊测试已经执行的时间。在AFLGo中，达到温度阈值时模糊测试已经执行的时间$t_x$由测试者预设，
+是已知量。
+
+结合温度阈值$T_k=0.05=\alpha^{k_x}$,那么要想计算某运行时刻$t$和温度$T$的关系。只需带入式\ref{eq:tk}，有：
+\begin{equation}\label{eq:t}
+	T=\alpha^k=\alpha^{\frac{t}{t_x}\times\frac{\log(0.05)}{\log(\alpha)}}=20^{-\frac{t}{t_x}}
+\end{equation}
+
+接下来，使用温度结合种子目标距离来进行能量调度。对给定的种子$s$，可以定义其被分配的能量分配因子$p(s)$为：
+\begin{equation}
+	p(s)=(1-\widetilde{d}(s,T_b))\cdot(1-T)+0.5T
+\end{equation}
+式中的$\widetilde{d}(s,T_b)$即由式\ref{eq:sndis}计算得到;当前温度$T$由式\ref{eq:t}计算得到。
+
+\begin{figure}[htb]
+	\centering
+	\subfigure[能量分配与种子目标距离的的关系]{
+		\begin{minipage}[b]{0.47\textwidth}
+			\includegraphics[width=1\textwidth]{dis.pdf}
+		\end{minipage}
+		}
+	\subfigure[能量分配与执行时间的关系]{
+		\begin{minipage}[b]{0.47\textwidth}
+		 	\includegraphics[width=1\textwidth]{dis2.pdf}
+		\end{minipage}
+		} 
+	\caption{模拟退火能量分配方式}
+ 	\label{pic:dis}
+\end{figure}
+
+则最终的种子被分配能量$\hat{p(s)}$为：
+\begin{equation}
+	\hat{p(s)}=p_{afl}(s)\cdot 2^{10\cdot p(s)-5}	
+\end{equation}
+式中的$p_{afl}(s)$是原有框架AFL为种子赋予的原始能量。
+\section{定向适应度指标设计}
+
 \subsection{距离定义}
 \subsection{目标函数集覆盖率}
 \subsection{能量调度机制}
@@ -484,7 +639,6 @@ Ma等人提出了两种符号执行方式：最短距离符号执行（Shortest-
 \subsection{系统测试环境}
 \section{功能测试}
 \section{实验评估}
-\subsection{定向模糊测试工具}
 \section{本章小结}
 
 
