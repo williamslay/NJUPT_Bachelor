@@ -165,7 +165,7 @@ KATCH\cite{marinescu2013katch} 需要24小时以上\cite{bohmeDGF2017}。
 第二章：主要介绍本文涉及技术的详细定义及通用架构，包括模糊测试技术和定向模糊测试技术，以及阐述本文的研究动机。
 
 第三章：介绍AFLGo的主要架构和适应度指标，以及针对于其不足设计出的定向模糊测试适应度指标。详细阐述相应指标的核心设计,
-包括插桩，目标函数集覆盖率的计算。
+包括距离机制的修改和可达目标函数集覆盖率的补充。
 
 第四章：结合目标场景对实现的定向模糊测试工具做了需求分析，详细介绍了基于LLVM的Pass技术实现的插桩以及静态分析过程
 。对于结构集成以及实现方式的缘由做了详细分析。
@@ -592,7 +592,7 @@ AFLGo采取指数型的冷却调度：
 \end{equation}
 
 接下来，使用温度结合种子目标距离来进行能量调度。对给定的种子$s$，可以定义其被分配的能量分配因子$p(s)$为：
-\begin{equation}
+\begin{equation}\label{eq:energy}
 	p(s)=(1-\widetilde{d}(s,T_b))\cdot(1-T)+0.5T
 \end{equation}
 式中的$\widetilde{d}(s,T_b)$即由式\ref{eq:sndis}计算得到;当前温度$T$由式\ref{eq:t}计算得到。
@@ -618,16 +618,186 @@ AFLGo采取指数型的冷却调度：
 	\hat{p(s)}=p_{afl}(s)\cdot 2^{10\cdot p(s)-5}	
 \end{equation}
 式中的$p_{afl}(s)$是原有框架AFL为种子赋予的原始能量。
+
+图\ref{pic:dis}展示了在设置时间阈值$t_x=45$时模拟退火调度下种子能量与归一化种子目标距离$d(s,T_b)$和模糊测试已经执行时间$t$之间的
+关系。其中(a)图展现了能量分配机制在不同的已执行时间条件下针对不同的归一化种子目标距离的种子的能量分配方式；(b)图展示了
+不同的归一化种子目标距离的种子随着执行时间的增加分配能量的变化。
+
 \section{定向适应度指标设计}
+AFLGo的能量调度策略以及设计方式奠定了DGF的基本流程框架。但是，在DGF关于距离的定义机制应该是公平且不带有偏见性的。也即，
+DGF应该有一个很好的基于距离的机制，可以通过考虑到目标的所有轨迹并避免对某些轨迹的偏见来指导定向模糊测试。此外，作为灰盒模糊测试
+，DGF应该在静态分析的开销和实用程序之间取得平衡。
 
+出于以上原则，实际上上述AFLGo的距离设计和能量调度的机制会具有一定的偏见性。这也是本文针对AFLGo设计改进的基础，将在以下小节分别阐述。
 \subsection{距离定义}
-\subsection{目标函数集覆盖率}
-\subsection{能量调度机制}
-\section{本章小结}
+让我们回到AFLGo对于函数级距离的定义并重新审视它：函数级距离 $d_f(n, n')$ 定义为调用图CG中函数 $n$ 和 $n'$ 之间最短路径上的边数。
+事实上这一定义中包含了一项默认信息，即从一个函数$n$到另一个函数$n'$的单位距离是调用图中相邻函数之间的一条边，即单位“1”.
 
+这样的默认条件只考虑了函数间的调用关系。我们再回到AFLGo对模糊测试过程的马尔科夫链建模过程：种子变异导致的程序执行路径转移概率,
+为马尔可夫链上的状态转移概率。那么函数间的函数级距离事实上也应该反映函数间互相调用（状态转移）的概率。
+
+\begin{figure}[htb]
+	\centering
+	\subfigure[code1]{
+		\begin{minipage}[b]{0.35\textwidth}
+			\includegraphics[width=1\textwidth]{code1.pdf}
+		\end{minipage}
+		}
+	\subfigure[code2]{
+		\begin{minipage}[b]{0.35\textwidth}
+		 	\includegraphics[width=1\textwidth]{code2.pdf}
+		\end{minipage}
+		} \\
+	\subfigure[code1-cfg]{
+		\begin{minipage}[b]{0.3\textwidth}
+			\includegraphics[width=1\textwidth]{excfg1.pdf}
+		\end{minipage}
+		}
+	\subfigure[cg]{
+			\begin{minipage}[b]{0.25\textwidth}
+				\includegraphics[width=1\textwidth]{excg.pdf}
+			\end{minipage}
+			}	
+	\subfigure[code2-cfg]{
+		\begin{minipage}[b]{0.3\textwidth}
+		 	\includegraphics[width=1\textwidth]{excfg2.pdf}
+		\end{minipage}
+		} 	
+	\caption{代码示例}
+ 	\label{pic:code}
+\end{figure}
+
+图\ref{pic:code}展现了这样的一个例子：(a)和(b)是两个不同的函数调用代码，但是它们的调用图CG都如(d)图所示一样。但是如果仔细追究
+其所对应的控制流图CFG，也即(c)和(e)时，可以知道在这个两个代码示例中，函数$fa$对函数$fb,fc$的调用概率（状态转移概率）是不同的。
+在(a)的情况下$fa$必然会调用$fb$,而不一定调用$fc$；在(b)的情况下$fa$并不一定会调用$fb$。但是仅凭(d)中的调用图CG是无法
+反映这样的区别的，也即这两种状况下被计算的得到的函数级距离是相同的。我们期望的理想状态应该是在(a)的情况下，$fa \to fb$的距离应当
+小于(b)情况下的$fa \to fb$的距离。
+
+这就使得我们得重新定义一个更精确的函数级距离。因此，我们采取使用两个额外的指标来增加由调用函数（称作“caller”）和被调用函数（称作“callee”）之间的直接调用关系定义的距离。
+\begin{enumerate}[label=(\arabic*)]
+	\item 给定调用函数caller中针对某个被调用函数callee的调用点的出现次数$C_N$。
+	被调用函数callee的出现次数越多，就越有可能在执行时被调用函数caller调用，
+	从而使调用函数caller到被调用函数callee之间的距离变小。为了显示这一效果，定义一个因子:
+	\begin{equation}
+	\Phi (C_N)=\frac{\phi \cdot C_N+1}{\phi \cdot C_N}
+	\end{equation}
+	其中$\phi$为常量，一般取$\phi=2$。
+	\item 调用函数caller中至少包含一个被调用函数callee调用点的基本块的个数$C_B$。
+	随着调用函数中更多分支(或者说，基本块)具有调用点，也就意味着更多不同的执行路径将包括被调用函数。
+	为了显示这一效果，定义一个因子:
+	\begin{equation}
+	\Psi (C_B)=\frac{\psi \cdot C_B+1}{\psi \cdot C_B}
+	\end{equation}
+	其中$\psi$为常量，一般取$\psi=2$。	
+\end{enumerate}
+
+现在，有了这两个影响因子，我们可以重新定义函数级距离$d(f_1,f_2)$:
+\begin{equation}
+	d(f_1,f_2)=\Psi (f_1,f_2)\cdot \Phi (f_1,f_2) 
+\end{equation}
+注意这里的$f_1,f_2$是调用函数与被调用函数的关系。我们再以图\ref{pic:code}中的例子来做验证。
+对于(a)中的情况，
+$d(fa,fb)=\frac{2\cdot 2+1}{2\cdot 2} \cdot \frac{2\cdot 2+1}{2\cdot 2} = 1.56$，
+$d(fa,fc)=\frac{2\cdot 1+1}{2\cdot 1} \cdot \frac{2\cdot 1+1}{2\cdot 1} = 2.25$。
+对于(b)中的情况，
+$d(fa,fb)=\frac{2\cdot 2+1}{2\cdot 2} \cdot \frac{2\cdot 1+1}{2\cdot 1} = 1.87$，
+$d(fa,fc)=\frac{2\cdot 1+1}{2\cdot 1} \cdot \frac{2\cdot 1+1}{2\cdot 1} = 2.25$。
+
+可以看到，这一机制成功的区分了这样的概率偏差导致的函数级调用距离的不同。为此，在AFLGo中的函数级目标距离（也即式\ref{eq:fdis}），基本块级
+目标距离（也即式\ref{eq:bbdis}）中函数间的距离都要以此距离为基础做修改。
+
+\subsection{可达目标函数集覆盖率}
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.3\textwidth]{trace.pdf}
+	\caption{种子路径示例}
+ 	\label{pic:trace}
+\end{figure}
+
+让我们再重新审视种子目标距离的定义，即式\ref{eq:sdis}。其采取的计算方式是种子路径经过的基本块的基本块级目标距离总和除以
+经过的基本块数。注意，由于轻量化插桩实现的机制，在实际计算过程中，种子目标距离计算时除以的是种子路径上经过的基本块级目标距离大于等于0的
+基本块总数。
+
+在图\ref{pic:trace}中提供了这样的一个例子。这是程序的部分调用图CG。为了简单起见，将每个函数中的基本块假设为1，那么我们就用函数级的
+目标距离来代替基本块级目标距离来计算种子的目标距离。如图所示，假设$T$为目标函数，其余每个函数的目标距离已计算得出并在图中标出，
+其中“NA”为不可达目标函数。假设三个种子的执行路径分别如下：
+\begin{itemize}
+	\item 种子S1:$a \to b \to c \to d \to T \to Z$
+	\item 种子S2:$a \to e \to T \to Z$
+	\item 种子S3:$a \to e \to f \to Z$
+\end{itemize}
+那么依据式\ref{eq:sdis}，可以分别计算出种子目标距离$d(S1,T)=\frac{2+3+2+1+0}{5}=1.6$，$d(S2,T)=\frac{2+1+0}{3}=1$，
+$d(S3,T)=\frac{2+1}{2}=1.5$。
+
+按照DGF关于距离的定义机制是公平且不带有偏见性的原则，我们显然可以看出AFLGo设计的种子目标距离是具有一定的偏见性的：即AFLGo更倾向于
+选择路径更短的种子。我们可以看到，能够到达目标函数的长路径种子S1的距离甚至比不能到达目标函数的短路径种子S3要远！这也意味着，如果实际
+漏洞存在于较长的执行路径的话，AFLGo的偏向性会使得其花费更多的时间资源来探查到此漏洞。这显然与DGF的目标不符，也与设计原则冲突。究其原因，
+是AFLGo采取了最短路径算法的距离定义和能量调度策略使得AFLGo倾向于更快地到达目标，而不是尽可能的覆盖测试所有可能到达目标的路径。
+
+于是我们可以补充定义一个可达目标函数集覆盖率的指标来引导种子尽可能覆盖更多可能到达目标的路径。首先我们引入可达目标函数集$\zeta(T_f)$的概念,
+$\zeta(T_f)$是被测试程序中所有可以到达目标函数集$T_f$中任一函数$t_f$的函数集。
+
+\begin{algorithm}[H]
+	\SetKwSty{algokeywordsty}
+	\SetFuncSty{algofuncsty}
+	\SetDataSty{algodatasty}
+	\SetArgSty{algoargsty}
+	\SetCommentSty{algocmtsty}
+	\SetKw{break}{break}
+	\SetKw{continue}{continue}
+	\SetKw{not}{not}
+	\SetKwFunction{dequeue}{\textsc{Dequeue}}
+	\SetKwFunction{enqueue}{\textsc{Enqueue}}
+	\SetKwFunction{isempty}{\textsc{IsEmpty}}
+	\SetKwFunction{iscall}{\textsc{IsCall}}	
+	\SetKwFunction{getProgram}{getProgram}
+	\SetKwData{queue}{$\textit{Queue}$}
+	\SetKwData{func}{$\textit{Function}$}
+	\SetKwData{i}{$\textit{func}$}	
+	\SetKwData{cg}{$\textit{CallGraph}$}	
+	\KwIn{\targets\tcp{a finite set of targets}}
+	\KwOut{\reach \tcp{a finite set of target-reachable functions}}
+	$\reach \gets \varnothing$\;
+	$\queue \gets \targets$ \; 
+	\While {$ !\isempty(\queue) $}{
+	  $\func \gets \dequeue(\queue) $\; 
+	  \For{$\i \in \cg $}
+	   {    
+		\If{\iscall(\i,\func)}
+		{
+			\tcp{to be unique}
+			\lIf{\i $\in$ \queue}{\continue}
+			\enqueue(\queue,\i) \; 	
+			$\reach \gets \reach \cup \i$\;	
+		}
+	   }
+	}
+	\Return{\reach}\;
+	\caption[short]{计算可达目标函数集的不动点算法}\label{alg:point} 
+\end{algorithm} 
+\vspace{6pt}
+算法\ref{alg:point}展示了一个简单的依据调用图CG计算$\zeta(T_f)$的不动点算法。利用此算法我们可以计算得到可达目标函数集，
+由此可以定义种子的可达目标函数集覆盖率：
+\begin{equation}
+	C_s(s)=\frac{|\xi(s) \cap \zeta(T_f)|}{|\zeta(T_f)|}
+\end{equation}
+由此我们就得到了可达目标函数集覆盖率。不过由于在实际测试中，$\zeta(T_f)$一般为固定大小，故我们实际采用可达目标函数集覆盖量
+$r(s)=|\xi(s) \cap \zeta(T_f)|$来做衡量即可。
+
+在引入可达目标函数集覆盖量这一指标后，我们通过对其进行归一化处理得到$\widetilde{r}(s)$，将其引入能量调度公式（即式\ref{eq:energy}），
+得到更新后的能量调度公式：
+\begin{equation}
+	p(s)=\widetilde{r}(s) \cdot (1-\widetilde{d}(s,T_b))\cdot(1-T)+0.5T
+\end{equation}
+
+\section{本章小结}
+本章详细介绍了本文重点研究的灰盒模糊测试工具AFLGo及其框架结构。通过距离计算机制和能量调度机制详细分析了AFLGo实现
+对被测试程序的定向策略。而后，本章结合示例指出其设计机制上的不合理之处，并针对性的进行了定向指标的补充设计和修改，包括
+距离的重新定义和可达函数集覆盖率的设计。
 
 \chapter{基于AFLGo的定向模糊测试系统的实现}
 \section{需求分析}
+
 \section{架构设计}
 \section{静态分析器的改进}
 \section{定向模糊测试工具}
@@ -646,41 +816,6 @@ AFLGo采取指数型的冷却调度：
 \section{总结}
 \section{展望}
 
-% \section{Apple M1}
-% 这是一个公式
-% \begin{equation}
-% 	y=A x+b
-% \end{equation}
-
-
-% 南京南站如图\ref{南京南站}所示。
-% \begin{figure}[hbt]
-% 	\centering
-% 	\subfigure[南京南1]{
-% 		\begin{minipage}[b]{0.4\textwidth}
-% 			\includegraphics[width=1\textwidth]{1}
-% 		\end{minipage}
-% 	}
-% 	\subfigure[南京南2]{
-% 		\begin{minipage}[b]{0.4\textwidth}
-% 			\includegraphics[width=1\textwidth]{2}
-			
-% 		\end{minipage}
-% 	} \\
-% 	\subfigure[南京南3]{
-% 		\begin{minipage}[b]{0.4\textwidth}
-% 			\includegraphics[width=1\textwidth]{3}
-% 		\end{minipage}
-% 	}
-% 	\subfigure[南京南4]{
-% 		\begin{minipage}[b]{0.4\textwidth}
-% 			\includegraphics[width=1\textwidth]{4}
-			
-% 		\end{minipage}
-% 	}
-% 	\caption{南京南站}
-% 	\label{南京南站}
-% \end{figure}
 
 %这里是结束语
 \thesisconclusion

@@ -43,35 +43,38 @@
  \cftsetpnumwidth {\widthof {17}-1pt} \thispagestyle {empty} 
 \contentsline {section}{\numberline {3.2}定向适应度指标设计}{17}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}距离定义}{17}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}目标函数集覆盖率}{17}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}能量调度机制}{17}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}本章小结}{17}{section.3.3}%
  \cftsetpnumwidth {\widthof {18}-1pt} \thispagestyle {empty} 
-\contentsline {chapter}{\numberline {第四章}基于AFLGo的定向模糊测试系统的实现}{18}{chapter.4}%
-\contentsline {section}{\numberline {4.1}需求分析}{18}{section.4.1}%
-\contentsline {section}{\numberline {4.2}架构设计}{18}{section.4.2}%
-\contentsline {section}{\numberline {4.3}静态分析器的改进}{18}{section.4.3}%
-\contentsline {section}{\numberline {4.4}定向模糊测试工具}{18}{section.4.4}%
-\contentsline {section}{\numberline {4.5}本章小结}{18}{section.4.5}%
  \cftsetpnumwidth {\widthof {19}-1pt} \thispagestyle {empty} 
-\contentsline {chapter}{\numberline {第五章}系统测试}{19}{chapter.5}%
-\contentsline {section}{\numberline {5.1}系统测试概述}{19}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}系统测试目标}{19}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}系统测试环境}{19}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}功能测试}{19}{section.5.2}%
-\contentsline {section}{\numberline {5.3}实验评估}{19}{section.5.3}%
-\contentsline {section}{\numberline {5.4}本章小结}{19}{section.5.4}%
+\contentsline {subsection}{\numberline {3.2.2}可达目标函数集覆盖率}{19}{subsection.3.2.2}%
  \cftsetpnumwidth {\widthof {20}-1pt} \thispagestyle {empty} 
-\contentsline {chapter}{\numberline {第六章}总结与展望}{20}{chapter.6}%
-\contentsline {section}{\numberline {6.1}总结}{20}{section.6.1}%
-\contentsline {section}{\numberline {6.2}展望}{20}{section.6.2}%
-\setcounter {tocdepth}{0}
  \cftsetpnumwidth {\widthof {21}-1pt} \thispagestyle {empty} 
-\contentsline {chapter}{结束语}{21}{chapter*.8}%
-\setcounter {tocdepth}{0}
+\contentsline {section}{\numberline {3.3}本章小结}{21}{section.3.3}%
  \cftsetpnumwidth {\widthof {22}-1pt} \thispagestyle {empty} 
-\contentsline {chapter}{致谢}{22}{chapter*.9}%
+\contentsline {chapter}{\numberline {第四章}基于AFLGo的定向模糊测试系统的实现}{22}{chapter.4}%
+\contentsline {section}{\numberline {4.1}需求分析}{22}{section.4.1}%
+\contentsline {section}{\numberline {4.2}架构设计}{22}{section.4.2}%
+\contentsline {section}{\numberline {4.3}静态分析器的改进}{22}{section.4.3}%
+\contentsline {section}{\numberline {4.4}定向模糊测试工具}{22}{section.4.4}%
+\contentsline {section}{\numberline {4.5}本章小结}{22}{section.4.5}%
  \cftsetpnumwidth {\widthof {23}-1pt} \thispagestyle {empty} 
-\contentsline {chapter}{参考文献}{23}{chapter*.10}%
+\contentsline {chapter}{\numberline {第五章}系统测试}{23}{chapter.5}%
+\contentsline {section}{\numberline {5.1}系统测试概述}{23}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}系统测试目标}{23}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}系统测试环境}{23}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}功能测试}{23}{section.5.2}%
+\contentsline {section}{\numberline {5.3}实验评估}{23}{section.5.3}%
+\contentsline {section}{\numberline {5.4}本章小结}{23}{section.5.4}%
  \cftsetpnumwidth {\widthof {24}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{\numberline {第六章}总结与展望}{24}{chapter.6}%
+\contentsline {section}{\numberline {6.1}总结}{24}{section.6.1}%
+\contentsline {section}{\numberline {6.2}展望}{24}{section.6.2}%
+\setcounter {tocdepth}{0}
+ \cftsetpnumwidth {\widthof {25}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{结束语}{25}{chapter*.10}%
+\setcounter {tocdepth}{0}
+ \cftsetpnumwidth {\widthof {26}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{致谢}{26}{chapter*.11}%
+ \cftsetpnumwidth {\widthof {27}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{参考文献}{27}{chapter*.12}%
+ \cftsetpnumwidth {\widthof {28}-1pt} \thispagestyle {empty} 
 \contentsfinish 

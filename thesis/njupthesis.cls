@@ -119,10 +119,10 @@
 \newcommand*{\bugoracle}{\ensuremath{O_\text{bug}}\xspace}%
 \newcommand*{\execinfos}{\texttt{execinfos}\xspace}%
 \newcommand*{\bugs}{\ensuremath{\mathbb{B}}\xspace}%
-
 \newcommand*{\seeds}{\ensuremath{\mathbb{S}}\xspace}%
 \newcommand*{\seed}{\texttt{s}\xspace}%
 \newcommand*{\targets}{\ensuremath{\mathbb{T}}\xspace}%
+\newcommand*{\reach}{\ensuremath{\mathbb{R}}\xspace}%
 \newcommand*{\sourcecode}{\ensuremath{\ensuremath{Code}}\xspace}%
 
 \def\HiLi{\leavevmode\rlap{\hbox to \hsize{\color{yellow!50}\leaders\hrule height .6\baselineskip depth .5ex\hfill}}}
