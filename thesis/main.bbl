@@ -1,4 +1,4 @@
-\begin{thebibliography}{31}
+\begin{thebibliography}{33}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -24,11 +24,11 @@ Man{\`e}s~V~J, Han~H, Han~C, et~al.
 \newblock IEEE Transactions on Software Engineering, 2019, 47\allowbreak (11):
   2312-2331.
 
-\bibitem[Wang et~al.(2022)Wang, Zhou, Lu, Yue, and Liu]{wang2022}
+\bibitem[Wang et~al.(2020{\natexlab{a}})Wang, Zhou, Lu, Yue, and Liu]{wang2022}
 Wang~P, Zhou~X, Lu~K, et~al.
 \newblock The progress, challenges, and perspectives of directed greybox
-  fuzzing: arXiv:2005.11907\allowbreak[EB/OL].
-\newblock arXiv, 2022.
+  fuzzing\allowbreak[J].
+\newblock arXiv preprint arXiv:2005.11907, 2020{\natexlab{a}}.
 
 \bibitem[Cadar et~al.(2008)Cadar, Dunbar, and Engler]{cadar2008klee}
 Cadar~C, Dunbar~D, Engler~D~R.
@@ -89,14 +89,14 @@ Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications
   Security.
 \newblock 2018{\natexlab{a}}: 2095-2108.
 
-\bibitem[Wang et~al.(2020)Wang, Xie, Li, Wen, Li, Liu, Qin, Chen, and
-  Sui]{wang2020typestate}
+\bibitem[Wang et~al.(2020{\natexlab{b}})Wang, Xie, Li, Wen, Li, Liu, Qin, Chen,
+  and Sui]{wang2020typestate}
 Wang~H, Xie~X, Li~Y, et~al.
 \newblock Typestate-guided fuzzer for discovering use-after-free
   vulnerabilities\allowbreak[C]//\allowbreak
 Proceedings of the ACM/IEEE 42nd International Conference on Software
   Engineering.
-\newblock 2020: 999-1010.
+\newblock 2020{\natexlab{b}}: 999-1010.
 
 \bibitem[Lee et~al.(2021)Lee, Shim, and Lee]{lee2021constraint}
 Lee~G, Shim~W, Lee~B.
@@ -214,5 +214,16 @@ Chen~H, Li~Y, Chen~B, et~al.
 Proceedings of the 2018 26th ACM Joint Meeting on European Software Engineering
   Conference and Symposium on the Foundations of Software Engineering.
 \newblock 2018{\natexlab{b}}: 867-870.
+
+\bibitem[Cla({[2023]})]{Clang}
+Clang:a c language family frontend for llvm\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://clang.llvm.org/}.
+
+\bibitem[Boo({[2023]})]{Boost}
+Boost:one of the most highly regarded and expertly designed c++ library
+  projects\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://www.boost.org/}.
 
 \end{thebibliography}

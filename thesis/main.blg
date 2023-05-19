@@ -23,51 +23,57 @@ Warning--empty year in Spike
 Warning--empty year in Spike
 Warning--empty year in AFL
 Warning--empty year in AFL
+Warning--empty year in Clang
+Warning--empty year in Clang
+Warning--empty year in Boost
+Warning--empty year in Boost
 Warning--empty author in Heartbleed
 Warning--empty author in Pass
 Warning--empty author in Libxml2
 Warning--empty author in Peach
 Warning--empty author in Spike
 Warning--empty author in AFL
-You've used 31 entries,
+Warning--empty author in Clang
+Warning--empty author in Boost
+You've used 33 entries,
             5225 wiz_defined-function locations,
-            1188 strings with 12847 characters,
-and the built_in function-call counts, 214541 in all, are:
-= -- 4572
-> -- 24545
-< -- 30681
-+ -- 8653
-- -- 1642
-* -- 1430
-:= -- 29687
-add.period$ -- 94
-call.type$ -- 31
-change.case$ -- 62
-chr.to.int$ -- 7535
-cite$ -- 55
-duplicate$ -- 828
-empty$ -- 2242
+            1193 strings with 13030 characters,
+and the built_in function-call counts, 221651 in all, are:
+= -- 4672
+> -- 25327
+< -- 31740
++ -- 8949
+- -- 1648
+* -- 1501
+:= -- 30627
+add.period$ -- 100
+call.type$ -- 33
+change.case$ -- 66
+chr.to.int$ -- 7764
+cite$ -- 65
+duplicate$ -- 857
+empty$ -- 2357
 format.name$ -- 834
-if$ -- 56057
-int.to.chr$ -- 2
-int.to.str$ -- 32
+if$ -- 57964
+int.to.chr$ -- 3
+int.to.str$ -- 34
 missing$ -- 0
-newline$ -- 185
+newline$ -- 195
 num.names$ -- 75
-pop$ -- 11004
+pop$ -- 11430
 preamble$ -- 1
-purify$ -- 31
+purify$ -- 33
 quote$ -- 0
-skip$ -- 22398
+skip$ -- 23135
 stack$ -- 0
-substring$ -- 9747
-swap$ -- 41
-text.length$ -- 647
+substring$ -- 10039
+swap$ -- 47
+text.length$ -- 664
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 333
-warning$ -- 18
-while$ -- 666
+type$ -- 355
+warning$ -- 24
+while$ -- 677
 width$ -- 0
-write$ -- 413
-(There were 18 warnings)
+write$ -- 435
+(There were 24 warnings)
