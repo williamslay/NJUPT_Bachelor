@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  21 MAY 2023 16:27
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  22 MAY 2023 11:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1116,29 +1116,32 @@ Chapter 第五章.
 Chapter 第六章.
 [28
 
-] (./main.bbl [29
+] [29]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 998.
+ (./main.bbl [30
 
-] [30
+] [31
 
 ])
 
 Package caption Warning: Unused \captionsetup[table] on input line 231.
 See the caption package documentation for explanation.
 
-[31] (./main.aux)
+[32] (./main.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C35DE157FE6217ACAE4ACFAEBDF56BA7;5895.
+(rerunfilecheck)             Checksum: 9EA508C52C9C32A77014445C45FCB9A6;6005.
  ) 
 Here is how much of TeX's memory you used:
- 23138 strings out of 476684
- 472069 string characters out of 5804055
+ 23157 strings out of 476684
+ 472363 string characters out of 5804055
  1889018 words of memory out of 5000000
- 42905 multiletter control sequences out of 15000+600000
- 567996 words of font info for 161 fonts, out of 8000000 for 9000
+ 42919 multiletter control sequences out of 15000+600000
+ 576341 words of font info for 172 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  101i,23n,105p,306b,708s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (37 pages).
+Output written on main.pdf (38 pages).
