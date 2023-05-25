@@ -25,7 +25,7 @@
 \RequirePackage{mathspec}
 \RequirePackage{fontspec}
 \RequirePackage{bm}
-
+\RequirePackage{listings}
 \RequirePackage{xeCJK}
 \RequirePackage{ifplatform}
 
@@ -125,8 +125,6 @@
 \newcommand*{\reach}{\ensuremath{\mathbb{R}}\xspace}%
 \newcommand*{\sourcecode}{\ensuremath{\ensuremath{Code}}\xspace}%
 
-\def\HiLi{\leavevmode\rlap{\hbox to \hsize{\color{yellow!50}\leaders\hrule height .6\baselineskip depth .5ex\hfill}}}
-
 
 % \newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
 
@@ -168,6 +166,20 @@
 % % 算法题注设置
 % \captionsetup[algorithm]{aboveskip=6pt}
 % \AtBeginEnvironment{algorithm}{\vspace{6pt}}
+
+
+%代码listings
+\lstset{
+	frame=single,
+	captionpos=b,
+	breaklines=true,
+	basicstyle=\ttfamily\small,
+  tabsize=4,
+}
+
+\renewcommand{\lstlistingname}{代码}
+\DeclareCaptionFormat{mylst}{#1#2      #3}
+\captionsetup[lstlisting]{format=mylst,labelfont=bf,singlelinecheck=off,labelsep=space,justification=centering}
 
 % 设置插入图片路径
 \graphicspath{{./pic/}}
@@ -228,7 +240,7 @@
 \captionsetup{width=\textwidth - 42pt,labelsep=custom}
 % 图注下方空行
 \captionsetup[figure]{aboveskip=0pt,belowskip=6pt}
-\captionsetup[table]{aboveskip=0pt,belowskip=0pt}
+\captionsetup[table]{aboveskip=0pt,belowskip=6pt}
 
 
 \setlength{\extrarowheight}{5pt}
@@ -307,7 +319,7 @@
 \RequirePackage[hang, perpage]{footmisc}
 
 \addtolength{\footnotesep}{0pt}
-\setlength{\footnotemargin}{1.5pt}
+\setlength{\footnotemargin}{10.5pt}
 
 \renewcommand{\footnotesize}{\fontsize{9pt}{10.8pt}\selectfont}
 \renewcommand{\small}{\fontsize{10.5pt}{12.6pt}\selectfont}

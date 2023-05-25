@@ -1,4 +1,4 @@
-\begin{thebibliography}{33}
+\begin{thebibliography}{42}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -225,5 +225,52 @@ Boost:one of the most highly regarded and expertly designed c++ library
   projects\allowbreak[EB/OL].
 \newblock \allowbreak[2023-05-13].
 \newblock \url{https://www.boost.org/}.
+
+\bibitem[afl({[2023]})]{aflpp}
+American fuzzy lop plus plus (afl++)\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://github.com/AFLplusplus/AFLplusplus}.
+
+\bibitem[cxx({[2023]})]{cxxfilt}
+Gnu binutils:cxxfilt\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock
+  \url{https://github.com/redox-os/binutils-gdb/blob/master/binutils/cxxfilt.c}.
+
+\bibitem[mjs({[2023]})]{mjs}
+mjs: Restricted javascript engine\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://github.com/cesanta/mjs}.
+
+\bibitem[obj({[2023]})]{objdump}
+Gnu binutils:objdump\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock
+  \url{https://github.com/bminor/binutils-gdb/blob/master/binutils/objdump.c}.
+
+\bibitem[47C({[2023]})]{47CVE}
+Cve-2017-9047\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://nvd.nist.gov/vuln/detail/CVE-2017-9047#match-6761949}.
+
+\bibitem[48C({[2023]})]{48CVE}
+Cve-2017-9048\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://nvd.nist.gov/vuln/detail/CVE-2017-9048}.
+
+\bibitem[49C({[2023]})]{49CVE}
+Cve-2017-9049\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://nvd.nist.gov/vuln/detail/CVE-2017-9049}.
+
+\bibitem[50C({[2023]})]{50CVE}
+Cve-2017-9050\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://nvd.nist.gov/vuln/detail/CVE-2017-9050}.
+
+\bibitem[39C({[2023]})]{39CVE}
+Cve-2016-1839\allowbreak[EB/OL].
+\newblock \allowbreak[2023-05-13].
+\newblock \url{https://nvd.nist.gov/vuln/detail/CVE-2016-1839}.
 
 \end{thebibliography}

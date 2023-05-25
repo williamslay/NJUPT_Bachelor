@@ -27,6 +27,24 @@ Warning--empty year in Clang
 Warning--empty year in Clang
 Warning--empty year in Boost
 Warning--empty year in Boost
+Warning--empty year in aflpp
+Warning--empty year in aflpp
+Warning--empty year in cxxfilt
+Warning--empty year in cxxfilt
+Warning--empty year in mjs
+Warning--empty year in mjs
+Warning--empty year in objdump
+Warning--empty year in objdump
+Warning--empty year in 47CVE
+Warning--empty year in 47CVE
+Warning--empty year in 48CVE
+Warning--empty year in 48CVE
+Warning--empty year in 49CVE
+Warning--empty year in 49CVE
+Warning--empty year in 50CVE
+Warning--empty year in 50CVE
+Warning--empty year in 39CVE
+Warning--empty year in 39CVE
 Warning--empty author in Heartbleed
 Warning--empty author in Pass
 Warning--empty author in Libxml2
@@ -35,45 +53,54 @@ Warning--empty author in Spike
 Warning--empty author in AFL
 Warning--empty author in Clang
 Warning--empty author in Boost
-You've used 33 entries,
+Warning--empty author in aflpp
+Warning--empty author in cxxfilt
+Warning--empty author in mjs
+Warning--empty author in objdump
+Warning--empty author in 47CVE
+Warning--empty author in 48CVE
+Warning--empty author in 49CVE
+Warning--empty author in 50CVE
+Warning--empty author in 39CVE
+You've used 42 entries,
             5225 wiz_defined-function locations,
-            1193 strings with 13030 characters,
-and the built_in function-call counts, 221651 in all, are:
-= -- 4672
-> -- 25327
-< -- 31740
-+ -- 8949
-- -- 1648
-* -- 1501
-:= -- 30627
-add.period$ -- 100
-call.type$ -- 33
-change.case$ -- 66
-chr.to.int$ -- 7764
-cite$ -- 65
-duplicate$ -- 857
-empty$ -- 2357
+            1225 strings with 13732 characters,
+and the built_in function-call counts, 231629 in all, are:
+= -- 5131
+> -- 25930
+< -- 32535
++ -- 9267
+- -- 1720
+* -- 1807
+:= -- 31905
+add.period$ -- 127
+call.type$ -- 42
+change.case$ -- 84
+chr.to.int$ -- 7947
+cite$ -- 110
+duplicate$ -- 1082
+empty$ -- 2987
 format.name$ -- 834
-if$ -- 57964
+if$ -- 60880
 int.to.chr$ -- 3
-int.to.str$ -- 34
+int.to.str$ -- 43
 missing$ -- 0
-newline$ -- 195
+newline$ -- 240
 num.names$ -- 75
-pop$ -- 11430
+pop$ -- 11746
 preamble$ -- 1
-purify$ -- 33
+purify$ -- 42
 quote$ -- 0
-skip$ -- 23135
+skip$ -- 24109
 stack$ -- 0
-substring$ -- 10039
-swap$ -- 47
-text.length$ -- 664
+substring$ -- 10402
+swap$ -- 65
+text.length$ -- 745
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 355
-warning$ -- 24
-while$ -- 677
+type$ -- 454
+warning$ -- 51
+while$ -- 731
 width$ -- 0
-write$ -- 435
-(There were 24 warnings)
+write$ -- 534
+(There were 51 warnings)

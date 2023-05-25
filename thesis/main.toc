@@ -33,7 +33,7 @@
 \contentsline {section}{\numberline {2.3}研究动机}{12}{section.2.3}%
 \contentsline {section}{\numberline {2.4}本章小结}{12}{section.2.4}%
  \cftsetpnumwidth {\widthof {13}-1pt} \thispagestyle {empty} 
-\contentsline {chapter}{\numberline {第三章}定向模糊测试策略设计}{13}{chapter.3}%
+\contentsline {chapter}{\numberline {第三章}定向模糊测试策略研究与设计}{13}{chapter.3}%
 \contentsline {section}{\numberline {3.1}AFLGo架构研究}{13}{section.3.1}%
  \cftsetpnumwidth {\widthof {14}-1pt} \thispagestyle {empty} 
 \contentsline {subsection}{\numberline {3.1.1}距离计算机制}{14}{subsection.3.1.1}%
@@ -66,20 +66,26 @@
  \cftsetpnumwidth {\widthof {27}-1pt} \thispagestyle {empty} 
 \contentsline {chapter}{\numberline {第五章}系统测试}{27}{chapter.5}%
 \contentsline {section}{\numberline {5.1}系统测试概述}{27}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}系统测试目标}{27}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}系统测试环境}{27}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.1}系统测试环境}{27}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}系统测试目标}{27}{subsection.5.1.2}%
 \contentsline {section}{\numberline {5.2}功能测试}{27}{section.5.2}%
-\contentsline {section}{\numberline {5.3}实验评估}{27}{section.5.3}%
-\contentsline {section}{\numberline {5.4}本章小结}{27}{section.5.4}%
+\contentsline {subsection}{\numberline {5.2.1}距离机制集成的有效性}{27}{subsection.5.2.1}%
  \cftsetpnumwidth {\widthof {28}-1pt} \thispagestyle {empty} 
-\contentsline {chapter}{\numberline {第六章}总结与展望}{28}{chapter.6}%
-\contentsline {section}{\numberline {6.1}总结}{28}{section.6.1}%
-\contentsline {section}{\numberline {6.2}展望}{28}{section.6.2}%
+\contentsline {subsection}{\numberline {5.2.2}定向覆盖的有效性}{28}{subsection.5.2.2}%
  \cftsetpnumwidth {\widthof {29}-1pt} \thispagestyle {empty} 
-\setcounter {tocdepth}{0}
  \cftsetpnumwidth {\widthof {30}-1pt} \thispagestyle {empty} 
-\contentsline {chapter}{致谢}{30}{chapter*.12}%
+\contentsline {section}{\numberline {5.3}性能评估}{30}{section.5.3}%
  \cftsetpnumwidth {\widthof {31}-1pt} \thispagestyle {empty} 
-\contentsline {chapter}{参考文献}{31}{chapter*.13}%
+\contentsline {section}{\numberline {5.4}本章小结}{31}{section.5.4}%
  \cftsetpnumwidth {\widthof {32}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{\numberline {第六章}总结与展望}{32}{chapter.6}%
+\contentsline {section}{\numberline {6.1}总结}{32}{section.6.1}%
+\contentsline {section}{\numberline {6.2}展望}{32}{section.6.2}%
+ \cftsetpnumwidth {\widthof {33}-1pt} \thispagestyle {empty} 
+\setcounter {tocdepth}{0}
+ \cftsetpnumwidth {\widthof {34}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{致谢}{34}{chapter*.15}%
+ \cftsetpnumwidth {\widthof {35}-1pt} \thispagestyle {empty} 
+\contentsline {chapter}{参考文献}{35}{chapter*.16}%
+ \cftsetpnumwidth {\widthof {36}-1pt} \thispagestyle {empty} 
 \contentsfinish 

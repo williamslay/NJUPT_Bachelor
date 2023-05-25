@@ -71,7 +71,11 @@ std::vector<vertex_desc> find_nodes(const graph_t &G, const std::string &name){
 // for callsit_test
 void cg_disinit(graph_t &G, std::ifstream &stream)
 {
-    cout << "Loading callsits..\n";
+    typedef bo::graph_traits<graph_t>::edge_iterator EdgeIterator;
+     std::pair<EdgeIterator, EdgeIterator> ei;
+      for (ei = edges(G); ei.first != ei.second; ++ei.first) {
+        G[*ei.first].weight=0.0;
+    }
     for (std::string line; getline(stream, line); ) {
         bo::trim(line);
         std::vector<std::string> splits;
@@ -79,15 +83,18 @@ void cg_disinit(graph_t &G, std::ifstream &stream)
         assert(splits.size() == 4); 
         std::string factor1 = splits[2]; 
         std::string factor2 = splits[3];
-        if (find_nodes(G, splits[0]).empty()||find_nodes(G, splits[1]).empty()) {
-            break;
-        }
+        if (find_nodes(G, splits[0]).empty()||find_nodes(G, splits[1]).empty()) continue;
         vertex_desc v1 = find_nodes(G, splits[0]).front();
         vertex_desc v2 = find_nodes(G, splits[1]).front(); 
         double cn = static_cast<double>(factor1[0] - '0');
         double cb = static_cast<double>(factor2[0] - '0');
         auto e = edge(v1,v2,G).first;
-        G[e].weight = ((2*cn+1)/(2*cn))*((2*cb+1)/(2*cb));
+        bool t = edge(v1,v2,G).second; 
+        if(t)
+        {
+            double weight = ((2*cn+1)/(2*cn))*((2*cb+1)/(2*cb)); 
+            G[e].weight = weight; 
+        }
     } 
 } 
 //for trace closure
@@ -107,7 +114,7 @@ std::vector<vertex_desc> tg_closure(
             vertex_desc temp = worklist.front();
             worklist.pop(); 
             bo::graph_traits<graph_t>::edge_iterator ei, ei_end;
-            for (boost::tie(ei, ei_end) = boost::edges(G); ei != ei_end; ++ei) {
+            for (bo::tie(ei, ei_end) = boost::edges(G); ei != ei_end; ++ei) {
                vertex_desc s = boost::source(*ei, G);
                vertex_desc t = boost::target(*ei, G);
                if(t == temp)
@@ -139,18 +146,11 @@ std::vector<vertex_desc> tg_closure(
 //     bo::breadth_first_search(G, from, bo::visitor(vis));
 // }
 
-inline void init_distances_from(const graph_t &G, vertex_desc from, std::vector<double> &dists) {
-    auto dist_pmap = bo::make_iterator_property_map(dists.begin(), get(bo::vertex_index, G));
-    typedef bo::property_map<graph_t, bo::vertex_index_t>::type IdMap;
-    std::vector<vertex_desc> pred(num_vertices(G));
-    bo::iterator_property_map<std::vector<vertex_desc>::iterator,
-                                 IdMap,
-                                 vertex_desc,
-                                 vertex_desc&>
-    predmap(pred.begin(), get(bo::vertex_index, G));
-    bo::dijkstra_shortest_paths(G, from, bo::predecessor_map(predmap)
-                                            .distance_map(dist_pmap)
-                                            .weight_map(get(&Edge::weight, G)));
+inline void init_distances_from(const graph_t &G, vertex_desc from, std::vector<double> &dists) { 
+    std::vector<vertex_desc> parent(num_vertices(G));
+    bo::dijkstra_shortest_paths(G, from,bo::predecessor_map(bo::make_iterator_property_map(parent.begin(), bo::get(bo::vertex_index, G))).
+                                        distance_map(bo::make_iterator_property_map(dists.begin(), bo::get(bo::vertex_index, G))).
+                                        weight_map(get(&Edge::weight, G)));
 }
 
 void distance(
@@ -175,6 +175,7 @@ void distance(
             for (vertex_desc t : targets) {
                 auto shortest = distances[t];           // shortest distance from n to t
                 if (shortest == 0 and n != t) continue; // not reachable
+                if (shortest > 1e+10 ) continue; 
                 d += 1.0 / (1.0 + static_cast<double>(shortest));
                 ++i;
             }
@@ -185,6 +186,7 @@ void distance(
                 for (auto t : find_nodes(G, bb_d_entry.first)) {
                     auto shortest = distances[t];           // shortest distance from n to t
                     if (shortest == 0 and n != t) continue; // not reachable
+                    if (shortest > 1e+10 ) continue; 
                     di += 1.0 / (1.0 + 10 * bb_d_entry.second + static_cast<double>(shortest));
                     ++ii;
                 }
