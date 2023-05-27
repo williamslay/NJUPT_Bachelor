@@ -11,14 +11,13 @@
 \usepackage{latexsym,amsmath,xcolor,multicol,booktabs,calligra}
 \usepackage{graphicx,pstricks,listings,stackengine}
 \usepackage[linesnumbered,vlined]{algorithm2e}
-%\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 \usepackage{float}
 % \usepackage{emoji}
 
 
 \author{雷尚远}
 \title{定向覆盖模糊测试工具的设计与实现}
-\subtitle{毕业设计检查}
+\subtitle{毕业设计答辩}
 \institute{南京邮电大学计算机学院}
 \date{2023年6月}
 
@@ -1303,180 +1302,159 @@
 \end{frame}
 
 
+\subsection{Hawkeye}
+\begin{frame}{Desired Properties}
+    \begin{itemize}
+        \item  A Distance Metric \textbf{\textcolor{deepred}{Avoiding bias}} \\
+            - \textbf{\structure{all traces}} reachable to the target should be \textbf{\textit{considered}}
+        \item  Balance \textbf{\textcolor{deepred}{Cost-Effectiveness}} \\
+            - precise static analysis \textbf{\textit{can be}} \textbf{\structure{costly}} but \textbf{\textit{may not be}} \textbf{\textcolor{deepred}{useful}}
+    \end{itemize} 
+\end{frame}
 
-\section{Work}
+\begin{frame}{Some problems in AFLGo}
+    \only<1>{
+        The \textbf{{distance}} measure the \textbf{{possibility}} of reaching the target 
+        \begin{figure}[htb]
+            \centering
+            \begin{minipage}[b]{0.35\linewidth}
+                \includegraphics[width=1\linewidth]{pic/code1.pdf}
+            \end{minipage}
+            \begin{minipage}[b]{0.35\linewidth}
+                \includegraphics[width=1\linewidth]{pic/code2.pdf}
+            \end{minipage}
+            \\
+            \begin{minipage}[b]{0.35\linewidth}
+                \includegraphics[width=0.65\linewidth]{pic/excfg1.pdf}
+            \end{minipage}
+            \begin{minipage}[b]{0.35\linewidth}
+                \includegraphics[width=0.65\linewidth]{pic/excfg2.pdf}
+            \end{minipage}
+        \end{figure} 
+    }
+    \only<2>{
+        The \textbf{{distance}} measure the \textbf{{possibility}} of reaching the target 
+        \begin{figure}[htb]
+            \begin{minipage}[b]{0.34\linewidth}
+                \includegraphics[width=0.75\linewidth]{pic/excfg1.pdf}
+            \end{minipage}
+            \begin{minipage}[b]{0.3\linewidth}
+                \includegraphics[width=0.75\linewidth]{pic/excg.pdf}
+            \end{minipage} 
+            \begin{minipage}[b]{0.34\linewidth}
+                \includegraphics[width=0.75\linewidth]{pic/excfg2.pdf}
+            \end{minipage}
+        \end{figure}  
+        \begin{itemize}
+            \item  \textbf{Adjacent-Function Distance Augmentation} \\
+            - the distances from the calling function to the immediately called function \textbf{\textit{may not be}} exactly the same\\
+            - the distabces of \structure{$fa \to fb$} and \textcolor{deepred}{$fa \to fc$} should depend on the \textbf{\textit{context}}
+        \end{itemize}  
+    }
+    \only<3>{
+        \textbf{Adjacent-Function Distance Augmentation} 
+        \begin{itemize}
+            \item  $f_1$:Caller 
+            \item  $f_2$:Callee 
+            \item  $C_N$:Call sits occurrences of $f_2$ inside $f_1$
+            \item  $C_B$:No. of basic blocks in $f_1$ that contains more than one call site of $f_2$ 
+        \end{itemize}  
+        $$
+        d(f_1,f_2)=\Psi (f_1,f_2)\cdot \Phi (f_1,f_2) =\frac{\phi \cdot C_N+1}{\phi \cdot C_N} \cdot \frac{\psi \cdot C_B+1}{\psi \cdot C_B}
+        $$
+    } 
+    \only<4>{
+        \textbf{Adjacent-Function Distance Augmentation} 
+        \begin{figure}[htb]
+            \centering
+            \begin{minipage}[b]{0.45\linewidth}
+                \includegraphics[width=0.8\linewidth]{pic/code1.pdf}
+            \end{minipage}
+            \begin{minipage}[b]{0.45\linewidth}
+                \includegraphics[width=0.8\linewidth]{pic/code2.pdf}
+            \end{minipage}
+        \end{figure}  
+        let $\phi=2$ and $\psi=2$ \\
+        \small{
+            \begin{minipage}[b]{0.485\linewidth}
+                $$d(fa,fb)=\frac{2\cdot 2+1}{2\cdot 2} \cdot \frac{2\cdot 2+1}{2\cdot 2} = 1.56$$
+                $$d(fa,fc)=\frac{2\cdot 1+1}{2\cdot 1} \cdot \frac{2\cdot 1+1}{2\cdot 1} = 2.25$$
+            \end{minipage}
+            \begin{minipage}[b]{0.05\linewidth}
+                $$ $$
+            \end{minipage}
+            \begin{minipage}[b]{0.485\linewidth}
+                $$d(fa,fb)=\frac{2\cdot 2+1}{2\cdot 2} \cdot \frac{2\cdot 1+1}{2\cdot 1} = 1.87$$
+                $$d(fa,fc)=\frac{2\cdot 1+1}{2\cdot 1} \cdot \frac{2\cdot 1+1}{2\cdot 1} = 2.25$$ 
+            \end{minipage} 
+        }
+    }
+    \only<5-6>{
+        \textbf{A Distance Metric Avoiding bias}\\
+        \begin{minipage}[t]{0.7\linewidth}
+            \vspace{15pt} 
+            \only<5>{
+                \begin{itemize}
+                    \item  Multiple targets are measured by distance
+                    \item  At least one target has more than one viable path
+                    \item  A seed exercises the longer path and is measured by this distance
+                \end{itemize} 
+            }
+            \textbf{\textcolor{red}{The shortest path is always prioritized}}
+            \only<6>
+            {
+                \begin{itemize}
+                    \item $S_1:a \to b \to c \to d \to T \to Z$
+                    \item $S_2:a \to e \to T \to Z$
+                    \item $S_3:a \to e \to f \to Z$
+                \end{itemize}
+                \begin{align*}
+                    &d(S_1,T)=\frac{2+3+2+1+0}{5}=1.6\\
+                    &d(S_2,T)=\frac{2+1+0}{3}=1\\
+                    &d(S_3,T)=\frac{2+1}{2}=1.5
+                \end{align*}
+            } 
+        \end{minipage}
+        \begin{minipage}[t]{0.28\linewidth}
+            \vspace{0pt}
+            \centering
+            \includegraphics[width=0.9\linewidth]{pic/trace.pdf}
+        \end{minipage}  
+    }
+    \only<7-8>
+    {
+        \begin{itemize}
+            \item  $\zeta(T_f)$:a finite function sets which can reach the targer function via the call chain
+            \item  $\xi(s)$:the execution trace of a seed s(functional level)
+        \end{itemize} 
+        \only<7>{
+            $$ C_s(s)=\frac{|\xi(s) \cap \zeta(T_f)|}{|\zeta(T_f)|}$$
+        }  
+        \only<8>{
+            $$r(s)=|\xi(s) \cap \zeta(T_f)|$$
+            $$ p(s)=\widetilde{r}(s) \cdot (1-\widetilde{d}(s,T_b))\cdot(1-T)+0.5T$$
+        }
+        
+    }
+\end{frame}   
 
-% \begin{frame}{排版举例}
-%     \begin{exampleblock}{无编号公式} % 加 * 
-%         \begin{equation*}
-%             J(\theta) = \mathbb{E}_{\pi_\theta}[G_t] = \sum_{s\in\mathcal{S}} d^\pi (s)V^\pi(s)=\sum_{s\in\mathcal{S}} d^\pi(s)\sum_{a\in\mathcal{A}}\pi_\theta(a|s)Q^\pi(s,a)
-%         \end{equation*}
-%     \end{exampleblock}
-%     \begin{exampleblock}{多行多列公式\footnote{如果公式中有文字出现，请用 $\backslash$mathrm\{\} 或者 $\backslash$text\{\} 包含，不然就会变成 $clip$，在公式里看起来比 $\mathrm{clip}$ 丑非常多。}}
-%         % 使用 & 分隔
-%         \begin{align}
-%             Q_\mathrm{target}&=r+\gamma Q^\pi(s^\prime, \pi_\theta(s^\prime)+\epsilon)\\
-%             \epsilon&\sim\mathrm{clip}(\mathcal{N}(0, \sigma), -c, c)\nonumber
-%         \end{align}
-%     \end{exampleblock}
-% \end{frame}
-
-% \begin{frame}
-%     \begin{exampleblock}{编号多行公式}
-%         % Taken from Mathmode.tex
-%         \begin{multline}
-%             A=\lim_{n\rightarrow\infty}\Delta x\left(a^{2}+\left(a^{2}+2a\Delta x+\left(\Delta x\right)^{2}\right)\right.\label{eq:reset}\\
-%             +\left(a^{2}+2\cdot2a\Delta x+2^{2}\left(\Delta x\right)^{2}\right)\\
-%             +\left(a^{2}+2\cdot3a\Delta x+3^{2}\left(\Delta x\right)^{2}\right)\\
-%             +\ldots\\
-%             \left.+\left(a^{2}+2\cdot(n-1)a\Delta x+(n-1)^{2}\left(\Delta x\right)^{2}\right)\right)\\
-%             =\frac{1}{3}\left(b^{3}-a^{3}\right)
-%         \end{multline}
-%     \end{exampleblock}
-% \end{frame}
+\section{Work\& Result}
+\subsection{Work}
+\begin{frame}{AFLGo Architecture \& Technique}
+    \only<1>{
+    \begin{figure}[htbp]
+        \includegraphics[width=11.5cm]{pic/AFLGo_l.pdf}
+    \end{figure}
+    }
+    \only<2>{
+        \begin{figure}[htbp]
+            \includegraphics[width=11.5cm]{pic/pass.pdf}
+        \end{figure} 
+    }
+\end{frame}
 
 
-% \begin{frame}[fragile]{\LaTeX{} 常用命令}
-%     \begin{exampleblock}{命令}
-%         \centering
-%         \footnotesize
-%         \begin{tabular}{llll}
-%             \cmd{chapter} & \cmd{section} & \cmd{subsection} & \cmd{paragraph} \\
-%             章 & 节 & 小节 & 带题头段落 \\\hline
-%             \cmd{centering} & \cmd{emph} & \cmd{verb} & \cmd{url} \\
-%             居中对齐 & 强调 & 原样输出 & 超链接 \\\hline
-%             \cmd{footnote} & \cmd{item} & \cmd{caption} & \cmd{includegraphics} \\
-%             脚注 & 列表条目 & 标题 & 插入图片 \\\hline
-%             \cmd{label} & \cmd{cite} & \cmd{ref} \\
-%             标号 & 引用参考文献 & 引用图表公式等\\\hline
-%         \end{tabular}
-%     \end{exampleblock}
-%     \begin{exampleblock}{环境}
-%         \centering
-%         \footnotesize
-%         \begin{tabular}{lll}
-%             \env{table} & \env{figure} & \env{equation}\\
-%             表格 & 图片 & 公式 \\\hline
-%             \env{itemize} & \env{enumerate} & \env{description}\\
-%             无编号列表 & 编号列表 & 描述 \\\hline
-%         \end{tabular}
-%     \end{exampleblock}
-% \end{frame}
-
-% \begin{frame}[fragile]{\LaTeX{} 环境命令举例}
-%     \begin{minipage}{0.5\linewidth}
-% \begin{lstlisting}[language=TeX]
-% \begin{itemize}
-%   \item A \item B
-%   \item C
-%   \begin{itemize}
-%     \item C-1
-%   \end{itemize}
-% \end{itemize}
-% \end{lstlisting}
-%     \end{minipage}\hspace{1cm}
-%     \begin{minipage}{0.3\linewidth}
-%         \begin{itemize}
-%             \item A
-%             \item B
-%             \item C
-%             \begin{itemize}
-%                 \item C-1
-%             \end{itemize}
-%         \end{itemize}
-%     \end{minipage}
-%     \medskip
-%     \pause
-%     \begin{minipage}{0.5\linewidth}
-% \begin{lstlisting}[language=TeX]
-% \begin{enumerate}
-%   \item 巨佬 \item 大佬
-%   \item 萌新
-%   \begin{itemize}
-%     \item[n+e] 瑟瑟发抖
-%   \end{itemize}
-% \end{enumerate}
-% \end{lstlisting}
-%     \end{minipage}\hspace{1cm}
-%     \begin{minipage}{0.3\linewidth}
-%         \begin{enumerate}
-%             \item 巨佬
-%             \item 大佬
-%             \item 萌新
-%             \begin{itemize}
-%                 \item[n+e] 瑟瑟发抖
-%             \end{itemize}
-%         \end{enumerate}
-%     \end{minipage}
-% \end{frame}
-
-% \begin{frame}[fragile]{\LaTeX{} 数学公式}
-%     \begin{columns}
-%         \begin{column}{.55\textwidth}
-% \begin{lstlisting}[language=TeX]
-% $V = \frac{4}{3}\pi r^3$
-
-% \[
-%   V = \frac{4}{3}\pi r^3
-% \]
-
-% \begin{equation}
-%   \label{eq:vsphere}
-%   V = \frac{4}{3}\pi r^3
-% \end{equation}
-% \end{lstlisting}
-%         \end{column}
-%         \begin{column}{.4\textwidth}
-%             $V = \frac{4}{3}\pi r^3$
-%             \[
-%                 V = \frac{4}{3}\pi r^3
-%             \]
-%             \begin{equation}
-%                 \label{eq:vsphere}
-%                 V = \frac{4}{3}\pi r^3
-%             \end{equation}
-%         \end{column}
-%     \end{columns}
-%     \begin{itemize}
-%         \item 更多内容请看 \href{https://zh.wikipedia.org/wiki/Help:数学公式}{\color{purple}{这里}}
-%     \end{itemize}
-% \end{frame}
-
-% \begin{frame}[fragile]
-%     \begin{columns}
-%         \column{.6\textwidth}
-% \begin{lstlisting}[language=TeX]
-%     \begin{table}[htbp]
-%       \caption{编号与含义}
-%       \label{tab:number}
-%       \centering
-%       \begin{tabular}{cl}
-%         \toprule
-%         编号 & 含义 \\
-%         \midrule
-%         1 & 4.0 \\
-%         2 & 3.7 \\
-%         \bottomrule
-%       \end{tabular}
-%     \end{table}
-%     公式~(\ref{eq:vsphere}) 的
-%     编号与含义请参见
-%     表~\ref{tab:number}。
-% \end{lstlisting}
-%         \column{.4\textwidth}
-%         \begin{table}[htpb]
-%             \centering
-%             \caption{编号与含义}
-%             \label{tab:number}
-%             \begin{tabular}{cl}\toprule
-%                 编号 & 含义 \\\midrule
-%                 1 & 4.0\\
-%                 2 & 3.7\\\bottomrule
-%             \end{tabular}
-%         \end{table}
-%         \normalsize 公式~(\ref{eq:vsphere})的编号与含义请参见表~\ref{tab:number}。
-%     \end{columns}
-% \end{frame}
+\subsection{Result}
 
  \section{References}
 

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  14 MAY 2023 15:43
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  27 MAY 2023 16:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1123,30 +1123,30 @@ Package fontspec Info: Font family 'SimHei(0)' created for font 'SimHei' with
  (./slide.aux)
 \openout1 = `slide.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 48.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 47.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1182,7 +1182,7 @@ LaTeX Font Info:    ... okay on input line 48.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 48.
+Package hyperref Info: Link coloring OFF on input line 47.
 (./slide.out) (./slide.out)
 \@outlinefile=\write5
 \openout5 = `slide.out'.
@@ -1190,41 +1190,41 @@ Package hyperref Info: Link coloring OFF on input line 48.
 \symnumbers=\mathgroup7
 \sympureletters=\mathgroup8
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/MicrosoftYaHei(0)/m/n on input line 48.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 48.
+(Font)                  OT1/cmr/m/n --> TU/MicrosoftYaHei(0)/m/n on input line 47.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/MicrosoftYaHei(0)/b/n on input line 48.
+(Font)                  OT1/cmr/bx/n --> TU/MicrosoftYaHei(0)/b/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/MicrosoftYaHei(0)/b/n on input line 48.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 48.
+(Font)                  OT1/cmr/bx/n --> TU/MicrosoftYaHei(0)/b/n on input line 47.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/TimesNewRoman(0)/m/n on input line 48.
+(Font)                  OT1/cmss/m/n --> TU/TimesNewRoman(0)/m/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/TimesNewRoman(0)/m/n on input line 48.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 48.
+(Font)                  OT1/cmss/bx/n --> TU/TimesNewRoman(0)/m/n on input line 47.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/MicrosoftYaHei(0)/m/it on input line 48.
+(Font)                  OT1/cmr/m/it --> TU/MicrosoftYaHei(0)/m/it on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/MicrosoftYaHei(0)/m/it on input line 48.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 48.
+(Font)                  OT1/cmr/bx/it --> TU/MicrosoftYaHei(0)/m/it on input line 47.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 48.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 48.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 47.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  TU/MicrosoftYaHei(0)/m/n --> TU/MicrosoftYaHei(0)/b/n on input line 48.
+(Font)                  TU/MicrosoftYaHei(0)/m/n --> TU/MicrosoftYaHei(0)/b/n on input line 47.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  TU/MicrosoftYaHei(0)/m/it --> TU/MicrosoftYaHei(0)/b/it on input line 48.
+(Font)                  TU/MicrosoftYaHei(0)/m/it --> TU/MicrosoftYaHei(0)/b/it on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/MicrosoftYaHei(0)/b/n on input line 48.
+(Font)                  OT1/cmr/bx/n --> TU/MicrosoftYaHei(0)/b/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  TU/MicrosoftYaHei(0)/b/n --> TU/MicrosoftYaHei(0)/b/n on input line 48.
+(Font)                  TU/MicrosoftYaHei(0)/b/n --> TU/MicrosoftYaHei(0)/b/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/b/n on input line 48.
+(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/b/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  TU/MicrosoftYaHei(0)/m/it --> TU/MicrosoftYaHei(0)/b/it on input line 48.
+(Font)                  TU/MicrosoftYaHei(0)/m/it --> TU/MicrosoftYaHei(0)/b/it on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  TU/lmtt/m/n --> TU/lmtt/b/n on input line 48.
+(Font)                  TU/lmtt/m/n --> TU/lmtt/b/n on input line 47.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
@@ -1244,57 +1244,57 @@ Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 
 \symlegacymaths=\mathgroup9
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 48.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 48.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 48.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 48.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 48.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 48.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 48.
-LaTeX Font Info:    Redeclaring math accent \check on input line 48.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 48.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 48.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 48.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 48.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 48.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 47.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 47.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 47.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 47.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 47.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 47.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 47.
+LaTeX Font Info:    Redeclaring math accent \check on input line 47.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 47.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 47.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 47.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 47.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 48.
+(Font)              `operators' in the math version `normal' on input line 47.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/MicrosoftYaHei(0)/m/n on input line 48.
+(Font)                  OT1/cmr/m/n --> TU/MicrosoftYaHei(0)/m/n on input line 47.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 48.
+(Font)              `operators' in the math version `bold' on input line 47.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/MicrosoftYaHei(0)/m/n on input line 48.
+(Font)                  OT1/cmr/bx/n --> TU/MicrosoftYaHei(0)/m/n on input line 47.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/MicrosoftYaHei(0)/m/n --> TU/MicrosoftYaHei(0)/m/n on input line 48.
-LaTeX Font Info:    Redeclaring math alphabet \mathrm on input line 48.
+(Font)                  TU/MicrosoftYaHei(0)/m/n --> TU/MicrosoftYaHei(0)/m/n on input line 47.
+LaTeX Font Info:    Redeclaring math alphabet \mathrm on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  TU/MicrosoftYaHei(0)/m/it --> TU/MicrosoftYaHei(0)/m/it on input line 48.
+(Font)                  TU/MicrosoftYaHei(0)/m/it --> TU/MicrosoftYaHei(0)/m/it on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  TU/MicrosoftYaHei(0)/b/n --> TU/MicrosoftYaHei(0)/b/n on input line 48.
+(Font)                  TU/MicrosoftYaHei(0)/b/n --> TU/MicrosoftYaHei(0)/b/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/m/n on input line 48.
+(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/m/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  TU/lmtt/m/n --> TU/lmtt/m/n on input line 48.
+(Font)                  TU/lmtt/m/n --> TU/lmtt/m/n on input line 47.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/MicrosoftYaHei(0)/m/n --> TU/MicrosoftYaHei(0)/b/n on input line 48.
+(Font)                  TU/MicrosoftYaHei(0)/m/n --> TU/MicrosoftYaHei(0)/b/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  TU/MicrosoftYaHei(0)/b/it --> TU/MicrosoftYaHei(0)/b/it on input line 48.
+(Font)                  TU/MicrosoftYaHei(0)/b/it --> TU/MicrosoftYaHei(0)/b/it on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  TU/TimesNewRoman(0)/b/n --> TU/TimesNewRoman(0)/b/n on input line 48.
+(Font)                  TU/TimesNewRoman(0)/b/n --> TU/TimesNewRoman(0)/b/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  TU/lmtt/b/n --> TU/lmtt/b/n on input line 48.
+(Font)                  TU/lmtt/b/n --> TU/lmtt/b/n on input line 47.
 \c@lstlisting=\count422
  (./slide.nav)
 File: pic/NJUPT_Logo.pdf Graphic file (type pdf)
@@ -1346,9 +1346,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/sc' undefined
 
 ]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <7> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 566.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 565.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <7> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 566.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 565.
  [7
 
 ] [8
@@ -1379,12 +1379,12 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <7> not available
 File: pic/blackbox.pdf Graphic file (type pdf)
 <use pic/blackbox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 846--846
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 845--845
 [] 
  []
 
 
-Overfull \vbox (107.93759pt too high) detected at line 846
+Overfull \vbox (107.93759pt too high) detected at line 845
  []
 
 [20
@@ -1393,12 +1393,12 @@ Overfull \vbox (107.93759pt too high) detected at line 846
 File: pic/blackbox.pdf Graphic file (type pdf)
 <use pic/blackbox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 846--846
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 845--845
 [] 
  []
 
 
-Overfull \vbox (107.93759pt too high) detected at line 846
+Overfull \vbox (107.93759pt too high) detected at line 845
  []
 
 [21
@@ -1409,12 +1409,12 @@ File: pic/cfg.pdf Graphic file (type pdf)
 File: pic/whitebox.pdf Graphic file (type pdf)
 <use pic/whitebox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 846--846
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 845--845
 [] 
  []
 
 
-Overfull \vbox (107.93759pt too high) detected at line 846
+Overfull \vbox (107.93759pt too high) detected at line 845
  []
 
 [22
@@ -1423,19 +1423,19 @@ Overfull \vbox (107.93759pt too high) detected at line 846
 File: pic/whitebox.pdf Graphic file (type pdf)
 <use pic/whitebox.pdf>
 
-Overfull \hbox (12.71013pt too wide) in paragraph at lines 846--846
+Overfull \hbox (12.71013pt too wide) in paragraph at lines 845--845
 [] 
  []
 
 
-Overfull \vbox (107.93759pt too high) detected at line 846
+Overfull \vbox (107.93759pt too high) detected at line 845
  []
 
 [23
 
 ]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/sl' in size <10> not available
-(Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 846.
+(Font)              Font shape `TU/TimesNewRoman(0)/m/it' tried instead on input line 845.
 File: pic/greybox.pdf Graphic file (type pdf)
 <use pic/greybox.pdf>
  [24
@@ -1448,7 +1448,7 @@ File: pic/greybox.pdf Graphic file (type pdf)
 File: pic/dse.pdf Graphic file (type pdf)
 <use pic/dse.pdf>
 
-Overfull \hbox (4.91745pt too wide) in paragraph at lines 892--892
+Overfull \hbox (4.91745pt too wide) in paragraph at lines 891--891
  [][] 
  []
 
@@ -1462,7 +1462,7 @@ Overfull \hbox (4.91745pt too wide) in paragraph at lines 892--892
 File: pic/gen.pdf Graphic file (type pdf)
 <use pic/gen.pdf>
 
-Overfull \vbox (1.1252pt too high) detected at line 901
+Overfull \vbox (1.1252pt too high) detected at line 900
  []
 
 [30
@@ -1479,7 +1479,7 @@ Overfull \vbox (1.1252pt too high) detected at line 901
 File: pic/AFLGo.pdf Graphic file (type pdf)
 <use pic/AFLGo.pdf>
 
-Overfull \hbox (19.91681pt too wide) in paragraph at lines 940--940
+Overfull \hbox (19.91681pt too wide) in paragraph at lines 939--939
  [] 
  []
 
@@ -1487,15 +1487,15 @@ Overfull \hbox (19.91681pt too wide) in paragraph at lines 940--940
 
 ]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 996.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 995.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/sc' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 996.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 995.
  [36
 
 ] [37
 
 ]
-Overfull \hbox (19.4616pt too wide) detected at line 1111
+Overfull \hbox (19.4616pt too wide) detected at line 1110
 [][]\OT1/cmr/m/n/10 ([]\OML/cmm/m/it/10 ; [][]\OT1/cmr/m/n/10 ) = []
  []
 
@@ -1514,26 +1514,26 @@ File: pic/diff.pdf Graphic file (type pdf)
 File: pic/CG_3.pdf Graphic file (type pdf)
 <use pic/CG_3.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1111--1111
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1110--1110
  [][] 
  []
 
 [40
 
 ]
-Overfull \hbox (21.36806pt too wide) detected at line 1111
+Overfull \hbox (21.36806pt too wide) detected at line 1110
 [][]\OT1/cmr/m/n/9 ([]\OML/cmm/m/it/9 ; [][]\OT1/cmr/m/n/9 ) = []
  []
 
 File: pic/CFG_1.pdf Graphic file (type pdf)
 <use pic/CFG_1.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1111--1111
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1110--1110
  [][] 
  []
 
 
-Overfull \vbox (3.84726pt too high) detected at line 1111
+Overfull \vbox (3.84726pt too high) detected at line 1110
  []
 
 [41
@@ -1542,7 +1542,7 @@ Overfull \vbox (3.84726pt too high) detected at line 1111
 File: pic/CFG_1.pdf Graphic file (type pdf)
 <use pic/CFG_1.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1111--1111
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1110--1110
  [][] 
  []
 
@@ -1554,7 +1554,7 @@ File: pic/CG_3.pdf Graphic file (type pdf)
 File: pic/CFG_2.pdf Graphic file (type pdf)
 <use pic/CFG_2.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1111--1111
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1110--1110
  [][] 
  []
 
@@ -1564,7 +1564,7 @@ Overfull \hbox (13.54385pt too wide) in paragraph at lines 1111--1111
 File: pic/CFG_3.pdf Graphic file (type pdf)
 <use pic/CFG_3.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1111--1111
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1110--1110
  [][] 
  []
 
@@ -1574,7 +1574,7 @@ Overfull \hbox (13.54385pt too wide) in paragraph at lines 1111--1111
 File: pic/CFG_4.pdf Graphic file (type pdf)
 <use pic/CFG_4.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1111--1111
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1110--1110
  [][] 
  []
 
@@ -1591,7 +1591,7 @@ File: pic/CFG_4.pdf Graphic file (type pdf)
 File: pic/CFG_5.pdf Graphic file (type pdf)
 <use pic/CFG_5.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1303--1303
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1302--1302
  [][] 
  []
 
@@ -1601,7 +1601,7 @@ Overfull \hbox (13.54385pt too wide) in paragraph at lines 1303--1303
 File: pic/CFG_6.pdf Graphic file (type pdf)
 <use pic/CFG_6.pdf>
 
-Overfull \hbox (13.54385pt too wide) in paragraph at lines 1303--1303
+Overfull \hbox (13.54385pt too wide) in paragraph at lines 1302--1302
  [][] 
  []
 
@@ -1615,7 +1615,7 @@ Overfull \hbox (13.54385pt too wide) in paragraph at lines 1303--1303
 File: pic/SA_1.pdf Graphic file (type pdf)
 <use pic/SA_1.pdf>
 
-Overfull \hbox (5.69067pt too wide) in paragraph at lines 1303--1303
+Overfull \hbox (5.69067pt too wide) in paragraph at lines 1302--1302
  [][] 
  []
 
@@ -1625,7 +1625,7 @@ Overfull \hbox (5.69067pt too wide) in paragraph at lines 1303--1303
 File: pic/SA_2.pdf Graphic file (type pdf)
 <use pic/SA_2.pdf>
 
-Overfull \hbox (5.69067pt too wide) in paragraph at lines 1303--1303
+Overfull \hbox (5.69067pt too wide) in paragraph at lines 1302--1302
  [][] 
  []
 
@@ -1635,7 +1635,7 @@ Overfull \hbox (5.69067pt too wide) in paragraph at lines 1303--1303
 File: pic/SA_3.pdf Graphic file (type pdf)
 <use pic/SA_3.pdf>
 
-Overfull \hbox (5.69067pt too wide) in paragraph at lines 1303--1303
+Overfull \hbox (5.69067pt too wide) in paragraph at lines 1302--1302
  [][] 
  []
 
@@ -1645,14 +1645,94 @@ Overfull \hbox (5.69067pt too wide) in paragraph at lines 1303--1303
 
 ] (./slide.toc) [56
 
-] (./slide.toc) [57
+] [57
 
-] (./slide.bbl) [58
+]
+File: pic/code1.pdf Graphic file (type pdf)
+<use pic/code1.pdf>
+File: pic/code2.pdf Graphic file (type pdf)
+<use pic/code2.pdf>
+File: pic/excfg1.pdf Graphic file (type pdf)
+<use pic/excfg1.pdf>
+File: pic/excfg2.pdf Graphic file (type pdf)
+<use pic/excfg2.pdf>
 
-] [59
+Overfull \vbox (6.73624pt too high) detected at line 1439
+ []
 
+[58
+
+]
+File: pic/excfg1.pdf Graphic file (type pdf)
+<use pic/excfg1.pdf>
+File: pic/excg.pdf Graphic file (type pdf)
+<use pic/excg.pdf>
+File: pic/excfg2.pdf Graphic file (type pdf)
+<use pic/excfg2.pdf>
+ [59
 
 ] [60
+
+]
+File: pic/code1.pdf Graphic file (type pdf)
+<use pic/code1.pdf>
+File: pic/code2.pdf Graphic file (type pdf)
+<use pic/code2.pdf>
+
+Overfull \hbox (6.14708pt too wide) in paragraph at lines 1439--1439
+[][][][] 
+ []
+
+[61
+
+]
+File: pic/trace.pdf Graphic file (type pdf)
+<use pic/trace.pdf>
+ [62
+
+]
+File: pic/trace.pdf Graphic file (type pdf)
+<use pic/trace.pdf>
+ [63
+
+] [64
+
+] [65
+
+] (./slide.toc) [66
+
+] (./slide.toc) [67
+
+]
+File: pic/AFLGo_l.pdf Graphic file (type pdf)
+<use pic/AFLGo_l.pdf>
+
+Overfull \hbox (19.91681pt too wide) in paragraph at lines 1454--1454
+ [] 
+ []
+
+[68
+
+]
+File: pic/pass.pdf Graphic file (type pdf)
+<use pic/pass.pdf>
+
+Overfull \hbox (19.91681pt too wide) in paragraph at lines 1454--1454
+ [] 
+ []
+
+[69
+
+] (./slide.toc) [70
+
+] (./slide.toc) [71
+
+] (./slide.bbl) [72
+
+] [73
+
+
+] [74
 
 ]
 \tf@nav=\write6
@@ -1669,15 +1749,15 @@ Overfull \hbox (5.69067pt too wide) in paragraph at lines 1303--1303
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `slide.out' has not changed.
-(rerunfilecheck)             Checksum: 12B91A196AB0B23809A0FE6E8CFC7FF9;771.
+(rerunfilecheck)             Checksum: 9E52B7B0BB5E0210FC278D169B8063B8;1078.
  ) 
 Here is how much of TeX's memory you used:
- 31464 strings out of 476684
- 667536 string characters out of 5804055
- 1879018 words of memory out of 5000000
- 50951 multiletter control sequences out of 15000+600000
+ 31552 strings out of 476684
+ 668971 string characters out of 5804055
+ 1881018 words of memory out of 5000000
+ 51026 multiletter control sequences out of 15000+600000
  522452 words of font info for 151 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,25n,122p,435b,1065s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on slide.pdf (60 pages).
+Output written on slide.pdf (74 pages).
