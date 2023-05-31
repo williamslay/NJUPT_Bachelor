@@ -1453,8 +1453,82 @@
     }
 \end{frame}
 
+\begin{frame}{How to change}
+    \only<1>{
+        \textbf{Adjacent-Function Distance Augmentation} 
+        \begin{itemize}
+            \item Preprocess Change
+            \item Distance Caculator
+        \end{itemize}  
+        \begin{figure}[htbp]
+            \includegraphics[width=11.5cm]{pic/pass1.pdf}
+        \end{figure} 
+
+    }
+    \only<2>{
+        \textbf{Target-Reached Function Set Coverage} 
+        \begin{itemize}
+            \item 16 kB additional Shared Memory
+            \item Instrument Logic Change
+        \end{itemize} 
+        \begin{figure}[htb]
+            \begin{minipage}[b]{0.2\textwidth}
+                \centering
+                \includegraphics[width=1\textwidth]{pic/fc1.pdf}
+            \end{minipage}
+            \begin{minipage}[b]{0.75\textwidth}
+                 \includegraphics[width=1\textwidth]{pic/fc2.pdf}
+            \end{minipage}
+        \end{figure} 
+    }
+\end{frame}
+
 
 \subsection{Result}
+\begin{frame}
+    \only<1>{
+        \begin{itemize}
+            \item \textbf{Main Test Object}:Libxml2
+            \item \textbf{Crash Reproduction}:CVE-2017-\{9047,9048\} 
+        \end{itemize}
+    }
+    \only<2>{
+        \begin{table}[htbp]
+            \centering
+            \caption{Crash Reproduction}
+            \begin{tabular}{|c|c|c|c|c|c|}
+              \hline
+              Runs & Times（s）& TTE（s）&Tupples& Crashes & Targets \\
+              \hline
+              1 & 8166 & 609 & 2767  &30 & 30\\
+              \hline
+              2 & 9409 & 360 & 2894  &16& 16\\
+              \hline
+              3 & 6322 & 524 & 3034  & 16& 16\\
+              \hline
+              4 & 8401 & 918 & 3166 &  23 & 23\\
+              \hline 
+              5 & 5088 & 1000 & 2551&  12 & 12\\
+              \hline  
+            \end{tabular}
+        \end{table}
+        \begin{table}[htbp]
+            \centering
+            \caption{Performance Comparation}
+            \begin{tabular}{|c|c|c|c|c|}
+              \hline
+              Tool & TTE（s）&Tupples& CVE &Targets \\
+              \hline
+              AFLGo$^\prime$ & 607 & 2882 & 2  & 100\% \\
+              \hline
+              AFLGo & 689 & 3032 & 4  & 26.7\%\\
+              \hline
+              AFL++ & 245 & 5176 & 4  & 44\%\\
+              \hline  
+            \end{tabular}
+        \end{table}
+    }
+\end{frame} 
 
  \section{References}
 

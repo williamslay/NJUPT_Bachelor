@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  25 MAY 2023 17:42
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  30 MAY 2023 18:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1049,38 +1049,14 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
  [3]
 Chapter 第一章.
-Package newfloat Info: Setting Plan B file extension to `lof'... on input line 67.
+Package newfloat Info: Setting Plan B file extension to `lof'... on input line 69.
 [1
 
 ] [2] [3] [4]
 Chapter 第二章.
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--209
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 209--213
-
- []
-
 [5
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 213--215
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--222
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 222--227
-
- []
-
 
 Package xeCJK Warning: Unknown CJK family `\CJKttdefault' is being ignored.
 (xeCJK)                
@@ -1088,10 +1064,10 @@ Package xeCJK Warning: Unknown CJK family `\CJKttdefault' is being ignored.
 (xeCJK)                it.
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 254.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 247.
 
 LaTeX Font Warning: Font shape `TU/lmtt/bx/sc' undefined
-(Font)              using `TU/lmtt/bx/n' instead on input line 257.
+(Font)              using `TU/lmtt/bx/n' instead on input line 250.
 
 [6] [7] [8]
 File: pic/GF.pdf Graphic file (type pdf)
@@ -1105,12 +1081,12 @@ File: pic/AFLGo.pdf Graphic file (type pdf)
 <use pic/AFLGo.pdf>
 File: pic/diff.pdf Graphic file (type pdf)
 <use pic/diff.pdf>
- [14] [15]
+ [14] [15] [16]
 File: ./pic//dis.pdf Graphic file (type pdf)
 <use ./pic//dis.pdf>
 File: ./pic//dis2.pdf Graphic file (type pdf)
 <use ./pic//dis2.pdf>
- [16]
+ [17]
 File: ./pic//code1.pdf Graphic file (type pdf)
 <use ./pic//code1.pdf>
 File: ./pic//code2.pdf Graphic file (type pdf)
@@ -1121,7 +1097,7 @@ File: ./pic//excg.pdf Graphic file (type pdf)
 <use ./pic//excg.pdf>
 File: ./pic//excfg2.pdf Graphic file (type pdf)
 <use ./pic//excfg2.pdf>
- [17] [18]
+ [18]
 File: ./pic//trace.pdf Graphic file (type pdf)
 <use ./pic//trace.pdf>
  [19] [20] [21]
@@ -1141,14 +1117,14 @@ Chapter 第五章.
 [27
 
 ]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 986.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 994.
  [28] [29] [30] [31]
 Chapter 第六章.
 [32
 
 ] [33]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 1211.
+(Font)              <9> on input line 1219.
  (./main.bbl [34
 
 ] [35
@@ -1158,14 +1134,14 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 3737967551A561DFD53EC3502D83E30B;6363.
+(rerunfilecheck)             Checksum: C5F43D730FF74AA2751E57481A3C4322;6253.
  ) 
 Here is how much of TeX's memory you used:
- 24449 strings out of 476684
- 492758 string characters out of 5804055
- 2060018 words of memory out of 5000000
- 44191 multiletter control sequences out of 15000+600000
- 576373 words of font info for 176 fonts, out of 8000000 for 9000
+ 24457 strings out of 476684
+ 493072 string characters out of 5804055
+ 2061018 words of memory out of 5000000
+ 44196 multiletter control sequences out of 15000+600000
+ 576397 words of font info for 179 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  101i,23n,105p,306b,1056s stack positions out of 10000i,1000n,20000p,200000b,200000s
 

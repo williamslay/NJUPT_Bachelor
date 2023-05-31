@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  27 MAY 2023 16:04
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.17)  31 MAY 2023 15:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1723,16 +1723,37 @@ Overfull \hbox (19.91681pt too wide) in paragraph at lines 1454--1454
 
 [69
 
-] (./slide.toc) [70
+]
+File: pic/pass1.pdf Graphic file (type pdf)
+<use pic/pass1.pdf>
 
-] (./slide.toc) [71
+Overfull \hbox (19.91681pt too wide) in paragraph at lines 1484--1484
+ [] 
+ []
 
-] (./slide.bbl) [72
+[70
+
+]
+File: pic/fc1.pdf Graphic file (type pdf)
+<use pic/fc1.pdf>
+File: pic/fc2.pdf Graphic file (type pdf)
+<use pic/fc2.pdf>
+ [71
+
+] (./slide.toc) [72
 
 ] [73
 
-
 ] [74
+
+] (./slide.toc) [75
+
+] (./slide.bbl) [76
+
+] [77
+
+
+] [78
 
 ]
 \tf@nav=\write6
@@ -1749,15 +1770,15 @@ Overfull \hbox (19.91681pt too wide) in paragraph at lines 1454--1454
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `slide.out' has not changed.
-(rerunfilecheck)             Checksum: 9E52B7B0BB5E0210FC278D169B8063B8;1078.
+(rerunfilecheck)             Checksum: 157D704EF3663FE1D1190F4EFB070647;1078.
  ) 
 Here is how much of TeX's memory you used:
- 31552 strings out of 476684
- 668971 string characters out of 5804055
- 1881018 words of memory out of 5000000
- 51026 multiletter control sequences out of 15000+600000
+ 31628 strings out of 476684
+ 671402 string characters out of 5804055
+ 1882018 words of memory out of 5000000
+ 51099 multiletter control sequences out of 15000+600000
  522452 words of font info for 151 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,25n,122p,435b,1065s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on slide.pdf (74 pages).
+Output written on slide.pdf (78 pages).

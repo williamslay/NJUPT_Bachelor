@@ -8,8 +8,8 @@
 \studentclass{B190303}
 \studentid{B19030334}
 \graduateyear{2023}
-\begindate{2023年3月x日}
-\finishdate{2023年6月x日}
+\begindate{2023年3月6日}
+\finishdate{2023年6月9日}
 
 
 \begin{document}
@@ -25,11 +25,12 @@
 浪费资源于不相关的部分。因此，DGF 特别适用于补丁测试、漏洞复现以及特殊漏洞检测等场景。
 目前，DGF 已成为一个快速发展的研究方向。基于一些先进的定向覆盖模糊测试工具的研究和相关调查，本文
 主要做了以下工作：
-\begin{enumerate}[label=(\arabic*)]
+\begin{enumerate}[label=(\arabic*),leftmargin=48pt]
 	\item 基于现有的模糊测试工具框架AFL（American Fuzzy Lop）以及AFLGo做了定向覆盖策略的设计和集成；
 	\item 实现了简单的定向覆盖的模糊测试命令行工具；
 	\item 针对相应的公开通用漏洞集（CVE）做了复现及定向实验对比测试。
 \end{enumerate}
+
 此外本文亦通过分析工具设计以及实现过程中的局限性与不足，对于未来该方向的研究发展做出了一些展望。
 
 \chinesekeyword{模糊测试；定向覆盖模糊测试；灰盒测试；软件安全}
@@ -48,11 +49,12 @@ Thus, DGF is particularly suitable for scenarios such as patch testing, bug repr
 special bug detection. For now, DGF has become a fast-growing research area.  Based on some advanced 
 directed coverage fuzz testing tools and relevant investigations, this article mainly focuses on the 
 following points of work:
-\begin{enumerate}[label=(\arabic*)]
+\begin{enumerate}[label=(\arabic*),leftmargin=48pt]
 	\item Designed and integrated a directed coverage strategy based on the existing fuzzy testing tool framework AFL (American Fuzzy Lop) and AFLGo；
 	\item Implemented a simple command-line tool for directed fuzz testing；
 	\item conducted reproductions and directed experiments on corresponding public vulnerability databases (CVE) for comparative testing。
 \end{enumerate}
+
 In addition, this article also provides some prospects for the future research and development of this direction by 
 analyzing the limitations and deficiencies in the design and implementation process of the tool.
 
@@ -175,6 +177,8 @@ KATCH\cite{marinescu2013katch} 需要24小时以上\cite{bohmeDGF2017}。
 第六章：总结了本文的工作并对于未来定向模糊测试技术的发展及研究方向做了展望。
 
 \chapter{相关技术研究}
+本章主要介绍了本文主要的研究对象模糊测试技术的基本定义，架构。对模糊测试技术的常见分类方式和不同技术的区别特点做了
+介绍。而后本章介绍了定向模糊测试技术的发展，包括白盒定向模糊测试技术和灰盒定向模糊测试技术。
 \section{模糊测试技术}
 模糊测试（Fuzz Testing）是一种软件测试技术，其主要思想是通过向输入参数、文件、网络请求等随机或半随机注入无效、
 异常、边界数据，来检测目标系统在处理异常情况时的鲁棒性。模糊测试可以帮助发现那些未经预料的漏洞和错误，
@@ -186,8 +190,8 @@ KATCH\cite{marinescu2013katch} 需要24小时以上\cite{bohmeDGF2017}。
 
 模糊测试的过程通常分为以下几个步骤：
 
-\begin{enumerate}[label=(\arabic*)]
-	\item 选择目标：选择需要测试的软件目标，如应用程序、库、操作系统等。
+\begin{enumerate}[label=(\arabic*),leftmargin=48pt]
+ 	\item 选择目标：选择需要测试的软件目标，如应用程序、库、操作系统等。
 	\item 寻找输入：确定需要对目标注入的输入类型和数据源，如输入参数、文件、网络请求等。
 	\item 创建模糊数据：使用随机或半随机的方式生成模糊数据，并将其注入到目标中。
 	\item 监控程序行为：监控被测试程序的运行行为，如崩溃、错误输出等。
@@ -197,43 +201,32 @@ KATCH\cite{marinescu2013katch} 需要24小时以上\cite{bohmeDGF2017}。
 模糊测试是一种简单有效的测试方法，可以在较短时间内发现大量的异常情况，并帮助开发人员提高软件质量和安全性。
 
 \subsection{基本概念定义}
-为了准确地讨论学界关注的模糊测试方向的问题以及梳理架构，我选择了采用Man{\`e}s等人于论文\cite{manes2019art}中
+为了准确地讨论学界关注的模糊测试方向的问题以及梳理架构，本文选择了采用Man{\`e}s等人于论文\cite{manes2019art}中
 提出的基本概念的定义。
 
-\begin{itemize}
-	\item \textbf{Fuzzing}:模糊测试技术是指使用从超出被测试程序（PUT）的预期输入空间的输入空间（“模糊输入空间”）采样的输入来执行被测试程序。
-	 \\ 事实上，模糊输入空间（fuzz input space）在定义中并不一定需要包含预期输入空间，其只需要包含预期输入空间所没有的输入即可；其次，
+\begin{itemize}[leftmargin=36pt]
+	\item \textbf{Fuzzing}：模糊测试技术是指使用从超出被测试程序（PUT）的预期输入空间的输入空间（“模糊输入空间”）采样的输入来执行被测试程序。
+	事实上，模糊输入空间（fuzz input space）在定义中并不一定需要包含预期输入空间，其只需要包含预期输入空间所没有的输入即可；其次，
 	 因为在实践中大部分模糊测试几乎必然会选择多次迭代来实现测试，故而上述定义补充为“重复执行”依然很大程度上是准确的；最后，关于对于模糊输入空间
 	 的采样并不必然是随机的，这与算法设计的种子优先级排序以及采取的变异方式等实现方式有关，故定义并没有加上“随机采样”。
-	 \\ 
 	\item \textbf{Fuzz Testing}：模糊测试是指使用模糊测试技术（Fuzzing）来测试被测试程序是否违反正确性策略。
-	\\ 在诸多论文\cite{householder2012probability,rebert2014optimizing,bohme2020fuzzing}中依然可以见到另一种说法 --- Fuzz Campaign(模糊测试活动)，
+	在诸多论文\cite{householder2012probability,rebert2014optimizing,bohme2020fuzzing}中依然可以见到另一种说法 --- Fuzz Campaign(模糊测试活动)，
 	用以指明利用特定的模糊测试工具针对具体的被测试程序的一次实际测试活动，但在本文中不再区分这一概念，统一用模糊测试来做指代。
-	\\ 
 	\item \textbf{Fuzzer}：模糊测试工具是对被测试程序执行模糊测试的程序。
-	\\ 
 	\item \textbf{Bug Oracle}：错误检测器是一个程序，可能是模糊测试工具的一部分，它确定被测试程序的给定执行是否违反了特定的正确性策略。
-	\\ 执行模糊测试的目标当然是查找被测程序的漏洞。但是不同模糊测试工具设计的针对的软件正确性准则（correctness policy）并不相同。例如，早期的
+	执行模糊测试的目标当然是查找被测程序的漏洞。但是不同模糊测试工具设计的针对的软件正确性准则（correctness policy）并不相同。例如，早期的
 	模糊测试的主要的准则仅仅是生成的测试用例是否会导致被测程序的崩溃（crash）；事实上，以SECFUZZ\cite{tsankov2012secfuzz}为代表的许多测试工具
 	就将模糊测试引入了包括网络密钥交换协议等非严格软件安全的领域。一般来讲，任何可以通过实际执行的状况中观察到的策略，都可以通过模糊测试来进行安全测试。
 	故而所有确定执行表现是否违反特定的正确性策略的机制部分都可以被称作为错误检测器。在本文中，依然将错误检测器执行的软件正确性准则视为导致被测试软件崩溃，其余
 	准则不加以讨论。
-	\\ 
 	\item \textbf{Fuzz Configuration}：模糊测试算法的配置是指所有能控制模糊测试算法执行的参数配置。
-	\\ 出于一般性，在此处将所有能够影响到模糊测试算法执行的参数因子都统一称为算法配置。不同的模糊测试算法关注的参数各不相同。例如，最简单的输入随机生成比特流
+	出于一般性，在此处将所有能够影响到模糊测试算法执行的参数因子都统一称为算法配置。不同的模糊测试算法关注的参数各不相同。例如，最简单的输入随机生成比特流
 	输出至被测试程序的模糊测试工具的配置可能仅仅是被测试程序的状态空间，而复杂的模糊测试算法的配置则可能涉及到算法执行时间，随机输入的结构，随机变异策略，前置静态
 	分析结果等等。而一般情况下，最受大家关注的配置就是种子的状况。
-	\\ 
 	\item \textbf{Seed}：种子是被测试程序的（通常结构良好的）输入，一般用于通过修改它来生成测试用例。
 \end{itemize}
 
 \subsection{基本架构}
-算法\ref{alg:fuzzing}是一般化的模糊测试算法。现如今的大部分模糊测试工具基本是以此流程架构设计。 
-这个算法足够通用且具有一般性，可以代表现如今所有的模糊测试技术，包括黑盒模糊测试，白盒模糊测试以及黑盒模糊测试。
-
-本算法也可以简单提炼为模糊测试算法的五个基本步骤，即为：预处理(preprocessing)、调度(schedule)、输入构造(input genaration)、
-输入评估(input evaluation)、配置更新(update)。下面将结合算法分别简单介绍各个阶段。
-
 \begin{algorithm}[H]
 	\SetKwSty{algokeywordsty}
 	\SetFuncSty{algofuncsty}
@@ -267,6 +260,13 @@ KATCH\cite{marinescu2013katch} 需要24小时以上\cite{bohmeDGF2017}。
 	\caption[short]{模糊测试算法}\label{alg:fuzzing} 
 \end{algorithm} 
 \vspace{6pt}
+
+算法\ref{alg:fuzzing}是一般化的模糊测试算法。现如今的大部分模糊测试工具基本是以此流程架构设计。 
+这个算法足够通用且具有一般性，可以代表现如今所有的模糊测试技术，包括黑盒模糊测试，白盒模糊测试以及黑盒模糊测试。
+
+本算法也可以简单提炼为模糊测试算法的五个基本步骤，即为：预处理(preprocessing)、调度(schedule)、输入构造(input genaration)、
+输入评估(input evaluation)、配置更新(update)。下面将结合算法分别简单介绍各个阶段。
+
 预处理:在算法\ref{alg:fuzzing}的第2行，为针对程序输入的算法配置进行预处理。主要是用户通过提供一组模糊测试配置，而后依据
 模糊测试算法进行处理从而返回一组可能经过修改的模糊测试配置。由于采取的模糊测试策略不同，预处理的操作也就不同。例如接受可执行
 文件的黑盒测试一般不做处理，而白盒测试和灰盒测试可能会依据算法的设置对源代码或者二进制代码进行插桩，控制流图的生成，指针分析
@@ -403,12 +403,6 @@ Ma等人提出了两种符号执行方式：最短距离符号执行（Shortest-
 在预处理阶段计算每个基本块与目标位置的距离并将其插桩进入二进制文件，再通过运行时评估每个种子执行路径相对于目标区域的平均距离从而
 利用种子的能量调度机制来影响测试用例的生成从而达到定向覆盖的目标。这一机制还会在章节\ref{sec:AFLGo}详细介绍。
 
-现在DGF仍然是模糊测试领域中非常先进的技术。其结合了定向模糊测试和灰盒模糊测试的思想，可以在不需要完全了解被测
-系统内部工作原理的情况下，检测出潜在的漏洞和错误。其将大部分的能量分配给重点的代码区域，而不浪费资源于其他无意义的部分，可以更快
-更高效地测试代码。同时，相比于白盒定向模糊测试方法，定向灰盒模糊测试可以避免过多地关注程序内部的实现细节，从而
-节省生成测试用例的时间成本。
-
-\section{研究动机}
 自从定向灰盒模糊测试技术被提出来以来，就有许多相关的研究工作被提出。虽然AFLGo作为定向灰盒模糊测试方向开山之作在该方向的
 表现卓有成效，但是其策略在一些方面依然存在着一定的缺陷。后续又涌现出了一批相关的工作，例如Hawkeye\cite{chen2018hawkeye}， 
 CDGF\cite{lee2021constraint}, BEACON\cite{huang2022beacon}等。
@@ -417,9 +411,10 @@ CDGF\cite{lee2021constraint}, BEACON\cite{huang2022beacon}等。
 Gwangmu Lee等人则认为AFLGo在路径上的优化问题处理方式会遗漏目标位置的顺序影响以及不考虑导致崩溃产生的数据条件，从而忽略满足崩溃条件的种子\cite{lee2021constraint}；
 Heqing Huang则指出AFLGo保留的过多无效路径仍然会影响模糊测试执行的路径以及耗费资源\cite{huang2022beacon}。
 
-这些工作中Chen Hongxu等人的Hawkeye\cite{chen2018hawkeye}对AFLGo的思路沿用最为整体，改进措施较为详细。
-但是他们的工作是在其自研的模糊测试框架FOT\cite{chen2018fot}上实现，且该项工具并未开源。这使得对于其成果即灰盒模糊测试的性能
-提升较难验证。于是本文的定向算法指标设计主要参考了他们指出的问题，并尝试在开源的AFLGo框架上实现集成指标，以期达到AFLGo的改进。
+总而言之，现在DGF仍然是模糊测试领域中非常先进的技术。其结合了定向模糊测试和灰盒模糊测试的思想，可以在不需要完全了解被测
+系统内部工作原理的情况下，检测出潜在的漏洞和错误。其将大部分的能量分配给重点的代码区域，而不浪费资源于其他无意义的部分，可以更快
+更高效地测试代码。同时，相比于白盒定向模糊测试方法，定向灰盒模糊测试可以避免过多地关注程序内部的实现细节，从而
+节省生成测试用例的时间成本。
 
 \section{本章小结}
 本章首先详细介绍了模糊测试的一般算法框架，并介绍了模糊测试技术的分类，分别详细区别了黑盒模糊测试，白盒模糊测试以及灰盒模糊测试的不同，一并介绍了
@@ -427,7 +422,11 @@ Heqing Huang则指出AFLGo保留的过多无效路径仍然会影响模糊测试
 定向灰盒模糊测试技术与典型工作AFLGo。最后，介绍了本文的研究动机和主要参考工作。
 
 \chapter{定向模糊测试策略研究与设计}
+本章主要介绍了对于AFLGo的架构研究，从距离计算机制和能量调度机制对AFLGo的定向机制做了仔细的分析。而后，通过给出
+例子指出了AFLGo在设计上的两点不足。结合Hawkeye给出的改进方法，本文给出了相应的定向策略修改方式。
 \section{AFLGo架构研究}\label{sec:AFLGo}
+本文以AFLGo为主要研究对象，且主要改进及算法实现均在AFLGo上实现，故本节将详细介绍AFLGo的基本架构。
+
 \begin{algorithm}[H]
 	\DontPrintSemicolon
 	\SetKwSty{algokeywordsty}
@@ -479,7 +478,6 @@ Heqing Huang则指出AFLGo保留的过多无效路径仍然会影响模糊测试
 	\caption[short]{定向灰盒模糊测试算法}\label{alg:DGF} 
 \end{algorithm} 
 \vspace{6pt}
-本文以AFLGo为主要研究对象，且主要改进及算法实现均在AFLGo上实现，故本节将详细介绍AFLGo的基本架构。
 
 算法\ref{alg:DGF}展现了AFLGo的基本执行流程。可以看到与算法\ref{alg:fuzzing}的基本结构相同。AFLGo采取的算法配置包括：种子队列，
 种子分配能量以及种子执行路径的距离。而AFLGo主要的修改可以分为在预处理阶段阶段和运行阶段两个阶段。
@@ -517,8 +515,8 @@ AFLGo利用LLVM的pass\cite{Pass}对程序的源码实现了编译器级别的�
    \right.
  \end{equation}
 式\ref{eq:fdis}中$R(n,T_f)$为从函数$n$出发可达的目标函数集$T_f$中的所有目标函数$t_f$的集合。注意，AFLGo是支持
-多个目标的，这也意味着目标函数可能不止一个。关于这里采用调和平均的计算方式，图\ref{pic:diff}展示了一个例子。在图中
-(a)采用了算数平均，而(b)采取了调和平均。当有多个目标函数时，在调用图中利用算数平均计算函数间目标距离无法很好地区分
+多个目标的，这也意味着目标函数可能不止一个。关于这里采用调和平均的计算方式，图\ref{pic:diff}展示了一个例子。图\ref{pic:diff}.
+(a)采用了算数平均，而图\ref{pic:diff}.(b)采取了调和平均。当有多个目标函数时，在调用图中利用算数平均计算函数间目标距离无法很好地区分
 当到达不同目标函数的最短路径总和恰好相等时，究竟哪个函数离其中某个目标函数更近一点的情况。
 
 \begin{figure}[htbp]
@@ -628,11 +626,15 @@ AFLGo采取指数型的冷却调度：
 不同的归一化种子目标距离的种子随着执行时间的增加分配能量的变化。
 
 \section{定向适应度指标设计}
-AFLGo的能量调度策略以及设计方式奠定了DGF的基本流程框架。但是，在DGF关于距离的定义机制应该是公平且不带有偏见性的。也即，
-DGF应该有一个很好的基于距离的机制，可以通过考虑到目标的所有执行路径并避免对某些执行路径的偏见来指导定向模糊测试。此外，作为灰盒模糊测试
-，DGF应该在静态分析的开销和实用程序之间取得平衡。
+AFLGo的能量调度策略以及设计方式奠定了DGF的基本流程框架。Chen Hongxu等人的Hawkeye\cite{chen2018hawkeye}对AFLGo的思路进行了沿用。
+他们认为，DGF关于距离的定义机制应该是公平且不带有偏见性的。也即，DGF应该有一个很好的基于距离的机制，可以通过考虑到
+目标的所有执行路径并避免对某些执行路径的偏见来指导定向模糊测试。此外，作为灰盒模糊测试，DGF应该在静态分析的开销和实用程序之间取得平衡。
 
-出于以上原则，实际上上述AFLGo的距离设计和能量调度的机制会具有一定的偏见性。这也是本文针对AFLGo设计改进的基础，将在以下小节分别阐述。
+然而实际上Chen Hongxu等人的研究工作指出AFLGo的距离设计和能量调度的机制会具有一定的偏见性，违背了上述的设计原则。
+他们在Hawkeye中给出了相应的改进措施。但是他们的工作是在其自研的模糊测试框架FOT\cite{chen2018fot}上实现，且该项工具并未开源。
+这使得对于其成果较难验证。于是本文的定向算法指标设计主要参考了他们指出的问题，并尝试在开源的AFLGo框架上实现集成指标，
+以期达到AFLGo的改进。
+
 \subsection{距离定义}\label{sec:disredefine}
 让我们回到AFLGo对于函数级距离的定义并重新审视它：函数级距离 $d_f(n, n')$ 定义为调用图CG中函数 $n$ 和 $n'$ 之间最短路径上的边数。
 事实上这一定义中包含了一项默认信息，即从一个函数$n$到另一个函数$n'$的单位距离是调用图中相邻函数之间的一条边，即单位“1”.
@@ -671,15 +673,15 @@ DGF应该有一个很好的基于距离的机制，可以通过考虑到目标�
  	\label{pic:code}
 \end{figure}
 
-图\ref{pic:code}展现了这样的一个例子：(a)和(b)是两个不同的函数调用代码，但是它们的调用图CG都如(d)图所示一样。但是如果仔细追究
-其所对应的控制流图CFG，也即(c)和(e)时，可以知道在这个两个代码示例中，函数$fa$对函数$fb,fc$的调用概率（状态转移概率）是不同的。
-在(a)的情况下$fa$必然会调用$fb$,而不一定调用$fc$；在(b)的情况下$fa$并不一定会调用$fb$。但是仅凭(d)中的调用图CG是无法
-反映这样的区别的，也即这两种状况下被计算的得到的函数级距离是相同的。我们期望的理想状态应该是在(a)的情况下，$fa \to fb$的距离应当
-小于(b)情况下的$fa \to fb$的距离。
+图\ref{pic:code}展现了这样的一个例子：图\ref{pic:code}.(a)和图\ref{pic:code}.(b)展示了两个不同的函数调用代码，但是它们的调用图CG都如图\ref{pic:code}.(d)所示一样。但是如果仔细追究
+其所对应的控制流图CFG，也即图\ref{pic:code}.(c)和图\ref{pic:code}.(e)，可以知道在这个两个代码示例中，函数$fa$对函数$fb,fc$的调用概率（状态转移概率）是不同的。
+在图\ref{pic:code}.(a)的情况下$fa$必然会调用$fb$,而不一定调用$fc$；在图\ref{pic:code}.(b)的情况下$fa$并不一定会调用$fb$。但是仅凭图\ref{pic:code}.(d)中的调用图CG是无法
+反映这样的区别的，也即这两种状况下被计算的得到的函数级距离是相同的。我们期望的理想状态应该是在图\ref{pic:code}.(a)的情况下，$fa \to fb$的距离应当
+小于图\ref{pic:code}.(b)情况下的$fa \to fb$的距离。
 
 这就使得我们得重新定义一个更精确的函数级距离。因此，我们采取使用两个额外的指标来增加由调用函数（称作“caller”）和被调用函数（称作“callee”）
 之间的直接调用关系定义的距离。
-\begin{enumerate}[label=(\arabic*)]
+\begin{enumerate}[label=(\arabic*),leftmargin=48pt]
 	\item 给定调用函数caller中针对某个被调用函数callee的调用点的出现次数$C_N$。
 	被调用函数callee的出现次数越多，就越有可能在执行时被调用函数caller调用，
 	从而使调用函数caller到被调用函数callee之间的距离变小。为了显示这一效果，定义一个因子:
@@ -726,21 +728,13 @@ $d(fa,fc)=\frac{2\cdot 1+1}{2\cdot 1} \cdot \frac{2\cdot 1+1}{2\cdot 1} = 2.25$�
 在图\ref{pic:trace}中提供了这样的一个例子。这是程序的部分调用图CG。为了简单起见，将每个函数中的基本块假设为1，那么我们就用函数级的
 目标距离来代替基本块级目标距离来计算种子的目标距离。如图所示，假设$T$为目标函数，其余每个函数的目标距离已计算得出并在图中标出，
 其中“NA”为不可达目标函数。假设三个种子的执行路径分别如下：
-\begin{itemize}
+\begin{itemize}[leftmargin=36pt]
 	\item 种子S1:$a \to b \to c \to d \to T \to Z$
 	\item 种子S2:$a \to e \to T \to Z$
 	\item 种子S3:$a \to e \to f \to Z$
 \end{itemize}
 那么依据式\ref{eq:sdis}，可以分别计算出种子目标距离$d(S1,T)=\frac{2+3+2+1+0}{5}=1.6$，$d(S2,T)=\frac{2+1+0}{3}=1$，
 $d(S3,T)=\frac{2+1}{2}=1.5$。
-
-按照DGF关于距离的定义机制是公平且不带有偏见性的原则，我们显然可以看出AFLGo设计的种子目标距离是具有一定的偏见性的：即AFLGo更倾向于
-选择路径更短的种子。我们可以看到，能够到达目标函数的长路径种子S1的距离甚至比不能到达目标函数的短路径种子S3要远！这也意味着，如果实际
-漏洞存在于较长的执行路径的话，AFLGo的偏向性会使得其花费更多的时间资源来探查到此漏洞。这显然与DGF的目标不符，也与设计原则冲突。究其原因，
-是AFLGo采取了最短路径算法的距离定义和能量调度策略使得AFLGo倾向于更快地到达目标，而不是尽可能的覆盖测试所有可能到达目标的路径。
-
-于是我们可以补充定义一个可达目标函数集覆盖率的指标来引导种子尽可能覆盖更多可能到达目标的路径。首先我们引入可达目标函数集$\zeta(T_f)$的概念,
-$\zeta(T_f)$是被测试程序中所有可以到达目标函数集$T_f$中任一函数$t_f$的函数集。
 
 \begin{algorithm}[H]
 	\SetKwSty{algokeywordsty}
@@ -781,6 +775,15 @@ $\zeta(T_f)$是被测试程序中所有可以到达目标函数集$T_f$中任一
 	\caption[short]{计算可达目标函数集的不动点算法}\label{alg:point} 
 \end{algorithm} 
 \vspace{6pt}
+
+按照DGF关于距离的定义机制是公平且不带有偏见性的原则，我们显然可以看出AFLGo设计的种子目标距离是具有一定的偏见性的：即AFLGo更倾向于
+选择路径更短的种子。我们可以看到，能够到达目标函数的长路径种子S1的距离甚至比不能到达目标函数的短路径种子S3要远！这也意味着，如果实际
+漏洞存在于较长的执行路径的话，AFLGo的偏向性会使得其花费更多的时间资源来探查到此漏洞。这显然与DGF的目标不符，也与设计原则冲突。究其原因，
+是AFLGo采取了最短路径算法的距离定义和能量调度策略使得AFLGo倾向于更快地到达目标，而不是尽可能的覆盖测试所有可能到达目标的路径。
+
+于是我们可以补充定义一个可达目标函数集覆盖率的指标来引导种子尽可能覆盖更多可能到达目标的路径。首先我们引入可达目标函数集$\zeta(T_f)$的概念,
+$\zeta(T_f)$是被测试程序中所有可以到达目标函数集$T_f$中任一函数$t_f$的函数集。
+
 算法\ref{alg:point}展示了一个简单的依据调用图CG计算$\zeta(T_f)$的不动点算法。利用此算法我们可以计算得到可达目标函数集，
 由此可以定义种子的可达目标函数集覆盖率：
 \begin{equation}
@@ -797,10 +800,13 @@ $r(s)=|\xi(s) \cap \zeta(T_f)|$来做衡量即可。
 
 \section{本章小结}
 本章详细介绍了本文重点研究的灰盒模糊测试工具AFLGo及其框架结构。通过距离计算机制和能量调度机制详细分析了AFLGo实现
-对被测试程序的定向策略。而后，本章结合示例指出其设计机制上的不合理之处，并针对性的进行了定向指标的补充设计和修改，包括
-距离的重新定义和可达函数集覆盖率的设计。
+对被测试程序的定向策略。而后，本章结合示例指出其设计机制上的不合理之处，即AFLGo的相邻函数距离定义对于不同调用模式
+下的函数转移概率无法区分，以及种子距离的计算方式使得AFLGo对于路径更短的种子赋予更高的优先级，使得其会忽略长路径的
+种子。本文参考Hawkeye的改进方式并针对上述问题进行了定向指标的补充设计和修改，包括临近函数距离的重新定义和可达函数集覆盖率。
 
 \chapter{基于AFLGo的定向模糊测试系统的实现}
+本章主要针对定向灰盒测试在软件测试中的需求进行了分析，针对第三章提出的改进机制在AFLGo框架上进行了集成实现。结合
+AFLGo的基本技术架构，本章详细介绍了利用LLVM的Pass技术对改进机制的实现与集成。
 \section{需求分析}
 软件测试是软件开发生命周期中非常重要的一环。在软件发布前和软件发布后维护都要大量的用到软件测试技术。
 在软件发布前，开发人员通常会利用静态分析技术来查验软件中的错误。这种技术一般通过控制流分析、符号执行等方式进行测试，
@@ -842,7 +848,6 @@ AFLGo预处理阶段所依赖的每个函数对应的CFG都是在pass插件的�
  	\label{pic:pass}
 \end{figure}
 
-
 \subsection{距离计算器的改进}
 在得到每个函数及其对应的因子后，在距离计算器中将重构调用图生成部分。
 AFLGo会将图生成器生成的调用图CG输入距离计算器中，而后利用C++中的经典库Boost\cite{Boost}来将计算目标距离转换为图
@@ -868,13 +873,13 @@ AFLGo在此基础上做出了基于其自己的修改。由距离计算器得到
 根据每个基本块的基本块级目标距离是否大于等于0来判断决定此基本块处是否要额外插桩执行代码。AFLGo在AFL申请的共享内存基础上额外申请了16字节的
 空间，用以记录两个运行时变量：经过的总距离（8字节）和经过的总基本块数（8字节）。如果Pass遍历过程中依据距离信息判断此处应该插入执行代码，
 那么其就会在此基本块处额外插入执行以下步骤的代码：
-\begin{enumerate}[label=(\arabic*)]
-	\item 将共享内存块M中存储总距离变量的内存地址M[a]处的数值$d_1$取出
-	\item 将当前基本块对应的基本块级距离$d_2$与$d_1$相加得到更新后的$d_1^\prime$
-	\item 将$d_1^\prime$存回M[a]
-	\item 将M中存储经过的总基本块数量的内存地址M[b]处的数值$c_1$取出
-	\item 将$c_1$加一得到更新后的$c_1^\prime$ 
-	\item 将$c_1^\prime$存回M[b] 
+\begin{enumerate}[label=(\arabic*),leftmargin=48pt]
+	\item 将共享内存块M中存储总距离变量的内存地址M[a]处的数值$d_1$取出；
+	\item 将当前基本块对应的基本块级距离$d_2$与$d_1$相加得到更新后的$d_1^\prime$；
+	\item 将$d_1^\prime$存回M[a]；
+	\item 将M中存储经过的总基本块数量的内存地址M[b]处的数值$c_1$取出；
+	\item 将$c_1$加一得到更新后的$c_1^\prime$；
+	\item 将$c_1^\prime$存回M[b]。 
 \end{enumerate}
 
 上述代码在编译期间插桩后，在被测试程序执行时运行到相应的基本块位置会直接执行。这样，在将种子执行完成后AFLGo的控制器部分将可以依据
@@ -904,20 +909,20 @@ AFLGo在此基础上做出了基于其自己的修改。由距离计算器得到
 函数的代表。通过给此基本块赋[1,16K]间的随机值来标识函数。当在Pass的执行过程中识别到当前被遍历到的函数处于可达目标函数集中，就会
 为其额外插桩一段执行代码：
 
-\begin{enumerate}[label=(\arabic*)]
-	\item 获得当前函数被赋予的随机值r
-	\item 将共享内存中M中对应的M[r]位置处的数值$c$取出
-	\item 将$c$加一得到更新后的$c^\prime$
-	\item 将$c^\prime$存回M[r] 
+\begin{enumerate}[label=(\arabic*),leftmargin=48pt]
+	\item 获得当前函数被赋予的随机值r；
+	\item 将共享内存中M中对应的M[r]位置处的数值$c$取出；
+	\item 将$c$加一得到更新后的$c^\prime$；
+	\item 将$c^\prime$存回M[r]。
 \end{enumerate}
 
 这段代码的执行逻辑与AFL的执行逻辑相同。通过执行这一步骤，我们就可以获取被测试程序在运行完种子后，种子路径所覆盖的可达目标函数集中的函数
 量。
 
-图\ref{pic:fc}展示了一个简单的示例。其中(a)图为调用图示例，以图\ref{pic:trace}为基础，为了贴合实际，加上了
-环路来展现实际可能的函数调用链。(b)图展现了一个种子可能的路径$a\to b \to c \to d \to b \to c \to d \to T \to Z$。
+图\ref{pic:fc}展示了一个简单的示例。其中图\ref{pic:fc}.(a)为调用图示例，以图\ref{pic:trace}为基础，为了贴合实际，加上了
+环路来展现实际可能的函数调用链。图\ref{pic:fc}.(b)展现了一个种子可能的路径$a\to b \to c \to d \to b \to c \to d \to T \to Z$。
 由可达目标函数集的定义我们可以知道$\xi(T)=\{a,b,c,d,e,T\}$。经过插桩以后，当被测试程序执行此种子时，共享内存的
-情况就如图(b)所示。最后，通过分析共享内存中不为0的内存块数，就可以得知此种子覆盖的可达目标函数为$\{a,b,c,d,T\}$，
+情况就如图\ref{pic:fc}.(b)所示。最后，通过分析共享内存中不为0的内存块数，就可以得知此种子覆盖的可达目标函数为$\{a,b,c,d,T\}$，
 数量为5。在计算得到此值后，就可以通过参与能量调度实现定向。
 
 当然，这一方法可能存在着一些问题。事实上，这一段共享内存的使用本质上是一个哈希表。我们难以保证随机给不同的函数的随机值会一定不同。
@@ -927,10 +932,12 @@ AFLGo在此基础上做出了基于其自己的修改。由距离计算器得到
 少数的标识相撞所带来的导引精度损失是更加可接受的。
 
 \section{本章小结}
-本章结合定向模糊测试的需求分析，详细介绍了基于第三章提出的针对于AFLGo的两项改进机制的具体实现方式。详细介绍了针对于AFLGo中
-插桩器和距离计算器部分的修改，结合示例展示了实现方式。
+本章结合定向模糊测试的需求分析，详细介绍了基于第三章提出的针对于AFLGo的两项改进机制的具体实现方式。
+详细介绍了针对于AFLGo中插桩器和距离计算器部分的修改，结合示例展示了实现方式。
 
 \chapter{系统测试}
+本章主要针对实现的模糊测试工具进行了功能测试和性能测试。通过相应的测试，验证了改进机制的集成有效性以及
+测试工具在性能上的定向性以及测试了与其余模糊测试工具性能的对比。
 \section{系统测试概述}
 \subsection{系统测试环境}
 本文的系统测试及评估运行在个人笔记本电脑中。其中处理器配置为英特尔 Core i5-8265U 四核处理器，标准主频为1.60GHz，
@@ -938,7 +945,7 @@ AFLGo在此基础上做出了基于其自己的修改。由距离计算器得到
 
 \subsection{系统测试目标}
 本文执行的系统测试主要目标包括以下几部分：
-\begin{enumerate}[label=(\arabic*)]
+\begin{enumerate}[label=(\arabic*),leftmargin=48pt]
 	\item 验证本文设计实现的机制在AFLGo架构下插入的正确性和有效性。将通过实际执行系统功能测试和输出结果，验证机制被正确集成进入框架。
 	通过执行实际的测试项目，验证机制植入的有效性；
 	\item 验证实现的定向灰盒模糊测试工具的性能：将通过测试本文实现的定向灰盒模糊测试工具(下称AFLGo$^\prime$)实际的系统功能，考察其作为定向灰盒模糊测试
@@ -952,6 +959,7 @@ AFLGo在此基础上做出了基于其自己的修改。由距离计算器得到
 
 \begin{table}[hbp]
 	\centering
+	\caption{被测试程序静态分析数据}\label{tab:sa}
 	\begin{tabular}{|c|c|c|c|c|c|}
 	  \hline
 	  项目 & 被测试程序 & 总函数量  &函数间调用 &$C_B >1$ & $C_N >1$ \\
@@ -965,8 +973,8 @@ AFLGo在此基础上做出了基于其自己的修改。由距离计算器得到
 	  Binutils & objdump & 5301 & 14057 &  4558 &  4155\\
 	  \hline  
 	\end{tabular}
-	\caption{被测试程序静态分析数据}\label{tab:sa}
   \end{table}
+  \vspace{6pt}
 表\ref{tab:sa}是主要针对于主要被测试程序的静态分析数据。选取的被测试程序包括libxm2\cite{Libxml2},cxxfilt\cite{cxxfilt},mjs\cite{mjs}
 以及objdump\cite{objdump}。主要针对被测试程序做了函数级的静态分析。表中总函数量表明统计得到的程序中总包含的函数数量。函数间调用则是
 通过分析得到的函数间调用关系总量，后两项则记录的是在章节\ref{sec:disredefine}中额外补充定义的函数间调用两个影响因子大于1的函数量。
@@ -976,9 +984,9 @@ AFLGo在此基础上做出了基于其自己的修改。由距离计算器得到
 为了与参考实验论文做对比，本文主要选择使用了libxml2 20904-GITv2.9.4-16-g0741801的历史版本来对比测试。
 如无特殊说明，后文中的libxm2均指本版本。在本小节，将主要与AFLGo对比距离机制是否有效集成进入本文实现的模糊测试工具。
 
-代码\ref{code:target}给出了本次实验中的libxm2的目标区域，其中前面表明代码所在文件，后面数字表示目标代码所在的代码行。
+图\ref{code:target}给出了本次实验中的libxm2的目标区域，其中前面表明代码所在文件，后面数字表示目标代码所在的代码行。
 该部分代码是libxm2开发者在修复已知的错误时经由ef709ce2提交的补丁版本。
-其对应的所在的目标函数为xmlAddID。为了验证修改的距离机制是有效的，代码\ref{code:callsite}展示了被测试程序中部分函数的函数级目标距离，
+其对应的所在的目标函数为xmlAddID。为了验证修改的距离机制是有效的，图\ref{code:callsite}展示了被测试程序中部分函数的函数级目标距离，
 其中前面表示函数名，后面的数字表示函数级目标距离。其中，old distance注释下的部分是指在旧的AFLGo距离机制下计算得到的函数级目标距离，
 而new distance注释下的部分是指在新的距离计算机制下计算得到的函数级目标距离。
 
@@ -1018,6 +1026,7 @@ AFLGo在此基础上做出了基于其自己的修改。由距离计算器得到
 
 \begin{table}[htbp]
 	\centering
+	\caption{AFLGo$^\prime$的模糊测试情况}\label{tab:aflgop}
 	\begin{tabular}{|c|c|c|c|c|c|}
 	  \hline
 	  测试次数 & 测试时长（s）& TTE（s）&总执行路径& 检出崩溃次数 &目标区域引起 \\
@@ -1033,9 +1042,8 @@ AFLGo在此基础上做出了基于其自己的修改。由距离计算器得到
 	  5 & 5088 & 1000 & 2551&  12 & 12\\
 	  \hline  
 	\end{tabular}
-	\caption{AFLGo$^\prime$的模糊测试情况}\label{tab:aflgop}
 \end{table}
-
+\vspace{6pt}
 由于很难给出有效的定向覆盖测试的评估指标，在本小节将采用由目标代码区域引起的漏洞或脆弱性的暴露情况来参与评估。本测试的
 被测试程序依然同上一小节，主要以针对libxm2的分析为例，判断AFLGo$^\prime$的定向覆盖的情况。
 
@@ -1048,14 +1056,9 @@ AFLGo在此基础上做出了基于其自己的修改。由距离计算器得到
 
 在本次测试中，对于libxml2本文采用了CVE-2017-\{9047,9048\}作为检测AFLGo$^\prime$定向覆盖有效性的指标。CVE-2017-9047\cite{47CVE}，
 CVE-2017-9048\cite{48CVE}是由libxml2在ef709ce2提交直接引入的错误。开发人员通过向valid.c中的方法xmlAddID函数
-添加边界检查来修补空指针取消引用，也即代码\ref{code:target}中的行数位置。此函数由另外两个函数xmlParseOneAttribute
+添加边界检查来修补空指针取消引用，也即图\ref{code:target}中的行数位置。此函数由另外两个函数xmlParseOneAttribute
 和xmlValidateOneNamespace调用。为了到达这些函数，解析器必须首先执行xmlValidateOneElement。当这个函数在函数的
 不同点打印元素的内容时，这两个错误就会暴露出来。
-
-在valid.c中的函数xmlSnprintfElementContent应该递归地将元素内容定义转储到大小为“size”的字符缓冲区“buf”中。
-变量len被赋值为strlen(buf)。如果content->type是XML\_ELEMENT\_CONTENT\_ELEMENT，则将content->prefix附加到buf中，
-然后将content->name写入缓冲区。然而，检查content->name是否适合也使用'len'的值而不是已更新的缓冲区长度strlen(buf)。
-这使我们能够写入超过分配内存的“size”个字节，从而在实际测试中就会表现为内存溢出。
 
 \renewcommand{\thelstlisting}{5.\arabic{lstlisting}}
 \begin{lstlisting}[caption={示例错误打印栈},label={code:stack},basicstyle=\linespread{1.75}\fontsize{6.8}{5}\ttfamily]
@@ -1073,8 +1076,13 @@ Program received signal SIGSEGV, Segmentation fault.
 #10 0x40cd0e in main (argc=5, argv=0x7fffffffe128) at xmllint.c:3759
 \end{lstlisting}
 
-代码\ref{code:stack}展示了一个崩溃示例的打印栈情况。可以看到，AFLGo$^\prime$生成的种子引起了xmlDumpElementContent的错误内存访问。
-代码\ref{code:bug}是引起错误的部分代码片段。这部分的逻辑则是由于content->c1->type的类型为XML\_ELEMENT\_CONTENT\_SEQ,
+在valid.c中的函数xmlSnprintfElementContent应该递归地将元素内容定义转储到大小为“size”的字符缓冲区“buf”中。
+变量len被赋值为strlen(buf)。如果content->type是XML\_ELEMENT\_CONTENT\_ELEMENT，则将content->prefix附加到buf中，
+然后将content->name写入缓冲区。然而，检查content->name是否适合也使用'len'的值而不是已更新的缓冲区长度strlen(buf)。
+这使我们能够写入超过分配内存的“size”个字节，从而在实际测试中就会表现为内存溢出。
+
+图\ref{code:stack}展示了一个崩溃示例的打印栈情况。可以看到，AFLGo$^\prime$生成的种子引起了xmlDumpElementContent的错误内存访问。
+图\ref{code:bug}是引起错误的部分代码片段。这部分的逻辑则是由于content->c1->type的类型为XML\_ELEMENT\_CONTENT\_SEQ,
 则重复递归xmlDumpElementContent函数将元素内容定义转存至缓冲区。由此，可以确定这一崩溃漏洞是由目标区域引入导致的。
 
 \renewcommand{\thelstlisting}{5.\arabic{lstlisting}}
@@ -1104,6 +1112,7 @@ Program received signal SIGSEGV, Segmentation fault.
 
 \begin{table}[htbp]
 	\centering
+	\caption{性能对比测试}\label{tab:aflgot}
 	\begin{tabular}{|c|c|c|c|c|}
 	  \hline
 	  测试工具 & TTE（s）&执行路径元组& 检出错误类型 &目标区域引起 \\
@@ -1115,9 +1124,8 @@ Program received signal SIGSEGV, Segmentation fault.
 	  AFL++ & 245 & 5176 & 4  & 44\%\\
 	  \hline  
 	\end{tabular}
-	\caption{性能对比测试}\label{tab:aflgot}
 \end{table}
-
+\vspace{6pt}
 表\ref{tab:aflgot}是上述三种模糊测试工具针对同一被测试程序在相同测试条件下进行模糊测试执行得到的结果对比。由于模糊测试的随机性，
 上述数据均采用了多次实验取均值的方式。其中AFLGo和AFLGo$^\prime$均设置了相同的探测-开发阶段的分界时间。本实验使用的被测试程序依然是
 libxml2，目标区域设置与前文相同。
@@ -1126,26 +1134,26 @@ libxml2，目标区域设置与前文相同。
 看到AFL++检测出程序的第一个崩溃的平均用时更短。这与AFL++在种子变异策略等多方面对AFL进行了优化重构有关，当然也与AFLGo以及AFLGo$^\prime$在
 种子生成调度上采取了定向策略有关。
 
-执行路径元组总数可以在一定程度上衡量对于被测试程序的路径覆盖情况。元组（tuple）这一概念来源于AFL的路径识别方式。以图\ref{pic:trace}中的调用图
-来做举例，由$a\to b$的一条调用边可以被视作一个元组，不过在AFL中这一概念是基本块级的。此外,$a \to b , b \to a$会被识别成两个不同的元组。简单来讲，
+执行路径元组总数可以在一定程度上衡量对于被测试程序的路径覆盖情况。元组（tuple）这一概念来源于AFL的路径识别方式。简单来讲，
 元组可以被视作基本块之间的路径。因而这一指标可以指示模糊测试工具对程序的覆盖率情况。可以看到，AFLGo$^\prime$，AFLGo，AFL++的执行路径元组是依次
-增加的。这在一定程度上可以反应模糊测试工具的定向性是依次降低的。
+增加的。这在一定程度上可以反映模糊测试工具的定向性是依次降低的。
 
 在错误类型检出情况中，除了前文已经提到的CVE-2017-\{9047,9048\}，还可以确定AFLGo与AFL++均探测到了CVE-2017-9049\cite{49CVE},CVE-2017-9048\cite{50CVE}。
 这两个错误是由于对以前已经报告的错误CVE-2016-1839\cite{39CVE}的不完全修复导致的，AFLGo和AFL++依然产生了少量的测试用例可以触发此错误。由于这一错误并非
-是由于目标区域的代码引入，所以在实验中并未将其作为复现目标。这部分的测试用例应当是由于AFL的灰盒模糊测试的基础框架生成，由于AFLGo$^\prime$的探测重点更集中于
+是由于目标区域的代码引入，所以在实验中并未将其作为复现指标。这部分的测试用例应当是由于AFL的灰盒模糊测试的基础框架生成，由于AFLGo$^\prime$的探测重点更集中于
 可以到达目标区域的路径，这样的能量调度使得其并未生成探测到此错误。
 
-目标区域引起的数据百分比则是由模糊测试工具报告的崩溃中可以确定是由CVE-2017-\{9047,9048\}导致的崩溃示例的占比。这也在一定程度上说明AFLGo$^\prime$
-更加具有定向性。
+目标区域引起的数据百分比则是由模糊测试工具报告的崩溃中可以确定由CVE-2017-\{9047,9048\}导致的崩溃占比。这也在一定程度上说明AFLGo$^\prime$
+的改进策略更加具有定向性。
 
-综合上述实验结果的分析，我们可以得出结论：本文实现的AFLGo$^\prime$的定向模糊测试工具在定向测试目标上实现的更好，相比于AFLGo，本文实现的测试工具
-将更多的精力放在了指定区域的路径探索。但是相应地，相比于AFL++，本文的AFLGo$^\prime$牺牲了一定的性能和对被测试程序的覆盖率扩张，导致可能会遗漏部分
-非目标区域引进的错误；相比于AFLGo，AFLGo$^\prime$的性能的差距并不是很大，可以认为AFLGo$^\prime$比较好的完成了策略的集成。
+综合上述实验结果的分析，我们可以得出结论：本文实现的AFLGo$^\prime$的定向模糊测试工具在定向测试目标上实现的更好。相比于AFLGo，AFLGo$^\prime$
+将更多的精力放在了指定区域的路径探索。但是相应地，相比于AFL++，AFLGo$^\prime$牺牲了一定的性能和对被测试程序的覆盖率扩张，导致可能会遗漏部分
+非目标区域引进的错误；相比于AFLGo，AFLGo$^\prime$的性能的差距并不是很大，可以认为AFLGo$^\prime$比较好的完成了定向策略的修正集成，
+有效的消除了AFLGo定向策略中的偏见性。
 \section{本章小结}
 本章通过系统测试与实验，对比验证了本文设计实现的定向策略的成功集成。从整体来讲，本文在第三章设计的定向策略较好地被集成进入了
-AFLGo框架中，并且证明了其改进的有效性。通过对于性能的测试对比实验，可以得知本文设计实现的工具在性能上任然有着一定的不足，但是
-相对于集成的AFLGo框架，性能影响并不是很大。综上，可以认为本文实现的模糊测试工具较好的完成了研究目标。
+AFLGo框架中，并且证明了其改进的有效性。通过与AFL++和AFLGo的性能对比测试，验证了本文实现的AFLGo$^\prime$在牺牲一些
+性能指标的情况下更具有定向性，可以认为较好的完成了针对于AFLGo定向策略的修正。
 
 \chapter{总结与展望}
 \section{总结}
@@ -1170,7 +1178,7 @@ AFLGo框架中，并且证明了其改进的有效性。通过对于性能的测
 定向覆盖和测试任务，达到了研究设计目标。
 \section{展望}
 根据目前的研究趋势以及本文的研究实现成果，本文关于未来的此相关方向的研究展望如下：
-\begin{enumerate}[label=(\arabic*)]
+\begin{enumerate}[label=(\arabic*),leftmargin=48pt]
 	\item 本文实现的定向灰盒模糊测试工具是基于AFLGo的基础架构。而其采用的是AFL2.52b版本的框架修改写成。而AFL的更新版本AFL++已然
 	对其做出了极大改变的重构。AFL++在很大程度上修改了AFL的包括种子变异策略的策略等在内的架构策略，极大提升了此架构的性能。故未来可以考虑基于
 	AFL++进行重构。且由于AFL本身的工程架构导致一些后续研究工作提出的改进策略并不能很好地在AFLGo上移植集成。这使得重构AFLGo的架构或者

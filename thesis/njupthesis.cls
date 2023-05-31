@@ -177,8 +177,8 @@
   tabsize=4,
 }
 
-\renewcommand{\lstlistingname}{代码}
-\DeclareCaptionFormat{mylst}{#1#2      #3}
+\renewcommand{\lstlistingname}{图}
+\DeclareCaptionFormat{mylst}{#1#2\phantom{XX}#3}
 \captionsetup[lstlisting]{format=mylst,labelfont=bf,singlelinecheck=off,labelsep=space,justification=centering}
 
 % 设置插入图片路径
@@ -295,10 +295,6 @@
   {\centering\fontsize{15pt}{15pt}\selectfont\heiti\thispagestyle{fancy}}
   {\thechapter}{30pt}{}
 
-% 四号黑体 14pt
-\titleformat{\section}[block]
-  {\fontsize{14pt}{14pt}\selectfont\heiti}
-  {\thesection}{4pt}{}
 
 % 四号黑体 14pt
 \titleformat{\subsection}[block]
@@ -535,7 +531,7 @@
     \cline{2-2}
     学生姓名{}{} & \theauthor   \\
     \cline{2-2}
-    班级学号{}{} & {\large \thestudentclass \quad \thestudentid} \\
+    班级学号{}{} & {\large \thestudentid} \\
     \cline{2-2}
     指导老师{}{} & \theadvisor \\
     \cline{2-2}
