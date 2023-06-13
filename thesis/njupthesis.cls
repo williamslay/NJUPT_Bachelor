@@ -295,16 +295,14 @@
   {\centering\fontsize{15pt}{15pt}\selectfont\heiti\thispagestyle{fancy}}
   {\thechapter}{30pt}{}
 
-
 % 四号黑体 14pt
+\titleformat{\section}[block]
+  {\fontsize{14pt}{14pt}\selectfont\heiti}
+  {\thesection}{7pt}{}
+
 \titleformat{\subsection}[block]
   {\fontsize{14pt}{14pt}\selectfont\heiti}
-  {\thesubsection}{4pt}{}
-
-% 小四号黑体 12pt（不推荐，要求中禁止使用）
-\titleformat{\subsubsection}[block]
-  {\fontsize{12pt}{12pt}\selectfont\heiti}
-  {\thesubsubsection}{4pt}{}
+  {\thesubsection}{7pt}{}
 
 % 下面的命令用于调节标题与左，上，下文，段落之间间距
 \titlespacing{\chapter}{0pt}{6pt}{6pt}
@@ -402,6 +400,7 @@
   \pdfbookmark{英文摘要}{englishabstract}
   \chapter*{\fontsize{16pt}{16pt}\selectfont{\bfseries ABSTRACT}}
     \thispagestyle{empty}
+    \vspace{1cm}
 }
 
 % 英文关键字
@@ -525,17 +524,17 @@
   \begin{tabular}{>{\fontsize{16pt}{16pt}\kaiti}l
       >{\centering\arraybackslash\fontsize{15pt}{15pt}}
       p{11.53cm}}
-    题\chinesespace\chinesespace 目{}{} & \thetitle \\
+    题\chinesespace\chinesespace 目{}{} &\kaiti \thetitle \\
     \cline{2-2}
-    专\chinesespace\chinesespace 业{}{} & \themajor \\
+    专\chinesespace\chinesespace 业{}{} & \kaiti\themajor \\
     \cline{2-2}
-    学生姓名{}{} & \theauthor   \\
+    学生姓名{}{} & \kaiti\theauthor   \\
     \cline{2-2}
-    班级学号{}{} & {\large \thestudentid} \\
+    班级学号{}{} & {\large \kaiti \thestudentid} \\
     \cline{2-2}
-    指导老师{}{} & \theadvisor \\
+    指导老师{}{} & \kaiti\theadvisor \\
     \cline{2-2}
-    指导单位{}{} & \theschool \\
+    指导单位{}{} & \kaiti \theschool \\
     \cline{2-2}
   \end{tabular}
   
@@ -563,7 +562,7 @@
 
 \hspace*{7cm} 论文作者签名：
 
-\hspace*{7cm} 日期：\quad\quad 年\quad\quad 月\quad\quad 日
+\hspace*{7cm} 日期：2023 年6 月3 日
 \end{spacing}
 
 
@@ -651,25 +650,25 @@
 
 % 附录
 \newcommand{\thesisappendix}{
+ 
 	\titleformat{\chapter}[block]
-	{\fontsize{16pt}{16pt}\selectfont\heiti\thispagestyle{fancy}}
-	{\thechapter}{30pt}{}
+	{\centering\fontsize{15pt}{15pt}\selectfont\heiti\thispagestyle{fancy}}
+	{\thechapter}{15pt}{}
 	\titlespacing{\chapter}{0pt}{0pt}{0pt}
 	
-    \chapter*{\raggedleft\fontsize{16pt}{16pt}\selectfont{附录A}}
+    \chapter*{\fontsize{16pt}{16pt}\selectfont{附录：软件使用说明书}\heiti\thispagestyle{fancy}}
   	
   	\titleformat{\chapter}[block]
   	{\centering\fontsize{15pt}{15pt}\selectfont\heiti\thispagestyle{fancy}}
-  	{\thechapter}{30pt}{}
+  	{\thechapter}{14pt}{}
   	\titlespacing{\chapter}{0pt}{0pt}{15pt}
   	
     \setcounter{section}{0}
-    \addcontentsline{toc}{chapter}{附录}
+    \addcontentsline{toc}{chapter}{附录：软件使用说明书}
+    
     \markboth{附录}{附录}
     \thispagestyle{fancy}
-    \renewcommand{\theequation}{a-\arabic{equation}}
-    \renewcommand{\thetable}{a-\arabic{table}}
-    \renewcommand{\thefigure}{a-\arabic{figure}}
+    \renewcommand{\thesection}{A.\arabic{section}} 
 }
 
 % 定理推导等等翻译
